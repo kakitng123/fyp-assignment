@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/product_all"
+        android:title="@string/all" />
+    <item
+        android:id="@+id/product_racket"
+        android:title="@string/rackets" />
+    <item
+        android:id="@+id/product_acc"
+        android:title="@string/accs" />
+    <item
+        android:id="@+id/product_etc"
+        android:title="@string/etc" />
+</menu>

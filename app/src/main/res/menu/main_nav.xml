@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navBar_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/Home" />
+    <item
+        android:id="@+id/navBar_booking"
+        android:icon="@drawable/ic_booking"
+        android:title="@string/Booking" />
+    <item
+        android:id="@+id/navBar_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/Profile" />
+</menu>

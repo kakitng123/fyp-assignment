@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">FYP_Booking_Application</string>
+    <string name="app_name">Booking Application</string>
+    <string name="Home">Home</string>
+    <string name="Booking">Booking</string>
+    <string name="Profile">Profile</string>
+    <string name="admin_maintenance">Admin Maintenance</string>
+    <string name="Coach">Coach</string>
+    <string name="Class">Class</string>
+    <string name="Court">Court</string>
+    <string name="Product">Product</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="all">All</string>
+    <string name="accs">Accessories</string>
+    <string name="rackets">Rackets</string>
+    <string name="etc">Etc.</string>
+    <string name="example">Example</string>
+    <string name="name">Name</string>
+    <string name="desc">Description</string>
+    <string name="price">Price</string>
+    <string name="finish">Finish</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
