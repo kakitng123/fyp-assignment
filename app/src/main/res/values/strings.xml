@@ -19,6 +19,7 @@
     <string name="desc">Description</string>
     <string name="price">Price</string>
     <string name="finish">Finish</string>
+    <string name="category">Category</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

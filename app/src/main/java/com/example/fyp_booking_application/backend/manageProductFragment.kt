@@ -7,25 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminActivity
-import com.example.fyp_booking_application.MainActivity
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.databinding.FragmentProductBinding
+import com.example.fyp_booking_application.databinding.FragmentManageProductBinding
 
-class productFragment : Fragment() {
+class manageProductFragment : Fragment() {
 
-    private lateinit var binding : FragmentProductBinding
+    private lateinit var binding : FragmentManageProductBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Variable Declaration
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
+        // Variables Declaration
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_manage_product, container, false)
         val adminactivityview = (activity as AdminActivity)
 
-        // Jumping Fragments
-        binding.btnManage.setOnClickListener(){
-            adminactivityview.replaceFragment(manageProductFragment())
+        binding.btnAddProduct.setOnClickListener{
+            adminactivityview.replaceFragment(addProductFragment())
+        }
+        binding.btnEditProduct.setOnClickListener{
+
+        }
+        binding.btnDeleteProduct.setOnClickListener{
+
         }
 
         return binding.root

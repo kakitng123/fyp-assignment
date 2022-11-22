@@ -23,9 +23,9 @@
             android:id="@+id/tvProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="24dp"
             android:text="@string/price"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tvProductDesc"
             app:layout_constraintTop_toBottomOf="@+id/tfProductDesc" />
@@ -51,14 +51,14 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:text="@string/name"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.109"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            app:layout_constraintVertical_bias="0.393" />
 
         <TextView
             android:id="@+id/tvAddProduct"
@@ -78,26 +78,26 @@
             android:id="@+id/tvProductDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="24dp"
             android:text="@string/desc"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/tvProductName"
-            app:layout_constraintTop_toBottomOf="@+id/tfProductName" />
+            app:layout_constraintStart_toStartOf="@+id/tvCategory"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerCat" />
 
         <EditText
             android:id="@+id/tfProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/example"
+            android:hint="Product Name"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
+            android:minHeight="40dp"
             android:textColorHint="#757575"
             app:layout_constraintStart_toStartOf="@+id/tvProductName"
             app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/tfProductDesc"
@@ -105,12 +105,13 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/example"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
+            android:minHeight="40dp"
             android:textColorHint="#757575"
             app:layout_constraintStart_toStartOf="@+id/tvProductDesc"
             app:layout_constraintTop_toBottomOf="@+id/tvProductDesc"
-            android:importantForAutofill="no" />
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/tfProductPrice"
@@ -118,15 +119,16 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/example"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
+            android:minHeight="40dp"
             android:textColorHint="#757575"
             app:layout_constraintStart_toStartOf="@+id/tvProductPrice"
             app:layout_constraintTop_toBottomOf="@+id/tvProductPrice"
-            android:importantForAutofill="no" />
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnFinish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -135,13 +137,33 @@
             app:layout_constraintStart_toStartOf="@+id/tvProductPrice" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/selectImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Click to Select Image"
             app:layout_constraintEnd_toEndOf="@+id/imgProduct"
             app:layout_constraintStart_toStartOf="@+id/imgProduct"
             app:layout_constraintTop_toBottomOf="@+id/imgProduct" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/category"
+            app:layout_constraintStart_toStartOf="@+id/tvProductName"
+            app:layout_constraintTop_toBottomOf="@+id/tfProductName" />
+
+        <Spinner
+            android:id="@+id/spinnerCat"
+            android:layout_width="225dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/tfProductName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvCategory"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategory"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

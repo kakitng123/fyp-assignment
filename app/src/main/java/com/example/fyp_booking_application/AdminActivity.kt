@@ -6,6 +6,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
+import com.example.fyp_booking_application.backend.adminHomeFragment
 import com.example.fyp_booking_application.backend.productFragment
 import com.example.fyp_booking_application.databinding.ActivityAdminBinding
 import com.example.fyp_booking_application.frontend.homeFragment
@@ -19,6 +21,8 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        replaceFragment(adminHomeFragment())
+
         binding.apply {
             toggle = ActionBarDrawerToggle(this@AdminActivity, mainDrawer, R.string.open, R.string.close)
             mainDrawer.setDrawerListener(toggle)
@@ -53,7 +57,9 @@ class AdminActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.adminLayout, fragment)
+        fragmentTransaction.setTransition(TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()
+
 
     }
 }
