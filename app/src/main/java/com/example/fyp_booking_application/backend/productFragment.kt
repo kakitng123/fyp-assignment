@@ -48,6 +48,8 @@ class productFragment : Fragment() {
             adapter = productAdapter
             productAdapter
 
+            // https://www.youtube.com/watch?v=dB9JOsVx-yY
+            // https://www.youtube.com/watch?v=EoJX7h7lGxM
 
         }
 
