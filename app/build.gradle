@@ -58,4 +58,6 @@ dependencies {
         // Excludes the support library because it's already included by Glide.
         transitive = false
     }
+    implementation("androidx.fragment:fragment-ktx:1.5.4")
+    debugImplementation("androidx.fragment:fragment-testing:1.5.4")
 }

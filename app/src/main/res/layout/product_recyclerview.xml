@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/img_productView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:id="@+id/tv_productNameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:text="Product Name"
         app:layout_constraintStart_toEndOf="@+id/img_productView"
         app:layout_constraintTop_toTopOf="@+id/img_productView" />
@@ -55,29 +55,22 @@
 
     <Button
         android:id="@+id/btn_editView"
-        android:layout_width="100dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Edit"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/tv_priceView"
         app:layout_constraintTop_toBottomOf="@+id/tv_priceView" />
 
     <Button
         android:id="@+id/btn_deleteView"
-        android:layout_width="100dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Delete"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_editView"
         app:layout_constraintStart_toEndOf="@+id/btn_editView" />
 
-    <TextView
-        android:id="@+id/tvTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="40dp"
-        android:text="test"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

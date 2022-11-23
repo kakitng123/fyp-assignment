@@ -41,7 +41,7 @@ class addProductFragment : Fragment() {
         val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
         binding.spinnerCat.adapter = spinnerAdapter
         binding.spinnerCat.setSelection(0)
-        val mainactivityview = (activity as AdminActivity)
+        val adminactivityview = (activity as AdminActivity)
 
         // Selecting Image
         binding.imgProduct.setOnClickListener() {
@@ -65,7 +65,7 @@ class addProductFragment : Fragment() {
                 2 -> product_category = "Etc."
             }
 
-            storageRef = FirebaseStorage.getInstance().getReference("images/product/product_" + product_name)
+            storageRef = FirebaseStorage.getInstance().getReference("images/products/product_$product_name")
             storageRef.putFile(imgUri).addOnSuccessListener() {
                 binding.imgProduct.setImageURI(null)
             }
@@ -79,7 +79,9 @@ class addProductFragment : Fragment() {
 
             firestoreRef.collection("products").document(product_name).set(newProduct)
 
-            mainactivityview.replaceFragment(adminHomeFragment())
+            adminactivityview.replaceFragment(adminHomeFragment())
+
+
         }
         return binding.root
     }
