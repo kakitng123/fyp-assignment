@@ -56,7 +56,7 @@ class addProductFragment : Fragment() {
             var product_name: String = binding.tfProductName.text.toString()
             var product_desc: String = binding.tfProductDesc.text.toString()
             var product_price: Double = binding.tfProductPrice.text.toString().toDouble()
-            var product_image: String = "images/product_" + product_name
+            var product_image: String = "images/product/product_" + product_name
 
 
             when(binding.spinnerCat.selectedItemPosition){
@@ -65,7 +65,7 @@ class addProductFragment : Fragment() {
                 2 -> product_category = "Etc."
             }
 
-            storageRef = FirebaseStorage.getInstance().getReference("images/product_" + product_name)
+            storageRef = FirebaseStorage.getInstance().getReference("images/product/product_" + product_name)
             storageRef.putFile(imgUri).addOnSuccessListener() {
                 binding.imgProduct.setImageURI(null)
             }
