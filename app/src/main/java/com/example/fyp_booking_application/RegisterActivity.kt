@@ -40,20 +40,6 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
 
-
-//        //On-click Role
-//        radioRoleReg.setOnCheckedChangeListener(){ group, check ->
-//            if (check == R.id.isUser){
-//                isPlayer.id(false)
-//            }
-//        }
-//
-//        radioRoleReg.setOnCheckedChangeListener(){ group, check ->
-//            if (check == R.id.isUser){
-//                isPlayer.id(false)
-//            }
-//        }
-
         radioRoleReg.setOnCheckedChangeListener() { group, check ->
         }
 

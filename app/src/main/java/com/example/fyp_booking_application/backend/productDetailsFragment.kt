@@ -14,7 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
-import com.example.fyp_booking_application.AdminActivity
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentProductDetailsBinding
 import com.google.firebase.firestore.FirebaseFirestore

@@ -19,14 +19,14 @@ class MenuActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(homeFragment())
 
-//        binding.mainNavView.setOnItemSelectedListener {
-//            when(it.itemId){
-//                R.id.navBar_home -> replaceFragment(homeFragment())
-//                R.id.navBar_booking -> replaceFragment(bookingFragment())
-//                R.id.navBar_profile -> replaceFragment(profileFragment())
-//            }
-//            true
-//        }
+        binding.mainNavView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.navBar_home -> replaceFragment(homeFragment())
+                R.id.navBar_booking -> replaceFragment(bookingFragment())
+                R.id.navBar_profile -> replaceFragment(profileFragment())
+            }
+            true
+        }
     }
 
     private fun replaceFragment(fragment: Fragment){

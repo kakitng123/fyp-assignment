@@ -32,14 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         //Navigate to Forgot Password Page
         navForgotPass.setOnClickListener {
-            Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show() //Show successfully Toast Message
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
             finish()
         }
 
         //Navigate to Register Page
         navRegister.setOnClickListener {
-            Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show() //Show successfully Toast Message
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }

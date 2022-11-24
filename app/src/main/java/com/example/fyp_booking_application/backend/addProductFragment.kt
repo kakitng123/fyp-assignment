@@ -15,7 +15,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.fyp_booking_application.AdminActivity
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAddProductBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,7 +41,7 @@ class addProductFragment : Fragment() {
         val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
         binding.spinnerCat.adapter = spinnerAdapter
         binding.spinnerCat.setSelection(0)
-        val adminactivityview = (activity as AdminActivity)
+        val adminactivityview = (activity as AdminDashboardActivity)
 
         // Selecting Image
         binding.imgProduct.setOnClickListener() {
