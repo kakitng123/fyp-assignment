@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Booking Application</string>
+    <string name="app_name">FYP BOOKING APPLICATION</string>
     <string name="Home">Home</string>
     <string name="Booking">Booking</string>
     <string name="Profile">Profile</string>
+    <!-- Admin Nav Bar -->
     <string name="admin_maintenance">Admin Maintenance</string>
     <string name="Coach">Coach</string>
     <string name="Class">Class</string>
@@ -10,16 +11,25 @@
     <string name="Product">Product</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <!-- Category -->
     <string name="all">All</string>
     <string name="accs">Accessories</string>
     <string name="rackets">Rackets</string>
     <string name="etc">Etc.</string>
     <string name="example">Example</string>
+    <!-- Product -->
     <string name="name">Name</string>
     <string name="desc">Description</string>
     <string name="price">Price</string>
-    <string name="finish">Finish</string>
     <string name="category">Category</string>
+    <string name="image">Image</string>
+    <string name="qty">Quantity</string>
+    <!-- Buttons ETC ETC -->
+    <string name="finish">Finish</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="add">Add</string>
+    <string name="newData">Enter New Data</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

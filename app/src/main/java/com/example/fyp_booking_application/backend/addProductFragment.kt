@@ -57,6 +57,7 @@ class addProductFragment : Fragment() {
             var product_desc: String = binding.tfProductDesc.text.toString()
             var product_price: Double = binding.tfProductPrice.text.toString().toDouble()
             var product_image: String = "images/product/product_" + product_name
+            var product_qty: Int = Integer.parseInt(binding.tfProductQty.text.toString())
 
 
             when(binding.spinnerCat.selectedItemPosition){
@@ -76,12 +77,11 @@ class addProductFragment : Fragment() {
             newProduct["product_category"] = product_category
             newProduct["product_desc"] = product_desc
             newProduct["product_price"] = product_price
+            newProduct["product_qty"] = product_qty
 
             firestoreRef.collection("products").document(product_name).set(newProduct)
 
-            adminactivityview.replaceFragment(adminHomeFragment())
-
-
+            adminactivityview.replaceFragment(productFragment())
         }
         return binding.root
     }
@@ -89,7 +89,6 @@ class addProductFragment : Fragment() {
     // Load Image into ImageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 3 && data != null && data.getData() != null) {
-
             imgUri = data.getData()!!;
             binding.imgProduct.setImageURI(imgUri)
         }

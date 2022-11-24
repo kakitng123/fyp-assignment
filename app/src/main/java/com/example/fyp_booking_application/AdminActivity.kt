@@ -58,6 +58,7 @@ class AdminActivity : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.adminLayout, fragment)
         fragmentTransaction.setTransition(TRANSIT_FRAGMENT_OPEN)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
 

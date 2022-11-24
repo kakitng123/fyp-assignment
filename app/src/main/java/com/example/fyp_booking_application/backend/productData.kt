@@ -7,5 +7,6 @@ data class productData(
     val product_name: String ?= null,
     val product_category: String ?= null,
     val product_desc: String ?= null,
-    val product_price: Double = 0.00
+    val product_price: Double = 0.00,
+    val product_qty: Int = 0
 )

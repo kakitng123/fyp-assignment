@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminActivity
 import com.example.fyp_booking_application.R
@@ -17,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 
-class productFragment : Fragment() {
+class productFragment : Fragment(), productAdapter.OnItemClickListener {
 
     private lateinit var binding : FragmentProductBinding
     private lateinit var productArrayList : ArrayList<productData>
@@ -35,24 +38,22 @@ class productFragment : Fragment() {
 
         // Jumping Fragments
         binding.btnManage.setOnClickListener(){
-            adminactivityview.replaceFragment(manageProductFragment())
+            adminactivityview.replaceFragment(addProductFragment())
         }
 
-        // Putting Data in RecyclerView (currently doing)
         dataInitialize()
         binding.productRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             productArrayList = arrayListOf()
-            productAdapter = productAdapter(productArrayList)
+            productAdapter = productAdapter(productArrayList, this@productFragment)
             adapter = productAdapter
 
         }
-
-
         return binding.root
     }
 
+    // Initialize RecyclerView Data
     private fun dataInitialize(){
         firestoreRef = FirebaseFirestore.getInstance()
         firestoreRef.collection("products")
@@ -69,9 +70,16 @@ class productFragment : Fragment() {
                     }
                     productAdapter.notifyDataSetChanged()
                 }
-
             })
-
         }
+
+    // On Click Jump to Product Details (with parsing data)
+    override fun onItemClick(position: Int) {
+        // Private Variables
+        val currentItem = productArrayList[position]
+        val adminactivityview = (activity as AdminActivity)
+        adminactivityview.replaceFragment(productDetailsFragment())
+        setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_name))
+    }
 
 }
