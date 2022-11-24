@@ -17,21 +17,10 @@ import java.io.File
 class productAdapter(private val productList: ArrayList<productData>) : RecyclerView.Adapter<productAdapter.MyViewHolder>() {
 
     private lateinit var storageRef : StorageReference
-    private lateinit var clickListener : onButtonClickListener
-
-
-    interface onButtonClickListener{
-        fun onEditButtonClicked(position: Int)
-        fun onDeleteButtonClicked(position: Int)
-    }
-
-    fun setOnButtonClickListener(listener: onButtonClickListener){
-        clickListener = listener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.product_recyclerview, parent, false)
-        return MyViewHolder(itemView, clickListener)
+        return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -49,13 +38,19 @@ class productAdapter(private val productList: ArrayList<productData>) : Recycler
         holder.product_category.text = currentItem.product_category
         holder.product_desc.text = currentItem.product_desc
         holder.product_price.text = currentItem.product_price.toString()
+        holder.btnEdit.setOnClickListener(){
+            AdminActivity().replaceFragment(editProductFragment())
+        }
+        holder.btnDelete.setOnClickListener(){
+            AdminActivity().replaceFragment(deleteProductFragment())
+        }
     }
 
     override fun getItemCount(): Int {
         return productList.size
     }
 
-    class MyViewHolder(itemView: View, listener: onButtonClickListener) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val product_image: ImageView = itemView.findViewById(R.id.img_productView)
         val product_name: TextView = itemView.findViewById(R.id.tv_productNameView)
         val product_category: TextView = itemView.findViewById(R.id.tv_categoryView)
@@ -63,14 +58,5 @@ class productAdapter(private val productList: ArrayList<productData>) : Recycler
         val product_price: TextView = itemView.findViewById(R.id.tv_priceView)
         val btnEdit: Button = itemView.findViewById(R.id.btn_editView)
         val btnDelete: Button = itemView.findViewById(R.id.btn_deleteView)
-
-        init{
-            btnEdit.setOnClickListener(){
-                listener.onEditButtonClicked(adapterPosition)
-            }
-            btnDelete.setOnClickListener(){
-                listener.onDeleteButtonClicked(adapterPosition)
-            }
-        }
     }
 }
