@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.example.fyp_booking_application.AdminActivity
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentManageProductBinding
 
@@ -20,7 +20,7 @@ class manageProductFragment : Fragment() {
     ): View? {
         // Variables Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_manage_product, container, false)
-        val adminactivityview = (activity as AdminActivity)
+        val adminactivityview = (activity as AdminDashboardActivity)
 
         binding.btnAddProduct.setOnClickListener{
             adminactivityview.replaceFragment(addProductFragment())

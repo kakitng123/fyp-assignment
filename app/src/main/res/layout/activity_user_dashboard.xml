@@ -2,17 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/b"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserDashboardActivity">
+
+    <Button
+        android:id="@+id/btnRetrieve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retrieve"
+        app:layout_constraintStart_toEndOf="@+id/btnSave"
+        tools:layout_editor_absoluteY="677dp" />
 
     <ImageView
         android:id="@+id/imgProPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="141dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
@@ -31,12 +41,13 @@
         android:id="@+id/editProName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editProEmail"
-        tools:layout_editor_absoluteX="93dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProEmail" />
 
     <EditText
         android:id="@+id/editProPhone"
@@ -101,5 +112,30 @@
         android:text="Save"
         app:layout_constraintTop_toBottomOf="@+id/editProPass2"
         tools:layout_editor_absoluteX="161dp" />
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="110dp"
+        android:layout_height="39dp"
+        android:text="Upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgProPhoto"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        app:layout_constraintEnd_toStartOf="@+id/btnSave"
+        tools:layout_editor_absoluteY="677dp" />
+
+    <Button
+        android:id="@+id/btnBrowse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Browse"
+        tools:layout_editor_absoluteX="286dp"
+        tools:layout_editor_absoluteY="48dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

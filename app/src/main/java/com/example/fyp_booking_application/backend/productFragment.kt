@@ -8,11 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bumptech.glide.Glide
-import com.example.fyp_booking_application.AdminActivity
-import com.example.fyp_booking_application.MainActivity
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentProductBinding
 import com.google.firebase.firestore.DocumentChange
@@ -20,8 +16,6 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 
 class productFragment : Fragment() {
 
@@ -37,7 +31,7 @@ class productFragment : Fragment() {
     ): View? {
         // Variable Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
-        val adminactivityview = (activity as AdminActivity)
+        val adminactivityview = (activity as AdminDashboardActivity)
 
         // Jumping Fragments
         binding.btnManage.setOnClickListener(){

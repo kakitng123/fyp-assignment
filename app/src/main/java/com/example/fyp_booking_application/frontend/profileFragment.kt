@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.example.fyp_booking_application.AdminActivity
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentProfileBinding
+
+
 
 class profileFragment : Fragment() {
 
@@ -23,7 +25,7 @@ class profileFragment : Fragment() {
 
         binding.btnToAdmin.setOnClickListener(){
             activity?. let{
-                val intent = Intent (it, AdminActivity::class. java)
+                val intent = Intent (it, AdminDashboardActivity::class. java)
                 it. startActivity(intent)
             }
         }
