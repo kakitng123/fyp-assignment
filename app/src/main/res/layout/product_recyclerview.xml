@@ -9,20 +9,26 @@
 
     <ImageView
         android:id="@+id/img_productView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tv_productNameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Product Name"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/img_productView"
         app:layout_constraintTop_toTopOf="@+id/img_productView" />
 
@@ -35,49 +41,4 @@
         app:layout_constraintStart_toStartOf="@+id/tv_productNameView"
         app:layout_constraintTop_toBottomOf="@+id/tv_productNameView" />
 
-    <TextView
-        android:id="@+id/tv_categoryView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Category"
-        app:layout_constraintStart_toStartOf="@+id/tv_descView"
-        app:layout_constraintTop_toBottomOf="@+id/tv_descView" />
-
-    <TextView
-        android:id="@+id/tv_priceView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Price"
-        app:layout_constraintStart_toStartOf="@+id/tv_categoryView"
-        app:layout_constraintTop_toBottomOf="@+id/tv_categoryView" />
-
-    <Button
-        android:id="@+id/btn_editView"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Edit"
-        app:layout_constraintStart_toStartOf="@+id/tv_priceView"
-        app:layout_constraintTop_toBottomOf="@+id/tv_priceView" />
-
-    <Button
-        android:id="@+id/btn_deleteView"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_editView"
-        app:layout_constraintStart_toEndOf="@+id/btn_editView" />
-
-    <TextView
-        android:id="@+id/tvTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="40dp"
-        android:text="test"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
