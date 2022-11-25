@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         val signInBtn = findViewById<Button>(R.id.btnSignIn)
         val navForgotPass = findViewById<TextView>(R.id.linkForgotPass)
         val navRegister = findViewById<TextView>(R.id.linkSignUp)
+        val btntoAdmin = findViewById<Button>(R.id.btnAdmin)
 
         // Initialise
         auth = FirebaseAuth.getInstance()
@@ -39,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         //Navigate to Register Page
         navRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
+        }
+
+        btntoAdmin.setOnClickListener(){
+            startActivity(Intent(this, AdminDashboardActivity::class.java))
             finish()
         }
 
@@ -92,6 +98,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Please insert your information!", Toast.LENGTH_SHORT).show() //Show failure Toast Message
             }
         }
+
+
     }
 
     //Function checking role

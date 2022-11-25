@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-//import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
@@ -80,7 +80,7 @@ class productFragment : Fragment(), productAdapter.OnItemClickListener {
         val currentItem = productArrayList[position]
         val adminactivityview = (activity as AdminDashboardActivity)
         adminactivityview.replaceFragment(productDetailsFragment())
-  //      setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_name))
+        setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_name))
     }
 
 }
