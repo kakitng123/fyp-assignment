@@ -9,6 +9,7 @@ import com.example.fyp_booking_application.frontend.homeFragment
 import com.example.fyp_booking_application.frontend.profileFragment
 
 class MenuActivity : AppCompatActivity() {
+    /*
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,4 +36,6 @@ class MenuActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.mainLayout, fragment)
         fragmentTransaction.commit()
     }
+
+     */
 }

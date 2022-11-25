@@ -110,7 +110,7 @@ class productDetailsFragment : Fragment() {
     }
 
     private fun _dialogFunc(title:String, productName:String){
-        val adminactivityview = (activity as AdminActivity)
+        val adminactivityview = (activity as AdminDashboardActivity)
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)

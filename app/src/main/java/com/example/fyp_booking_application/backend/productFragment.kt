@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
@@ -17,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 
-class productFragment : Fragment() {
+class productFragment : Fragment(), productAdapter.OnItemClickListener {
 
     private lateinit var binding : FragmentProductBinding
     private lateinit var productArrayList : ArrayList<productData>
@@ -35,7 +37,7 @@ class productFragment : Fragment() {
 
         // Jumping Fragments
         binding.btnManage.setOnClickListener(){
-            adminactivityview.replaceFragment(manageProductFragment())
+            adminactivityview.replaceFragment(addProductFragment())
         }
 
         // Putting Data in RecyclerView (currently doing)
@@ -44,7 +46,7 @@ class productFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             productArrayList = arrayListOf()
-            productAdapter = productAdapter(productArrayList)
+            productAdapter = productAdapter(productArrayList, this@productFragment)
             adapter = productAdapter
 
         }
@@ -72,5 +74,13 @@ class productFragment : Fragment() {
             })
 
         }
+
+    override fun onItemClick(position: Int) {
+        // Private Variables
+        val currentItem = productArrayList[position]
+        val adminactivityview = (activity as AdminDashboardActivity)
+        adminactivityview.replaceFragment(productDetailsFragment())
+        setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_name))
+    }
 
 }
