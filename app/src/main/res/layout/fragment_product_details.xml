@@ -36,7 +36,7 @@
                     android:layout_margin="8dp"
                     android:text="@string/name"
                     android:textAlignment="viewEnd"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -46,17 +46,27 @@
                     android:layout_margin="8dp"
                     android:text="@string/image"
                     android:textAlignment="textEnd"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvProductDetailDesc"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:text="@string/desc"
                     android:textAlignment="textEnd"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvProductDetailCate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:text="@string/category"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -66,7 +76,7 @@
                     android:layout_margin="8dp"
                     android:text="@string/price"
                     android:textAlignment="textEnd"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -76,7 +86,7 @@
                     android:layout_margin="8dp"
                     android:text="@string/qty"
                     android:textAlignment="textEnd"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -91,7 +101,8 @@
                     android:id="@+id/tfProductDetailName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="8dp" />
+                    android:layout_margin="8dp"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/imgViewProductDetail"
@@ -105,20 +116,30 @@
                 <TextView
                     android:id="@+id/tfProductDetailDesc"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_margin="8dp" />
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tfProductDetailCate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tfProductDetailPrice"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="8dp" />
+                    android:layout_margin="8dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tfProductDetailQty"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_margin="8dp" />
+                    android:layout_margin="8dp"
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>

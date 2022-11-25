@@ -37,28 +37,26 @@ class addProductFragment : Fragment() {
         // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_product, container, false)
         firestoreRef = FirebaseFirestore.getInstance()
+        val adminactivityview = (activity as AdminDashboardActivity)
         val categoryType = arrayOf("Racket", "Accessories", "Etc.")
         val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
         binding.spinnerCat.adapter = spinnerAdapter
         binding.spinnerCat.setSelection(0)
-        val adminactivityview = (activity as AdminDashboardActivity)
 
         // Selecting Image
         binding.imgProduct.setOnClickListener() {
-            val selectImage =
-                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(selectImage, 3)
         }
 
         // Add Product to Firestore
         binding.btnFinish.setOnClickListener() {
+            val product_name: String = binding.tfProductName.text.toString()
+            val product_image = "images/products/product_$product_name"
             var product_category = ""
-            var product_name: String = binding.tfProductName.text.toString()
-            var product_desc: String = binding.tfProductDesc.text.toString()
-            var product_price: Double = binding.tfProductPrice.text.toString().toDouble()
-            var product_image: String = "images/product/product_" + product_name
-            var product_qty: Int = Integer.parseInt(binding.tfProductQty.text.toString())
-
+            val product_desc: String = binding.tfProductDesc.text.toString()
+            val product_price: Double = binding.tfProductPrice.text.toString().toDouble()
+            val product_qty: Int = Integer.parseInt(binding.tfProductQty.text.toString())
 
             when(binding.spinnerCat.selectedItemPosition){
                 0 -> product_category = "Racket"
@@ -67,19 +65,25 @@ class addProductFragment : Fragment() {
             }
 
             storageRef = FirebaseStorage.getInstance().getReference("images/products/product_$product_name")
-            storageRef.putFile(imgUri).addOnSuccessListener() {
-                binding.imgProduct.setImageURI(null)
-            }
+            storageRef.putFile(imgUri)
+                .addOnSuccessListener() {
+                    binding.imgProduct.setImageURI(null)
+                }
 
-            val newProduct: MutableMap<String, Any> = HashMap()
-            newProduct["product_image"] = product_image
-            newProduct["product_name"] = product_name
-            newProduct["product_category"] = product_category
-            newProduct["product_desc"] = product_desc
-            newProduct["product_price"] = product_price
-            newProduct["product_qty"] = product_qty
+            val newProductRef = firestoreRef.collection("products").document()
+            val newProduct = hashMapOf(
+                "product_id" to newProductRef.id,
+                "product_name" to product_name,
+                "product_image" to product_image,
+                "product_category" to product_category,
+                "product_desc" to product_desc,
+                "product_price" to product_price,
+                "product_qty" to product_qty
+            )
 
-            firestoreRef.collection("products").document(product_name).set(newProduct)
+            newProductRef.set(newProduct)
+                .addOnSuccessListener { Log.d(TAG, "Document Successfully Added!") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error Adding Document", e) }
 
             adminactivityview.replaceFragment(productFragment())
         }

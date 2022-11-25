@@ -80,7 +80,7 @@ class productFragment : Fragment(), productAdapter.OnItemClickListener {
         val currentItem = productArrayList[position]
         val adminactivityview = (activity as AdminDashboardActivity)
         adminactivityview.replaceFragment(productDetailsFragment())
-        setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_name))
+        setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_id))
     }
 
 }
