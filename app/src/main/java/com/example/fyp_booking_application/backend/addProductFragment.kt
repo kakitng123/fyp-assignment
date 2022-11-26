@@ -1,9 +1,7 @@
 package com.example.fyp_booking_application.backend
 
-import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,13 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAddProductBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -37,7 +33,7 @@ class addProductFragment : Fragment() {
         // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_product, container, false)
         firestoreRef = FirebaseFirestore.getInstance()
-        val adminactivityview = (activity as AdminDashboardActivity)
+        val adminActivityView = (activity as AdminDashboardActivity)
         val categoryType = arrayOf("Racket", "Accessories", "Etc.")
         val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
         binding.spinnerCat.adapter = spinnerAdapter
@@ -85,7 +81,7 @@ class addProductFragment : Fragment() {
                 .addOnSuccessListener { Log.d(TAG, "Document Successfully Added!") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error Adding Document", e) }
 
-            adminactivityview.replaceFragment(productFragment())
+            adminActivityView.replaceFragment(productAdminFragment())
         }
         return binding.root
     }

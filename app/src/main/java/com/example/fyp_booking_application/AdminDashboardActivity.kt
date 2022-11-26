@@ -8,7 +8,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
 import com.example.fyp_booking_application.backend.adminHomeFragment
-import com.example.fyp_booking_application.backend.productFragment
+import com.example.fyp_booking_application.backend.courtAdminFragment
+import com.example.fyp_booking_application.backend.productAdminFragment
 import com.example.fyp_booking_application.databinding.ActivityAdminDashboardBinding
 
 class AdminDashboardActivity : AppCompatActivity() {
@@ -35,8 +36,8 @@ class AdminDashboardActivity : AppCompatActivity() {
                     R.id.nav_admin -> Toast.makeText(this@AdminDashboardActivity, "Selected", Toast.LENGTH_SHORT).show()
                     R.id.nav_coach -> Toast.makeText(this@AdminDashboardActivity, "Selected", Toast.LENGTH_SHORT).show()
                     R.id.nav_class -> Toast.makeText(this@AdminDashboardActivity, "Selected", Toast.LENGTH_SHORT).show()
-                    R.id.nav_court -> Toast.makeText(this@AdminDashboardActivity, "Selected", Toast.LENGTH_SHORT).show()
-                    R.id.nav_product -> replaceFragment(productFragment())
+                    R.id.nav_court -> replaceFragment(courtAdminFragment())
+                    R.id.nav_product -> replaceFragment(productAdminFragment())
                 }
                 true
             }
@@ -54,6 +55,14 @@ class AdminDashboardActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.adminLayout, fragment)
+        fragmentTransaction.setTransition(TRANSIT_FRAGMENT_OPEN)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+    }
+    internal fun replaceFragment(fragment: Fragment, layout: Int){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(layout, fragment)
         fragmentTransaction.setTransition(TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()

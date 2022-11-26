@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 
-class productFragment : Fragment(), productAdapter.OnItemClickListener {
+class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
 
     private lateinit var binding : FragmentProductBinding
     private lateinit var productArrayList : ArrayList<productData>
@@ -33,11 +33,11 @@ class productFragment : Fragment(), productAdapter.OnItemClickListener {
     ): View? {
         // Variable Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
-        val adminactivityview = (activity as AdminDashboardActivity)
+        val adminActivityView = (activity as AdminDashboardActivity)
 
         // Jumping Fragments
         binding.btnManage.setOnClickListener(){
-            adminactivityview.replaceFragment(addProductFragment())
+            adminActivityView.replaceFragment(addProductFragment())
         }
 
         // Putting Data in RecyclerView (currently doing)
@@ -46,10 +46,12 @@ class productFragment : Fragment(), productAdapter.OnItemClickListener {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             productArrayList = arrayListOf()
-            productAdapter = productAdapter(productArrayList, this@productFragment)
+            productAdapter = productAdapter(productArrayList, this@productAdminFragment)
             adapter = productAdapter
 
         }
+
+        // DO NAVIGATION VIEW (w/ DIFF CATEGORY)
 
         return binding.root
     }

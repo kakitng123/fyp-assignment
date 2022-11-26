@@ -200,7 +200,7 @@ class productDetailsFragment : Fragment() {
             docRef.delete()
                 .addOnSuccessListener {
                     Log.d(TAG, "Document Deleted Successfully")
-                    adminactivityview.replaceFragment(productFragment())
+                    adminactivityview.replaceFragment(productAdminFragment())
                 }
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error Deleting Document", e)

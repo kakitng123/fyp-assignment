@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".backend.productFragment">
+        tools:context=".backend.productAdminFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/productLayout"
@@ -32,10 +32,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                tools:listitem="@layout/product_recyclerview" />
+                tools:listitem="@layout/recyclerview_products" />
 
             <ImageButton
-                android:id="@+id/btn_manage"
+                android:id="@+id/btnManage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginEnd="16dp"

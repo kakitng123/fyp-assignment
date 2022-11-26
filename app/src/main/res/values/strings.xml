@@ -3,7 +3,7 @@
     <string name="Home">Home</string>
     <string name="Booking">Booking</string>
     <string name="Profile">Profile</string>
-    <!-- Admin Nav Bar -->
+    <!-- Nav Bar -->
     <string name="admin_maintenance">Admin Maintenance</string>
     <string name="Coach">Coach</string>
     <string name="Class">Class</string>
@@ -11,6 +11,8 @@
     <string name="Product">Product</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="management">Management</string>
+    <string name="pending">Pending</string>
     <!-- Category -->
     <string name="all">All</string>
     <string name="accs">Accessories</string>
