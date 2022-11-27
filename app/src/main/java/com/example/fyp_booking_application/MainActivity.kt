@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         val signInBtn = findViewById<Button>(R.id.btnSignIn)
         val navForgotPass = findViewById<TextView>(R.id.linkForgotPass)
         val navRegister = findViewById<TextView>(R.id.linkSignUp)
+        val btntoUser = findViewById<Button>(R.id.btntoUser)
         val btntoAdmin = findViewById<Button>(R.id.btnAdmin)
 
         // Initialise
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity() {
 
         btntoAdmin.setOnClickListener(){
             startActivity(Intent(this, AdminDashboardActivity::class.java))
+            finish()
+        }
+        btntoUser.setOnClickListener(){
+            startActivity(Intent(this, UserDashboardActivity::class.java))
             finish()
         }
 

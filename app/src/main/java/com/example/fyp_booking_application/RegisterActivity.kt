@@ -40,9 +40,6 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
 
-        radioRoleReg.setOnCheckedChangeListener() { group, check ->
-        }
-
         //On-click Register
         registerBtn.setOnClickListener {
             //Input Data

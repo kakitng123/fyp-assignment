@@ -5,15 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentCourtManageBinding
-import com.example.fyp_booking_application.frontend.bookingFragment
-import com.example.fyp_booking_application.frontend.homeFragment
-import com.example.fyp_booking_application.frontend.profileFragment
 
 class courtAdminFragment : Fragment(){
 

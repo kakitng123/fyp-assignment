@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.fyp_booking_application.R
 
-class UserProfileFragment : Fragment() {
+class MyWalletFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_user_profile, container, false)
+        return inflater.inflate(R.layout.fragment_my_wallet, container, false)
     }
 }
