@@ -40,7 +40,7 @@ class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
             adminActivityView.replaceFragment(addProductFragment())
         }
 
-        // Putting Data in RecyclerView (currently doing)
+        // Putting Data in RecyclerView
         dataInitialize()
         binding.productRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
@@ -52,7 +52,6 @@ class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
         }
 
         // DO NAVIGATION VIEW (w/ DIFF CATEGORY)
-
         return binding.root
     }
 
@@ -80,8 +79,8 @@ class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
     override fun onItemClick(position: Int) {
         // Private Variables
         val currentItem = productArrayList[position]
-        val adminactivityview = (activity as AdminDashboardActivity)
-        adminactivityview.replaceFragment(productDetailsFragment())
+        val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.replaceFragment(productDetailsFragment())
         setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_id))
     }
 

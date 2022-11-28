@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        // TO DELETE AFTER
         btntoAdmin.setOnClickListener(){
             startActivity(Intent(this, AdminDashboardActivity::class.java))
             finish()

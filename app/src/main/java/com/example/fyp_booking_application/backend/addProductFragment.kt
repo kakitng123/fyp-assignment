@@ -45,22 +45,22 @@ class addProductFragment : Fragment() {
             startActivityForResult(selectImage, 3)
         }
 
-        // Add Product to Firestore
+        // Add Product into Database
         binding.btnFinish.setOnClickListener() {
-            val product_name: String = binding.tfProductName.text.toString()
-            val product_image = "images/products/product_$product_name"
-            var product_category = ""
-            val product_desc: String = binding.tfProductDesc.text.toString()
-            val product_price: Double = binding.tfProductPrice.text.toString().toDouble()
-            val product_qty: Int = Integer.parseInt(binding.tfProductQty.text.toString())
+            val productName: String = binding.tfProductName.text.toString()
+            val productImage = "images/products/product_$productName"
+            var productCategory = ""
+            val productDesc: String = binding.tfProductDesc.text.toString()
+            val productPrice: Double = binding.tfProductPrice.text.toString().toDouble()
+            val productQty: Int = Integer.parseInt(binding.tfProductQty.text.toString())
 
             when(binding.spinnerCat.selectedItemPosition){
-                0 -> product_category = "Racket"
-                1 -> product_category = "Accessories"
-                2 -> product_category = "Etc."
+                0 -> productCategory = "Racket"
+                1 -> productCategory = "Accessories"
+                2 -> productCategory = "Etc."
             }
 
-            storageRef = FirebaseStorage.getInstance().getReference("images/products/product_$product_name")
+            storageRef = FirebaseStorage.getInstance().getReference("images/products/product_$productName")
             storageRef.putFile(imgUri)
                 .addOnSuccessListener() {
                     binding.imgProduct.setImageURI(null)
@@ -69,12 +69,12 @@ class addProductFragment : Fragment() {
             val newProductRef = firestoreRef.collection("products").document()
             val newProduct = hashMapOf(
                 "product_id" to newProductRef.id,
-                "product_name" to product_name,
-                "product_image" to product_image,
-                "product_category" to product_category,
-                "product_desc" to product_desc,
-                "product_price" to product_price,
-                "product_qty" to product_qty
+                "product_name" to productName,
+                "product_image" to productImage,
+                "product_category" to productCategory,
+                "product_desc" to productDesc,
+                "product_price" to productPrice,
+                "product_qty" to productQty
             )
 
             newProductRef.set(newProduct)
