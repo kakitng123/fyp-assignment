@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
     private lateinit var fstore: FirebaseFirestore //get the shared instance of the FirebaseAuth object
-    private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
+    lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
