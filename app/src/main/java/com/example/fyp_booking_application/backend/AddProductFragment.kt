@@ -19,20 +19,20 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-class addProductFragment : Fragment() {
+class AddProductFragment : Fragment() {
 
     private lateinit var binding: FragmentAddProductBinding
     private lateinit var storageRef: StorageReference
-    private lateinit var firestoreRef: FirebaseFirestore
+    private lateinit var databaseRef: FirebaseFirestore
     private lateinit var imgUri: Uri
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_product, container, false)
-        firestoreRef = FirebaseFirestore.getInstance()
+        databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
         val categoryType = arrayOf("Racket", "Accessories", "Etc.")
         val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
@@ -40,15 +40,15 @@ class addProductFragment : Fragment() {
         binding.spinnerCat.setSelection(0)
 
         // Selecting Image
-        binding.imgProduct.setOnClickListener() {
+        binding.imgProduct.setOnClickListener {
             val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(selectImage, 3)
         }
 
         // Add Product into Database
-        binding.btnFinish.setOnClickListener() {
+        binding.btnFinish.setOnClickListener {
             val productName: String = binding.tfProductName.text.toString()
-            val productImage = "images/products/product_$productName"
+            val productImage = "products/product_$productName"
             var productCategory = ""
             val productDesc: String = binding.tfProductDesc.text.toString()
             val productPrice: Double = binding.tfProductPrice.text.toString().toDouble()
@@ -60,13 +60,13 @@ class addProductFragment : Fragment() {
                 2 -> productCategory = "Etc."
             }
 
-            storageRef = FirebaseStorage.getInstance().getReference("images/products/product_$productName")
+            storageRef = FirebaseStorage.getInstance().getReference("products/product_$productName")
             storageRef.putFile(imgUri)
-                .addOnSuccessListener() {
+                .addOnSuccessListener {
                     binding.imgProduct.setImageURI(null)
                 }
 
-            val newProductRef = firestoreRef.collection("products").document()
+            val newProductRef = databaseRef.collection("products").document()
             val newProduct = hashMapOf(
                 "product_id" to newProductRef.id,
                 "product_name" to productName,
@@ -81,7 +81,7 @@ class addProductFragment : Fragment() {
                 .addOnSuccessListener { Log.d(TAG, "Document Successfully Added!") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error Adding Document", e) }
 
-            adminActivityView.replaceFragment(productAdminFragment())
+            adminActivityView.replaceFragment(ProductAdminFragment())
         }
         return binding.root
     }
@@ -89,7 +89,7 @@ class addProductFragment : Fragment() {
     // Load Image into ImageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 3 && data != null && data.getData() != null) {
-            imgUri = data.getData()!!;
+            imgUri = data.getData()!!
             binding.imgProduct.setImageURI(imgUri)
         }
         super.onActivityResult(requestCode, resultCode, data)

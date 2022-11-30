@@ -19,25 +19,25 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 
-class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
+class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener {
 
     private lateinit var binding : FragmentProductBinding
-    private lateinit var productArrayList : ArrayList<productData>
-    private lateinit var firestoreRef: FirebaseFirestore
-    private lateinit var productAdapter : productAdapter
+    private lateinit var productArrayList : ArrayList<ProductData>
+    private lateinit var databaseRef: FirebaseFirestore
+    private lateinit var productAdapter : ProductAdminAdapter
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Variable Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
 
         // Jumping Fragments
-        binding.btnManage.setOnClickListener(){
-            adminActivityView.replaceFragment(addProductFragment())
+        binding.btnManage.setOnClickListener{
+            adminActivityView.replaceFragment(AddProductFragment())
         }
 
         // Putting Data in RecyclerView
@@ -46,7 +46,7 @@ class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             productArrayList = arrayListOf()
-            productAdapter = productAdapter(productArrayList, this@productAdminFragment)
+            productAdapter = ProductAdminAdapter(productArrayList, this@ProductAdminFragment)
             adapter = productAdapter
 
         }
@@ -56,8 +56,8 @@ class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
     }
 
     private fun dataInitialize(){
-        firestoreRef = FirebaseFirestore.getInstance()
-        firestoreRef.collection("products")
+        databaseRef = FirebaseFirestore.getInstance()
+        databaseRef.collection("products")
             .addSnapshotListener(object :  EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
@@ -66,7 +66,7 @@ class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
                     }
                     for (dc : DocumentChange in value?.documentChanges!! ){
                         if( dc.type ==  DocumentChange.Type.ADDED){
-                            productArrayList.add(dc.document.toObject(productData::class.java))
+                            productArrayList.add(dc.document.toObject(ProductData::class.java))
                         }
                     }
                     productAdapter.notifyDataSetChanged()
@@ -80,7 +80,7 @@ class productAdminFragment : Fragment(), productAdapter.OnItemClickListener {
         // Private Variables
         val currentItem = productArrayList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.replaceFragment(productDetailsFragment())
+        adminActivityView.replaceFragment(ProductDetailsFragment())
         setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_id))
     }
 

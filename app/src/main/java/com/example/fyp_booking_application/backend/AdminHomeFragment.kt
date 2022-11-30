@@ -7,20 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.databinding.FragmentClassAdminBinding
+import com.example.fyp_booking_application.databinding.FragmentAdminHomeBinding
 
-class classAdminFragment : Fragment() {
+class AdminHomeFragment : Fragment() {
 
-    private lateinit var binding : FragmentClassAdminBinding
+    private lateinit var binding : FragmentAdminHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //Variable Declarations
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_class_admin, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_home, container, false)
 
         return binding.root
     }
-
 }
