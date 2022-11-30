@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.addProductFragment
+import com.example.fyp_booking_application.backend.AddProductFragment
 import com.example.fyp_booking_application.databinding.FragmentProductDetailsBinding
 import com.example.fyp_booking_application.databinding.ProductCardBinding
 import com.example.fyp_booking_application.databinding.ProductCardDetailsBinding

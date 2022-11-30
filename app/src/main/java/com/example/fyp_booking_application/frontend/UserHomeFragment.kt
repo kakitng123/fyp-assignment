@@ -11,8 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.productAdapter
-import com.example.fyp_booking_application.backend.productData
+import com.example.fyp_booking_application.backend.ProductAdminAdapter
+import com.example.fyp_booking_application.backend.ProductData
 import com.example.fyp_booking_application.databinding.FragmentUserHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
