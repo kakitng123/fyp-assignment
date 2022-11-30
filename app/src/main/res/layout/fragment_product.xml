@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".backend.productAdminFragment">
+        tools:context=".backend.ProductAdminFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/productLayout"

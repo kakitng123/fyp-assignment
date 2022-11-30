@@ -1,23 +1,10 @@
 package com.example.fyp_booking_application
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.example.fyp_booking_application.backend.courtAdminFragment
-import com.example.fyp_booking_application.backend.productAdminFragment
-import com.example.fyp_booking_application.databinding.ActivityUserDashboardBinding
 import com.example.fyp_booking_application.frontend.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 class UserDashboardActivity : AppCompatActivity() {
 

@@ -14,29 +14,31 @@ import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentCourtPendingAdminBinding
 import com.google.firebase.firestore.*
 
-class courtPendingAdminFragment : Fragment(), courtAdminAdapter.OnItemClickListener {
+class CourtPendingAdminFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentCourtPendingAdminBinding
     private lateinit var courtPendingArrayList: ArrayList<CourtPendingData>
-    private lateinit var firestoreRef: FirebaseFirestore
-    private lateinit var courtAdminAdapter: courtAdminAdapter
+    private lateinit var databaseRef: FirebaseFirestore
+    private lateinit var docRef : DocumentReference
+    private lateinit var courtAdminAdapter: CourtAdminAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_court_pending_admin, container, false)
 
         // Example Button (Add New Booking)
-        binding.btnAddCourt.setOnClickListener() {
-            val newCourtRef = firestoreRef.collection("court_testing").document()
+        binding.btnAddCourtPending.setOnClickListener {
+            val newCourtRef = databaseRef.collection("court_testing").document()
             val newCourt = hashMapOf(
                 "document_id" to newCourtRef.id,
                 "court_id" to "A1",
                 "bookingTime" to "10:00am - 12:00pm",
                 "bookingDate" to "29_11_2022",
-                "players" to 6
+                "players" to 6,
+                "status" to "Pending"
             )
 
             newCourtRef.set(newCourt)
@@ -54,7 +56,7 @@ class courtPendingAdminFragment : Fragment(), courtAdminAdapter.OnItemClickListe
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             courtPendingArrayList = arrayListOf()
-            courtAdminAdapter = courtAdminAdapter(courtPendingArrayList, this@courtPendingAdminFragment)
+            courtAdminAdapter = CourtAdminAdapter(courtPendingArrayList, this@CourtPendingAdminFragment)
             adapter = courtAdminAdapter
 
         }
@@ -63,8 +65,8 @@ class courtPendingAdminFragment : Fragment(), courtAdminAdapter.OnItemClickListe
     }
 
     private fun dataInitialize() {
-        firestoreRef = FirebaseFirestore.getInstance()
-        firestoreRef.collection("court_testing")
+        databaseRef = FirebaseFirestore.getInstance()
+        databaseRef.collection("court_testing")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if (error != null) {
@@ -86,7 +88,16 @@ class courtPendingAdminFragment : Fragment(), courtAdminAdapter.OnItemClickListe
     override fun onItemClick(position: Int, action: String) {
         // Private Variables
         val currentItem = courtPendingArrayList[position]
+        databaseRef = FirebaseFirestore.getInstance()
+        docRef = databaseRef.collection("court_testing").document(currentItem.document_id.toString())
 
-        Toast.makeText(context, "TESTING: $action", Toast.LENGTH_SHORT).show()
+        if(action == "Approve"){
+            docRef.update("status", "APPROVED")
+            Toast.makeText(context, "TESTING: $action", Toast.LENGTH_SHORT).show()
+        }
+        else if (action == "Decline"){
+            docRef.update("status", "DECLINE")
+            Toast.makeText(context, "TESTING: $action", Toast.LENGTH_SHORT).show()
+        }
     }
 }

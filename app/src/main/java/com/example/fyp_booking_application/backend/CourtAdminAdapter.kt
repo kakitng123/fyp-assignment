@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 
-class courtAdminAdapter(
+class CourtAdminAdapter(
     private val courtPendingList: ArrayList<CourtPendingData>,
     private val listener: OnItemClickListener
-) : RecyclerView.Adapter<courtAdminAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<CourtAdminAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {

@@ -27,36 +27,36 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
 
-class productDetailsFragment : Fragment() {
+class ProductDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductDetailsBinding
-    private lateinit var firestoreRef: FirebaseFirestore
+    private lateinit var databaseRef: FirebaseFirestore
     private lateinit var storageRef: StorageReference
     private lateinit var imgUri: Uri
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Variables Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false)
-        firestoreRef = FirebaseFirestore.getInstance()
+        databaseRef = FirebaseFirestore.getInstance()
 
-        setFragmentResultListener("toProductDetails") { toProductDetails, bundle ->
+        setFragmentResultListener("toProductDetails") { _, bundle ->
             // Private Variables
-            val productid = bundle.getString("toProductDetails")
-            val docRef = firestoreRef.collection("products").document(productid.toString())
-            storageRef = FirebaseStorage.getInstance().getReference()
+            val productID = bundle.getString("toProductDetails")
+            val docRef = databaseRef.collection("products").document(productID.toString())
+            storageRef = FirebaseStorage.getInstance().reference
 
             // View Current Product Details
             docRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        val currentPhoto = storageRef.child("images/products/product_" + document["product_name"])
+                        val currentPhoto = storageRef.child("products/product_" + document["product_name"])
                         val file = File.createTempFile("temp", "png")
 
                         binding.tfProductDetailName.text = document["product_name"].toString()
-                        currentPhoto.getFile(file).addOnSuccessListener() {
+                        currentPhoto.getFile(file).addOnSuccessListener {
                             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
                             binding.imgViewProductDetail.setImageBitmap(bitmap)
                         }
@@ -73,33 +73,33 @@ class productDetailsFragment : Fragment() {
                 }
 
             // EDIT FUNCTIONS
-            binding.tfProductDetailName.setOnClickListener() {
+            binding.tfProductDetailName.setOnClickListener {
                 dialogTextView("Update Product Name", binding.tfProductDetailName)
             }
-            binding.tfProductDetailDesc.setOnClickListener() {
+            binding.tfProductDetailDesc.setOnClickListener {
                 dialogTextView("Update Product Description", binding.tfProductDetailDesc)
             }
-            binding.tfProductDetailPrice.setOnClickListener() {
+            binding.tfProductDetailPrice.setOnClickListener {
                 dialogTextView("Update Product Price", binding.tfProductDetailPrice)
             }
-            binding.tfProductDetailQty.setOnClickListener() {
+            binding.tfProductDetailQty.setOnClickListener {
                 dialogTextView("Update Product Quantity", binding.tfProductDetailQty)
             }
-            binding.tfProductDetailCate.setOnClickListener() {
-                dialogSpinner("Update Product Category", binding.tfProductDetailCate)
+            binding.tfProductDetailCate.setOnClickListener {
+                dialogSpinner(binding.tfProductDetailCate)
             }
-            binding.imgViewProductDetail.setOnClickListener() {
+            binding.imgViewProductDetail.setOnClickListener {
                 val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 startActivityForResult(selectImage, 3)
 
             }
 
             // Confirm Button for Updating Item
-            binding.imgbtnEdit.setOnClickListener() {
+            binding.imgbtnEdit.setOnClickListener {
                 docRef.get().addOnSuccessListener { document ->
                     if (document != null) {
-                        storageRef = FirebaseStorage.getInstance().getReference("images/products/product_" + binding.tfProductDetailName.text.toString())
-                        storageRef.putFile(imgUri).addOnSuccessListener() {
+                        storageRef = FirebaseStorage.getInstance().getReference("products/product_" + binding.tfProductDetailName.text.toString())
+                        storageRef.putFile(imgUri).addOnSuccessListener {
                             binding.imgViewProductDetail.setImageURI(null)
                         }
                     } else {
@@ -110,7 +110,7 @@ class productDetailsFragment : Fragment() {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Update Product Data")
                 builder.setMessage("Confirm to update product data?")
-                builder.setPositiveButton("Ok") { dialogInterface, which ->
+                builder.setPositiveButton("Ok") { _, _ ->
                     val newProduct = hashMapOf(
                         "product_image" to ("images/products/product_" + binding.tfProductDetailName.text.toString()),
                         "product_name" to binding.tfProductDetailName.text.toString(),
@@ -121,16 +121,16 @@ class productDetailsFragment : Fragment() {
                     )
 
 
-                    firestoreRef.collection("products").document(productid.toString())
+                    databaseRef.collection("products").document(productID.toString())
                         .set(newProduct, SetOptions.merge())
                 }
-                builder.setNegativeButton("Cancel") { dialogInterface, which -> }
+                builder.setNegativeButton("Cancel") { _, _ -> }
                 builder.show()
             }
 
             // Confirm Button for Delete Item
-            binding.imgbtnDelete.setOnClickListener() {
-                dialogDelete("Deleting Data", productid.toString())
+            binding.imgbtnDelete.setOnClickListener {
+                dialogDelete(productID.toString())
             }
         }
         return binding.root
@@ -144,15 +144,15 @@ class productDetailsFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setView(dialogLayout)
-        builder.setPositiveButton("Ok") { dialogInterface, which ->
+        builder.setPositiveButton("Ok") { _, _ ->
             testingTextView.text = editText.text
         }
-        builder.setNegativeButton("Cancel") { dialogInterface, which -> }
+        builder.setNegativeButton("Cancel") { _, _ -> }
         builder.show()
     }
 
     // Insert New Data Function (w/ Spinner)
-    private fun dialogSpinner(title: String, testingTextView: TextView) {
+    private fun dialogSpinner(testingTextView: TextView) {
 
         val dialogLayout = layoutInflater.inflate(R.layout.dialog_spinner, null)
         val spinner = dialogLayout.findViewById<Spinner>(R.id.dialog_spinner)
@@ -161,9 +161,9 @@ class productDetailsFragment : Fragment() {
         spinner.adapter = spinnerAdapter
         spinner.setSelection(0)
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(title)
+        builder.setTitle("Updating Product Category")
         builder.setView(dialogLayout)
-        builder.setPositiveButton("Ok") { dialogInterface, which ->
+        builder.setPositiveButton("Ok") { _, _ ->
             var product_category = "TESTING123"
             when(spinner.selectedItemPosition){
                 0 -> product_category = "Racket"
@@ -172,22 +172,22 @@ class productDetailsFragment : Fragment() {
             }
             testingTextView.text = product_category
         }
-        builder.setNegativeButton("Cancel") { dialogInterface, which -> }
+        builder.setNegativeButton("Cancel") { _, _ -> }
         builder.show()
     }
 
     // Delete Item Function
-    private fun dialogDelete(title: String, productid: String) {
-        val adminactivityview = (activity as AdminDashboardActivity)
-        val docRef = firestoreRef.collection("products").document(productid)
+    private fun dialogDelete(productID: String) {
+        val adminActivityView = (activity as AdminDashboardActivity)
+        val docRef = databaseRef.collection("products").document(productID)
         storageRef = FirebaseStorage.getInstance().reference
 
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(title)
+        builder.setTitle("Deleting Data")
         builder.setMessage("Delete Product Confirmation?")
-        builder.setPositiveButton("Ok") { dialogInterface, which ->
+        builder.setPositiveButton("Ok") { _, _ ->
             docRef.get()
-                .addOnSuccessListener() { document ->
+                .addOnSuccessListener { document ->
                     val imagePath = document["product_image"].toString()
                     storageRef.child(imagePath).delete()
                         .addOnSuccessListener {
@@ -200,22 +200,22 @@ class productDetailsFragment : Fragment() {
             docRef.delete()
                 .addOnSuccessListener {
                     Log.d(TAG, "Document Deleted Successfully")
-                    adminactivityview.replaceFragment(productAdminFragment())
+                    adminActivityView.replaceFragment(ProductAdminFragment())
                 }
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error Deleting Document", e)
                 }
 
         }
-        builder.setNegativeButton("Cancel") { dialogInterface, which -> }
+        builder.setNegativeButton("Cancel") { _, _ -> }
         builder.show()
     }
 
     // Load Image into ImageView
     // *Issue with Updating Data !MUST SELECT PICTURE OF NOT IMGURI = NULL)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 3 && data != null && data.getData() != null) {
-            imgUri = data.getData()!!;
+        if (requestCode == 3 && data != null && data.data != null) {
+            imgUri = data.data!!
             binding.imgViewProductDetail.setImageURI(imgUri)
         }
         super.onActivityResult(requestCode, resultCode, data)

@@ -12,10 +12,10 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
 
-class productAdapter(
-    private val productList: ArrayList<productData>,
+class ProductAdminAdapter(
+    private val productList: ArrayList<ProductData>,
     private val listener: OnItemClickListener
-    ) : RecyclerView.Adapter<productAdapter.MyViewHolder>() {
+    ) : RecyclerView.Adapter<ProductAdminAdapter.MyViewHolder>() {
 
     private lateinit var storageRef : StorageReference
 
@@ -48,10 +48,10 @@ class productAdapter(
         val currentItem = productList[position]
 
         storageRef = FirebaseStorage.getInstance().getReference()
-        val currentPhoto = storageRef.child("images/products/product_"+currentItem.product_name)
+        val currentPhoto = storageRef.child("products/product_"+currentItem.product_name)
         val file = File.createTempFile("temp", "png")
 
-        currentPhoto.getFile(file).addOnSuccessListener(){
+        currentPhoto.getFile(file).addOnSuccessListener{
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
             holder.product_image.setImageBitmap(bitmap)
         }

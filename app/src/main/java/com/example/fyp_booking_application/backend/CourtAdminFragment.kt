@@ -10,24 +10,24 @@ import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentCourtManageBinding
 
-class courtAdminFragment : Fragment(){
+class CourtAdminFragment : Fragment(){
 
     private lateinit var binding: FragmentCourtManageBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //Variable Declarations
         val adminActivityView = (activity as AdminDashboardActivity)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_court_manage, container, false)
-        adminActivityView.replaceFragment(courtManageAdminFragment(), R.id.courtAdminLayout)
+        adminActivityView.replaceFragment(CourtManageAdminFragment(), R.id.courtAdminLayout)
 
         // Directing Navigation
         binding.courtAdminNavBar.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.court_management -> adminActivityView.replaceFragment(courtManageAdminFragment(), R.id.courtAdminLayout)
-                R.id.court_pending -> adminActivityView.replaceFragment(courtPendingAdminFragment(), R.id.courtAdminLayout)
+                R.id.court_management -> adminActivityView.replaceFragment(CourtManageAdminFragment(), R.id.courtAdminLayout)
+                R.id.court_pending -> adminActivityView.replaceFragment(CourtPendingAdminFragment(), R.id.courtAdminLayout)
             }
             true
         }
