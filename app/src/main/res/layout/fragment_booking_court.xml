@@ -1,14 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".frontend.BookingCourtFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Booking Court Fragment" />
+        tools:context=".edit_e_password">
 
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Booking Court Fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editBookedCourtName"
+            android:layout_width="311dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="192dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="bookedCourtName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editBookedRate"
+        android:layout_width="311dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="15dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="bookedRate"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editBookedCourtName" />
+
+    <EditText
+            android:id="@+id/editBookedPhone"
+            android:layout_width="311dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="bookedPhone"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editBookedRate" />
+
+        <EditText
+            android:id="@+id/editBookedDate"
+            android:layout_width="311dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="15dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="bookedDate"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editBookedPhone" />
+
+        <EditText
+            android:id="@+id/editBookedTime"
+            android:layout_width="311dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="bookedTime"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editBookedDate" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="311dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editBookedTime" />
+
+
+<!--    <com.shuhart.stepview.StepView-->
+<!--        android:id="@+id/step_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="16dp"-->
+
+<!--        app:sv_animationType="Line"-->
+<!--        app:sv_doneCircleColor="@color/colorAccent"-->
+<!--        app:sv_doneCircleRadius="12dp"-->
+<!--        app:sv_doneStepLineColor="@color/colorAccent"-->
+<!--        app:sv_doneStepMarkColor="@color/teal_200"-->
+<!--        app:sv_nextStepLineColor="@color/colorAccent"-->
+<!--        app:sv_nextTextColor="@color/colorAccent"-->
+<!--        app:sv_selectedCircleColor="@color/colorAccent"-->
+<!--        app:sv_selectedCircleRadius="12dp"-->
+<!--        app:sv_selectedStepNumberColor="@color/teal_200"-->
+<!--        app:sv_selectedTextColor="@color/colorAccent"-->
+<!--        app:sv_stepLineWidth="1dp"-->
+<!--        app:sv_stepNumberTextSize="12sp"-->
+<!--        app:sv_stepPadding="4dp"-->
+<!--        app:sv_stepViewStyle="@style/StepView" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

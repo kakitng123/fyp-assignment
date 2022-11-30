@@ -18,7 +18,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        //Declare the variable
+        //Declare Variable
         val emailRegister = findViewById<TextView>(R.id.editRegEmail)
         val usernameRegister = findViewById<TextView>(R.id.editRegName)
         val passwordRegister1 = findViewById<TextView>(R.id.editRegPass1)

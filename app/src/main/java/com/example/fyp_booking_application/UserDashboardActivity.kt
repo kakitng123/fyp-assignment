@@ -24,7 +24,7 @@ class UserDashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_dashboard)
-        loadFragment(UserHomeFragment())
+        loadFragment(UserHomeFragment()) ////
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.setOnNavigationItemReselectedListener {
             when (it.itemId) {

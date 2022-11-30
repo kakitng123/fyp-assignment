@@ -6,11 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/smashlogo" />
+
     <EditText
         android:id="@+id/editRegEmail"
         android:layout_width="311dp"
         android:layout_height="52dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="Email"
@@ -18,13 +29,13 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editRegName"
         android:layout_width="311dp"
         android:layout_height="52dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
@@ -37,7 +48,7 @@
         android:id="@+id/editRegPass1"
         android:layout_width="311dp"
         android:layout_height="52dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
@@ -50,7 +61,7 @@
         android:id="@+id/editRegPass2"
         android:layout_width="311dp"
         android:layout_height="52dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -63,7 +74,7 @@
         android:id="@+id/radioGroupRole"
         android:layout_width="311dp"
         android:layout_height="97dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editRegPass1">
@@ -83,9 +94,9 @@
 
     <Button
         android:id="@+id/btnRegSignUp"
-        android:layout_width="wrap_content"
+        android:layout_width="311dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +106,7 @@
         android:id="@+id/linkSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textStyle="bold"
