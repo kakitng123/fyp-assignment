@@ -164,13 +164,13 @@ class ProductDetailsFragment : Fragment() {
         builder.setTitle("Updating Product Category")
         builder.setView(dialogLayout)
         builder.setPositiveButton("Ok") { _, _ ->
-            var product_category = "TESTING123"
+            var productCategory = "TESTING123"
             when(spinner.selectedItemPosition){
-                0 -> product_category = "Racket"
-                1 -> product_category = "Accessories"
-                2 -> product_category = "Etc."
+                0 -> productCategory = "Racket"
+                1 -> productCategory = "Accessories"
+                2 -> productCategory = "Etc."
             }
-            testingTextView.text = product_category
+            testingTextView.text = productCategory
         }
         builder.setNegativeButton("Cancel") { _, _ -> }
         builder.show()
@@ -212,7 +212,7 @@ class ProductDetailsFragment : Fragment() {
     }
 
     // Load Image into ImageView
-    // *Issue with Updating Data !MUST SELECT PICTURE OF NOT IMGURI = NULL)
+    // *Issue with Updating Data !MUST SELECT PICTURE OF NOT imgUri = NULL)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 3 && data != null && data.data != null) {
             imgUri = data.data!!

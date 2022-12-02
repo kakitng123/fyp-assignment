@@ -32,7 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:text="Court ID"
-                    android:textAlignment="viewEnd" />
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvRC_courtTime"
@@ -41,7 +42,8 @@
                     android:layout_margin="4dp"
                     android:text="Booking Time"
                     android:textAlignment="viewEnd"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tvRC_courtDate"
@@ -49,7 +51,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:text="Booking Date "
-                    android:textAlignment="viewEnd" />
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/tvRC_courtPlayers"
@@ -57,7 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:text="Players"
-                    android:textAlignment="viewEnd" />
+                    android:textAlignment="viewEnd"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout

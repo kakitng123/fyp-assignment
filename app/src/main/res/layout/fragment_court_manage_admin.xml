@@ -2,64 +2,93 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".backend.CourtManageAdminFragment">
 
-        <Button
-            android:id="@+id/btnAddTimeslot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="ADDTIMESLOT"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/btnAddCourt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="ADDCOURT"
-            app:layout_constraintBottom_toTopOf="@+id/btnAddTimeslot"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <EditText
-            android:id="@+id/tfTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="340dp"
-            android:ems="10"
-            android:hint="ENTER DATA"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvTESTING"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/court_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="375dp"
+                android:layout_margin="4dp"
+                tools:listitem="@layout/recyclerview_court_manage" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCourtslotTimeslot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:text="Timeslot"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCourtslotAvailability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:text="Availability"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/timeslot_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                tools:listitem="@layout/recyclerview_timeslot" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imgbtnAddCourt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TEST VIEW"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/tfTime"
-            app:layout_constraintStart_toStartOf="@+id/tfTime"
-            app:layout_constraintTop_toBottomOf="@+id/tfTime" />
+            android:layout_marginTop="325dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_add40"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/tvTESTING2"
+            android:id="@+id/tvTesting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/tvTESTING"
-            app:layout_constraintStart_toStartOf="@+id/tvTESTING"
-            app:layout_constraintTop_toBottomOf="@+id/tvTESTING" />
+            android:layout_marginBottom="150dp"
+            android:text="Click Here to Add Timeslots"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

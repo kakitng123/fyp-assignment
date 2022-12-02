@@ -1,23 +1,6 @@
 package com.example.fyp_booking_application.frontend
 
-import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.GridView
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.ProductAdminAdapter
-import com.example.fyp_booking_application.backend.ProductData
-import com.example.fyp_booking_application.databinding.FragmentUserHomeBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 
 class UserHomeFragment : Fragment() {

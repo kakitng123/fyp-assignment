@@ -9,11 +9,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.ProductAdminAdapter
-import com.example.fyp_booking_application.databinding.FragmentProductDetailsBinding
 import com.example.fyp_booking_application.databinding.FragmentTrainingClassBinding
 import com.example.fyp_booking_application.frontend.adapter.CoachAdapter
 import com.example.fyp_booking_application.frontend.data.CoachData

@@ -11,16 +11,17 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.R
+import com.example.fyp_booking_application.backend.Adapters.CourtPendingAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentCourtPendingAdminBinding
 import com.google.firebase.firestore.*
 
-class CourtPendingAdminFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
+class CourtPendingAdminFragment : Fragment(), CourtPendingAdminAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentCourtPendingAdminBinding
     private lateinit var courtPendingArrayList: ArrayList<CourtPendingData>
     private lateinit var databaseRef: FirebaseFirestore
     private lateinit var docRef : DocumentReference
-    private lateinit var courtAdminAdapter: CourtAdminAdapter
+    private lateinit var courtAdminAdapter: CourtPendingAdminAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +57,7 @@ class CourtPendingAdminFragment : Fragment(), CourtAdminAdapter.OnItemClickListe
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             courtPendingArrayList = arrayListOf()
-            courtAdminAdapter = CourtAdminAdapter(courtPendingArrayList, this@CourtPendingAdminFragment)
+            courtAdminAdapter = CourtPendingAdminAdapter(courtPendingArrayList, this@CourtPendingAdminFragment)
             adapter = courtAdminAdapter
 
         }
@@ -64,6 +65,7 @@ class CourtPendingAdminFragment : Fragment(), CourtAdminAdapter.OnItemClickListe
         return binding.root
     }
 
+    // Parsing Data into Pending_BookingRecyclerView (not complete)
     private fun dataInitialize() {
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("court_testing")
@@ -85,6 +87,7 @@ class CourtPendingAdminFragment : Fragment(), CourtAdminAdapter.OnItemClickListe
 
     }
 
+    // RecyclerView onItemClick
     override fun onItemClick(position: Int, action: String) {
         // Private Variables
         val currentItem = courtPendingArrayList[position]

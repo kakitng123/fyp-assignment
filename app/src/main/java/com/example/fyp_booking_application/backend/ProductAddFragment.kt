@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-class AddProductFragment : Fragment() {
+class ProductAddFragment : Fragment() {
 
     private lateinit var binding: FragmentAddProductBinding
     private lateinit var storageRef: StorageReference
@@ -88,8 +88,8 @@ class AddProductFragment : Fragment() {
 
     // Load Image into ImageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 3 && data != null && data.getData() != null) {
-            imgUri = data.getData()!!
+        if (requestCode == 3 && data != null && data.data != null) {
+            imgUri = data.data!!
             binding.imgProduct.setImageURI(imgUri)
         }
         super.onActivityResult(requestCode, resultCode, data)

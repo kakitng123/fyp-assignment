@@ -1,4 +1,4 @@
-package com.example.fyp_booking_application.backend
+package com.example.fyp_booking_application.backend.Adapters
 
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
+import com.example.fyp_booking_application.backend.ProductData
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -20,15 +21,15 @@ class ProductAdminAdapter(
     private lateinit var storageRef : StorageReference
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val product_image: ImageView = itemView.findViewById(R.id.img_productView)
-        val product_name: TextView = itemView.findViewById(R.id.tv_productNameView)
-        val product_desc: TextView = itemView.findViewById(R.id.tv_descView)
+        val productImage: ImageView = itemView.findViewById(R.id.img_productView)
+        val productName: TextView = itemView.findViewById(R.id.tv_productNameView)
+        val productDesc: TextView = itemView.findViewById(R.id.tv_descView)
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        override fun onClick(p0: View?) {
+        override fun onClick(v: View?) {
             val position = adapterPosition
             if(position != RecyclerView.NO_POSITION)
                 listener.onItemClick(position)
@@ -53,10 +54,10 @@ class ProductAdminAdapter(
 
         currentPhoto.getFile(file).addOnSuccessListener{
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-            holder.product_image.setImageBitmap(bitmap)
+            holder.productImage.setImageBitmap(bitmap)
         }
-        holder.product_name.text = currentItem.product_name
-        holder.product_desc.text = currentItem.product_desc
+        holder.productName.text = currentItem.product_name
+        holder.productDesc.text = currentItem.product_desc
     }
 
     override fun getItemCount(): Int {

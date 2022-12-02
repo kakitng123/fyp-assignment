@@ -12,6 +12,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
+import com.example.fyp_booking_application.backend.Adapters.ProductAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentProductBinding
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
@@ -37,10 +38,9 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
 
         // Jumping Fragments
         binding.btnManage.setOnClickListener{
-            adminActivityView.replaceFragment(AddProductFragment())
+            adminActivityView.replaceFragment(ProductAddFragment())
         }
 
-        // Putting Data in RecyclerView
         dataInitialize()
         binding.productRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
@@ -52,9 +52,11 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
         }
 
         // DO NAVIGATION VIEW (w/ DIFF CATEGORY)
+
         return binding.root
     }
 
+    // Parsing Data into ProductRecyclerView
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("products")
@@ -71,17 +73,14 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
                     }
                     productAdapter.notifyDataSetChanged()
                 }
-
             })
-
         }
 
+    // RecyclerView onItemClick
     override fun onItemClick(position: Int) {
-        // Private Variables
         val currentItem = productArrayList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
         adminActivityView.replaceFragment(ProductDetailsFragment())
         setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_id))
     }
-
 }
