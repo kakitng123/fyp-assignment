@@ -63,7 +63,7 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
             .addSnapshotListener(object :  EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
-                        Log.e("Failed", error.message.toString())
+                        Log.e("FAILED INITIALIZATION", error.message.toString())
                         return
                     }
                     for (dc : DocumentChange in value?.documentChanges!! ){

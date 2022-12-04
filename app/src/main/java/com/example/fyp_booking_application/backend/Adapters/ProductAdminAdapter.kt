@@ -48,7 +48,7 @@ class ProductAdminAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = productList[position]
 
-        storageRef = FirebaseStorage.getInstance().getReference()
+        storageRef = FirebaseStorage.getInstance().reference
         val currentPhoto = storageRef.child("products/product_"+currentItem.product_name)
         val file = File.createTempFile("temp", "png")
 

@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.CourtData
 import com.example.fyp_booking_application.backend.CourtTimeslots
 
 class TimeslotAdminAdapter(

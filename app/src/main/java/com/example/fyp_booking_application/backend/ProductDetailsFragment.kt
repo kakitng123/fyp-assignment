@@ -139,7 +139,7 @@ class ProductDetailsFragment : Fragment() {
     // Insert New Data Function (w/ TextView)
     private fun dialogTextView(title: String, testingTextView: TextView) {
 
-        val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext, null)
+        val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext1, null)
         val editText = dialogLayout.findViewById<EditText>(R.id.dialog_editText)
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)

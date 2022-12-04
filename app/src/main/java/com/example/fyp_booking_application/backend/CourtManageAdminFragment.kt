@@ -47,17 +47,18 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
             adapter = courtManageAdapter
         }
 
-        // Adding new court into database (courtID = documentID, only enter courtName)
+        // Adding new court into database
         binding.imgbtnAddCourt.setOnClickListener {
-            val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext, null)
+            val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext1, null)
             val editText = dialogLayout.findViewById<EditText>(R.id.dialog_editText)
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Enter Court Name")
             builder.setView(dialogLayout)
             builder.setPositiveButton("Add"){ _, _ ->
+                // Validation can be done here to not allow redundant court name
                 val newCourtRef = databaseRef.collection("court_testing2").document()
                 val newCourtData = hashMapOf(
-                    "courtID" to newCourtRef.id,
+                    "courtID" to newCourtRef.id, // CourtID = DocumentID *for now, could change later.
                     "courtName" to editText.text.toString(),
                     "courtSlots" to arrayListOf<CourtTimeslots>()
                 )
@@ -68,47 +69,45 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
             builder.setNegativeButton("Cancel"){ _, _ -> }
             builder.show()
         }
-
         return binding.root
     }
 
     // RecyclerView onItemClick
     override fun onItemClick(position: Int) {
         // Private Variables from Adapter
-        timeslotList = arrayListOf()
         val currentItem = courtList[position]
-        val timeslotSize = (courtList[position].courtSlots!!.size)-1
+
+        //TESTING
+        displayTimeslots(currentItem, position)
 
         // To make part of a text clickable
         val ss = SpannableString("Click Here to Add Timeslot")
         val clickableSpan: ClickableSpan = object : ClickableSpan(){
             override fun onClick(textView: View) {
-                // **NEED TO DO SMTG IF ADD SLOT, CHECK CODE BELOW FOR REF
+                val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext2, null)
+                val editTextStart = dialogLayout.findViewById<EditText>(R.id.tfStartTime)
+                val editTextEnd = dialogLayout.findViewById<EditText>(R.id.tfEndTime)
+                val editTextIncrement = dialogLayout.findViewById<EditText>(R.id.tfIncrement)
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Enter Timeslot & Increment")
+                builder.setView(dialogLayout)
+                builder.setPositiveButton("Add"){ _, _ ->
 
-                Toast.makeText(context, "CLICKED", Toast.LENGTH_SHORT).show()
+                    val startTime = editTextStart.text.toString().toInt()
+                    val endTime = editTextEnd.text.toString().toInt()
+                    val increment = editTextIncrement.text.toString().toInt()
+                    for (i in startTime..endTime){
+                        addData(i, increment, currentItem.courtID.toString())
+                    }
+                }
+                builder.setNegativeButton("Cancel"){_,_ -> }
+                builder.show()
             }
         }
         ss.setSpan(clickableSpan, 6, 10 , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.tvTesting.text = ss
+        binding.tvTesting.movementMethod = LinkMovementMethod.getInstance()
 
-        if (timeslotSize < 0){
-            Toast.makeText(context, "ERROR: EMPTY ARRAY", Toast.LENGTH_SHORT).show()
-            timeslotList.clear()
-            binding.tvTesting.visibility = View.VISIBLE
-            binding.tvTesting.text = ss
-            binding.tvTesting.movementMethod = LinkMovementMethod.getInstance()
-        }
-        else {
-            binding.tvTesting.visibility = View.INVISIBLE
-            for (i in 0..timeslotSize){
-                timeslotList.add(currentItem.courtSlots!![i])
-            }
-        }
-        binding.timeslotRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            timeslotAdapter = TimeslotAdminAdapter(timeslotList)
-            adapter = timeslotAdapter
-        }
     }
 
     // Parsing Data into CourtRecyclerView
@@ -118,7 +117,7 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
-                        Log.e("Failed", error.message.toString())
+                        Log.e("FAILED INITIALIZATION", error.message.toString())
                         return
                     }
                     for (dc : DocumentChange in value?.documentChanges!! ){
@@ -132,14 +131,39 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
     }
 
     // Able to function as intended but need tidy up
-    private fun addData(number: Int, increment: Int){
+    private fun addData(number: Int, increment: Int, document_id:String){
 
         val nestedData = hashMapOf(
             "availability" to true,
             "timeslot" to "${number}:00 - ${number+increment}:00"
         )
-        val testing1 = databaseRef.collection("court_testing2").document("PBpkL1uptOhvzpCQAIQq")
+        val testing1 = databaseRef.collection("court_testing2").document(document_id)
         testing1.update("courtSlots", FieldValue.arrayUnion(nestedData))
+    }
+
+    private fun displayTimeslots(currentItem: CourtData, position: Int){
+        timeslotList = arrayListOf()
+
+        val timeslotSize = (courtList[position].courtSlots!!.size)-1
+        if (timeslotSize < 0){
+            timeslotList.clear()
+            Toast.makeText(context, "ERROR: EMPTY ARRAY", Toast.LENGTH_SHORT).show()
+            binding.tvTesting.visibility = View.VISIBLE
+        }
+        else {
+            binding.tvTesting.visibility = View.INVISIBLE
+            for (i in 0..timeslotSize){
+                timeslotList.add(currentItem.courtSlots!![i])
+            }
+        }
+        binding.timeslotRecyclerView.apply {
+            //timeslotList.clear()
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            timeslotAdapter = TimeslotAdminAdapter(timeslotList)
+            adapter = timeslotAdapter
+        }
+
     }
 }
 
@@ -161,36 +185,3 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
             }
         }
  */
-
-// ABLE TO READ SELECTED TIMESLOT
-/*
-            val testing = databaseRef.collection("court_testing2").document("PBpkL1uptOhvzpCQAIQq")
-            testing.get().addOnSuccessListener { document ->
-                if(document != null){
-                    val doc = document.toObject(CourtDocument::class.java)
-                    if( doc != null){
-                        val timeslots = doc.courtSlots
-                        if(timeslots != null){
-                            // MANUALLY CHANGE (FOR NOW)
-                            binding.tvTESTING.text = timeslots[0].timeslot.toString()
-                            binding.tvTESTING2.text = timeslots[0].availability.toString()
-                        }
-                    }
-                }
-            }
-
-             */
-
-/*
-        // NON FUNCTIONAL
-        binding.btnAddTimeslot.setOnClickListener{
-            //val testing = Integer.parseInt(binding.tfTime.text.toString())
-            val testing = 10
-            for (i in testing..testing+10){
-                addData(i, 1)
-            }
-
-            Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show()
-        }
-
-         */
