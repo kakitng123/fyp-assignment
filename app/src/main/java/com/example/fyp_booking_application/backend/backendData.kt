@@ -40,5 +40,20 @@ data class CourtTimeslots (
     val timeslot: String ?= null
 )
 
+data class CoachData (
+    val coachEmail: String ?= null,
+    val coachExperience: String ?= null,
+    val coachID: String ?= null,
+    val coachName: String ?= null,
+    val coachPhone: String ?= null
+)
+
+data class ClassData (
+    val trainingClassDate: String ?= null,
+    val trainingClassName: String ?= null,
+    val trainingClassPrice: Int = 0,
+    val trainingClassTime: String ?= null
+)
+
 
 

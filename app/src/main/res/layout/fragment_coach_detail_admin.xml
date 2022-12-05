@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/border_strokes"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvCoachDetailID"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:text="ID"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCoachDetailName"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:text="@string/name"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCoachDetailEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:text="Email"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCoachDetailPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:text="Phone"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCoachDetailExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:text="Experience"
+                    android:textAlignment="viewEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tfCoachDetailID"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tfCoachDetailName"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tfCoachDetailEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tfCoachDetailPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tfCoachDetailExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="4dp"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvCoachDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Coach Detail"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

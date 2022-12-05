@@ -64,7 +64,7 @@ class CourtPendingAdminFragment : Fragment(), CourtPendingAdminAdapter.OnItemCli
         return binding.root
     }
 
-    // Parsing Data into Pending_BookingRecyclerView
+    // Parsing Data into PendingBookingRecyclerView
     private fun dataInitialize() {
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("court_testing").whereEqualTo("status","Pending")
@@ -82,9 +82,7 @@ class CourtPendingAdminFragment : Fragment(), CourtPendingAdminAdapter.OnItemCli
                     }
                     courtAdminAdapter.notifyDataSetChanged()
                 }
-
             })
-
     }
 
     // RecyclerView onItemClick

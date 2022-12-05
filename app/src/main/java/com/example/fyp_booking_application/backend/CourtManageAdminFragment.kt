@@ -77,10 +77,9 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
         // Private Variables from Adapter
         val currentItem = courtList[position]
 
-        //TESTING
         displayTimeslots(currentItem, position)
 
-        // To make part of a text clickable
+        // To Make Part of A Text Clickable
         val ss = SpannableString("Click Here to Add Timeslot")
         val clickableSpan: ClickableSpan = object : ClickableSpan(){
             override fun onClick(textView: View) {
@@ -130,7 +129,7 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
             })
     }
 
-    // Able to function as intended but need tidy up
+    // Able to function as intended but need tidy up (INCOMPLETE)
     private fun addData(number: Int, increment: Int, document_id:String){
 
         val nestedData = hashMapOf(
@@ -157,13 +156,11 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
             }
         }
         binding.timeslotRecyclerView.apply {
-            //timeslotList.clear()
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             timeslotAdapter = TimeslotAdminAdapter(timeslotList)
             adapter = timeslotAdapter
         }
-
     }
 }
 

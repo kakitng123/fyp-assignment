@@ -55,6 +55,12 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
 
         return binding.root
     }
+    override fun onItemClick(position: Int) {
+        val currentItem = productArrayList[position]
+        val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.replaceFragment(ProductDetailsFragment())
+        setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_id))
+    }
 
     // Parsing Data into ProductRecyclerView
     private fun dataInitialize(){
@@ -76,11 +82,5 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
             })
         }
 
-    // RecyclerView onItemClick
-    override fun onItemClick(position: Int) {
-        val currentItem = productArrayList[position]
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.replaceFragment(ProductDetailsFragment())
-        setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.product_id))
-    }
+
 }
