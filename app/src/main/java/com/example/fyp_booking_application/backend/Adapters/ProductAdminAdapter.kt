@@ -49,15 +49,15 @@ class ProductAdminAdapter(
         val currentItem = productList[position]
 
         storageRef = FirebaseStorage.getInstance().reference
-        val currentPhoto = storageRef.child("products/product_"+currentItem.product_name)
+        val currentPhoto = storageRef.child("products/product"+currentItem.productName)
         val file = File.createTempFile("temp", "png")
 
         currentPhoto.getFile(file).addOnSuccessListener{
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
             holder.productImage.setImageBitmap(bitmap)
         }
-        holder.productName.text = currentItem.product_name
-        holder.productDesc.text = currentItem.product_desc
+        holder.productName.text = currentItem.productName
+        holder.productDesc.text = currentItem.productDesc
     }
 
     override fun getItemCount(): Int {

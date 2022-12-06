@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,30 +74,29 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
         return binding.root
     }
 
-    // RecyclerView onItemClick
     override fun onItemClick(position: Int) {
-        // Private Variables from Adapter
         val currentItem = courtList[position]
 
         displayTimeslots(currentItem, position)
 
-        // To Make Part of A Text Clickable
         val ss = SpannableString("Click Here to Add Timeslot")
         val clickableSpan: ClickableSpan = object : ClickableSpan(){
             override fun onClick(textView: View) {
-                val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext2, null)
-                val editTextStart = dialogLayout.findViewById<EditText>(R.id.tfStartTime)
-                val editTextEnd = dialogLayout.findViewById<EditText>(R.id.tfEndTime)
-                val editTextIncrement = dialogLayout.findViewById<EditText>(R.id.tfIncrement)
+                val dialogLayout = layoutInflater.inflate(R.layout.dialog_addtimeslot, null)
+                val radioGroup = dialogLayout.findViewById<RadioGroup>(R.id.radioGroup1)
                 val builder = AlertDialog.Builder(requireContext())
-                builder.setTitle("Enter Timeslot & Increment")
+
+                builder.setTitle("Select Timeslot")
                 builder.setView(dialogLayout)
                 builder.setPositiveButton("Add"){ _, _ ->
-
-                    val startTime = editTextStart.text.toString().toInt()
-                    val endTime = editTextEnd.text.toString().toInt()
-                    val increment = editTextIncrement.text.toString().toInt()
-                    for (i in startTime..endTime){
+                    val increment: Int = when(radioGroup.checkedRadioButtonId){
+                        R.id.rdBtnSlotA -> 1
+                        R.id.rdBtnSlotB -> 2
+                        else -> {
+                            Log.d("TESTING WATER", "HAHAHHAHAHAH")
+                        }
+                    }
+                    for (i in 10..22 step increment){
                         addData(i, increment, currentItem.courtID.toString())
                     }
                 }
@@ -109,7 +110,7 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
 
     }
 
-    // Parsing Data into CourtRecyclerView
+    // Get/Parse Data into RecyclerView
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("court_testing2") //.whereEqualTo("courtName", "A1")
@@ -131,7 +132,6 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
 
     // Able to function as intended but need tidy up (INCOMPLETE)
     private fun addData(number: Int, increment: Int, document_id:String){
-
         val nestedData = hashMapOf(
             "availability" to true,
             "timeslot" to "${number}:00 - ${number+increment}:00"
@@ -163,22 +163,3 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
         }
     }
 }
-
-// EXTRA CODES
-// SEARCH FUNCTION
-/*
-
-        val kekw = databaseRef.collection("court_testing2/PBpkL1uptOhvzpCQAIQq/courtSlots").whereEqualTo("availability",true)
-        val testing = kekw.count()
-
-
-        testing.get(AggregateSource.SERVER).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val snapshot = task.result
-                Log.d(TAG, "Count: ${snapshot.count}")
-                binding.tvTESTING.text = task.result.toString()
-            } else {
-                Log.d(TAG, "Count failed: ", task.getException())
-            }
-        }
- */

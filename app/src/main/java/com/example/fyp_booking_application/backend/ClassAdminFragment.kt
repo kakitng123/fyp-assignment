@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.Adapters.ClassAdminAdapter
-import com.example.fyp_booking_application.backend.Adapters.CoachAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentClassAdminBinding
 import com.google.firebase.firestore.*
 
@@ -50,7 +48,7 @@ class ClassAdminFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
         setFragmentResult("toClassDetails", bundleOf("toClassDetails" to currentItem.trainingClassName))
     }
 
-    // Parsing Data into ClassAdminRecyclerView
+    // Get/Parse Data into RecyclerView
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("TrainingClass")

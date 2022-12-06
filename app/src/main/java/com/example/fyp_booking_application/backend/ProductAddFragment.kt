@@ -34,7 +34,7 @@ class ProductAddFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_product, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
-        val categoryType = arrayOf("Racket", "Accessories", "Etc.")
+        val categoryType = arrayOf("Racket", "Accessories", "Etc")
         val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
         binding.spinnerCat.adapter = spinnerAdapter
         binding.spinnerCat.setSelection(0)
@@ -48,7 +48,7 @@ class ProductAddFragment : Fragment() {
         // Add Product into Database
         binding.btnFinish.setOnClickListener {
             val productName: String = binding.tfProductName.text.toString()
-            val productImage = "products/product_$productName"
+            val productImage = "products/product$productName"
             var productCategory = ""
             val productDesc: String = binding.tfProductDesc.text.toString()
             val productPrice: Double = binding.tfProductPrice.text.toString().toDouble()
@@ -57,29 +57,29 @@ class ProductAddFragment : Fragment() {
             when(binding.spinnerCat.selectedItemPosition){
                 0 -> productCategory = "Racket"
                 1 -> productCategory = "Accessories"
-                2 -> productCategory = "Etc."
+                2 -> productCategory = "Etc"
             }
 
-            storageRef = FirebaseStorage.getInstance().getReference("products/product_$productName")
+            storageRef = FirebaseStorage.getInstance().getReference("products/product$productName")
             storageRef.putFile(imgUri)
                 .addOnSuccessListener {
                     binding.imgProduct.setImageURI(null)
                 }
 
-            val newProductRef = databaseRef.collection("products").document()
+            val newProductRef = databaseRef.collection("Products").document()
             val newProduct = hashMapOf(
-                "product_id" to newProductRef.id,
-                "product_name" to productName,
-                "product_image" to productImage,
-                "product_category" to productCategory,
-                "product_desc" to productDesc,
-                "product_price" to productPrice,
-                "product_qty" to productQty
+                "productID" to newProductRef.id,
+                "productName" to productName,
+                "productImage" to productImage,
+                "productCategory" to productCategory,
+                "productDesc" to productDesc,
+                "productPrice" to productPrice,
+                "productQty" to productQty
             )
 
             newProductRef.set(newProduct)
-                .addOnSuccessListener { Log.d(TAG, "Document Successfully Added!") }
-                .addOnFailureListener { e -> Log.w(TAG, "Error Adding Document", e) }
+                .addOnSuccessListener { Log.d("ADDING PRODUCT", "PRODUCT SUCCESSFULLY ADDED") }
+                .addOnFailureListener { e -> Log.w("ADDING PRODUCT", "ERROR ADDING PRODUCT", e) }
 
             adminActivityView.replaceFragment(ProductAdminFragment())
         }

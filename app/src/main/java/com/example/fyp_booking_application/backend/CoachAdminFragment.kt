@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
@@ -20,7 +19,6 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.ktx.toObject
 
 class CoachAdminFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
 
@@ -54,7 +52,7 @@ class CoachAdminFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
         setFragmentResult("toCoachDetails", bundleOf("toCoachDetails" to currentItem.coachID))
     }
 
-    // Parsing Data into CoachAdminRecyclerView
+    // Get/Parse Data into RecyclerView
     private fun dataInitialize() {
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("CoachProfile")
@@ -71,7 +69,6 @@ class CoachAdminFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
                     }
                     coachAdminAdapter.notifyDataSetChanged()
                 }
-
             })
     }
 }

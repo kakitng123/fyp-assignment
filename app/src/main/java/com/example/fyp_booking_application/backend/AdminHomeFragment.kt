@@ -11,7 +11,7 @@ import com.example.fyp_booking_application.databinding.FragmentAdminHomeBinding
 
 class AdminHomeFragment : Fragment() {
 
-    private lateinit var binding : FragmentAdminHomeBinding
+    private lateinit var binding: FragmentAdminHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

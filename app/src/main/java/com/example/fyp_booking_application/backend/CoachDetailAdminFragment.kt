@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.R
@@ -21,7 +20,7 @@ class CoachDetailAdminFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coach_detail_admin, container, false)
 

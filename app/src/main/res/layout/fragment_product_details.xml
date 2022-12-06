@@ -34,8 +34,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
+                    android:gravity="center|end"
                     android:text="@string/name"
-                    android:textAlignment="viewEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -54,8 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
+                    android:gravity="center|end"
                     android:text="@string/desc"
-                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -64,8 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
+                    android:gravity="center|end"
                     android:text="@string/category"
-                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -74,8 +74,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
+                    android:gravity="center|end"
                     android:text="@string/price"
-                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -84,8 +84,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
+                    android:gravity="center|end"
                     android:text="@string/qty"
-                    android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -97,12 +97,18 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <EditText
                     android:id="@+id/tfProductDetailName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
-                    android:textSize="16sp" />
+                    android:enabled="false"
+                    android:hint="Enter Name"
+                    android:inputType="textPersonName"
+                    android:textAlignment="textStart"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    android:importantForAutofill="no" />
 
                 <ImageView
                     android:id="@+id/imgViewProductDetail"
@@ -111,35 +117,53 @@
                     android:layout_margin="8dp"
                     android:contentDescription="@string/image"
                     tools:ignore="ImageContrastCheck"
-                    tools:src="@tools:sample/avatars"/>
+                    tools:src="@tools:sample/avatars" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfProductDetailDesc"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
-                    android:textSize="16sp" />
+                    android:enabled="false"
+                    android:hint="Enter Description"
+                    android:inputType="text"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    android:importantForAutofill="no" />
 
-                <TextView
+                <Spinner
                     android:id="@+id/tfProductDetailCate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
+                    android:contentDescription="Enter Category"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:enabled="false"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfProductDetailPrice"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
-                    android:textSize="16sp" />
+                    android:enabled="false"
+                    android:hint="Enter Price"
+                    android:inputType="number"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    android:importantForAutofill="no" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfProductDetailQty"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
-                    android:textSize="16sp" />
+                    android:enabled="false"
+                    android:hint="Enter Quantity"
+                    android:inputType="number"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    android:importantForAutofill="no" />
             </LinearLayout>
 
         </LinearLayout>
@@ -180,6 +204,17 @@
             android:src="@drawable/ic_delete40"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <Switch
+            android:id="@+id/switchUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="Updatable"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

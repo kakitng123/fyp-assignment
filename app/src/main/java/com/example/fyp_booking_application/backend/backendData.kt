@@ -2,13 +2,23 @@ package com.example.fyp_booking_application.backend
 
 // ProductData is done
 data class ProductData(
-    val product_id: String ?= null,
-    val product_name: String ?= null,
-    val product_image: String ?= null,
-    val product_category: String ?= null,
-    val product_desc: String ?= null,
-    val product_price: Double = 0.00,
-    val product_qty: Int = 0
+    val productID: String ?= null,
+    val productName: String ?= null,
+    val productImage: String ?= null,
+    val productCategory: String ?= null,
+    val productDesc: String ?= null,
+    val productPrice: Double = 0.00,
+    val productQty: Int = 0
+)
+data class CourtData (
+    val courtID: String ?= null,
+    val courtName: String ?= null,
+    val courtSlots: MutableList<CourtTimeslots> ?= null
+)
+
+data class CourtTimeslots (
+    val availability: Boolean ?= null,
+    val timeslot: String ?= null
 )
 /*
 data class CoachData (
@@ -28,16 +38,6 @@ data class CourtPendingData (
     val bookingDate: String ?= null,
     val players: Int = 0,
     val status: String ?= null
-)
-data class CourtData (
-    val courtID: String ?= null,
-    val courtName: String ?= null,
-    val courtSlots: MutableList<CourtTimeslots> ?= null
-)
-
-data class CourtTimeslots (
-    val availability: Boolean ?= null,
-    val timeslot: String ?= null
 )
 
 data class CoachData (

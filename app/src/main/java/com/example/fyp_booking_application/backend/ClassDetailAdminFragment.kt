@@ -21,7 +21,6 @@ class ClassDetailAdminFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_class_detail_admin, container, false)
 
         setFragmentResultListener("toClassDetails") { _, bundle ->
@@ -31,6 +30,8 @@ class ClassDetailAdminFragment : Fragment() {
             docRef.get()
                 .addOnSuccessListener { document ->
                     val testing = document.toObjects(ClassData::class.java)
+
+                    // could use a better method to access
                     binding.tfClassDate.text = testing[0].trainingClassDate
                     binding.tfClassName.text = testing[0].trainingClassName
                     binding.tfClassPrice.text = testing[0].trainingClassPrice.toString()

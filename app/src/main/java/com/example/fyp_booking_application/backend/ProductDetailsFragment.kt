@@ -1,7 +1,6 @@
 package com.example.fyp_booking_application.backend
 
 import android.app.AlertDialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -13,9 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Spinner
-import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.AdminDashboardActivity
@@ -38,186 +36,159 @@ class ProductDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variables Declaration
+        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false)
         databaseRef = FirebaseFirestore.getInstance()
+        val adminActivityView = (activity as AdminDashboardActivity)
 
+        // Get Data from Paired-Fragment
         setFragmentResultListener("toProductDetails") { _, bundle ->
-            // Private Variables
             val productID = bundle.getString("toProductDetails")
-            val docRef = databaseRef.collection("products").document(productID.toString())
+            val docRef = databaseRef.collection("Products").document(productID.toString())
             storageRef = FirebaseStorage.getInstance().reference
 
-            // View Current Product Details
-            docRef.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        val currentPhoto = storageRef.child("products/product_" + document["product_name"])
-                        val file = File.createTempFile("temp", "png")
+            // TESTING FUNCTION
+            val categoryType = arrayOf("Racket", "Accessories", "Etc")
+            val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
+            binding.tfProductDetailCate.isEnabled = false
+            binding.tfProductDetailCate.adapter = spinnerAdapter
 
-                        binding.tfProductDetailName.text = document["product_name"].toString()
-                        currentPhoto.getFile(file).addOnSuccessListener {
-                            val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-                            binding.imgViewProductDetail.setImageBitmap(bitmap)
-                        }
-                        binding.tfProductDetailCate.text = document["product_category"].toString()
-                        binding.tfProductDetailDesc.text = document["product_desc"].toString()
-                        binding.tfProductDetailPrice.text = document["product_price"].toString()
-                        binding.tfProductDetailQty.text = document["product_qty"].toString()
-                    } else {
-                        Log.d(TAG, "Invalid Document")
+            // GET DOCUMENT
+            docRef.get().addOnSuccessListener { document ->
+                if (document != null) {
+                    val product = document.toObject(ProductData::class.java)
+                    val prevProductImgPath = product?.productImage.toString() // used to delete previous image
+                    var productCategory = product?.productCategory.toString()
+
+                    val currentPhoto = storageRef.child(product?.productImage.toString())
+                    val file = File.createTempFile("temp", "png")
+                    currentPhoto.getFile(file).addOnSuccessListener {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        binding.imgViewProductDetail.setImageBitmap(bitmap)
                     }
-                }
-                .addOnFailureListener { exception ->
-                    Log.d(TAG, "FAILED with", exception)
-                }
 
-            // EDIT FUNCTIONS
-            binding.tfProductDetailName.setOnClickListener {
-                dialogTextView("Update Product Name", binding.tfProductDetailName)
-            }
-            binding.tfProductDetailDesc.setOnClickListener {
-                dialogTextView("Update Product Description", binding.tfProductDetailDesc)
-            }
-            binding.tfProductDetailPrice.setOnClickListener {
-                dialogTextView("Update Product Price", binding.tfProductDetailPrice)
-            }
-            binding.tfProductDetailQty.setOnClickListener {
-                dialogTextView("Update Product Quantity", binding.tfProductDetailQty)
-            }
-            binding.tfProductDetailCate.setOnClickListener {
-                dialogSpinner(binding.tfProductDetailCate)
-            }
-            binding.imgViewProductDetail.setOnClickListener {
-                val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                startActivityForResult(selectImage, 3)
+                    // To Enable Editable! Fields
+                    binding.switchUpdate.setOnCheckedChangeListener { _, isChecked ->
+                        binding.tfProductDetailName.isEnabled = isChecked
+                        binding.tfProductDetailCate.isEnabled = isChecked
+                        binding.tfProductDetailDesc.isEnabled = isChecked
+                        binding.tfProductDetailPrice.isEnabled = isChecked
+                        binding.tfProductDetailQty.isEnabled = isChecked
+                    }
 
-            }
+                    // Set text for EditText
+                    binding.tfProductDetailName.setText(product?.productName.toString())
+                    binding.tfProductDetailCate.setSelection(getIndex(binding.tfProductDetailCate, productCategory))
+                    binding.tfProductDetailDesc.setText(product?.productDesc.toString())
+                    binding.tfProductDetailPrice.setText(product?.productPrice.toString())
+                    binding.tfProductDetailQty.setText(product?.productQty.toString())
 
-            // Confirm Button for Updating Item
-            binding.imgbtnEdit.setOnClickListener {
-                docRef.get().addOnSuccessListener { document ->
-                    if (document != null) {
-                        storageRef = FirebaseStorage.getInstance().getReference("products/product_" + binding.tfProductDetailName.text.toString())
+                    // For Editing ProductImage
+                    binding.imgViewProductDetail.setOnClickListener {
+                        val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        startActivityForResult(selectImage, 3)
+
+                        storageRef.child(prevProductImgPath).delete()
+                            .addOnSuccessListener {
+                                Log.d("DELETING PROD.IMAGE", "PROD.IMG DELETED SUCCESSFULLY")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.d("DELETING PROD.IMAGE", "ERROR DELETING PROD.IMG", e)
+                            }
+                    }
+
+                    // Confirm Button for Updating Item
+                    binding.imgbtnEdit.setOnClickListener {
+                        storageRef = FirebaseStorage.getInstance().getReference("products/product${binding.tfProductDetailName.text}")
                         storageRef.putFile(imgUri).addOnSuccessListener {
                             binding.imgViewProductDetail.setImageURI(null)
                         }
-                    } else {
-                        Log.d(TAG, "Invalid Document")
+
+                        when(binding.tfProductDetailCate.selectedItemPosition){
+                            0 -> productCategory = "Racket"
+                            1 -> productCategory = "Accessories"
+                            2 -> productCategory = "Etc"
+                        }
+
+                        val builder = AlertDialog.Builder(requireContext())
+                        builder.setTitle("Update Product Data")
+                        builder.setMessage("Confirm to update product data?")
+                        builder.setPositiveButton("Ok") { _, _ ->
+                            if(binding.tfProductDetailName.text != null &&  binding.tfProductDetailDesc.text != null
+                                && binding.tfProductDetailPrice.text != null && binding.tfProductDetailQty.text != null){
+                                val updateProduct = hashMapOf(
+                                    "productImage" to "products/product${binding.tfProductDetailName.text}",
+                                    "productName" to binding.tfProductDetailName.text.toString(),
+                                    "productCategory" to productCategory,
+                                    "productDesc" to binding.tfProductDetailDesc.text.toString(),
+                                    "productPrice" to binding.tfProductDetailPrice.text.toString().toDouble(),
+                                    "productQty" to binding.tfProductDetailQty.text.toString().toInt()
+                                )
+                                docRef.set(updateProduct, SetOptions.merge())
+                            }
+                            else {
+                                Toast.makeText(context, "CANNOT HAVE EMPTY FIELD", Toast.LENGTH_SHORT).show()
+                                return@setPositiveButton
+                            }
+                        }
+                        builder.setNegativeButton("Cancel") { _, _ -> }
+                        builder.show()
                     }
                 }
-
-                val builder = AlertDialog.Builder(requireContext())
-                builder.setTitle("Update Product Data")
-                builder.setMessage("Confirm to update product data?")
-                builder.setPositiveButton("Ok") { _, _ ->
-                    val newProduct = hashMapOf(
-                        "product_image" to ("images/products/product_" + binding.tfProductDetailName.text.toString()),
-                        "product_name" to binding.tfProductDetailName.text.toString(),
-                        "product_category" to binding.tfProductDetailCate.text.toString(),
-                        "product_desc" to binding.tfProductDetailDesc.text.toString(),
-                        "product_price" to (binding.tfProductDetailPrice.text.toString()).toDouble(),
-                        "product_qty" to Integer.parseInt(binding.tfProductDetailQty.text.toString())
-                    )
-
-
-                    databaseRef.collection("products").document(productID.toString())
-                        .set(newProduct, SetOptions.merge())
+                else {
+                    Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
                 }
-                builder.setNegativeButton("Cancel") { _, _ -> }
-                builder.show()
+            }.addOnFailureListener { e ->
+                Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
             // Confirm Button for Delete Item
             binding.imgbtnDelete.setOnClickListener {
-                dialogDelete(productID.toString())
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Deleting Data")
+                builder.setMessage("Delete Product Confirmation?")
+                builder.setPositiveButton("Ok") { _, _ ->
+                    docRef.get().addOnSuccessListener { document ->
+                        val imagePath = document["product_image"].toString()
+                        storageRef.child(imagePath).delete()
+                            .addOnSuccessListener {
+                                Log.d("DELETING PROD.IMG", "PROD.IMG DELETED SUCCESSFULLY")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.d("DELETING PROD.IMG", "ERROR DELETING PROD.IMG", e)
+                            }
+                    }.addOnFailureListener { e ->
+                        Log.e("FETCHING PRODUCT", "INVALID PRODUCT", e)
+                    }
+                    docRef.delete().addOnSuccessListener {
+                        Log.d("DELETING PRODUCT", "PRODUCT DELETED SUCCESSFULLY")
+                        adminActivityView.replaceFragment(ProductAdminFragment())
+                    }.addOnFailureListener { e ->
+                        Log.e("DELETING PRODUCT", "ERROR DELETING PRODUCT", e)
+                    }
+                }
+                builder.setNegativeButton("Cancel") { _, _ -> }
+                builder.show()
             }
         }
         return binding.root
     }
 
-    // Insert New Data Function (w/ TextView)
-    private fun dialogTextView(title: String, testingTextView: TextView) {
-
-        val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext1, null)
-        val editText = dialogLayout.findViewById<EditText>(R.id.dialog_editText)
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(title)
-        builder.setView(dialogLayout)
-        builder.setPositiveButton("Ok") { _, _ ->
-            testingTextView.text = editText.text
-        }
-        builder.setNegativeButton("Cancel") { _, _ -> }
-        builder.show()
-    }
-
-    // Insert New Data Function (w/ Spinner)
-    private fun dialogSpinner(testingTextView: TextView) {
-
-        val dialogLayout = layoutInflater.inflate(R.layout.dialog_spinner, null)
-        val spinner = dialogLayout.findViewById<Spinner>(R.id.dialog_spinner)
-        val categoryType = arrayOf("Racket", "Accessories", "Etc.")
-        val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
-        spinner.adapter = spinnerAdapter
-        spinner.setSelection(0)
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Updating Product Category")
-        builder.setView(dialogLayout)
-        builder.setPositiveButton("Ok") { _, _ ->
-            var productCategory = "TESTING123"
-            when(spinner.selectedItemPosition){
-                0 -> productCategory = "Racket"
-                1 -> productCategory = "Accessories"
-                2 -> productCategory = "Etc."
-            }
-            testingTextView.text = productCategory
-        }
-        builder.setNegativeButton("Cancel") { _, _ -> }
-        builder.show()
-    }
-
-    // Delete Item Function
-    private fun dialogDelete(productID: String) {
-        val adminActivityView = (activity as AdminDashboardActivity)
-        val docRef = databaseRef.collection("products").document(productID)
-        storageRef = FirebaseStorage.getInstance().reference
-
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Deleting Data")
-        builder.setMessage("Delete Product Confirmation?")
-        builder.setPositiveButton("Ok") { _, _ ->
-            docRef.get()
-                .addOnSuccessListener { document ->
-                    val imagePath = document["product_image"].toString()
-                    storageRef.child(imagePath).delete()
-                        .addOnSuccessListener {
-                            Log.d(TAG, "DELETE SUCCESSFULLY")
-                        }
-                        .addOnFailureListener { e ->
-                            Log.d(TAG, "ERROR FOUND NOT DELETED", e)
-                        }
-                }
-            docRef.delete()
-                .addOnSuccessListener {
-                    Log.d(TAG, "Document Deleted Successfully")
-                    adminActivityView.replaceFragment(ProductAdminFragment())
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error Deleting Document", e)
-                }
-
-        }
-        builder.setNegativeButton("Cancel") { _, _ -> }
-        builder.show()
-    }
-
     // Load Image into ImageView
-    // *Issue with Updating Data !MUST SELECT PICTURE OF NOT imgUri = NULL)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 3 && data != null && data.data != null) {
             imgUri = data.data!!
             binding.imgViewProductDetail.setImageURI(imgUri)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    // Loading Existing Product Category into Spinner
+    private fun getIndex(spinner: Spinner, category: String): Int {
+        for (i in 0..spinner.count){
+            if(spinner.getItemAtPosition(i).toString() == category)
+                return i
+        }
+        return 0
     }
 }
