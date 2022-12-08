@@ -35,20 +35,20 @@ class CourtPendingAdminFragment : Fragment(), CourtPendingAdminAdapter.OnItemCli
         binding.btnAddCourtPending.setOnClickListener {
             val newBookingRef = databaseRef.collection("court_testing").document()
             val newCourt = hashMapOf(
-                "booking_id" to newBookingRef.id,
-                "court_id" to "hdKxtkb7ooszWQNBiyPg",
+                "bookingID" to newBookingRef.id,
+                "courtID" to "Eo5LKANc8HWlIHQN0O4V",
+                "userID" to "testing123",
                 "bookingTime" to "10:00 - 11:00",
                 "bookingDate" to "29_11_2022",
-                "players" to 6,
                 "status" to "Pending"
             )
 
             newBookingRef.set(newCourt)
                 .addOnSuccessListener {
-                    Log.d("ADDING COURT DATABASE", "Document Successfully Added!")
+                    Log.d("ADDING NEW COURT", "Document Successfully Added!")
                     Toast.makeText(context, "DOCUMENT ADDED", Toast.LENGTH_SHORT).show()
                 }
-                .addOnFailureListener { e -> Log.w("ADDING COURT DATABASE", "Error Adding Document", e) }
+                .addOnFailureListener { e -> Log.w("ADDING NEW COURT", "Error Adding Document", e) }
         }
 
         dataInitialize()
@@ -86,14 +86,18 @@ class CourtPendingAdminFragment : Fragment(), CourtPendingAdminAdapter.OnItemCli
     }
 
     // RecyclerView onItemClick
-    override fun onItemClick(position: Int, action: String) {
+    override fun onItemClick(position: Int) {
         // Private Variables
         val currentItem = courtPendingArrayList[position]
         databaseRef = FirebaseFirestore.getInstance()
-        docRef = databaseRef.collection("court_testing").document(currentItem.document_id.toString())
-        courtRef = databaseRef.collection("court_testing2").document(currentItem.court_id.toString())
+        docRef = databaseRef.collection("court_testing").document(currentItem.documentID.toString())
+        courtRef = databaseRef.collection("court_testing2").document(currentItem.courtID.toString())
         //val testRef = databaseRef.collection("court_testing2")
 
+    }
+}
+// EXTRA CODES ATM
+/*
         if(action == "Approve"){
             docRef.update("status", "APPROVED")
             Toast.makeText(context, "TESTING: $action", Toast.LENGTH_SHORT).show()
@@ -118,5 +122,5 @@ class CourtPendingAdminFragment : Fragment(), CourtPendingAdminAdapter.OnItemCli
             docRef.update("status", "DECLINE")
             Toast.makeText(context, "TESTING: $action", Toast.LENGTH_SHORT).show()
         }
-    }
-}
+
+         */

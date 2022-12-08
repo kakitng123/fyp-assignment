@@ -17,6 +17,12 @@
         <item
             android:id="@+id/nav_product"
             android:title="@string/Product" />
+        <item
+            android:id="@+id/nav_trans"
+            android:title="Transaction" />
+        <item
+            android:id="@+id/nav_settings"
+            android:title="System Setting" />
     </group>
     <item
         android:id="@+id/nav_signout"

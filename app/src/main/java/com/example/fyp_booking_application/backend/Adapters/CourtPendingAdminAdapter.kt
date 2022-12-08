@@ -18,28 +18,22 @@ class CourtPendingAdminAdapter(
         val courtID: TextView = itemView.findViewById(R.id.tfRC_courtID)
         val bookingTime: TextView = itemView.findViewById(R.id.tfRC_courtTime)
         val bookingDate: TextView = itemView.findViewById(R.id.tfRC_courtDate)
-        val players: TextView = itemView.findViewById(R.id.tfRC_courtPlayers)
-        private val btnApprove: Button = itemView.findViewById(R.id.btnRC_approve)
-        private val btnDecline: Button = itemView.findViewById(R.id.btnRC_decline)
+        private val btnReminder: Button = itemView.findViewById(R.id.btnReminder)
 
         init {
-            btnApprove.setOnClickListener(this)
-            btnDecline.setOnClickListener(this)
+            btnReminder.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                when (v.id) {
-                    R.id.btnRC_approve -> listener.onItemClick(position, "Approve")
-                    R.id.btnRC_decline -> listener.onItemClick(position, "Decline")
-                }
+                listener.onItemClick(position)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, action: String)
+        fun onItemClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -50,10 +44,9 @@ class CourtPendingAdminAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = courtPendingList[position]
 
-        holder.courtID.text = currentItem.court_id
+        holder.courtID.text = currentItem.courtID
         holder.bookingTime.text = currentItem.bookingTime
         holder.bookingDate.text = currentItem.bookingDate
-        holder.players.text = currentItem.players.toString()
     }
 
     override fun getItemCount(): Int {

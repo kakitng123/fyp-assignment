@@ -12,12 +12,19 @@
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="317dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +50,7 @@
                     android:text="Booking Time"
                     android:textAlignment="viewEnd"
                     android:textSize="14sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvRC_courtDate"
@@ -52,16 +59,8 @@
                     android:layout_margin="4dp"
                     android:text="Booking Date "
                     android:textAlignment="viewEnd"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvRC_courtPlayers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="Players"
-                    android:textAlignment="viewEnd"
-                    android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout
@@ -92,49 +91,19 @@
                     android:layout_margin="4dp"
                     android:text="26_11_2022" />
 
-                <TextView
-                    android:id="@+id/tfRC_courtPlayers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="6" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:textAlignment="center">
-
-            <Button
-                android:id="@+id/btnRC_approve"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="2.5"
-                android:backgroundTint="@color/green_approve"
-                android:text="@string/approve"
-                android:textColor="@color/black"
-                app:cornerRadius="25dp"
-                tools:ignore="TextContrastCheck" />
-
-            <Button
-                android:id="@+id/btnRC_decline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:backgroundTint="@color/red_decline"
-                android:text="@string/decline"
-                android:textColor="@color/black"
-                app:cornerRadius="25dp" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnReminder"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="Send Reminder"
+            app:cornerRadius="25dp"
+            app:icon="@drawable/ic_notifications"
+            app:iconGravity="textStart" />
 
     </LinearLayout>
 

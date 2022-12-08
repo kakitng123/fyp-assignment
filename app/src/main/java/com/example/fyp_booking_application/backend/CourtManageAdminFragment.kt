@@ -49,7 +49,7 @@ class CourtManageAdminFragment : Fragment(), CourtManageAdminAdapter.OnItemClick
             adapter = courtManageAdapter
         }
 
-        // Adding new court into database
+        // Adding New Court Into database
         binding.imgbtnAddCourt.setOnClickListener {
             val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext1, null)
             val editText = dialogLayout.findViewById<EditText>(R.id.dialog_editText)

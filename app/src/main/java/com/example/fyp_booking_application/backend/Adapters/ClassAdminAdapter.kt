@@ -3,14 +3,13 @@ package com.example.fyp_booking_application.backend.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.ClassData
+import com.example.fyp_booking_application.backend.ClassData2
 
 class ClassAdminAdapter(
-    private val classList: ArrayList<ClassData>,
+    private val classList: ArrayList<ClassData2>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<ClassAdminAdapter.MyViewHolder>(){
 
@@ -41,8 +40,8 @@ class ClassAdminAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = classList[position]
 
-        holder.className.text = currentItem.trainingClassName
-        holder.classPrice.text = currentItem.trainingClassPrice.toString()
+        holder.className.text = currentItem.className
+        holder.classPrice.text = currentItem.classPrice.toString()
     }
 
     override fun getItemCount(): Int {

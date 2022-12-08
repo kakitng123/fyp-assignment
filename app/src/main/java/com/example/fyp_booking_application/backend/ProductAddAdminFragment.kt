@@ -1,6 +1,5 @@
 package com.example.fyp_booking_application.backend
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -19,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-class ProductAddFragment : Fragment() {
+class ProductAddAdminFragment : Fragment() {
 
     private lateinit var binding: FragmentAddProductBinding
     private lateinit var storageRef: StorageReference

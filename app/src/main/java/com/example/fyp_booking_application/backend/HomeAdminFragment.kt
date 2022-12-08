@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminHomeBinding
 
-class AdminHomeFragment : Fragment() {
+class HomeAdminFragment : Fragment() {
 
     private lateinit var binding: FragmentAdminHomeBinding
 

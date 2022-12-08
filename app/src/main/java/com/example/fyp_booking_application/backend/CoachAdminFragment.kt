@@ -33,6 +33,7 @@ class CoachAdminFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
     ): View {
         //Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coach_admin, container, false)
+        val adminActivityView = (activity as AdminDashboardActivity)
 
         dataInitialize()
         binding.coachRecyclerView.apply {
@@ -42,6 +43,11 @@ class CoachAdminFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
             coachAdminAdapter = CoachAdminAdapter(coachArrayList, this@CoachAdminFragment)
             adapter = coachAdminAdapter
         }
+
+        binding.btnAddCoach.setOnClickListener{
+            adminActivityView.replaceFragment(CoachAddAdminFragment())
+        }
+
         return binding.root
     }
 
@@ -55,7 +61,7 @@ class CoachAdminFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
     // Get/Parse Data into RecyclerView
     private fun dataInitialize() {
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("CoachProfile")
+        databaseRef.collection("coach_testing1")
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){

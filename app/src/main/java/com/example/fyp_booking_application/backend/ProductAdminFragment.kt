@@ -36,8 +36,9 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
         productArrayList = arrayListOf()
         val adminActivityView = (activity as AdminDashboardActivity)
 
+        // Button to Add New Product
         binding.btnManage.setOnClickListener{
-            adminActivityView.replaceFragment(ProductAddFragment())
+            adminActivityView.replaceFragment(ProductAddAdminFragment())
         }
         dataInitialize1()
         binding.productNavView.setOnItemSelectedListener {
@@ -63,7 +64,7 @@ class ProductAdminFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
     override fun onItemClick(position: Int) {
         val currentItem = productArrayList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.replaceFragment(ProductDetailsFragment())
+        adminActivityView.replaceFragment(ProductDetailsAdminFragment())
         // Parse Data to Paired-Fragment
         setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.productID))
     }

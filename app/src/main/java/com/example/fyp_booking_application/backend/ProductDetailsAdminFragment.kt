@@ -25,7 +25,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
 
-class ProductDetailsFragment : Fragment() {
+class ProductDetailsAdminFragment : Fragment() {
 
     private lateinit var binding: FragmentProductDetailsBinding
     private lateinit var databaseRef: FirebaseFirestore
@@ -46,8 +46,6 @@ class ProductDetailsFragment : Fragment() {
             val productID = bundle.getString("toProductDetails")
             val docRef = databaseRef.collection("Products").document(productID.toString())
             storageRef = FirebaseStorage.getInstance().reference
-
-            // TESTING FUNCTION
             val categoryType = arrayOf("Racket", "Accessories", "Etc")
             val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
             binding.tfProductDetailCate.isEnabled = false
@@ -67,7 +65,7 @@ class ProductDetailsFragment : Fragment() {
                         binding.imgViewProductDetail.setImageBitmap(bitmap)
                     }
 
-                    // To Enable Editable! Fields
+                    // To Enable Editable Fields
                     binding.switchUpdate.setOnCheckedChangeListener { _, isChecked ->
                         binding.tfProductDetailName.isEnabled = isChecked
                         binding.tfProductDetailCate.isEnabled = isChecked
@@ -111,8 +109,8 @@ class ProductDetailsFragment : Fragment() {
                         }
 
                         val builder = AlertDialog.Builder(requireContext())
-                        builder.setTitle("Update Product Data")
-                        builder.setMessage("Confirm to update product data?")
+                        builder.setTitle("Update Product Details")
+                        builder.setMessage("Confirm to update product details?")
                         builder.setPositiveButton("Ok") { _, _ ->
                             if(binding.tfProductDetailName.text != null &&  binding.tfProductDetailDesc.text != null
                                 && binding.tfProductDetailPrice.text != null && binding.tfProductDetailQty.text != null){
@@ -142,7 +140,7 @@ class ProductDetailsFragment : Fragment() {
                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
-            // Confirm Button for Delete Item
+            // Confirm Button for Deleting Item
             binding.imgbtnDelete.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Deleting Data")

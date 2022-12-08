@@ -32,50 +32,50 @@
                 <TextView
                     android:id="@+id/tvCoachDetailID"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="ID"
-                    android:textAlignment="viewEnd"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvCoachDetailName"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="@string/name"
-                    android:textAlignment="viewEnd"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvCoachDetailEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="Email"
-                    android:textAlignment="viewEnd"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvCoachDetailPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="Phone"
-                    android:textAlignment="viewEnd"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvCoachDetailExp"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="Experience"
-                    android:textAlignment="viewEnd"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -87,40 +87,70 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <EditText
                     android:id="@+id/tfCoachDetailID"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:hint="ID"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:enabled="false" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfCoachDetailName"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:hint="Name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:enabled="false" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfCoachDetailEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:hint="Email"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:enabled="false" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfCoachDetailPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:hint="Phone"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:enabled="false" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfCoachDetailExp"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:hint="Experience"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:enabled="false" />
             </LinearLayout>
         </LinearLayout>
 
@@ -130,11 +160,46 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:text="Coach Detail"
+            android:text="COACH DETAIL"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swUpdateCoach"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="Update"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/imgbtnDeleteCoach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_delete40"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/imgbtnUpdateCoach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_circle"
+            app:layout_constraintEnd_toStartOf="@+id/imgbtnDeleteCoach"
+            app:layout_constraintTop_toTopOf="@+id/imgbtnDeleteCoach"
+            app:srcCompat="@drawable/ic_task40"
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

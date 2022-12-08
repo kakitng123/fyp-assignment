@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
@@ -19,7 +20,7 @@ class AdminDashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(AdminHomeFragment())
+        replaceFragment(HomeAdminFragment())
 
         binding.apply {
             toggle = ActionBarDrawerToggle(this@AdminDashboardActivity, mainDrawer, R.string.open, R.string.close)
@@ -31,11 +32,13 @@ class AdminDashboardActivity : AppCompatActivity() {
             adminNav.setNavigationItemSelectedListener {
                 mainDrawer.closeDrawers()
                 when(it.itemId){
-                    R.id.nav_admin -> replaceFragment(AdminHomeFragment())
+                    R.id.nav_admin -> replaceFragment(HomeAdminFragment())
                     R.id.nav_coach -> replaceFragment(CoachAdminFragment())
                     R.id.nav_class -> replaceFragment(ClassAdminFragment())
                     R.id.nav_court -> replaceFragment(CourtAdminFragment())
                     R.id.nav_product -> replaceFragment(ProductAdminFragment())
+                    R.id.nav_trans -> replaceFragment(TransactionAdminFragment())
+                    R.id.nav_settings -> Toast.makeText(this@AdminDashboardActivity, "SETTINGS CLICKED", Toast.LENGTH_SHORT).show()
                     R.id.nav_signout -> {
                         startActivity(Intent(this@AdminDashboardActivity, MainActivity::class.java))
                         finish()

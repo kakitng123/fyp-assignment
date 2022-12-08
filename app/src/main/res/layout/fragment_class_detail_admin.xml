@@ -29,42 +29,62 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvClassDate"
+                    android:id="@+id/tvClassID"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:text="Date"
-                    android:textAlignment="textEnd"
+                    android:gravity="center|end"
+                    android:text="ID"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvClassName"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="Name"
-                    android:textAlignment="textEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvClassDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_margin="4dp"
+                    android:gravity="center|end"
+                    android:text="@string/desc"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvClassPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="Price"
-                    android:textAlignment="textEnd"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvClassDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_margin="4dp"
+                    android:gravity="center|end"
+                    android:text="Date"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvClassTime"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
+                    android:gravity="center|end"
                     android:text="Time"
-                    android:textAlignment="textEnd"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -76,33 +96,83 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tfClassDate"
+                <EditText
+                    android:id="@+id/tfClassID"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:hint="ID"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:enabled="false" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tfClassName"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:enabled="false"
+                    android:hint="Name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/tfClassDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_margin="4dp"
+                    android:enabled="false"
+                    android:hint="@string/desc"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                <EditText
                     android:id="@+id/tfClassPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:enabled="false"
+                    android:hint="@string/price"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/tfClassDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_margin="4dp"
+                    android:enabled="false"
+                    android:hint="Date"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                <EditText
                     android:id="@+id/tfClassTime"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="44dp"
                     android:layout_margin="4dp"
-                    android:textSize="16sp" />
+                    android:enabled="false"
+                    android:hint="Time"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColor="@drawable/edit_text_selector"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
             </LinearLayout>
         </LinearLayout>
 
@@ -112,10 +182,45 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:text="Class Detail"
+            android:text="CLASS DETAIL"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swUpdateClass"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="Update"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/imgbtnDeleteClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_delete40"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/imgbtnUpdateClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_circle"
+            app:layout_constraintEnd_toStartOf="@+id/imgbtnDeleteClass"
+            app:layout_constraintTop_toTopOf="@+id/imgbtnDeleteClass"
+            app:srcCompat="@drawable/ic_task40"
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

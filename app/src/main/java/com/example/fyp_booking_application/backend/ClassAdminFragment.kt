@@ -20,7 +20,7 @@ class ClassAdminFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentClassAdminBinding
     private lateinit var databaseRef: FirebaseFirestore
-    private lateinit var classArrayList: ArrayList<ClassData>
+    private lateinit var classArrayList: ArrayList<ClassData2>
     private lateinit var classAdminAdapter: ClassAdminAdapter
 
     override fun onCreateView(
@@ -29,6 +29,7 @@ class ClassAdminFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
     ): View {
         //Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_class_admin, container, false)
+        val adminActivityView = (activity as AdminDashboardActivity)
 
         dataInitialize()
         binding.classRecyclerView.apply {
@@ -38,6 +39,11 @@ class ClassAdminFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
             classAdminAdapter = ClassAdminAdapter(classArrayList, this@ClassAdminFragment)
             adapter = classAdminAdapter
         }
+
+        binding.btnAddClass.setOnClickListener{
+           adminActivityView.replaceFragment(ClassAddAdminFragment())
+        }
+
         return binding.root
     }
 
@@ -45,13 +51,13 @@ class ClassAdminFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
         val currentItem = classArrayList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
         adminActivityView.replaceFragment(ClassDetailAdminFragment())
-        setFragmentResult("toClassDetails", bundleOf("toClassDetails" to currentItem.trainingClassName))
+        setFragmentResult("toClassDetails", bundleOf("toClassDetails" to currentItem.classID))
     }
 
     // Get/Parse Data into RecyclerView
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("TrainingClass")
+        databaseRef.collection("class_testing1")
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
@@ -60,7 +66,7 @@ class ClassAdminFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
                     }
                     for (dc: DocumentChange in value?.documentChanges!!){
                         if (dc.type == DocumentChange.Type.ADDED){
-                            classArrayList.add(dc.document.toObject(ClassData::class.java))
+                            classArrayList.add(dc.document.toObject(ClassData2::class.java))
                         }
                     }
                     classAdminAdapter.notifyDataSetChanged()
