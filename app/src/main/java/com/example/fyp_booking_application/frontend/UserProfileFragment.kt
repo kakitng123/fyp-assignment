@@ -181,9 +181,10 @@ class UserProfileFragment : Fragment() {
                         return@setOnClickListener
                     }
                 }
+                val userID = auth.currentUser?.uid
 
             val profileUpdates = hashMapOf(
-               // "userID" to retrieveProfileData.id,
+                "userID" to userID,
                 "email" to email,
                 "username" to username,
                 "phone" to phone,
@@ -192,7 +193,7 @@ class UserProfileFragment : Fragment() {
             )
 
             //Update Data
-            val userID = auth.currentUser?.uid
+
             val updateData = fstore.collection("Users").document(userID.toString())
             updateData.set(profileUpdates)
                 .addOnSuccessListener { editData ->

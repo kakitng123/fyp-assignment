@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentTrainingClassBinding
-import com.example.fyp_booking_application.frontend.adapter.CoachAdapter
-import com.example.fyp_booking_application.frontend.data.CoachData
+import com.example.fyp_booking_application.frontend.adapter.TrainingClassAdapter
+import com.example.fyp_booking_application.frontend.data.TrainingClassData
 import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -23,9 +23,9 @@ class TrainingClassFragment : Fragment() {
     private lateinit var storage: FirebaseStorage
     private lateinit var fstore: FirebaseFirestore
     private lateinit var storageRef: StorageReference
-    private lateinit var coachAdapter: CoachAdapter
-    private lateinit var coachDataArrayList: ArrayList<CoachData>
-    private lateinit var recView: RecyclerView
+    private lateinit var trainingClassAdapter: TrainingClassAdapter
+    private lateinit var trainingClassDataArrayList: ArrayList<TrainingClassData>
+    private lateinit var trainingClassRecView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +34,12 @@ class TrainingClassFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training_class, container, false)
         val userView = (activity as UserDashboardActivity)
 
-        recView = binding.recyclerView
-        recView.layoutManager = LinearLayoutManager(context)
-        recView.setHasFixedSize(true)
-        coachDataArrayList = arrayListOf()
-        coachAdapter = CoachAdapter(coachDataArrayList)
-        recView.adapter = coachAdapter
+        trainingClassRecView = binding.recyclerView
+        trainingClassRecView.layoutManager = LinearLayoutManager(context)
+        trainingClassRecView.setHasFixedSize(true)
+        trainingClassDataArrayList = arrayListOf()
+        trainingClassAdapter = TrainingClassAdapter(trainingClassDataArrayList)
+        trainingClassRecView.adapter = trainingClassAdapter
         eventChangeListener()
 
         return binding.root
@@ -49,7 +49,7 @@ class TrainingClassFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
 
-        fstore.collection("CoachProfile")
+        fstore.collection("TrainingClass")
         .addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                 if(error != null){
@@ -58,10 +58,10 @@ class TrainingClassFragment : Fragment() {
                 }
                 for (dc : DocumentChange in value?.documentChanges!! ){
                     if( dc.type ==  DocumentChange.Type.ADDED){
-                        coachDataArrayList.add(dc.document.toObject(CoachData::class.java))
+                        trainingClassDataArrayList.add(dc.document.toObject(TrainingClassData::class.java))
                     }
                 }
-                coachAdapter.notifyDataSetChanged()
+                trainingClassAdapter.notifyDataSetChanged()
             }
         })
     }

@@ -65,6 +65,7 @@ class CoachDetailAdminFragment : Fragment() {
                                 "coachEmail" to "TEST2@gmail.com",
                                 "coachExp" to "Expert+1",
                                 "coachPhone" to "011-3456789",
+                                "coachExample" to "TESTING"
                             )
                             docRef.set(updateCoach, SetOptions.merge())
                                 .addOnSuccessListener { Log.d("UPDATE COACH","COACH DETAIL UPDATED SUCCESSFULLY" ) }

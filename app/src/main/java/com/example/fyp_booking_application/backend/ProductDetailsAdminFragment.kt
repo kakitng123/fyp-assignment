@@ -41,6 +41,8 @@ class ProductDetailsAdminFragment : Fragment() {
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
 
+        // setFragmentresultlister () {_, bundle -> val testing = bundle.getString
+
         // Get Data from Paired-Fragment
         setFragmentResultListener("toProductDetails") { _, bundle ->
             val productID = bundle.getString("toProductDetails")

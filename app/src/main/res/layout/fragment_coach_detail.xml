@@ -6,20 +6,20 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".frontend.TrainingClassFragment">
+        tools:context=".frontend.CoachDetailFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
-            android:id="@+id/tvTrainingTitle"
+            android:id="@+id/tvCoachDetailTitle"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="Training Fragment" />
+            android:text="Coach Fragment" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/training_class_card" />
+            tools:listitem="@layout/coach_card" />
     </FrameLayout>
 </layout>
 

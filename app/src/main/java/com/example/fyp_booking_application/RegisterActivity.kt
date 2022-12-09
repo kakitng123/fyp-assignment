@@ -93,6 +93,12 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
 
+            if(password!=confirmPassword){
+                passwordRegister2.setError("Password does not match!")
+                passwordRegister2.requestFocus()
+                return@setOnClickListener
+            }
+
 //            if(!password.equals(confirmPassword)){
 //                passwordRegister2.setError("Password would not be matched!")
 //                passwordRegister2.requestFocus()

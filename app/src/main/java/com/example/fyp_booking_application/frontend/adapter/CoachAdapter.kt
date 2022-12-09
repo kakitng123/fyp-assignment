@@ -1,6 +1,6 @@
 package com.example.fyp_booking_application.frontend.adapter
 
-import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.frontend.data.CoachData
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -44,10 +42,23 @@ class CoachAdapter(
         }
 
         holder.coachName.text = coachModel.coachName
-        holder.coachID.text = coachModel.coachID
+      //  holder.coachID.text = coachModel.coachID
         holder.coachExperience.text = coachModel.coachExperience
         holder.coachPhone.text = coachModel.coachPhone
         holder.coachEmail.text = coachModel.coachEmail
+
+//        // making intent method to go another page
+//        holder.itemView.setOnClickListener {
+//            val intent = Intent(context, DetailActivity::class.java)
+//            intent.putExtra("img", coachModel.coachImage)
+//            intent.putExtra("name", coachModel.coachName)
+//            intent.putExtra("id", coachModel.coachID)
+//            intent.putExtra("experience", coachModel.coachExperience)
+//            intent.putExtra("phone", coachModel.coachPhone)
+//            intent.putExtra("email", coachModel.coachEmail)
+//            intent.putExtra("type", 1)
+//            context.startActivity(intent)
+//        }
     }
 
     override fun getItemCount(): Int {
@@ -63,7 +74,7 @@ class CoachAdapter(
          val coachExperience: TextView
          val coachPhone: TextView
          val coachEmail: TextView
-        init {
+         init {
             coachImage = itemView.findViewById(R.id.tvCoachImage)
             coachName = itemView.findViewById(R.id.tvCoachName)
             coachID = itemView.findViewById(R.id.tvCoachID)

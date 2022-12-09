@@ -33,6 +33,7 @@ class ProductAddAdminFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_product, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
+
         val categoryType = arrayOf("Racket", "Accessories", "Etc")
         val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
         binding.spinnerCat.adapter = spinnerAdapter
