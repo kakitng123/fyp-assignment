@@ -20,7 +20,7 @@ class AdminDashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(HomeAdminFragment())
+        replaceFragment(AdminHomeFragment(), R.id.adminLayout)
 
         binding.apply {
             toggle = ActionBarDrawerToggle(this@AdminDashboardActivity, mainDrawer, R.string.open, R.string.close)
@@ -32,12 +32,14 @@ class AdminDashboardActivity : AppCompatActivity() {
             adminNav.setNavigationItemSelectedListener {
                 mainDrawer.closeDrawers()
                 when(it.itemId){
-                    R.id.nav_admin -> replaceFragment(HomeAdminFragment())
-                    R.id.nav_coach -> replaceFragment(CoachAdminFragment())
-                    R.id.nav_class -> replaceFragment(ClassAdminFragment())
-                    R.id.nav_court -> replaceFragment(CourtAdminFragment())
-                    R.id.nav_product -> replaceFragment(ProductAdminFragment())
-                    R.id.nav_trans -> replaceFragment(TransactionAdminFragment())
+                    R.id.nav_admin -> replaceFragment(AdminHomeFragment(), R.id.adminLayout)
+                    R.id.nav_coach -> replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+                    R.id.nav_class -> replaceFragment(AdminClassFragment(), R.id.adminLayout)
+                    R.id.nav_court -> replaceFragment(AdminCourtFragment(), R.id.adminLayout)
+                    R.id.nav_product -> replaceFragment(AdminProductFragment(), R.id.adminLayout)
+                    R.id.nav_booking -> replaceFragment(AdminBookingFragment(), R.id.adminLayout)
+                    R.id.nav_purchase -> replaceFragment(AdminPurchaseFragment(), R.id.adminLayout)
+                    R.id.nav_notification -> replaceFragment(AdminNotifFragment(), R.id.adminLayout)
                     R.id.nav_settings -> Toast.makeText(this@AdminDashboardActivity, "SETTINGS CLICKED", Toast.LENGTH_SHORT).show()
                     R.id.nav_signout -> {
                         startActivity(Intent(this@AdminDashboardActivity, MainActivity::class.java))
@@ -56,14 +58,6 @@ class AdminDashboardActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    internal fun replaceFragment(fragment: Fragment){
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.adminLayout, fragment)
-        fragmentTransaction.setTransition(TRANSIT_FRAGMENT_OPEN)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
     internal fun replaceFragment(fragment: Fragment, layout: Int){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

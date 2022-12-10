@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Management">
+        <menu>
+            <item
+                android:id="@+id/nav_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:title="Admin Profile" />
+            <item
+                android:id="@+id/nav_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:title="@string/Class" />
+            <item
+                android:id="@+id/nav_coach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:title="@string/Coach" />
+            <item
+                android:id="@+id/nav_court"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:title="@string/Court" />
+            <item
+                android:id="@+id/nav_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:title="@string/Product" />
+        </menu>
+    </item>
+    <item
+        android:title="TRANSACTIONS">
+        <menu>
+            <item
+                android:id="@+id/nav_booking"
+                android:title="Booking" />
+            <item
+                android:id="@+id/nav_purchase"
+                android:title="Purchases" />
+            <item
+                android:id="@+id/nav_notification"
+                android:title="Notification" />
+        </menu>
+    </item>
+    <item android:title="SYSTEM">
+        <menu>
+
+            <item
+                android:id="@+id/nav_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:title="System Setting" />
+            <item
+                android:id="@+id/nav_signout"
+                android:title="Sign Out" />
+        </menu>
+    </item>
+
+</menu>

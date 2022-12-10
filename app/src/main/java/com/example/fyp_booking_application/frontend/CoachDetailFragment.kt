@@ -6,15 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.ProductDetailsAdminFragment
 import com.example.fyp_booking_application.databinding.FragmentCoachDetailBinding
 import com.example.fyp_booking_application.frontend.adapter.CoachAdapter
 import com.example.fyp_booking_application.frontend.data.CoachData
