@@ -31,6 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:title="@string/Product" />
+            <item
+                android:id="@+id/nav_notification"
+                android:title="Notification" />
         </menu>
     </item>
     <item
@@ -41,10 +44,7 @@
                 android:title="Booking" />
             <item
                 android:id="@+id/nav_purchase"
-                android:title="Purchases" />
-            <item
-                android:id="@+id/nav_notification"
-                android:title="Notification" />
+                android:title="Purchase" />
         </menu>
     </item>
     <item android:title="SYSTEM">

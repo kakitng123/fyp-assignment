@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
@@ -37,10 +36,10 @@ class AdminDashboardActivity : AppCompatActivity() {
                     R.id.nav_class -> replaceFragment(AdminClassFragment(), R.id.adminLayout)
                     R.id.nav_court -> replaceFragment(AdminCourtFragment(), R.id.adminLayout)
                     R.id.nav_product -> replaceFragment(AdminProductFragment(), R.id.adminLayout)
+                    R.id.nav_notification -> replaceFragment(AdminNotifFragment(), R.id.adminLayout)
                     R.id.nav_booking -> replaceFragment(AdminBookingFragment(), R.id.adminLayout)
                     R.id.nav_purchase -> replaceFragment(AdminPurchaseFragment(), R.id.adminLayout)
-                    R.id.nav_notification -> replaceFragment(AdminNotifFragment(), R.id.adminLayout)
-                    R.id.nav_settings -> Toast.makeText(this@AdminDashboardActivity, "SETTINGS CLICKED", Toast.LENGTH_SHORT).show()
+                    R.id.nav_settings -> replaceFragment(AdminSettingsFragment(), R.id.adminLayout)
                     R.id.nav_signout -> {
                         startActivity(Intent(this@AdminDashboardActivity, MainActivity::class.java))
                         finish()

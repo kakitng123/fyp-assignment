@@ -17,7 +17,10 @@ class AdminSettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_settings, container, false)
+
+
 
         return binding.root
     }

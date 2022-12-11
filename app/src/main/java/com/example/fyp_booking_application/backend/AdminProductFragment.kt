@@ -40,6 +40,7 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
         binding.btnManage.setOnClickListener{
             adminActivityView.replaceFragment(AdminProductAddFragment(), R.id.adminLayout)
         }
+
         dataInitialize1()
         binding.productNavView.setOnItemSelectedListener {
             when(it.itemId){
@@ -50,6 +51,7 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
             }
             true
         }
+
         binding.productRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)

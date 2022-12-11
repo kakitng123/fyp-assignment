@@ -5,16 +5,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".backend.AdminNotifFragment">
+        tools:context=".backend.AdminNotificationHistoryFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/notificationRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/notificationLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/notificationNavBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/notificationNavBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/recyclerview_notification_admin" />
+            app:layout_constraintTop_toBottomOf="@+id/notificationLayout"
+            app:menu="@menu/nav_admin_notification" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

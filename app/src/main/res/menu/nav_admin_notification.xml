@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- rmb to add logo -->
     <item
-        android:id="@+id/court_management"
+        android:id="@+id/nav_notificationManage"
         android:title="@string/management" />
     <item
-        android:id="@+id/court_pending"
-        android:title="@string/pending" />
+        android:id="@+id/nav_notificationHistory"
+        android:title="History" />
 </menu>

@@ -21,6 +21,7 @@ class AdminPurchaseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin_purchases, container, false)
 
 
+
         return binding.root
     }
 }
