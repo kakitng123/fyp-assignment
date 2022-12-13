@@ -34,6 +34,8 @@
     <string name="newData">Enter New Data</string>
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
+    <!-- TESTING -->
+    <string name="testing">Testing</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

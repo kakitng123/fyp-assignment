@@ -14,10 +14,10 @@ class NotificationAdminAdapter(
 ) : RecyclerView.Adapter<NotificationAdminAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val tvNotifyID: TextView = itemView.findViewById(R.id.tvText1)
-        val tvRefCode: TextView = itemView.findViewById(R.id.tvText2)
-        val tfNotifyID: TextView = itemView.findViewById(R.id.tfText1)
-        val tfRefCode: TextView =itemView.findViewById(R.id.tfText2)
+        val tvNotifyID: TextView = itemView.findViewById(R.id.tvDisplay1)
+        val tvRefCode: TextView = itemView.findViewById(R.id.tvDisplay2)
+        val tfNotifyID: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val tfRefCode: TextView =itemView.findViewById(R.id.tfDisplay2)
 
         init {
             itemView.setOnClickListener(this)
@@ -36,16 +36,18 @@ class NotificationAdminAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_notification_admin, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_admin_cardview, parent, false)
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = notificationList[position]
 
-        holder.tvNotifyID.text = "NOTIFICATION ID"
+        // Ignore warning for now
+        holder.tvNotifyID.text = "Notif. Title"
         holder.tvRefCode.text = "Referral Code"
-        holder.tfNotifyID.text = currentItem.notifyID.toString()
+
+        holder.tfNotifyID.text = currentItem.notifyTitle.toString()
         holder.tfRefCode.text = currentItem.referralCode.toString()
     }
 

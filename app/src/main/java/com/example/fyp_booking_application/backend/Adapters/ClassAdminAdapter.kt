@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.backend.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,10 @@ class ClassAdminAdapter(
 ) : RecyclerView.Adapter<ClassAdminAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val className: TextView = itemView.findViewById(R.id.tfRC_className)
-        val classPrice: TextView = itemView.findViewById(R.id.tfRC_classPrice)
+        val className: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val classPrice: TextView = itemView.findViewById(R.id.tfDisplay2)
+        val tvClassName: TextView = itemView.findViewById(R.id.tvDisplay1)
+        val tvClassPrice: TextView = itemView.findViewById(R.id.tvDisplay2)
 
         init {
             itemView.setOnClickListener(this)
@@ -33,12 +36,16 @@ class ClassAdminAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_class_admin,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_admin_cardview,parent,false)
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = classList[position]
+
+        // Ignore warning for now
+        holder.tvClassName.text = "Class Name"
+        holder.tvClassPrice.text = "Class Price"
 
         holder.className.text = currentItem.className
         holder.classPrice.text = currentItem.classPrice.toString()

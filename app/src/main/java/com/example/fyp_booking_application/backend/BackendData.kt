@@ -32,7 +32,15 @@ data class ClassData2 (
 )
 
 // BELOW THIS LINE IS EXAMPLE DATA FOR ADAPTER (REAL DATA WE DISCUSS)
-data class CourtPendingData (
+data class NotificationData (
+    val notifyID: String ?= null,
+    val userID: String ?= null,
+    val notifyTitle: String ?= null,
+    val notifyMessage: String ?= null,
+    val referralCode: String ?= null
+)
+
+data class BookingDataTesting (
     val bookingID: String ?= null,
     val courtID: String ?= null,
     val userID: String ?= null,
@@ -56,13 +64,7 @@ data class ClassData1 (
     val trainingClassTime: String ?= null
 )
 
-data class NotificationData (
-    val notifyID: String ?= null,
-    val userID: String ?= null,
-    val notifyTitle: String ?= null,
-    val notifyMessage: String ?= null,
-    val referralCode: String ?= null
-)
+
 
 
 

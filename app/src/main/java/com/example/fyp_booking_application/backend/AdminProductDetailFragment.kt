@@ -36,12 +36,11 @@ class AdminProductDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product_details, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
 
-        // Get Data from Paired-Fragment
         setFragmentResultListener("toProductDetails") { _, bundle ->
             val productID = bundle.getString("toProductDetails")
             val docRef = databaseRef.collection("Products").document(productID.toString())
@@ -51,7 +50,6 @@ class AdminProductDetailFragment : Fragment() {
             binding.tfProductDetailCate.isEnabled = false
             binding.tfProductDetailCate.adapter = spinnerAdapter
 
-            // GET DOCUMENT
             docRef.get().addOnSuccessListener { document ->
                 if (document != null) {
                     val product = document.toObject(ProductData::class.java)
@@ -65,7 +63,6 @@ class AdminProductDetailFragment : Fragment() {
                         binding.imgViewProductDetail.setImageBitmap(bitmap)
                     }
 
-                    // To Enable Editable Fields
                     binding.switchUpdate.setOnCheckedChangeListener { _, isChecked ->
                         binding.tfProductDetailName.isEnabled = isChecked
                         binding.tfProductDetailCate.isEnabled = isChecked
@@ -74,14 +71,12 @@ class AdminProductDetailFragment : Fragment() {
                         binding.tfProductDetailQty.isEnabled = isChecked
                     }
 
-                    // Set text for EditText
                     binding.tfProductDetailName.setText(product?.productName.toString())
                     binding.tfProductDetailCate.setSelection(getIndex(binding.tfProductDetailCate, productCategory))
                     binding.tfProductDetailDesc.setText(product?.productDesc.toString())
                     binding.tfProductDetailPrice.setText(product?.productPrice.toString())
                     binding.tfProductDetailQty.setText(product?.productQty.toString())
 
-                    // For Editing ProductImage
                     binding.imgViewProductDetail.setOnClickListener {
                         val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                         startActivityForResult(selectImage, 3)
@@ -95,7 +90,6 @@ class AdminProductDetailFragment : Fragment() {
                             }
                     }
 
-                    // Confirm Button for Updating Item
                     binding.imgbtnEdit.setOnClickListener {
                         storageRef = FirebaseStorage.getInstance().getReference("products/product${binding.tfProductDetailName.text}")
                         storageRef.putFile(imgUri).addOnSuccessListener {
@@ -140,7 +134,6 @@ class AdminProductDetailFragment : Fragment() {
                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
-            // Confirm Button for Deleting Item
             binding.imgbtnDelete.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Deleting Data")
@@ -172,7 +165,6 @@ class AdminProductDetailFragment : Fragment() {
         return binding.root
     }
 
-    // Load Image into ImageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 3 && data != null && data.data != null) {
             imgUri = data.data!!
@@ -181,7 +173,6 @@ class AdminProductDetailFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    // Loading Existing Product Category into Spinner
     private fun getIndex(spinner: Spinner, category: String): Int {
         for (i in 0..spinner.count){
             if(spinner.getItemAtPosition(i).toString() == category)

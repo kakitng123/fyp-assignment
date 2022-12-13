@@ -13,14 +13,14 @@ import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.databinding.FragmentAddProductBinding
+import com.example.fyp_booking_application.databinding.FragmentAdminProductAddBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class AdminProductAddFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddProductBinding
+    private lateinit var binding: FragmentAdminProductAddBinding
     private lateinit var storageRef: StorageReference
     private lateinit var databaseRef: FirebaseFirestore
     private lateinit var imgUri: Uri
@@ -29,8 +29,7 @@ class AdminProductAddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_product, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product_add, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
 
@@ -39,13 +38,11 @@ class AdminProductAddFragment : Fragment() {
         binding.spinnerCat.adapter = spinnerAdapter
         binding.spinnerCat.setSelection(0)
 
-        // Selecting Image
         binding.imgProduct.setOnClickListener {
             val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(selectImage, 3)
         }
 
-        // Add Product into Database
         binding.btnFinish.setOnClickListener {
             val productName: String = binding.tfProductName.text.toString()
             val productImage = "products/product$productName"
@@ -86,7 +83,6 @@ class AdminProductAddFragment : Fragment() {
         return binding.root
     }
 
-    // Load Image into ImageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 3 && data != null && data.data != null) {
             imgUri = data.data!!

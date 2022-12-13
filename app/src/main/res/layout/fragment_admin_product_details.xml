@@ -189,7 +189,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_circle"
             android:contentDescription="@string/edit"
-            android:src="@drawable/ic_task40"
+            android:src="@drawable/ic_update30"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnDelete" />
 
@@ -201,7 +201,7 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_circle"
             android:contentDescription="@string/delete"
-            android:src="@drawable/ic_delete40"
+            android:src="@drawable/ic_delete30"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

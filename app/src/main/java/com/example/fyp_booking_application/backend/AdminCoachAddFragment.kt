@@ -21,12 +21,10 @@ class AdminCoachAddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_coach_add, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
         databaseRef = FirebaseFirestore.getInstance()
 
-        // Button to Add New Coach
         binding.btnFinishAddCoach.setOnClickListener {
             val newCoachRef = databaseRef.collection("coach_testing1").document()
             val newCoach = hashMapOf(

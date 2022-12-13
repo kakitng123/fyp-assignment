@@ -31,12 +31,10 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product, container, false)
         productArrayList = arrayListOf()
         val adminActivityView = (activity as AdminDashboardActivity)
 
-        // Button to Add New Product
         binding.btnManage.setOnClickListener{
             adminActivityView.replaceFragment(AdminProductAddFragment(), R.id.adminLayout)
         }
@@ -58,7 +56,6 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
             productArrayList = arrayListOf()
             productAdapter = ProductAdminAdapter(productArrayList, this@AdminProductFragment)
             adapter = productAdapter
-
         }
         return binding.root
     }
@@ -67,11 +64,9 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
         val currentItem = productArrayList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
         adminActivityView.replaceFragment(AdminProductDetailFragment(), R.id.adminLayout)
-        // Parse Data to Paired-Fragment
         setFragmentResult("toProductDetails", bundleOf("toProductDetails" to currentItem.productID))
     }
 
-    // Get/Parse Data into RecyclerView
     private fun dataInitialize1() {
         productArrayList.clear()
         databaseRef = FirebaseFirestore.getInstance()
@@ -92,7 +87,6 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
             })
     }
 
-    // Get/Parse Data into RecyclerView (w/ Diff.Category)
     private fun dataInitialize2(category: String){
         productArrayList.clear()
         databaseRef = FirebaseFirestore.getInstance()

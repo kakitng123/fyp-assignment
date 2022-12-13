@@ -17,10 +17,7 @@ class AdminPurchaseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin_purchases, container, false)
-
-
 
         return binding.root
     }

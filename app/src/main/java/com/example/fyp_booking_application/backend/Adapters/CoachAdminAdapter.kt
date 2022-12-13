@@ -15,8 +15,11 @@ class CoachAdminAdapter(
 ) : RecyclerView.Adapter<CoachAdminAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        val coachID: TextView = itemView.findViewById(R.id.tfRC_coachID)
-        val coachName: TextView = itemView.findViewById(R.id.tfRC_coachName)
+        val coachID: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val coachName: TextView = itemView.findViewById(R.id.tfDisplay2)
+        val tvCoachID: TextView = itemView.findViewById(R.id.tvDisplay1)
+        val tvCoachName: TextView = itemView.findViewById(R.id.tvDisplay2)
+
 
         init {
             itemView.setOnClickListener(this)
@@ -34,12 +37,16 @@ class CoachAdminAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_coach_admin, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_admin_cardview, parent, false)
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = coachList[position]
+
+        // Ignore warning for now
+        holder.tvCoachID.text = "Coach ID"
+        holder.tvCoachName.text = "Coach Name"
 
         holder.coachID.text = currentItem.coachID
         holder.coachName.text = currentItem.coachName

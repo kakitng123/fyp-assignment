@@ -24,22 +24,18 @@ class AdminClassDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class_detail, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
 
-        // Get Data from Paired Fragment
         setFragmentResultListener("toClassDetails") { _, bundle ->
             val classID = bundle.getString("toClassDetails")
             databaseRef = FirebaseFirestore.getInstance()
             val docRef = databaseRef.collection("class_testing1").document(classID.toString())
 
-            // Get Document
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
                     val testing = document.toObject(ClassData2::class.java)
 
-                    // To Enable Editable Fields
                     binding.swUpdateClass.setOnCheckedChangeListener { _, isChecked ->
                         binding.tfClassName.isEnabled = isChecked
                         binding.tfClassDesc.isEnabled = isChecked
@@ -48,7 +44,6 @@ class AdminClassDetailFragment : Fragment() {
                         binding.tfClassTime.isEnabled = isChecked
                     }
 
-                    // Set Text for EditText
                     binding.tfClassID.setText(testing?.classID.toString())
                     binding.tfClassName.setText(testing?.className.toString())
                     binding.tfClassDesc.setText(testing?.classDesc.toString())
@@ -56,7 +51,6 @@ class AdminClassDetailFragment : Fragment() {
                     binding.tfClassDate.setText(testing?.classDate.toString())
                     binding.tfClassTime.setText(testing?.classTime.toString())
 
-                    // Confirm Button for Updating Item
                     binding.imgbtnUpdateClass.setOnClickListener {
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Update Class Details")
@@ -83,7 +77,6 @@ class AdminClassDetailFragment : Fragment() {
                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
-            // Confirm Button for Deleting Item
             binding.imgbtnDeleteClass.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Delete Class")

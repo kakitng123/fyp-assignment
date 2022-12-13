@@ -27,7 +27,6 @@ class AdminClassFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
 
@@ -54,7 +53,6 @@ class AdminClassFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
         setFragmentResult("toClassDetails", bundleOf("toClassDetails" to currentItem.classID))
     }
 
-    // Get/Parse Data into RecyclerView
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("class_testing1")

@@ -18,7 +18,7 @@ class TimeslotAdminAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_timeslot, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_admin_timeslot, parent, false)
         return MyViewHolder(itemView)
     }
 

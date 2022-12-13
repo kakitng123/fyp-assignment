@@ -6,8 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
@@ -26,9 +27,7 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_history, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
 
         dataInitialize()
         binding.notificationRecyclerView.apply{
@@ -38,21 +37,16 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
             notificationAdminAdapter = NotificationAdminAdapter(notificationList, this@AdminNotifHistoryFragment)
             adapter = notificationAdminAdapter
         }
-
-        // TESTING BUTTON
-        binding.btnCheckDetail.setOnClickListener {
-            adminActivityView.replaceFragment(AdminNotifDetailFragment(), R.id.notificationLayout)
-        }
-
         return binding.root
     }
 
     override fun onItemClick(position: Int) {
         val currentItem = notificationList[position]
-        Toast.makeText(context, "TESTING: ${currentItem.referralCode}", Toast.LENGTH_SHORT).show()
+        val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.replaceFragment(AdminNotifDetailFragment(), R.id.notificationLayout)
+        setFragmentResult("toNotifDetails", bundleOf("toNotifDetails" to currentItem.notifyID))
     }
 
-    // Get/Parse Data into RecyclerView
     private fun dataInitialize() {
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("notification_testing1")

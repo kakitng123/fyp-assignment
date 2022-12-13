@@ -7,16 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="80dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="80dp"
-            android:background="@drawable/border_strokes"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,135 +23,141 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1.5"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvCoachDetailID"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="match_parent"
                     android:layout_margin="4dp"
-                    android:gravity="center|end"
-                    android:text="ID"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvCoachDetailName"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:gravity="center|end"
-                    android:text="@string/name"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvCoachDetailID"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="ID"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvCoachDetailEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:gravity="center|end"
-                    android:text="Email"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvCoachDetailName"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="@string/name"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvCoachDetailPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:gravity="center|end"
-                    android:text="Phone"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvCoachDetailEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="Email"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvCoachDetailExp"
+                    <TextView
+                        android:id="@+id/tvCoachDetailPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="Phone"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvCoachDetailExp"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="Experience"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="44dp"
+                    android:layout_height="match_parent"
                     android:layout_margin="4dp"
-                    android:gravity="center|end"
-                    android:text="Experience"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/tfCoachDetailID"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="ID"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfCoachDetailName"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Name"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfCoachDetailEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Email"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfCoachDetailPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Phone"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfCoachDetailExp"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Experience"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/tfCoachDetailID"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:hint="ID"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:textSize="16sp"
-                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
-                    android:textColor="@drawable/edit_text_selector"
-                    android:enabled="false" />
-
-                <EditText
-                    android:id="@+id/tfCoachDetailName"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:hint="Name"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:textSize="16sp"
-                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
-                    android:textColor="@drawable/edit_text_selector"
-                    android:enabled="false" />
-
-                <EditText
-                    android:id="@+id/tfCoachDetailEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:hint="Email"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:textSize="16sp"
-                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
-                    android:textColor="@drawable/edit_text_selector"
-                    android:enabled="false" />
-
-                <EditText
-                    android:id="@+id/tfCoachDetailPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:hint="Phone"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:textSize="16sp"
-                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
-                    android:textColor="@drawable/edit_text_selector"
-                    android:enabled="false" />
-
-                <EditText
-                    android:id="@+id/tfCoachDetailExp"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_margin="4dp"
-                    android:hint="Experience"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    android:textSize="16sp"
-                    tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck"
-                    android:textColor="@drawable/edit_text_selector"
-                    android:enabled="false" />
-            </LinearLayout>
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tvCoachDetail"
@@ -184,11 +189,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/btn_circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_delete40"
+            app:srcCompat="@drawable/ic_delete30"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
@@ -199,7 +204,7 @@
             android:background="@drawable/btn_circle"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnDeleteCoach"
             app:layout_constraintTop_toTopOf="@+id/imgbtnDeleteCoach"
-            app:srcCompat="@drawable/ic_task40"
+            app:srcCompat="@drawable/ic_update30"
             tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

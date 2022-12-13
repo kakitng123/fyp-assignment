@@ -17,7 +17,6 @@ class AdminNotifAddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_add, container, false)
 
         return binding.root

@@ -24,22 +24,18 @@ class AdminCoachDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_coach_detail, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
 
-        // Get Data from Paired-Fragment
         setFragmentResultListener("toCoachDetails"){ _, bundle ->
             val coachID = bundle.getString("toCoachDetails")
             databaseRef = FirebaseFirestore.getInstance()
             val docRef = databaseRef.collection("coach_testing1").document(coachID.toString())
 
-            // GET DOCUMENT
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
                     val testing = document.toObject(CoachData::class.java)
 
-                    // To Enable Editable Fields
                     binding.swUpdateCoach.setOnCheckedChangeListener{ _, isChecked ->
                         binding.tfCoachDetailName.isEnabled = isChecked
                         binding.tfCoachDetailEmail.isEnabled = isChecked
@@ -47,14 +43,12 @@ class AdminCoachDetailFragment : Fragment() {
                         binding.tfCoachDetailExp.isEnabled = isChecked
                     }
 
-                    // Set Text for EditText
                     binding.tfCoachDetailID.setText(testing?.coachID.toString())
                     binding.tfCoachDetailName.setText(testing?.coachName.toString())
                     binding.tfCoachDetailEmail.setText(testing?.coachEmail.toString())
                     binding.tfCoachDetailPhone.setText(testing?.coachPhone.toString())
                     binding.tfCoachDetailExp.setText(testing?.coachExp.toString())
 
-                    // Confirm Button for Updating Item
                     binding.imgbtnUpdateCoach.setOnClickListener{
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Update Coach Details")
@@ -81,7 +75,6 @@ class AdminCoachDetailFragment : Fragment() {
                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
-            // Confirm Button for Deleting Item
             binding.imgbtnDeleteCoach.setOnClickListener{
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Delete Coach")
@@ -97,8 +90,6 @@ class AdminCoachDetailFragment : Fragment() {
                 builder.setNegativeButton("Cancel"){ _, _ -> }
                 builder.show()
             }
-
-
         }
         return binding.root
     }

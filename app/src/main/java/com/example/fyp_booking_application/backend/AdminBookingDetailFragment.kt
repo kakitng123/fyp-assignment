@@ -6,19 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.databinding.FragmentAdminBookingHistoryBinding
+import com.example.fyp_booking_application.databinding.FragmentAdminBookingDetailBinding
 
-class AdminBookingHistoryFragment : Fragment() {
+class AdminBookingDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentAdminBookingHistoryBinding
+    private lateinit var binding: FragmentAdminBookingDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Variable Declarations
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_booking_history, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_booking_detail, container, false)
 
         return binding.root
     }

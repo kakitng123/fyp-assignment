@@ -35,7 +35,6 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_court, container, false)
         databaseRef = FirebaseFirestore.getInstance()
 
@@ -48,10 +47,9 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
             adapter = courtManageAdapter
         }
 
-        // Adding New Court Into database
         binding.imgbtnAddCourt.setOnClickListener {
-            val dialogLayout = layoutInflater.inflate(R.layout.dialog_edittext1, null)
-            val editText = dialogLayout.findViewById<EditText>(R.id.dialog_editText)
+            val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_edittext1, null)
+            val editText = dialogLayout.findViewById<EditText>(R.id.dialog_editText1)
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Enter Court Name")
             builder.setView(dialogLayout)
@@ -81,7 +79,7 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
         val ss = SpannableString("Click Here to Add Timeslot")
         val clickableSpan: ClickableSpan = object : ClickableSpan(){
             override fun onClick(textView: View) {
-                val dialogLayout = layoutInflater.inflate(R.layout.dialog_addtimeslot, null)
+                val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_add_timeslot, null)
                 val radioGroup = dialogLayout.findViewById<RadioGroup>(R.id.radioGroup1)
                 val builder = AlertDialog.Builder(requireContext())
 
@@ -109,7 +107,6 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
 
     }
 
-    // Get/Parse Data into RecyclerView
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("court_testing2") //.whereEqualTo("courtName", "A1")
@@ -129,7 +126,6 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
             })
     }
 
-    // Able to function as intended but need tidy up (INCOMPLETE)
     private fun addData(number: Int, increment: Int, document_id:String){
         val nestedData = hashMapOf(
             "availability" to true,

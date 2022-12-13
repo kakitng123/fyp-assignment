@@ -15,7 +15,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/recyclerview_class_admin" />
+            tools:listitem="@layout/recyclerview_admin_cardview" />
 
         <ImageButton
             android:id="@+id/btnAddClass"
@@ -27,6 +27,6 @@
             android:contentDescription="AddCourt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add40" />
+            app:srcCompat="@drawable/ic_add30" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

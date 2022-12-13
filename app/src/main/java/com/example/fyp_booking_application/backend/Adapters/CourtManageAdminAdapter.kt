@@ -14,8 +14,10 @@ class CourtManageAdminAdapter(
 ) : RecyclerView.Adapter<CourtManageAdminAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val courtID: TextView = itemView.findViewById(R.id.tfRC_courtIDManage)
-        val courtName: TextView = itemView.findViewById(R.id.tfRC_courtNameManage)
+        val courtID: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val courtName: TextView = itemView.findViewById(R.id.tfDisplay2)
+        val tvCourtID: TextView = itemView.findViewById(R.id.tvDisplay1)
+        val tvCourtName: TextView = itemView.findViewById(R.id.tvDisplay2)
 
         init {
             itemView.setOnClickListener(this)
@@ -33,12 +35,16 @@ class CourtManageAdminAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_court_manage, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_admin_cardview, parent, false)
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = courtList[position]
+
+        // Ignore warning for now
+        holder.tvCourtID.text = "Court ID"
+        holder.tvCourtName.text = "Court Name"
 
         holder.courtID.text = currentItem.courtID
         holder.courtName.text = currentItem.courtName

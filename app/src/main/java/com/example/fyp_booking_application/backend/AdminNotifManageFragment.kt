@@ -17,15 +17,9 @@ class AdminNotifManageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Variable Declarations
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_manage, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
 
-        // TESTING BUTTON
-        binding.btnAddNotif.setOnClickListener {
-            adminActivityView.replaceFragment(AdminNotifAddFragment(), R.id.notificationLayout)
-        }
 
         return binding.root
     }

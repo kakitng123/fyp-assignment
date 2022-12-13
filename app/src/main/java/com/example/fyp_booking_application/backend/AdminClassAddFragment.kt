@@ -21,12 +21,10 @@ class AdminClassAddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //Variable Declarations
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class_add, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
         databaseRef = FirebaseFirestore.getInstance()
 
-        // Button to Add New Class
         binding.btnFinishAddClass.setOnClickListener{
             val newClassRef = databaseRef.collection("class_testing1").document()
             val newClass = hashMapOf(
@@ -42,7 +40,9 @@ class AdminClassAddFragment : Fragment() {
                     Log.d("ADD NEW CLASS", "CLASS ADDED SUCCESSFULLY")
                     adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
                 }
-                .addOnFailureListener { e -> Log.e("ADDING NEW CLASS", "ERROR ADDING NEW CLASS", e)}
+                .addOnFailureListener { e ->
+                    Log.e("ADDING NEW CLASS", "ERROR ADDING NEW CLASS", e)
+                }
         }
 
         return binding.root
