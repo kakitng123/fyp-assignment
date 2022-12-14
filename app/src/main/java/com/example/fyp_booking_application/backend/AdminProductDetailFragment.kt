@@ -162,6 +162,9 @@ class AdminProductDetailFragment : Fragment() {
                 builder.show()
             }
         }
+        binding.tvBackProductDetail.setOnClickListener(){
+            adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
+        }
         return binding.root
     }
 

@@ -3,6 +3,8 @@ package com.example.fyp_booking_application.backend.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
@@ -23,7 +25,7 @@ class CourtManageAdminAdapter(
             itemView.setOnClickListener(this)
         }
 
-        override fun onClick(v: View?) {
+        override fun onClick(v: View) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION)
                 listener.onItemClick(position)

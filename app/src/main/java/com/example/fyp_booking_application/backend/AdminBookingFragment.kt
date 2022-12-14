@@ -52,11 +52,9 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
     }
 
     override fun onItemClick(position: Int) {
-        // bookingArrayList.clear()
         val currentItem = bookingArrayList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.replaceFragment(AdminBookingDetailFragment(), R.id.bookingLayout)
-        binding.bookingRecyclerView.visibility = View.INVISIBLE
+        adminActivityView.replaceFragment(AdminBookingDetailFragment(), R.id.adminLayout)
         setFragmentResult("toAdminBookingDetails", bundleOf("toAdminBookingDetails" to currentItem.bookingID))
     }
 

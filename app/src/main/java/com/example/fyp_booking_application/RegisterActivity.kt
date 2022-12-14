@@ -181,13 +181,13 @@ class RegisterActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }.addOnFailureListener {
-                    //Show failure Toast Message
-                    Toast.makeText(this, "Registered Failure", Toast.LENGTH_SHORT).show()
-                }
-        }
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }.addOnFailureListener {
+                        //Show failure Toast Message
+                        Toast.makeText(this, "Registered Failure", Toast.LENGTH_SHORT).show()
+                    }
+            }
             else{
                 Toast.makeText(this, "Please insert your information!", Toast.LENGTH_SHORT).show() //Show failure Toast Message
             }

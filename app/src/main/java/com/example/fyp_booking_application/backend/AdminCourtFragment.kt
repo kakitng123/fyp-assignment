@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.R
@@ -39,7 +40,7 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
         databaseRef = FirebaseFirestore.getInstance()
 
         dataInitialize()
-        binding.courtRecyclerView.apply{
+        binding.courtRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             courtList = arrayListOf()
@@ -49,21 +50,39 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
 
         binding.imgbtnAddCourt.setOnClickListener {
             val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_edittext1, null)
-            val editText = dialogLayout.findViewById<EditText>(R.id.dialog_editText1)
+            val editText = dialogLayout.findViewById<EditText>(R.id.dataEditText)
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Enter Court Name")
             builder.setView(dialogLayout)
-            builder.setPositiveButton("Add"){ _, _ ->
-                // Validation can be done here to not allow redundant court name
-                val newCourtRef = databaseRef.collection("court_testing2").document()
-                val newCourtData = hashMapOf(
-                    "courtID" to newCourtRef.id, // CourtID = DocumentID *for now, could change later.
-                    "courtName" to editText.text.toString(),
-                    "courtSlots" to arrayListOf<CourtTimeslots>()
-                )
-                newCourtRef.set(newCourtData)
-                    .addOnSuccessListener { Log.d("ADDING COURT DATA", "COURT ADDED SUCCESSFULLY") }
-                    .addOnFailureListener { e -> Log.e("ADDING COURT DATA", "ERROR ADDING DATA", e) }
+            builder.setPositiveButton("Add") { _, _ ->
+                if(editText.text.isEmpty()){
+                    Toast.makeText(context, "EMPTY FIELD", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                else if(!editText.text.matches("^[a-zA-Z0-9_]*$".toRegex())){
+                    Toast.makeText(context, "ONLY ALPHANUMERIC ALLOWED", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                var nameValidation = 0
+                databaseRef.collection("court_testing2").get()
+                    .addOnSuccessListener { results ->
+                        for (document in results) {
+                            if (document["courtName"] == editText.text.toString()) {
+                                nameValidation += 1
+                            }
+                        }
+                        if (nameValidation == 0) {
+                            val newCourtRef = databaseRef.collection("court_testing2").document()
+                            val newCourtData = hashMapOf(
+                                "courtID" to newCourtRef.id,
+                                "courtName" to editText.text.toString(),
+                                "courtSlots" to arrayListOf<CourtTimeslots>()
+                            )
+                            newCourtRef.set(newCourtData)
+                                .addOnSuccessListener { Log.d("ADDING COURT DATA", "COURT ADDED SUCCESSFULLY") }
+                                .addOnFailureListener { e -> Log.e("ADDING COURT DATA", "ERROR ADDING DATA", e ) }
+                        } else Toast.makeText(context, "EXISTING COURT NAME", Toast.LENGTH_SHORT).show()
+                    }
             }
             builder.setNegativeButton("Cancel"){ _, _ -> }
             builder.show()
@@ -77,7 +96,7 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
         displayTimeslots(currentItem, position)
 
         val ss = SpannableString("Click Here to Add Timeslot")
-        val clickableSpan: ClickableSpan = object : ClickableSpan(){
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {
                 val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_add_timeslot, null)
                 val radioGroup = dialogLayout.findViewById<RadioGroup>(R.id.radioGroup1)
@@ -85,27 +104,28 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
 
                 builder.setTitle("Select Timeslot")
                 builder.setView(dialogLayout)
-                builder.setPositiveButton("Add"){ _, _ ->
-                    val increment: Int = when(radioGroup.checkedRadioButtonId){
+                builder.setPositiveButton("Add") { _, _ ->
+                    val increment: Int = when (radioGroup.checkedRadioButtonId) {
                         R.id.rdBtnSlotA -> 1
                         R.id.rdBtnSlotB -> 2
                         else -> {
                             Log.d("FAIL TIMESLOT", "FAIL TIMESLOT")
                         }
                     }
-                    for (i in 10..22 step increment){
+                    for (i in 10..22 step increment) {
                         addData(i, increment, currentItem.courtID.toString())
                     }
                 }
-                builder.setNegativeButton("Cancel"){_,_ -> }
+                builder.setNegativeButton("Cancel") { _, _ -> }
                 builder.show()
             }
         }
-        ss.setSpan(clickableSpan, 6, 10 , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ss.setSpan(clickableSpan, 6, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvTesting.text = ss
         binding.tvTesting.movementMethod = LinkMovementMethod.getInstance()
 
     }
+
 
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()

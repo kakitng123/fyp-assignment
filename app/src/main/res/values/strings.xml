@@ -1,31 +1,53 @@
 <resources>
+    <!-- System -->
     <string name="app_name">FYP BOOKING APPLICATION</string>
     <string name="Home">Home</string>
     <string name="Booking">Booking</string>
     <string name="Profile">Profile</string>
-    <!-- Nav Bar -->
-    <string name="admin_maintenance">Admin Maintenance</string>
-    <string name="Coach">Coach</string>
-    <string name="Class">Class</string>
-    <string name="Court">Court</string>
-    <string name="Product">Product</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="management">Management</string>
+
+    <!-- Admin Nav Bar -->
+    <string name="management">MANAGEMENT</string>
+    <string name="transactions">TRANSACTIONS</string>
+    <string name="system">SYSTEM</string>
+    <string name="admin">Admin</string>
+    <string name="coach">Coach</string>
+    <string name="trainingClass">Class</string>
+    <string name="court">Court</string>
+    <string name="product">Product</string>
+    <string name="notification">Notification</string>
+    <string name="booking">Booking</string>
+    <string name="purchase">Purchase</string>
+    <string name="settings">System Settings</string>
+    <string name="signOut">Sign Out</string>
     <string name="pending">Pending</string>
-    <!-- Category -->
-    <string name="all">All</string>
-    <string name="accs">Accessories</string>
-    <string name="rackets">Rackets</string>
-    <string name="etc">Etc</string>
-    <string name="example">Example</string>
-    <!-- Product -->
+
+    <!-- Add Item -->
     <string name="name">Name</string>
     <string name="desc">Description</string>
     <string name="price">Price</string>
     <string name="category">Category</string>
     <string name="image">Image</string>
     <string name="qty">Quantity</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="required">Required</string>
+    <string name="phoneNo">Phone No.</string>
+    <string name="exp">Experience</string>
+    <string name="email">Email</string>
+
+    <!-- Add Category -->
+    <string name="all">All</string>
+    <string name="accs">Accessories</string>
+    <string name="rackets">Rackets</string>
+    <string name="etc">Etc</string>
+    <string name="example">Example</string>
+
+    <!-- ACTIVITY/FRAGMENT TITLES -->
+    <string name="addCoach">ADD COACH</string>
+
+
     <!-- Buttons ETC ETC -->
     <string name="finish">Finish</string>
     <string name="edit">Edit</string>
@@ -34,8 +56,9 @@
     <string name="newData">Enter New Data</string>
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
-    <!-- TESTING -->
-    <string name="testing">Testing</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
 </resources>

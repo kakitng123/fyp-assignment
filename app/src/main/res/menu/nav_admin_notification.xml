@@ -3,8 +3,10 @@
 
     <item
         android:id="@+id/nav_notificationManage"
+        android:icon="@drawable/ic_admin_management"
         android:title="@string/management" />
     <item
         android:id="@+id/nav_notificationHistory"
+        android:icon="@drawable/ic_admin_history"
         android:title="History" />
 </menu>

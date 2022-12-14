@@ -25,14 +25,8 @@ class AdminNotifFragment : Fragment() {
 
         binding.notificationNavBar.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.nav_notificationManage -> {
-                    binding.imgBtnAddNotif.visibility = View.VISIBLE
-                    adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
-                }
-                R.id.nav_notificationHistory -> {
-                    binding.imgBtnAddNotif.visibility = View.INVISIBLE
-                    adminActivityView.replaceFragment(AdminNotifHistoryFragment(), R.id.notificationLayout)
-                }
+                R.id.nav_notificationManage -> adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
+                R.id.nav_notificationHistory -> adminActivityView.replaceFragment(AdminNotifHistoryFragment(), R.id.notificationLayout)
             }
             true
         }

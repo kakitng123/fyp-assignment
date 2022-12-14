@@ -23,13 +23,13 @@
                 android:id="@+id/rdBtnSlotA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Timeslot A" />
+                android:text="Timeslot A (From 10am + 1hr Interval)" />
 
             <RadioButton
                 android:id="@+id/rdBtnSlotB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Timeslot B" />
+                android:text="Timeslot B (From 10am + 2hr Interval)" />
         </RadioGroup>
 
     </LinearLayout>

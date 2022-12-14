@@ -7,24 +7,201 @@
         android:layout_height="match_parent"
         tools:context=".backend.AdminBookingDetailFragment">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BOOKING FRAGMENT"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
             android:text="TEST"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBookingDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="BOOKING DETAIL"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/cardView3"
+            app:layout_constraintStart_toStartOf="@+id/cardView3" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="80dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvBDetailID"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="ID"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvBDetailDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="Date"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvBDetailTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="Time"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvBDetailCourt"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="Court ID"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvBDetailStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="Status"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvBDetailUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:gravity="center|end"
+                        android:text="User ID"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/tfBDetailID"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="ID"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfBDetailDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Date"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfBDetailTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Time"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfBDetailCourt"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Court ID"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfBDetailStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="Status"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    <EditText
+                        android:id="@+id/tfBDetailUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_margin="4dp"
+                        android:enabled="false"
+                        android:hint="User ID"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

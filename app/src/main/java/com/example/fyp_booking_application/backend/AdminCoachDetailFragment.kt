@@ -91,6 +91,10 @@ class AdminCoachDetailFragment : Fragment() {
                 builder.show()
             }
         }
+        binding.tvCoachBack.setOnClickListener(){
+            adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+        }
+
         return binding.root
     }
 }

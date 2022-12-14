@@ -32,13 +32,6 @@ class AdminNotifDetailFragment : Fragment() {
                 if(document != null){
                     val testing = document.toObject(NotificationData::class.java)
 
-                    binding.swUpdateNotif.setOnCheckedChangeListener{ _, isChecked ->
-                        binding.tfNotifTitle.isEnabled = isChecked
-                        binding.tfNotifMsg.isEnabled = isChecked
-                        binding.tfNotifCode.isEnabled = isChecked
-                        binding.tfNotifUser.isEnabled = isChecked
-                    }
-
                     // Set Text for EditText
                     binding.tfNotifID.setText(testing?.notifyID.toString())
                     binding.tfNotifTitle.setText(testing?.notifyTitle.toString())

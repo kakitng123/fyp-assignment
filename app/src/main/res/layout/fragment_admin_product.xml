@@ -23,7 +23,7 @@
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/product_recyclerView"
+                android:id="@+id/productRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -35,14 +35,14 @@
                 tools:listitem="@layout/recyclerview_admin_products" />
 
             <ImageButton
-                android:id="@+id/btnManage"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:id="@+id/btnAddProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/btn_circle"
                 android:contentDescription="@string/add"
-                android:src="@drawable/ic_add30"
+                android:src="@drawable/ic_admin_add30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />

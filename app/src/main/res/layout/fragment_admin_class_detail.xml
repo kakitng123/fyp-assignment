@@ -8,6 +8,7 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardAdminClassDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -29,7 +30,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
                     android:layout_weight="1.5"
                     android:orientation="vertical">
 
@@ -97,7 +97,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -111,7 +110,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <EditText
@@ -124,7 +123,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <EditText
@@ -137,7 +136,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <EditText
@@ -150,7 +149,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <EditText
@@ -163,7 +162,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <EditText
@@ -176,7 +175,7 @@
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
                 </LinearLayout>
             </LinearLayout>
@@ -186,36 +185,36 @@
             android:id="@+id/tvClassDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
             android:text="CLASS DETAIL"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminClassDetail"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminClassDetail" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/swUpdateClass"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Update"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminClassDetail"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminClassDetail"
             tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/imgbtnDeleteClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/btn_circle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_delete30"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminClassDetail"
+            app:layout_constraintTop_toBottomOf="@+id/cardAdminClassDetail"
+            app:srcCompat="@drawable/ic_admin_delete30"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
@@ -226,7 +225,22 @@
             android:background="@drawable/btn_circle"
             app:layout_constraintEnd_toStartOf="@+id/imgbtnDeleteClass"
             app:layout_constraintTop_toTopOf="@+id/imgbtnDeleteClass"
-            app:srcCompat="@drawable/ic_update30"
+            app:srcCompat="@drawable/ic_admin_update30"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvBackClassDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_admin_back"
+            android:gravity="center"
+            android:text="Back"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

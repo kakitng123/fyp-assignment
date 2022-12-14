@@ -4,29 +4,52 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".backend.AdminClassAddFragment">
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvBackClassAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Back"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/ic_admin_back" />
 
         <TextView
             android:id="@+id/tvAddClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="Add Training Class"
-            android:textSize="24sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="ADD TRAINING CLASS"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminAddClass"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminAddClass" />
+
+        <Button
+            android:id="@+id/btnFinishAddClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/finish"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminAddClass"
+            app:layout_constraintTop_toBottomOf="@+id/cardAdminAddClass" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/cardAdminAddClass"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="80dp"
-            android:orientation="horizontal"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,160 +57,121 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1.5"
-                    android:gravity="end"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvAddClassID"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nameContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="ID"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:hint="@string/name"
+                        app:endIconMode="clear_text"
+                        app:helperText="@string/required"
+                        app:helperTextTextColor="@color/red_decline">
 
-                    <TextView
-                        android:id="@+id/tvAddClassName"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Name"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tfAddClassName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:lines="1"
+                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
-                    <TextView
-                        android:id="@+id/tvAddClassDesc"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Description"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:id="@+id/tvAddClassPrice"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/descContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Price"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:hint="@string/desc"
+                        app:endIconMode="clear_text"
+                        app:helperText="@string/required"
+                        app:helperTextTextColor="@color/red_decline">
 
-                    <TextView
-                        android:id="@+id/tvAddClassDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Date"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tfAddClassDesc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
-                    <TextView
-                        android:id="@+id/tvAddClassTime"
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/priceContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Time"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:hint="@string/price"
+                        app:helperText="@string/required"
+                        app:helperTextTextColor="@color/red_decline">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tfAddClassPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:maxLength="4"
+                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/dateContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:hint="@string/date"
+                        app:helperText="@string/required"
+                        app:helperTextTextColor="@color/red_decline">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tfAddClassDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="date"
+                            android:lines="1"
+                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/timeContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:hint="@string/time"
+                        app:helperText="@string/required"
+                        app:helperTextTextColor="@color/red_decline">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tfAddClassTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="time"
+                            android:lines="1"
+                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
                 </LinearLayout>
+            </ScrollView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/tfAddClassID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:hint="Enter Class ID"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <EditText
-                        android:id="@+id/tfAddClassName"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:hint="Enter Class Name"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <EditText
-                        android:id="@+id/tfAddClassDesc"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:hint="Enter Desc"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <EditText
-                        android:id="@+id/tfAddClassPrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:hint="Enter Price"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <EditText
-                        android:id="@+id/tfAddClassDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:hint="Enter Date"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <EditText
-                        android:id="@+id/tfAddClassTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:hint="Enter Time"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </LinearLayout>
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btnFinishAddClass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/finish"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

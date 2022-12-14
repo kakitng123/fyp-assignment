@@ -84,7 +84,7 @@ class AdminClassDetailFragment : Fragment() {
                 builder.setPositiveButton("Delete"){ _, _ ->
                     docRef.delete().addOnSuccessListener {
                         Log.d("DELETE CLASS", "CLASS DELETED SUCCESSFULLY")
-                        adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+                        adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
                     }.addOnFailureListener { e ->
                         Log.e("DELETE CLASS", "ERROR DELETING CLASS", e)
                     }
@@ -94,6 +94,10 @@ class AdminClassDetailFragment : Fragment() {
             }
 
         }
+        binding.tvBackClassDetail.setOnClickListener {
+            adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
+        }
+
         return binding.root
     }
 }
