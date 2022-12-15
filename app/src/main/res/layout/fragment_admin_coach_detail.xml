@@ -192,7 +192,7 @@
             android:background="@drawable/btn_circle"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
-            app:srcCompat="@drawable/ic_admin_delete30"
+            app:srcCompat="@drawable/ic_admin_delete_white"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView

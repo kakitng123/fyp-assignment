@@ -224,7 +224,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/btn_circle"
             android:contentDescription="@string/delete"
-            android:src="@drawable/ic_admin_delete30"
+            android:src="@drawable/ic_admin_delete_white"
             app:layout_constraintEnd_toEndOf="@+id/cardAdminProductDetail"
             app:layout_constraintTop_toBottomOf="@+id/cardAdminProductDetail" />
 

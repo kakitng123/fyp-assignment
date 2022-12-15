@@ -40,10 +40,10 @@ class ClassAdminAdapter(
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = classList[position]
 
-        // Ignore warning for now
         holder.tvClassName.text = "Class Name"
         holder.tvClassPrice.text = "Class Price"
 

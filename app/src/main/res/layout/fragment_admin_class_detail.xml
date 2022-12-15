@@ -214,7 +214,7 @@
             android:background="@drawable/btn_circle"
             app:layout_constraintEnd_toEndOf="@+id/cardAdminClassDetail"
             app:layout_constraintTop_toBottomOf="@+id/cardAdminClassDetail"
-            app:srcCompat="@drawable/ic_admin_delete30"
+            app:srcCompat="@drawable/ic_admin_delete_white"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton

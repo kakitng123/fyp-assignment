@@ -2,17 +2,15 @@ package com.example.fyp_booking_application.frontend
 
 import android.content.ContentValues
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.Adapters.CourtManageAdminAdapter
+import com.example.fyp_booking_application.backend.Adapters.CourtAdminAdapter
 import com.example.fyp_booking_application.backend.Adapters.TimeslotAdminAdapter
 import com.example.fyp_booking_application.backend.CourtData
 import com.example.fyp_booking_application.backend.CourtTimeslots
@@ -21,15 +19,11 @@ import com.example.fyp_booking_application.frontend.data.BookingData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.collections.List
-import kotlin.collections.MutableMap
 import kotlin.collections.hashMapOf
-import kotlin.collections.set
 
 
 class BookingCourtFragment : Fragment() {
@@ -42,7 +36,7 @@ class BookingCourtFragment : Fragment() {
 
     private lateinit var courtList : ArrayList<CourtData>
     private lateinit var timeslotList : ArrayList<CourtTimeslots>
-    private lateinit var courtManageAdapter : CourtManageAdminAdapter
+    private lateinit var courtManageAdapter : CourtAdminAdapter
     private lateinit var timeslotAdapter : TimeslotAdminAdapter
 
     private lateinit var testing: ArrayList<BookingData>

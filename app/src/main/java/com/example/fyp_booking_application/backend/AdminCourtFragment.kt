@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.backend
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.SpannableString
@@ -14,22 +15,22 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.Adapters.CourtManageAdminAdapter
+import com.example.fyp_booking_application.backend.Adapters.CourtAdminAdapter
 import com.example.fyp_booking_application.backend.Adapters.TimeslotAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentAdminCourtBinding
 import com.google.firebase.firestore.*
 
-class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListener {
+class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentAdminCourtBinding
     private lateinit var databaseRef: FirebaseFirestore
     private lateinit var courtList : ArrayList<CourtData>
     private lateinit var timeslotList : ArrayList<CourtTimeslots>
-    private lateinit var courtManageAdapter : CourtManageAdminAdapter
+    private lateinit var courtManageAdapter : CourtAdminAdapter
     private lateinit var timeslotAdapter : TimeslotAdminAdapter
 
     override fun onCreateView(
@@ -38,17 +39,18 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_court, container, false)
         databaseRef = FirebaseFirestore.getInstance()
+        val adminActivityView = (activity as AdminDashboardActivity)
 
         dataInitialize()
         binding.courtRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             courtList = arrayListOf()
-            courtManageAdapter = CourtManageAdminAdapter(courtList, this@AdminCourtFragment)
+            courtManageAdapter = CourtAdminAdapter(courtList, this@AdminCourtFragment)
             adapter = courtManageAdapter
         }
 
-        binding.imgbtnAddCourt.setOnClickListener {
+        binding.imgBtnAddCourt.setOnClickListener {
             val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_edittext1, null)
             val editText = dialogLayout.findViewById<EditText>(R.id.dataEditText)
             val builder = AlertDialog.Builder(requireContext())
@@ -86,6 +88,9 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
             }
             builder.setNegativeButton("Cancel"){ _, _ -> }
             builder.show()
+        }
+        binding.imgBtnRefreshCourt.setOnClickListener{
+            adminActivityView.replaceFragment(AdminCourtFragment(), R.id.adminLayout)
         }
         return binding.root
     }
@@ -126,11 +131,31 @@ class AdminCourtFragment : Fragment(), CourtManageAdminAdapter.OnItemClickListen
 
     }
 
+    override fun onButtonClick(position: Int) {
+        val currentItem = courtList[position]
+        databaseRef = FirebaseFirestore.getInstance()
+        val docRef = databaseRef.collection("court_testing2").document(currentItem.courtID.toString())
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Delete Court Data")
+        builder.setMessage("Confirm to delete court data?")
+        builder.setPositiveButton("Delete"){ _, _ ->
+            docRef.delete().addOnSuccessListener {
+                Log.d("DELETE COURT", "COURT DELETED SUCCESSFULLY")
+            }.addOnFailureListener { e ->
+                Log.e("DELETE COURT", "ERROR DELETING COURT", e)
+            }
+        }
+        builder.setNegativeButton("Cancel"){ _, _ -> }
+        builder.show()
+    }
+
 
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("court_testing2") //.whereEqualTo("courtName", "A1")
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
                         Log.e("FAILED INITIALIZATION", error.message.toString())

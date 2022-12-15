@@ -1,9 +1,9 @@
 package com.example.fyp_booking_application.backend.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
@@ -41,10 +41,10 @@ class CoachAdminAdapter(
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = coachList[position]
 
-        // Ignore warning for now
         holder.tvCoachID.text = "Coach ID"
         holder.tvCoachName.text = "Coach Name"
 

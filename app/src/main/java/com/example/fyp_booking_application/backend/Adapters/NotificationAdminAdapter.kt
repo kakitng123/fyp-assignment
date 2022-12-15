@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.backend.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,10 +41,10 @@ class NotificationAdminAdapter(
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = notificationList[position]
 
-        // Ignore warning for now
         holder.tvNotifyID.text = "Notif. Title"
         holder.tvRefCode.text = "Referral Code"
 
