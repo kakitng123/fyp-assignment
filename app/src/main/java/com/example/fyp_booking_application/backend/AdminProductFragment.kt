@@ -57,6 +57,7 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
             productAdapter = ProductAdminAdapter(productArrayList, this@AdminProductFragment)
             adapter = productAdapter
         }
+
         return binding.root
     }
 

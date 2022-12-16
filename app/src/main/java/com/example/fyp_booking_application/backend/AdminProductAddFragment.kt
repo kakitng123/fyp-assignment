@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
@@ -33,58 +34,107 @@ class AdminProductAddFragment : Fragment() {
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
 
-        val categoryType = arrayOf("Racket", "Accessories", "Etc")
-        val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
-        binding.spinnerCat.adapter = spinnerAdapter
-        binding.spinnerCat.setSelection(0)
+        binding.tfAddProductName.setOnFocusChangeListener { _, focused ->
+            if(!focused && binding.tfAddProductName.text!!.isEmpty()){
+                binding.pNameContainer.helperText = "Name is Required"
+            }
+            else if(!focused && !(binding.tfAddProductName.text!!.matches("^[a-zA-Z0-9_]*$".toRegex()))){
+                binding.pNameContainer.helperText = "Invalid Name"
+            }
+            else binding.pNameContainer.helperText = null
+        }
 
         binding.imgProduct.setOnClickListener {
             val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(selectImage, 3)
+            startActivityForResult(selectImage, 100)
         }
 
-        binding.btnFinish.setOnClickListener {
-            val productName: String = binding.tfProductName.text.toString()
-            val productImage = "products/product$productName"
-            var productCategory = ""
-            val productDesc: String = binding.tfProductDesc.text.toString()
-            val productPrice: Double = binding.tfProductPrice.text.toString().toDouble()
-            val productQty: Int = Integer.parseInt(binding.tfProductQty.text.toString())
+        val categoryType = arrayOf("Racket", "Accessories", "Etc")
+        val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
+        binding.spinnerAddProductCat.adapter = spinnerAdapter
+        binding.spinnerAddProductCat.setSelection(0)
 
-            when(binding.spinnerCat.selectedItemPosition){
-                0 -> productCategory = "Racket"
-                1 -> productCategory = "Accessories"
-                2 -> productCategory = "Etc"
+        binding.tfAddProductDesc.setOnFocusChangeListener { _, focused ->
+            if(!focused && binding.tfAddProductDesc.text!!.isEmpty()){
+                binding.pDescContainer.helperText = "Description is Required"
             }
+            else binding.pDescContainer.helperText = null
+        }
 
-            storageRef = FirebaseStorage.getInstance().getReference("products/product$productName")
-            storageRef.putFile(imgUri)
-                .addOnSuccessListener {
-                    binding.imgProduct.setImageURI(null)
-                }
+        binding.tfAddProductPrice.setOnFocusChangeListener { _, focused ->
+            if(!focused && binding.tfAddProductPrice.text!!.isEmpty()){
+                binding.pPriceContainer.helperText = "Price is Required"
+            }
+            else if(!focused && !(binding.tfAddProductPrice.text!!.all { it.isDigit() })){
+                binding.pPriceContainer.helperText = "Invalid Price"
+            }
+            else binding.pPriceContainer.helperText = null
+        }
 
-            val newProductRef = databaseRef.collection("Products").document()
-            val newProduct = hashMapOf(
-                "productID" to newProductRef.id,
-                "productName" to productName,
-                "productImage" to productImage,
-                "productCategory" to productCategory,
-                "productDesc" to productDesc,
-                "productPrice" to productPrice,
-                "productQty" to productQty
-            )
+        //Qty
+        binding.tfAddProductQty.setOnFocusChangeListener { _, focused ->
+            if(!focused && binding.tfAddProductQty.text!!.isEmpty()){
+                binding.pQtyContainer.helperText = "Quantity is Required"
+            }
+            else if(!focused && !(binding.tfAddProductQty.text!!.all { it.isDigit() })){
+                binding.pQtyContainer.helperText = "Invalid Quantity"
+            }
+            else binding.pQtyContainer.helperText = null
+        }
 
-            newProductRef.set(newProduct)
-                .addOnSuccessListener { Log.d("ADDING PRODUCT", "PRODUCT SUCCESSFULLY ADDED") }
-                .addOnFailureListener { e -> Log.w("ADDING PRODUCT", "ERROR ADDING PRODUCT", e) }
+        binding.btnFinishAddProduct.setOnClickListener {
+            val validName = binding.pNameContainer.helperText == null
+            val validDesc = binding.pDescContainer.helperText == null
+            val validPrice = binding.pPriceContainer.helperText == null
+            val validQty = binding.pQtyContainer.helperText == null
 
-            adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
+            if(validName && validDesc && validPrice && validQty) {
+                var nameValidation = 0
+                databaseRef.collection("Products").get()
+                    .addOnSuccessListener { results ->
+                        for (document in results) {
+                            if (document["productName"] == binding.tfAddProductName.text.toString()) {
+                                nameValidation += 1
+                            }
+                        }
+                        if(nameValidation == 0){
+                            val productName: String = binding.tfAddProductName.text.toString()
+                            var productCategory = ""
+                            when(binding.spinnerAddProductCat.selectedItemPosition){
+                                0 -> productCategory = "Racket"
+                                1 -> productCategory = "Accessories"
+                                2 -> productCategory = "Etc"
+                            }
+                            storageRef = FirebaseStorage.getInstance().getReference("products/product$productName")
+                            storageRef.putFile(imgUri).addOnSuccessListener {
+                                binding.imgProduct.setImageURI(null)
+                            }
+
+                            val newProductRef = databaseRef.collection("Products").document()
+                            val newProduct = hashMapOf(
+                                "productID" to newProductRef.id,
+                                "productName" to productName,
+                                "productImage" to "products/product$productName",
+                                "productCategory" to productCategory,
+                                "productDesc" to binding.tfAddProductDesc.text.toString(),
+                                "productPrice" to binding.tfAddProductPrice.text.toString().toDouble(),
+                                "productQty" to binding.tfAddProductQty.text.toString().toInt()
+                            )
+
+                            newProductRef.set(newProduct)
+                                .addOnSuccessListener { Log.d("ADDING PRODUCT", "PRODUCT SUCCESSFULLY ADDED") }
+                                .addOnFailureListener { e -> Log.w("ADDING PRODUCT", "ERROR ADDING PRODUCT", e) }
+
+                            adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
+                        }
+                    }.addOnFailureListener{ e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }
+            } else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
         }
         return binding.root
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 3 && data != null && data.data != null) {
+        if (requestCode == 100 && data != null && data.data != null) {
             imgUri = data.data!!
             binding.imgProduct.setImageURI(imgUri)
         }

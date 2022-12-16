@@ -2,199 +2,206 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".backend.AdminProductAddFragment">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-250dp"
-            android:adjustViewBounds="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gradient_orangelight" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvProductPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/price"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/tvProductDesc"
-            app:layout_constraintTop_toBottomOf="@+id/tfProductDesc" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".backend.AdminProductAddFragment">
 
-        <ImageView
-            android:id="@+id/imgProduct"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="productImage"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.130"
-            tools:ignore="ImageContrastCheck"
-            tools:src="@drawable/ic_image40" />
+                <TextView
+                    android:id="@+id/tvAddProductBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:drawableStart="@drawable/ic_admin_back"
+                    android:gravity="center"
+                    android:text="Back"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/name"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.109"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35" />
+                <TextView
+                    android:id="@+id/tvAddProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="48dp"
+                    android:text="Add Product"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvAddProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Product"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.05" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/pNameContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:hint="@string/name"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red_decline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAddProduct">
 
-        <TextView
-            android:id="@+id/tvProductDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/desc"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/tvCategory"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCat" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tfAddProductName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:maxLength="20" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/tfProductName"
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Product Name"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="40dp"
-            android:textColorHint="#757575"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tvProductName"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+                <TextView
+                    android:id="@+id/tvAddPImage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/image"
+                    app:layout_constraintStart_toStartOf="@+id/pNameContainer"
+                    app:layout_constraintTop_toBottomOf="@+id/pNameContainer" />
 
-        <EditText
-            android:id="@+id/tfProductDesc"
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/example"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="40dp"
-            android:textColorHint="#757575"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tvProductDesc"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductDesc"
-            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                <ImageView
+                    android:id="@+id/imgProduct"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAddPImage1"
+                    app:srcCompat="@drawable/ic_admin_image" />
 
-        <EditText
-            android:id="@+id/tfProductPrice"
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="9.9"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="40dp"
-            android:textColorHint="#757575"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tvProductPrice"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductPrice"
-            tools:ignore="TouchTargetSizeCheck" />
+                <TextView
+                    android:id="@+id/tvAddPImage2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click to Select Image"
+                    app:layout_constraintEnd_toEndOf="@+id/imgProduct"
+                    app:layout_constraintStart_toStartOf="@+id/imgProduct"
+                    app:layout_constraintTop_toBottomOf="@+id/imgProduct" />
 
-        <Button
-            android:id="@+id/btnFinish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/finish"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/category"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tvAddPImage1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAddPImage2" />
 
-        <TextView
-            android:id="@+id/selectImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Click to Select Image"
-            app:layout_constraintEnd_toEndOf="@+id/imgProduct"
-            app:layout_constraintStart_toStartOf="@+id/imgProduct"
-            app:layout_constraintTop_toBottomOf="@+id/imgProduct" />
+                <Spinner
+                    android:id="@+id/spinnerAddProductCat"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    app:layout_constraintEnd_toEndOf="@+id/pNameContainer"
+                    app:layout_constraintStart_toStartOf="@+id/tvCategory"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategory"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/tvCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/category"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tvProductName"
-            app:layout_constraintTop_toBottomOf="@+id/tfProductName" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/pDescContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/desc"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red_decline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerAddProductCat">
 
-        <Spinner
-            android:id="@+id/spinnerCat"
-            android:layout_width="225dp"
-            android:layout_height="40dp"
-            app:layout_constraintEnd_toEndOf="@+id/tfProductName"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvCategory"
-            app:layout_constraintTop_toBottomOf="@+id/tvCategory"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tfAddProductDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvQty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/qty"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/tvProductPrice"
-            app:layout_constraintTop_toBottomOf="@+id/tfProductPrice" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/pPriceContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:hint="@string/price"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red_decline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pDescContainer">
 
-        <EditText
-            android:id="@+id/tfProductQty"
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="10"
-            android:inputType="textPersonName"
-            android:minHeight="40dp"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tvQty"
-            app:layout_constraintTop_toBottomOf="@+id/tvQty"
-            tools:ignore="TouchTargetSizeCheck" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tfAddProductPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="5"
+                        android:inputType="numberDecimal"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/pQtyContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:hint="@string/qty"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red_decline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/pPriceContainer">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tfAddProductQty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="3"
+                        android:inputType="number"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/btnFinishAddProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_admin_add_black"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
+    </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

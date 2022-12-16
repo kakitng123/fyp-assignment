@@ -100,9 +100,7 @@ class AdminCoachAddFragment : Fragment() {
                                 .addOnFailureListener { e -> Log.e("ADDING NEW COACH", "ERROR ADDING NEW COACH", e)}
                         } else Toast.makeText(context, "EXISTING CLASS NAME", Toast.LENGTH_SHORT).show()
 
-                    }.addOnFailureListener { e ->
-                        Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
-                    }
+                    }.addOnFailureListener { e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }
             } else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
         }
         binding.tvBackCoachAdd.setOnClickListener(){
