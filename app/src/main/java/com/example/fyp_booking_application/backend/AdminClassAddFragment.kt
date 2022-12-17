@@ -12,7 +12,6 @@ import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminClassAddBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 
 class AdminClassAddFragment : Fragment() {
 
@@ -104,15 +103,15 @@ class AdminClassAddFragment : Fragment() {
                                     Log.e("ADDING NEW CLASS", "ERROR ADDING NEW CLASS", e)
                                 }
                         } else Toast.makeText(context, "EXISTING CLASS NAME", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener(){ e ->
+                    }.addOnFailureListener { e ->
                         Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
                     }
             }
             else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
         }
 
-        binding.tvBackClassAdd.setOnClickListener(){
-            adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
+        binding.tvBackClassAdd.setOnClickListener{
+            adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
         }
         return binding.root
     }

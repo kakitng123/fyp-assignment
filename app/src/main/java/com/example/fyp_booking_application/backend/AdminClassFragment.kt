@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.backend
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,7 +29,6 @@ class AdminClassFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
 
         dataInitialize()
         binding.classRecyclerView.apply {
@@ -38,11 +38,6 @@ class AdminClassFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
             classAdminAdapter = ClassAdminAdapter(classArrayList, this@AdminClassFragment)
             adapter = classAdminAdapter
         }
-
-        binding.btnAddClass.setOnClickListener{
-           adminActivityView.replaceFragment(AdminClassAddFragment(), R.id.adminLayout)
-        }
-
         return binding.root
     }
 
@@ -57,6 +52,7 @@ class AdminClassFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("class_testing1")
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
                         Log.e("FAILED INITIALIZATION", error.message.toString())

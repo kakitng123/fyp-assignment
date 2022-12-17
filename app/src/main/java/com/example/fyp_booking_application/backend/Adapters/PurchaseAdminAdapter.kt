@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.CoachData
+import com.example.fyp_booking_application.backend.PurchaseData
 
-class CoachAdminAdapter(
-    private val coachList: ArrayList<CoachData>,
+class PurchaseAdminAdapter(
+    private val purchaseList: ArrayList<PurchaseData>,
     private val listener: OnItemClickListener
-) : RecyclerView.Adapter<CoachAdminAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<PurchaseAdminAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        val coachID: TextView = itemView.findViewById(R.id.tfDisplay1)
-        val coachName: TextView = itemView.findViewById(R.id.tfDisplay2)
-        val tvCoachID: TextView = itemView.findViewById(R.id.tvDisplay1)
-        val tvCoachName: TextView = itemView.findViewById(R.id.tvDisplay2)
+        val tvTransID: TextView = itemView.findViewById(R.id.tvDisplay1)
+        val tvTransAmt: TextView = itemView.findViewById(R.id.tvDisplay2)
+        val tfTransID: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val tfTransAmt: TextView = itemView.findViewById(R.id.tfDisplay2)
 
         init {
             itemView.setOnClickListener(this)
@@ -42,17 +42,17 @@ class CoachAdminAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = coachList[position]
+        val currentItem = purchaseList[position]
 
-        holder.tvCoachID.text = "Coach ID"
-        holder.tvCoachName.text = "Coach Name"
+        holder.tvTransID.text = "Transact ID"
+        holder.tvTransAmt.text = "Transact Amount"
 
-        holder.coachID.text = currentItem.coachID
-        holder.coachName.text = currentItem.coachName
+        holder.tfTransID.text = currentItem.transactID
+        holder.tfTransAmt.text = currentItem.transactAmt.toString()
     }
 
     override fun getItemCount(): Int {
-        return coachList.size
+        return purchaseList.size
     }
 
 }

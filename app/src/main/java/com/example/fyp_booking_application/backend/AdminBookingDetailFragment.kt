@@ -32,14 +32,14 @@ class AdminBookingDetailFragment : Fragment() {
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
-                    val testing = document.toObject(BookingDataTesting::class.java)
+                    val booking = document.toObject(BookingDataTesting::class.java)
 
-                    binding.tfBDetailID.setText(testing?.bookingID.toString())
-                    binding.tfBDetailDate.setText(testing?.bookingDate.toString())
-                    binding.tfBDetailTime.setText(testing?.bookingTime.toString())
-                    binding.tfBDetailCourt.setText(testing?.courtID.toString())
-                    binding.tfBDetailStatus.setText(testing?.status.toString())
-                    binding.tfBDetailUser.setText(testing?.userID.toString())
+                    binding.tfBDetailID.setText(booking?.bookingID.toString())
+                    binding.tfBDetailDate.setText(booking?.bookingDate.toString())
+                    binding.tfBDetailTime.setText(booking?.bookingTime.toString())
+                    binding.tfBDetailCourt.setText(booking?.courtID.toString())
+                    binding.tfBDetailStatus.setText(booking?.status.toString())
+                    binding.tfBDetailUser.setText(booking?.userID.toString())
                 }
                 else Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
             }.addOnFailureListener { e ->

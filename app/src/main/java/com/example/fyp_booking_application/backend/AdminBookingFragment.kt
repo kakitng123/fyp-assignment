@@ -67,7 +67,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
         val newNotifyRef = databaseRef.collection("notification_testing1").document()
         val newNotify = hashMapOf(
             "notifyID" to newNotifyRef.id,
-            "userID" to currentItem.userID.toString(), // GET USER ID
+            "userID" to currentItem.userID.toString(),
             "notifyTitle" to "PENDING PAYMENT",
             "notifyMessage" to "YOUR PAYMENT FOR BOOKING ID:${currentItem.bookingID} IS STILL PENDING, " +
                     "PLEASE PROCEED TO XXX PAGE TO CONTINUE PAYMENT!",

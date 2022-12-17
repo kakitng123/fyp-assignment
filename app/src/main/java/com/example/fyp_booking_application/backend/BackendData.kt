@@ -7,7 +7,7 @@ data class ProductData(
     val productImage: String ?= null,
     val productCategory: String ?= null,
     val productDesc: String ?= null,
-    val productPrice: Double = 0.00,
+    val productPrice: Double = 0.0,
     val productQty: Int = 0
 )
 // CourtData (Complete)
@@ -28,7 +28,16 @@ data class ClassData2 (
     val classDesc: String ?= null,
     val classPrice: Double ?= null,
     val classDate: String ?= null,
-    val classTime: String ?= null
+    val classTime: String ?= null,
+    val entitledCoach: String ?= null,
+)
+// CoachData (Complete)
+data class CoachData (
+    val coachID: String ?= null,
+    val coachName: String ?= null,
+    val coachEmail: String ?= null,
+    val coachExp: String ?= null,
+    val coachPhone: String ?= null
 )
 
 // BELOW THIS LINE IS EXAMPLE DATA FOR ADAPTER (REAL DATA WE DISCUSS)
@@ -49,19 +58,18 @@ data class BookingDataTesting (
     val status: String ?= null
 )
 
-data class CoachData (
-    val coachID: String ?= null,
-    val coachName: String ?= null,
-    val coachEmail: String ?= null,
-    val coachExp: String ?= null,
-    val coachPhone: String ?= null
-)
-
 data class ClassData1 (
     val trainingClassDate: String ?= null,
     val trainingClassName: String ?= null,
     val trainingClassPrice: Int = 0,
     val trainingClassTime: String ?= null
+)
+
+data class PurchaseData (
+    val transactID: String ?= null,
+    val productName: String ?= null,
+    val productQty: Int = 0,
+    val transactAmt: Double = 0.0 // ProductPrice*QTY
 )
 
 

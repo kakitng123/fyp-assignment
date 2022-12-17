@@ -34,7 +34,7 @@ class AdminClassDetailFragment : Fragment() {
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
-                    val testing = document.toObject(ClassData2::class.java)
+                    val trainingClass = document.toObject(ClassData2::class.java)
 
                     binding.swUpdateClass.setOnCheckedChangeListener { _, isChecked ->
                         binding.tfClassName.isEnabled = isChecked
@@ -44,12 +44,13 @@ class AdminClassDetailFragment : Fragment() {
                         binding.tfClassTime.isEnabled = isChecked
                     }
 
-                    binding.tfClassID.setText(testing?.classID.toString())
-                    binding.tfClassName.setText(testing?.className.toString())
-                    binding.tfClassDesc.setText(testing?.classDesc.toString())
-                    binding.tfClassPrice.setText(testing?.classPrice.toString())
-                    binding.tfClassDate.setText(testing?.classDate.toString())
-                    binding.tfClassTime.setText(testing?.classTime.toString())
+                    binding.tfClassID.setText(trainingClass?.classID.toString())
+                    binding.tfClassName.setText(trainingClass?.className.toString())
+                    binding.tfClassDesc.setText(trainingClass?.classDesc.toString())
+                    binding.tfClassPrice.setText(trainingClass?.classPrice.toString())
+                    binding.tfClassDate.setText(trainingClass?.classDate.toString())
+                    binding.tfClassTime.setText(trainingClass?.classTime.toString())
+                    binding.tfClassCoach.setText(trainingClass?.entitledCoach.toString())
 
                     binding.imgbtnUpdateClass.setOnClickListener {
                         val builder = AlertDialog.Builder(requireContext())
@@ -97,6 +98,7 @@ class AdminClassDetailFragment : Fragment() {
         binding.tvBackClassDetail.setOnClickListener {
             adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
         }
+
 
         return binding.root
     }

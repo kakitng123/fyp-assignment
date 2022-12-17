@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.backend
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -61,6 +62,7 @@ class AdminCoachFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
         databaseRef = FirebaseFirestore.getInstance()
         databaseRef.collection("coach_testing1")
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
                         Log.e("FAILED INITIALIZATION", error.message.toString())

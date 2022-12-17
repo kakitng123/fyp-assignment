@@ -103,7 +103,7 @@ class AdminCoachAddFragment : Fragment() {
                     }.addOnFailureListener { e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }
             } else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
         }
-        binding.tvBackCoachAdd.setOnClickListener(){
+        binding.tvBackCoachAdd.setOnClickListener {
             adminActivityView.replaceFragment(AdminCoachFragment(),R.id.adminLayout)
         }
         return binding.root

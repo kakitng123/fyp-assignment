@@ -32,7 +32,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Product Name"
-            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/img_productView"
             app:layout_constraintTop_toTopOf="@+id/img_productView" />
@@ -44,6 +45,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/desc"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_productNameView"
             app:layout_constraintTop_toBottomOf="@+id/tv_productNameView" />
     </androidx.constraintlayout.widget.ConstraintLayout>

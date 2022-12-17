@@ -36,7 +36,6 @@ class AdminProductDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product_details, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
@@ -162,12 +161,13 @@ class AdminProductDetailFragment : Fragment() {
                 builder.show()
             }
         }
-        binding.tvBackProductDetail.setOnClickListener(){
+        binding.tvBackProductDetail.setOnClickListener{
             adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
         }
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 3 && data != null && data.data != null) {
             imgUri = data.data!!
