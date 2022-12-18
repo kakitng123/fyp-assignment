@@ -2,65 +2,42 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".backend.AdminCoachAddFragment">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp">
 
-        <TextView
-            android:id="@+id/tvBackCoachAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_admin_back"
-            android:gravity="center"
-            android:text="Back"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvAddCoach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/addCoach"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardAdminAddCoach"
-            app:layout_constraintStart_toStartOf="@+id/cardAdminAddCoach" />
-
-        <Button
-            android:id="@+id/btnFinishAddCoach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/finish"
-            app:layout_constraintEnd_toEndOf="@+id/cardAdminAddCoach"
-            app:layout_constraintTop_toBottomOf="@+id/cardAdminAddCoach" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAdminAddCoach"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="80dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            tools:context=".backend.AdminCoachAddFragment">
+
+            <ImageButton
+                android:id="@+id/imgBtnAddCoach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@null"
+                android:contentDescription="@string/add"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_admin_add_black"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <ScrollView
+                android:id="@+id/scrollView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -139,18 +116,18 @@
                         android:hint="@string/phoneNo"
                         app:counterEnabled="true"
                         app:counterMaxLength="11"
-                        app:prefixText="+6"
                         app:endIconMode="clear_text"
                         app:helperText="@string/required"
-                        app:helperTextTextColor="@color/red_decline">
+                        app:helperTextTextColor="@color/red_decline"
+                        app:prefixText="+6">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tfAddCoachPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="phone"
-                            android:maxLength="11"
                             android:lines="1"
+                            android:maxLength="11"
                             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -158,6 +135,33 @@
                 </LinearLayout>
             </ScrollView>
 
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvBackCoachAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/back"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_admin_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAddCoach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/addCoach"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 </layout>

@@ -7,15 +7,19 @@
         android:layout_height="match_parent"
         tools:context=".backend.AdminBookingDetailFragment">
 
-        <Button
-            android:id="@+id/button"
+        <TextView
+            android:id="@+id/tvBackBookingDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="TEST"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_admin_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvBookingDetail"
@@ -23,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="BOOKING DETAIL"
+            android:text="@string/bookingDetail"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cardView3"
@@ -36,7 +40,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="60dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,6 +51,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -61,7 +66,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="ID"
+                        android:text="@string/id"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -71,7 +76,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Date"
+                        android:text="@string/date"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -81,7 +86,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Time"
+                        android:text="@string/time"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -91,7 +96,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Court ID"
+                        android:text="@string/courtID"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -101,7 +106,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Status"
+                        android:text="@string/status"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -111,7 +116,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="User ID"
+                        android:text="@string/userID"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -128,7 +133,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="ID"
+                        android:hint="@string/id"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -141,9 +146,9 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Date"
+                        android:hint="@string/date"
                         android:importantForAutofill="no"
-                        android:inputType="textPersonName"
+                        android:inputType="date"
                         android:textColor="@drawable/edit_text_selector"
                         android:textSize="16sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
@@ -154,9 +159,9 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Time"
+                        android:hint="@string/time"
                         android:importantForAutofill="no"
-                        android:inputType="textPersonName"
+                        android:inputType="time"
                         android:textColor="@drawable/edit_text_selector"
                         android:textSize="16sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
@@ -167,7 +172,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Court ID"
+                        android:hint="@string/courtID"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -180,7 +185,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Status"
+                        android:hint="@string/status"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -193,7 +198,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="User ID"
+                        android:hint="@string/userID"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"

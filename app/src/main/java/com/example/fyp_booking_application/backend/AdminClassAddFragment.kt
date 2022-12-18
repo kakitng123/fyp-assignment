@@ -68,7 +68,7 @@ class AdminClassAddFragment : Fragment() {
             else binding.timeContainer.helperText = null
         }
 
-        binding.btnFinishAddClass.setOnClickListener{
+        binding.imgBtnAddClass.setOnClickListener{
             val validName = binding.nameContainer.helperText == null
             val validDesc = binding.descContainer.helperText == null
             val validPrice = binding.priceContainer.helperText == null

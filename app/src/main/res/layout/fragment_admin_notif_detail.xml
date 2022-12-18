@@ -12,9 +12,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="60dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,6 +25,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -39,7 +40,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Notif. ID"
+                        android:text="@string/id"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -49,7 +50,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Title"
+                        android:text="@string/title"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -59,7 +60,7 @@
                         android:layout_height="150dp"
                         android:layout_margin="4dp"
                         android:gravity="end"
-                        android:text="Message"
+                        android:text="@string/message"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -69,7 +70,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Referral Code"
+                        android:text="@string/refCode"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -79,7 +80,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="User"
+                        android:text="@string/user"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -96,7 +97,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="ID"
+                        android:hint="@string/id"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -109,7 +110,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Title"
+                        android:hint="@string/title"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -133,7 +134,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Code"
+                        android:hint="@string/refCode"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -146,7 +147,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="User"
+                        android:hint="@string/user"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -163,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="NOTIFICATION DETAIL"
+            android:text="@string/notifDetail"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cardView2"

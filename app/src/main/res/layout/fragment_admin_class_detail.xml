@@ -25,7 +25,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="ID"
+                        android:text="@string/id"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -49,7 +50,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Name"
+                        android:text="@string/name"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -69,7 +70,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Price"
+                        android:text="@string/price"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -79,7 +80,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Date"
+                        android:text="@string/date"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -89,7 +90,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Time"
+                        android:text="@string/time"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -99,7 +100,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:gravity="center|end"
-                        android:text="Entitled Coach"
+                        android:text="@string/classCoach"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -116,7 +117,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="ID"
+                        android:hint="@string/id"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -129,7 +130,7 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Name"
+                        android:hint="@string/name"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textColor="@drawable/edit_text_selector"
@@ -168,9 +169,9 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Date"
+                        android:hint="@string/date"
                         android:importantForAutofill="no"
-                        android:inputType="textPersonName"
+                        android:inputType="date"
                         android:textColor="@drawable/edit_text_selector"
                         android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
@@ -181,9 +182,9 @@
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
                         android:enabled="false"
-                        android:hint="Time"
+                        android:hint="@string/time"
                         android:importantForAutofill="no"
-                        android:inputType="textPersonName"
+                        android:inputType="textPersonName|time"
                         android:textColor="@drawable/edit_text_selector"
                         android:textSize="14sp"
                         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
@@ -210,7 +211,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="CLASS DETAIL"
+            android:text="@string/classDetail"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/cardAdminClassDetail"
@@ -222,32 +223,34 @@
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Update"
+            android:text="@string/update"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/cardAdminClassDetail"
             app:layout_constraintEnd_toEndOf="@+id/cardAdminClassDetail"
             tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:id="@+id/imgbtnDeleteClass"
+            android:id="@+id/imgBtnDeleteClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/btn_circle"
+            android:contentDescription="@string/delete"
             app:layout_constraintEnd_toEndOf="@+id/cardAdminClassDetail"
             app:layout_constraintTop_toBottomOf="@+id/cardAdminClassDetail"
             app:srcCompat="@drawable/ic_admin_delete_white"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
-            android:id="@+id/imgbtnUpdateClass"
+            android:id="@+id/imgBtnUpdateClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@drawable/btn_circle"
-            app:layout_constraintEnd_toStartOf="@+id/imgbtnDeleteClass"
-            app:layout_constraintTop_toTopOf="@+id/imgbtnDeleteClass"
+            android:contentDescription="@string/update"
+            app:layout_constraintEnd_toStartOf="@+id/imgBtnDeleteClass"
+            app:layout_constraintTop_toTopOf="@+id/imgBtnDeleteClass"
             app:srcCompat="@drawable/ic_admin_update30"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -257,11 +260,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_admin_back"
             android:gravity="center"
-            android:text="Back"
+            android:text="@string/back"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_admin_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

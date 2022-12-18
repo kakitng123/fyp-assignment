@@ -62,7 +62,7 @@ class AdminProductDetailFragment : Fragment() {
                         binding.imgViewProductDetail.setImageBitmap(bitmap)
                     }
 
-                    binding.switchUpdate.setOnCheckedChangeListener { _, isChecked ->
+                    binding.swUpdatePDetail.setOnCheckedChangeListener { _, isChecked ->
                         binding.tfProductDetailName.isEnabled = isChecked
                         binding.tfProductDetailCate.isEnabled = isChecked
                         binding.tfProductDetailDesc.isEnabled = isChecked
@@ -89,7 +89,7 @@ class AdminProductDetailFragment : Fragment() {
                             }
                     }
 
-                    binding.imgbtnEdit.setOnClickListener {
+                    binding.imgBtnEditPDetail.setOnClickListener {
                         storageRef = FirebaseStorage.getInstance().getReference("products/product${binding.tfProductDetailName.text}")
                         storageRef.putFile(imgUri).addOnSuccessListener {
                             binding.imgViewProductDetail.setImageURI(null)
@@ -133,7 +133,7 @@ class AdminProductDetailFragment : Fragment() {
                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
-            binding.imgbtnDelete.setOnClickListener {
+            binding.imgBtnDltPDetail.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Deleting Data")
                 builder.setMessage("Delete Product Confirmation?")

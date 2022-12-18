@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminPurchaseDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +24,7 @@ class AdminPurchaseDetailFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_purchase_detail, container, false)
         databaseRef = FirebaseFirestore.getInstance()
+        val adminActivityView = (activity as AdminDashboardActivity)
 
         setFragmentResultListener("toPurchaseDetail") { _, bundle ->
             val transactID = bundle.getString("toPurchaseDetail")
@@ -39,6 +41,11 @@ class AdminPurchaseDetailFragment : Fragment() {
 
             }.addOnFailureListener { e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)}
         }
+
+        binding.tvBackPurchaseDetail.setOnClickListener{
+            adminActivityView.replaceFragment(AdminPurchaseFragment(), R.id.adminLayout)
+        }
+
         return binding.root
     }
 }

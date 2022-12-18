@@ -15,7 +15,6 @@ class BookingAdminAdapter(
 ) : RecyclerView.Adapter<BookingAdminAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val tfBookingID: TextView = itemView.findViewById(R.id.tfBookingID)
         val tfBookingDate: TextView = itemView.findViewById(R.id.tfBookingTime)
         val tfBookingTime: TextView = itemView.findViewById(R.id.tfBookingDate)
         val tfBookingStatus: TextView = itemView.findViewById(R.id.tfBookingStatus)
@@ -47,7 +46,6 @@ class BookingAdminAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = bookingList[position]
 
-        holder.tfBookingID.text = currentItem.bookingID
         holder.tfBookingDate.text = currentItem.bookingDate
         holder.tfBookingTime.text = currentItem.bookingTime
         holder.tfBookingStatus.text = currentItem.status

@@ -25,164 +25,183 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
 
-                    <TextView
-                        android:id="@+id/tvCoachDetailID"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="ID"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvCoachDetailName"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/name"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvCoachDetailID"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:gravity="center|end"
+                            android:text="@string/id"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvCoachDetailEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Email"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvCoachDetailName"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:gravity="center|end"
+                            android:text="@string/name"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvCoachDetailPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Phone"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvCoachDetailEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:gravity="center|end"
+                            android:text="@string/email"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvCoachDetailExp"
+                        <TextView
+                            android:id="@+id/tvCoachDetailPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:gravity="center|end"
+                            android:text="@string/phoneNo"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvCoachDetailExp"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:gravity="center|end"
+                            android:text="@string/exp"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/tfCoachDetailID"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:enabled="false"
+                            android:hint="@string/id"
+                            android:importantForAutofill="no"
+                            android:inputType="textPersonName"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="14sp"
+                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                        <EditText
+                            android:id="@+id/tfCoachDetailName"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:enabled="false"
+                            android:hint="@string/name"
+                            android:importantForAutofill="no"
+                            android:inputType="textPersonName"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="14sp"
+                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                        <EditText
+                            android:id="@+id/tfCoachDetailEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:enabled="false"
+                            android:hint="@string/email"
+                            android:importantForAutofill="no"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="14sp"
+                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                        <EditText
+                            android:id="@+id/tfCoachDetailPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:enabled="false"
+                            android:hint="@string/phoneNo"
+                            android:importantForAutofill="no"
+                            android:inputType="phone"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="14sp"
+                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                        <EditText
+                            android:id="@+id/tfCoachDetailExp"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_margin="4dp"
+                            android:enabled="false"
+                            android:hint="@string/exp"
+                            android:importantForAutofill="no"
+                            android:inputType="textPersonName"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="14sp"
+                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imgBtnAddClass1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Experience"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:background="@null"
+                        android:contentDescription="@string/add"
+                        app:srcCompat="@drawable/ic_admin_add_black"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                     <TextView
                         android:id="@+id/tvCoachDetailClass"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="Classes"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/trainingClass"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <ImageButton
-                        android:id="@+id/imgbtnAddClass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_margin="4dp"
-                        android:background="@null"
-                        app:srcCompat="@drawable/ic_admin_add_black"
-                        tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCoachDetailClasses"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_margin="4dp"
+                    tools:listitem="@layout/recyclerview_admin_coach_class" />
 
-                    <EditText
-                        android:id="@+id/tfCoachDetailID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="ID"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <EditText
-                        android:id="@+id/tfCoachDetailName"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="Name"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <EditText
-                        android:id="@+id/tfCoachDetailEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="Email"
-                        android:importantForAutofill="no"
-                        android:inputType="text"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <EditText
-                        android:id="@+id/tfCoachDetailPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="Phone"
-                        android:importantForAutofill="no"
-                        android:inputType="text"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <EditText
-                        android:id="@+id/tfCoachDetailExp"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="Experience"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvCoachDetailClasses"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        tools:listitem="@layout/recyclerview_admin_coach_class" />
-                </LinearLayout>
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -191,7 +210,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="COACH DETAIL"
+            android:text="@string/coachDetail"
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -204,46 +223,48 @@
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Update"
+            android:text="@string/update"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             tools:ignore="TouchTargetSizeCheck" />
 
+        <TextView
+            android:id="@+id/tvBackCoachDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/ic_admin_back" />
+
         <ImageButton
-            android:id="@+id/imgbtnDeleteCoach"
+            android:id="@+id/imgBtnDeleteCoach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/btn_circle"
+            android:contentDescription="@string/delete"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
             app:srcCompat="@drawable/ic_admin_delete_white"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/tvCoachBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_admin_back"
-            android:gravity="center"
-            android:text="Back"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageButton
-            android:id="@+id/imgbtnUpdateCoach"
+            android:id="@+id/imgBtnUpdateCoach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@drawable/btn_circle"
-            app:layout_constraintEnd_toStartOf="@+id/imgbtnDeleteCoach"
-            app:layout_constraintTop_toTopOf="@+id/imgbtnDeleteCoach"
+            android:contentDescription="@string/update"
+            app:layout_constraintEnd_toStartOf="@+id/imgBtnDeleteCoach"
+            app:layout_constraintTop_toTopOf="@+id/imgBtnDeleteCoach"
             app:srcCompat="@drawable/ic_admin_update30"
             tools:ignore="SpeakableTextPresentCheck" />
 

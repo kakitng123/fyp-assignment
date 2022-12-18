@@ -68,7 +68,7 @@ class AdminCoachAddFragment : Fragment() {
             else binding.coachPhoneContainer.helperText = null
         }
 
-        binding.btnFinishAddCoach.setOnClickListener {
+        binding.imgBtnAddCoach.setOnClickListener {
             val validName = binding.coachNameContainer.helperText == null
             val validEmail = binding.coachEmailContainer.helperText == null
             val validExp = binding.coachExpContainer.helperText == null

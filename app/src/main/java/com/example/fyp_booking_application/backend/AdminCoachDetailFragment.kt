@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
@@ -64,7 +63,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     binding.tfCoachDetailPhone.setText(coach?.coachPhone.toString())
                     binding.tfCoachDetailExp.setText(coach?.coachExp.toString())
 
-                    binding.imgbtnUpdateCoach.setOnClickListener{
+                    binding.imgBtnUpdateCoach.setOnClickListener{
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Update Coach Details")
                         builder.setMessage("Confirm to update coach details?")
@@ -90,7 +89,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
-            binding.imgbtnDeleteCoach.setOnClickListener{
+            binding.imgBtnDeleteCoach.setOnClickListener{
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Delete Coach")
                 builder.setMessage("Confirm to delete coach?")
@@ -108,11 +107,11 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
 
 
         }
-        binding.tvCoachBack.setOnClickListener{
+        binding.tvBackCoachDetail.setOnClickListener{
             adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
         }
 
-        binding.imgbtnAddClass.setOnClickListener{
+        binding.imgBtnAddClass1.setOnClickListener{
             adminActivityView.replaceFragment(AdminClassAddFragment(), R.id.adminLayout)
         }
 

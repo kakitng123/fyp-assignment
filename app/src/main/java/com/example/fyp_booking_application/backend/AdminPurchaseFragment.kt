@@ -14,7 +14,6 @@ import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.Adapters.ProductAdminAdapter
 import com.example.fyp_booking_application.backend.Adapters.PurchaseAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentAdminPurchaseBinding
 import com.google.firebase.firestore.*
@@ -32,7 +31,7 @@ class AdminPurchaseFragment : Fragment(), PurchaseAdminAdapter.OnItemClickListen
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin_purchase, container, false)
 
-        binding.btnTestAdd.setOnClickListener {
+        binding.btnTestAddPurchase.setOnClickListener {
             val newTransRef = databaseRef.collection("purchase_testing1").document()
             val newTransaction = hashMapOf(
                 "transactID" to newTransRef.id,

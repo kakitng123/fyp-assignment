@@ -20,18 +20,18 @@
                 tools:context=".backend.AdminProductAddFragment">
 
                 <TextView
-                    android:id="@+id/tvAddProductBack"
+                    android:id="@+id/tvBackAddProduct"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:drawableStart="@drawable/ic_admin_back"
                     android:gravity="center"
-                    android:text="Back"
+                    android:text="@string/back"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:drawableStartCompat="@drawable/ic_admin_back" />
 
                 <TextView
                     android:id="@+id/tvAddProduct"
@@ -39,9 +39,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="48dp"
-                    android:text="Add Product"
-                    android:textColor="#000000"
+                    android:text="@string/addProduct"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +68,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lines="1"
-                        android:maxLength="20" />
+                        android:maxLength="20"
+                        tools:ignore="TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -84,6 +85,7 @@
                     android:id="@+id/imgProduct"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
+                    android:contentDescription="@string/image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvAddPImage1"
@@ -93,7 +95,7 @@
                     android:id="@+id/tvAddPImage2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Click to Select Image"
+                    android:text="@string/selectImage"
                     app:layout_constraintEnd_toEndOf="@+id/imgProduct"
                     app:layout_constraintStart_toStartOf="@+id/imgProduct"
                     app:layout_constraintTop_toBottomOf="@+id/imgProduct" />
@@ -135,7 +137,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tfAddProductDesc"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        tools:ignore="TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -158,8 +161,9 @@
                         android:id="@+id/tfAddProductPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
                         android:maxLength="5"
-                        android:inputType="numberDecimal"/>
+                        tools:ignore="TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -182,8 +186,9 @@
                         android:id="@+id/tfAddProductQty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:maxLength="3"
-                        android:inputType="number"/>
+                        tools:ignore="TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
@@ -193,6 +198,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:background="@null"
+                    android:contentDescription="@string/add"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_admin_add_black"

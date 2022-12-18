@@ -52,7 +52,7 @@ class AdminClassDetailFragment : Fragment() {
                     binding.tfClassTime.setText(trainingClass?.classTime.toString())
                     binding.tfClassCoach.setText(trainingClass?.entitledCoach.toString())
 
-                    binding.imgbtnUpdateClass.setOnClickListener {
+                    binding.imgBtnUpdateClass.setOnClickListener {
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Update Class Details")
                         builder.setMessage("Confirm to update class details?")
@@ -78,7 +78,7 @@ class AdminClassDetailFragment : Fragment() {
                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
             }
 
-            binding.imgbtnDeleteClass.setOnClickListener {
+            binding.imgBtnDeleteClass.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Delete Class")
                 builder.setMessage("Confirm to delete class?")

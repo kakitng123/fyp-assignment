@@ -13,16 +13,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/ic_admin_back"
             android:gravity="center"
-            android:text="Back"
+            android:text="@string/back"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/ic_admin_back" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardAdminProductDetail"
+            android:id="@+id/cardAdminPDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -39,6 +39,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -51,60 +52,60 @@
                         android:id="@+id/tvProductDetailName"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:gravity="center|end"
                         android:text="@string/name"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvProductDetailImage"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:text="@string/image"
                         android:textAlignment="textEnd"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvProductDetailDesc"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:gravity="center|end"
                         android:text="@string/desc"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvProductDetailCate"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:gravity="center|end"
                         android:text="@string/category"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvProductDetailPrice"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:gravity="center|end"
                         android:text="@string/price"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvProductDetailQty"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:gravity="center|end"
                         android:text="@string/qty"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -119,21 +120,21 @@
                         android:id="@+id/tfProductDetailName"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:enabled="false"
-                        android:hint="Enter Name"
+                        android:hint="@string/name"
                         android:importantForAutofill="no"
                         android:inputType="textPersonName"
                         android:textAlignment="textStart"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:textSize="14sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <ImageView
                         android:id="@+id/imgViewProductDetail"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:contentDescription="@string/image"
                         tools:ignore="ImageContrastCheck"
                         tools:src="@tools:sample/avatars" />
@@ -142,51 +143,51 @@
                         android:id="@+id/tfProductDetailDesc"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:enabled="false"
-                        android:hint="Enter Description"
+                        android:hint="@string/desc"
                         android:importantForAutofill="no"
                         android:inputType="text"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:textSize="14sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <Spinner
                         android:id="@+id/tfProductDetailCate"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
-                        android:contentDescription="Enter Category"
+                        android:layout_margin="6dp"
+                        android:contentDescription="@string/category"
                         android:enabled="false"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:textSize="14sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <EditText
                         android:id="@+id/tfProductDetailPrice"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:enabled="false"
-                        android:hint="Enter Price"
+                        android:hint="@string/price"
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:textSize="14sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
                     <EditText
                         android:id="@+id/tfProductDetailQty"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
-                        android:layout_margin="8dp"
+                        android:layout_margin="6dp"
                         android:enabled="false"
-                        android:hint="Enter Quantity"
+                        android:hint="@string/qty"
                         android:importantForAutofill="no"
                         android:inputType="number"
                         android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:textSize="14sp"
+                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -198,26 +199,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Product Details"
-            android:textAllCaps="true"
+            android:text="@string/productDetail"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardAdminProductDetail"
-            app:layout_constraintStart_toStartOf="@+id/cardAdminProductDetail" />
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminPDetail"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminPDetail" />
 
         <ImageButton
-            android:id="@+id/imgbtnEdit"
+            android:id="@+id/imgBtnEditPDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@drawable/btn_circle"
             android:contentDescription="@string/edit"
             android:src="@drawable/ic_admin_update30"
-            app:layout_constraintEnd_toStartOf="@+id/imgbtnDelete"
-            app:layout_constraintTop_toTopOf="@+id/imgbtnDelete" />
+            app:layout_constraintEnd_toStartOf="@+id/imgBtnDltPDetail"
+            app:layout_constraintTop_toTopOf="@+id/imgBtnDltPDetail" />
 
         <ImageButton
-            android:id="@+id/imgbtnDelete"
+            android:id="@+id/imgBtnDltPDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -225,18 +225,18 @@
             android:background="@drawable/btn_circle"
             android:contentDescription="@string/delete"
             android:src="@drawable/ic_admin_delete_white"
-            app:layout_constraintEnd_toEndOf="@+id/cardAdminProductDetail"
-            app:layout_constraintTop_toBottomOf="@+id/cardAdminProductDetail" />
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminPDetail"
+            app:layout_constraintTop_toBottomOf="@+id/cardAdminPDetail" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchUpdate"
+            android:id="@+id/swUpdatePDetail"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Update"
-            app:layout_constraintBottom_toTopOf="@+id/cardAdminProductDetail"
-            app:layout_constraintEnd_toEndOf="@+id/cardAdminProductDetail"
+            android:text="@string/update"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminPDetail"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminPDetail"
             tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -130,7 +130,7 @@ class AdminProductAddFragment : Fragment() {
                     }.addOnFailureListener{ e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }
             } else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
         }
-        binding.tvAddProductBack.setOnClickListener{
+        binding.tvBackAddProduct.setOnClickListener{
             adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
         }
         return binding.root

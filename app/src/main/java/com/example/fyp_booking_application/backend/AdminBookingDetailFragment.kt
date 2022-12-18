@@ -47,7 +47,7 @@ class AdminBookingDetailFragment : Fragment() {
             }
         }
 
-        binding.button.setOnClickListener{
+        binding.tvBackBookingDetail.setOnClickListener{
             adminActivityView.replaceFragment(AdminBookingFragment(), R.id.adminLayout)
         }
 

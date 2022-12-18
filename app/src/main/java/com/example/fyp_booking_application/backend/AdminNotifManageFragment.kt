@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminNotifManageBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,7 +24,7 @@ class AdminNotifManageFragment : Fragment() {
         databaseRef = FirebaseFirestore.getInstance()
 
         // TESTING (USABLE)
-        binding.imgBtnAddNotif.setOnClickListener(){
+        binding.imgBtnAddNotif.setOnClickListener {
             val newNotifyRef = databaseRef.collection("notification_testing1").document()
             val newNotify = hashMapOf(
                 "notifyID" to newNotifyRef.id,
