@@ -31,7 +31,6 @@ class AdminPurchaseFragment : Fragment(), PurchaseAdminAdapter.OnItemClickListen
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin_purchase, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
 
         binding.btnTestAdd.setOnClickListener {
             val newTransRef = databaseRef.collection("purchase_testing1").document()
@@ -43,7 +42,8 @@ class AdminPurchaseFragment : Fragment(), PurchaseAdminAdapter.OnItemClickListen
             )
             newTransRef.set(newTransaction)
                 .addOnSuccessListener { Log.d("ADDING PRODUCT", "PRODUCT SUCCESSFULLY ADDED")
-                Toast.makeText(context, "ADDED 69", Toast.LENGTH_SHORT).show()}
+                Toast.makeText(context, "ADDED 69", Toast.LENGTH_SHORT).show()
+                /* IF ADD SUCCESS THEN DEDUCT STOCK QTY */}
                 .addOnFailureListener { e -> Log.w("ADDING PRODUCT", "ERROR ADDING PRODUCT", e) }
         }
 

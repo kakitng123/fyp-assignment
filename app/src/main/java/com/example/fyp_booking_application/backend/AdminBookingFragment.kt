@@ -80,6 +80,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
         }
     }
 
+    // Could make into one function
     private fun dataPending() {
         bookingArrayList.clear()
         databaseRef = FirebaseFirestore.getInstance()

@@ -24,15 +24,14 @@ class AdminNotifManageFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_manage, container, false)
         databaseRef = FirebaseFirestore.getInstance()
 
+        // TESTING (USABLE)
         binding.imgBtnAddNotif.setOnClickListener(){
-            // TESTING (USABLE)
             val newNotifyRef = databaseRef.collection("notification_testing1").document()
             val newNotify = hashMapOf(
                 "notifyID" to newNotifyRef.id,
-                "userID" to "HKzMy78ARMLHghaN6dEk", // GET USER ID
-                "notifyTitle" to "PROMOTIONS!",
-                "notifyMessage" to "YOUR PAYMENT FOR BOOKING ID:SHDUSHUDHSUHDSU IS STILL PENDING, " +
-                        "PLEASE PROCEED TO XXX PAGE TO CONTINUE PAYMENT!",
+                "userID" to "HKzMy78ARMLHghaN6dEk", // GET USER ID (Do Spinner or checkbox to all Opt-in Notif)
+                "notifyTitle" to binding.tfAddNotifTitle.text.toString(),
+                "notifyMessage" to binding.tfAddNotifMsg.text.toString(),
                 "referralCode" to "R100001" // NEED TO GENERATE
             )
             newNotifyRef.set(newNotify).addOnSuccessListener {

@@ -72,6 +72,12 @@ data class PurchaseData (
     val transactAmt: Double = 0.0 // ProductPrice*QTY
 )
 
+data class UserData2 (
+    val username: String ?= null,
+    val email: String ?= null,
+    val password: String ?= null,
+    val userType: String ?= null
+)
 
 
 
