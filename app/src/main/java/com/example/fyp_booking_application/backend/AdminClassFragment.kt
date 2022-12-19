@@ -29,6 +29,8 @@ class AdminClassFragment : Fragment(), ClassAdminAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class, container, false)
+        val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("CLASS MANAGEMENT")
 
         dataInitialize()
         binding.classRecyclerView.apply {

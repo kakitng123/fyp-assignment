@@ -24,6 +24,7 @@ class AdminBookingDetailFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_booking_detail, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("BOOKING DETAIL")
 
         setFragmentResultListener("toAdminBookingDetails") {_, bundle ->
             val bookingID = bundle.getString("toAdminBookingDetails")
@@ -34,12 +35,12 @@ class AdminBookingDetailFragment : Fragment() {
                 if(document != null){
                     val booking = document.toObject(BookingDataTesting::class.java)
 
-                    binding.tfBDetailID.setText(booking?.bookingID.toString())
-                    binding.tfBDetailDate.setText(booking?.bookingDate.toString())
-                    binding.tfBDetailTime.setText(booking?.bookingTime.toString())
-                    binding.tfBDetailCourt.setText(booking?.courtID.toString())
-                    binding.tfBDetailStatus.setText(booking?.status.toString())
-                    binding.tfBDetailUser.setText(booking?.userID.toString())
+                    binding.bookingIDField.setText(booking?.bookingID.toString())
+                    binding.bookingDateField.setText(booking?.bookingDate.toString())
+                    binding.bookingTimeField.setText(booking?.bookingTime.toString())
+                    binding.bookingCourtIDField.setText(booking?.courtID.toString())
+                    binding.bookingStatusField.setText(booking?.status.toString())
+                    binding.bookingUserIDField.setText(booking?.userID.toString())
                 }
                 else Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
             }.addOnFailureListener { e ->

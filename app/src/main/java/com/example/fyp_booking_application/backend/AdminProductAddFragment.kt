@@ -33,6 +33,7 @@ class AdminProductAddFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product_add, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("ADD PRODUCT")
 
         binding.tfAddProductName.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddProductName.text!!.isEmpty()){
@@ -82,7 +83,7 @@ class AdminProductAddFragment : Fragment() {
             else binding.pQtyContainer.helperText = null
         }
 
-        binding.btnFinishAddProduct.setOnClickListener {
+        binding.imgBtnAddProduct.setOnClickListener {
             val validName = binding.pNameContainer.helperText == null
             val validDesc = binding.pDescContainer.helperText == null
             val validPrice = binding.pPriceContainer.helperText == null

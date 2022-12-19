@@ -13,7 +13,6 @@ import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.Adapters.PurchaseAdminAdapter
 import com.example.fyp_booking_application.backend.Adapters.UserAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentAdminUserBinding
 import com.google.firebase.firestore.*
@@ -30,6 +29,8 @@ class AdminUserFragment : Fragment(), UserAdminAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_user, container, false)
+        val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("USER MANAGEMENT")
 
         dataInitialize()
         binding.userRecyclerView.apply{

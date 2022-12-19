@@ -7,252 +7,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="80dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvCoachDetailID"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:gravity="center|end"
-                            android:text="@string/id"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvCoachDetailName"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:gravity="center|end"
-                            android:text="@string/name"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvCoachDetailEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:gravity="center|end"
-                            android:text="@string/email"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvCoachDetailPhone"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:gravity="center|end"
-                            android:text="@string/phoneNo"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvCoachDetailExp"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:gravity="center|end"
-                            android:text="@string/exp"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/tfCoachDetailID"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:enabled="false"
-                            android:hint="@string/id"
-                            android:importantForAutofill="no"
-                            android:inputType="textPersonName"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="14sp"
-                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                        <EditText
-                            android:id="@+id/tfCoachDetailName"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:enabled="false"
-                            android:hint="@string/name"
-                            android:importantForAutofill="no"
-                            android:inputType="textPersonName"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="14sp"
-                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                        <EditText
-                            android:id="@+id/tfCoachDetailEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:enabled="false"
-                            android:hint="@string/email"
-                            android:importantForAutofill="no"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="14sp"
-                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                        <EditText
-                            android:id="@+id/tfCoachDetailPhone"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:enabled="false"
-                            android:hint="@string/phoneNo"
-                            android:importantForAutofill="no"
-                            android:inputType="phone"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="14sp"
-                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                        <EditText
-                            android:id="@+id/tfCoachDetailExp"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:layout_margin="4dp"
-                            android:enabled="false"
-                            android:hint="@string/exp"
-                            android:importantForAutofill="no"
-                            android:inputType="textPersonName"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="14sp"
-                            tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/imgBtnAddClass1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:background="@null"
-                        android:contentDescription="@string/add"
-                        app:srcCompat="@drawable/ic_admin_add_black"
-                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-                    <TextView
-                        android:id="@+id/tvCoachDetailClass"
-                        android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:gravity="center|start"
-                        android:text="@string/trainingClass"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvCoachDetailClasses"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    tools:listitem="@layout/recyclerview_admin_coach_class" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/tvCoachDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/coachDetail"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
-            app:layout_constraintStart_toStartOf="@+id/cardView" />
-
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/swUpdateCoach"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/update"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
-            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminCoachDetail"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminCoachDetail"
             tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/tvBackCoachDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/back"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:drawableStartCompat="@drawable/ic_admin_back" />
+            app:drawableStartCompat="@drawable/ic_admin_back"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminCoachDetail"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminCoachDetail" />
 
         <ImageButton
             android:id="@+id/imgBtnDeleteCoach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/btn_circle"
             android:contentDescription="@string/delete"
-            app:layout_constraintEnd_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminCoachDetail"
+            app:layout_constraintTop_toBottomOf="@+id/cardAdminCoachDetail"
             app:srcCompat="@drawable/ic_admin_delete_white"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -267,6 +56,192 @@
             app:layout_constraintTop_toTopOf="@+id/imgBtnDeleteCoach"
             app:srcCompat="@drawable/ic_admin_update30"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAdminCoachDetail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="65dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/coachIDContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/id"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/coachIDField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/coachNameContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/name"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/coachNameField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="textPersonName"
+                            android:lines="1"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/coachEmailContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/desc"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/coachEmailField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="text"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/coachPhoneNoContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/price"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/coachPhoneNoField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="numberDecimal"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/coachExpContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/date"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/coachExpField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="date"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imgBtnAddCoachClass"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:contentDescription="@string/image"
+                            app:srcCompat="@drawable/ic_admin_add_black"
+                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                        <TextView
+                            android:id="@+id/tvCoachClass"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:gravity="center|start"
+                            android:text="@string/trainingClass"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/coachClassRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        tools:listitem="@layout/recyclerview_admin_coach_class">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

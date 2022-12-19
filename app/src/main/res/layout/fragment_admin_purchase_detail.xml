@@ -8,162 +8,138 @@
         tools:context=".backend.AdminPurchaseDetailFragment">
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardAdminPurchaseDetail"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="60dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvTransactID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/id"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvTransactProductID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/name"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvTransactProductQty"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/qty"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvTransactAmt"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/amount"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/tfTransactID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="@string/id"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <EditText
-                        android:id="@+id/tfTransactProductID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="@string/name"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <EditText
-                        android:id="@+id/tfTransactProductQty"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="@string/qty"
-                        android:importantForAutofill="no"
-                        android:inputType="text"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                    <EditText
-                        android:id="@+id/tfTransactAmt"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:hint="@string/amount"
-                        android:importantForAutofill="no"
-                        android:inputType="text"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/tvPurchaseDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/purchaseDetail"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardAdminPurchaseDetail"
-            app:layout_constraintStart_toStartOf="@+id/cardAdminPurchaseDetail" />
-
         <TextView
             android:id="@+id/tvBackPurchaseDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/back"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="16sp"
             android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_admin_back"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminPurchaseDetail"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminPurchaseDetail" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAdminPurchaseDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="65dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/purchaseIDContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/id"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/purchaseIDField"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:enabled="false"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/purchasePNameContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/name"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/purchasePNameField"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:enabled="false"
+                        android:inputType="textPersonName"
+                        android:lines="1"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/purchasePQtyContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/desc"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/purchasePQtyField"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:enabled="false"
+                        android:inputType="text"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/purchaseAmountContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/price"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/purchaseAmtField"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -26,6 +26,7 @@ class AdminClassDetailFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class_detail, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("CLASS DETAIL")
 
         setFragmentResultListener("toClassDetails") { _, bundle ->
             val classID = bundle.getString("toClassDetails")
@@ -37,20 +38,22 @@ class AdminClassDetailFragment : Fragment() {
                     val trainingClass = document.toObject(ClassData2::class.java)
 
                     binding.swUpdateClass.setOnCheckedChangeListener { _, isChecked ->
-                        binding.tfClassName.isEnabled = isChecked
-                        binding.tfClassDesc.isEnabled = isChecked
-                        binding.tfClassPrice.isEnabled = isChecked
-                        binding.tfClassDate.isEnabled = isChecked
-                        binding.tfClassTime.isEnabled = isChecked
+                        binding.classNameField.isEnabled = isChecked
+                        binding.classDescField.isEnabled = isChecked
+                        binding.classPriceField.isEnabled = isChecked
+                        binding.classDateField.isEnabled = isChecked
+                        binding.classTimeField.isEnabled = isChecked
                     }
 
-                    binding.tfClassID.setText(trainingClass?.classID.toString())
-                    binding.tfClassName.setText(trainingClass?.className.toString())
-                    binding.tfClassDesc.setText(trainingClass?.classDesc.toString())
-                    binding.tfClassPrice.setText(trainingClass?.classPrice.toString())
-                    binding.tfClassDate.setText(trainingClass?.classDate.toString())
-                    binding.tfClassTime.setText(trainingClass?.classTime.toString())
-                    binding.tfClassCoach.setText(trainingClass?.entitledCoach.toString())
+                    binding.classIDField.setText(trainingClass?.classID.toString())
+                    binding.classNameField.setText(trainingClass?.className.toString())
+                    binding.classDescField.setText(trainingClass?.classDesc.toString())
+                    binding.classPriceField.setText(trainingClass?.classPrice.toString())
+                    binding.classDateField.setText(trainingClass?.classDate.toString())
+                    binding.classTimeField.setText(trainingClass?.classTime.toString())
+                    binding.classCoachField.setText(trainingClass?.entitledCoach.toString())
+
+                    // CAN DO VALIDATION HERE LIKE ADD CLASS
 
                     binding.imgBtnUpdateClass.setOnClickListener {
                         val builder = AlertDialog.Builder(requireContext())
@@ -58,11 +61,11 @@ class AdminClassDetailFragment : Fragment() {
                         builder.setMessage("Confirm to update class details?")
                         builder.setPositiveButton("Update"){ _, _ ->
                             val updateClass = hashMapOf(
-                                "className" to binding.tfClassName.text.toString(),
-                                "classDesc" to binding.tfClassDesc.text.toString(),
-                                "classPrice" to binding.tfClassPrice.text.toString().toDouble(),
-                                "classDate" to binding.tfClassDate.text.toString(), // ClassDate can use Calendar
-                                "classTime" to binding.tfClassTime.text.toString() // ClassTime can use Spinner
+                                "className" to binding.classNameField.text.toString(),
+                                "classDesc" to binding.classDescField.text.toString(),
+                                "classPrice" to binding.classPriceField.text.toString().toDouble(),
+                                "classDate" to binding.classDateField.text.toString(), // ClassDate can use Calendar
+                                "classTime" to binding.classTimeField.text.toString() // ClassTime can use Spinner
                             )
                             docRef.set(updateClass, SetOptions.merge())
                                 .addOnSuccessListener { Log.d("UPDATE CLASS","CLASS DETAIL UPDATED SUCCESSFULLY" ) }

@@ -30,6 +30,8 @@ class AdminPurchaseFragment : Fragment(), PurchaseAdminAdapter.OnItemClickListen
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin_purchase, container, false)
+        val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("PURCHASE MANAGEMENT")
 
         binding.btnTestAddPurchase.setOnClickListener {
             val newTransRef = databaseRef.collection("purchase_testing1").document()

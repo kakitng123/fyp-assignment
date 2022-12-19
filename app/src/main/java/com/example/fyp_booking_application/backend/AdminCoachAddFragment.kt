@@ -25,6 +25,7 @@ class AdminCoachAddFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_coach_add, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("ADD COACH")
         databaseRef = FirebaseFirestore.getInstance()
 
         // Input Validations

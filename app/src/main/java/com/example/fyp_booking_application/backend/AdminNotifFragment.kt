@@ -20,6 +20,7 @@ class AdminNotifFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("NOTIF MANAGEMENT")
 
         adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
 

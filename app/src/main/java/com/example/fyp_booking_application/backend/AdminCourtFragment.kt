@@ -40,6 +40,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_court, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("COURT MANAGEMENT")
 
         dataInitialize()
         binding.courtRecyclerView.apply {

@@ -39,6 +39,7 @@ class AdminProductDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product_details, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("PRODUCT DETAIL")
 
         setFragmentResultListener("toProductDetails") { _, bundle ->
             val productID = bundle.getString("toProductDetails")

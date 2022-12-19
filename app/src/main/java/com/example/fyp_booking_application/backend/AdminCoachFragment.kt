@@ -34,6 +34,7 @@ class AdminCoachFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_coach, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("COACH MANAGEMENT")
 
         dataInitialize()
         binding.coachRecyclerView.apply {

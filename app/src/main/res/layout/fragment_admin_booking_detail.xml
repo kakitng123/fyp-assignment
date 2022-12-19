@@ -11,202 +11,187 @@
             android:id="@+id/tvBackBookingDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="@string/back"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="16sp"
             android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_admin_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvBookingDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/bookingDetail"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardView3"
-            app:layout_constraintStart_toStartOf="@+id/cardView3" />
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminBookingDetail"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminBookingDetail" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
+            android:id="@+id/cardAdminBookingDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="60dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="65dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvBDetailID"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bookingIDContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/id"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvBDetailDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/date"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvBDetailTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/time"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvBDetailCourt"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/courtID"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvBDetailStatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/status"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvBDetailUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/userID"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/tfBDetailID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/id"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <EditText
-                        android:id="@+id/tfBDetailDate"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookingIDField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bookingDateContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/date"
-                        android:importantForAutofill="no"
-                        android:inputType="date"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <EditText
-                        android:id="@+id/tfBDetailTime"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookingDateField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="textPersonName"
+                            android:lines="1"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bookingTimeContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/time"
-                        android:importantForAutofill="no"
-                        android:inputType="time"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <EditText
-                        android:id="@+id/tfBDetailCourt"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookingTimeField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="text"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bookingCourtIDContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/courtID"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <EditText
-                        android:id="@+id/tfBDetailStatus"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookingCourtIDField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="numberDecimal"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bookingStatusContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/status"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <EditText
-                        android:id="@+id/tfBDetailUser"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookingStatusField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="date"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/bookingUserIDContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/userID"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-                </LinearLayout>
-            </LinearLayout>
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/bookingUserIDField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="time"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

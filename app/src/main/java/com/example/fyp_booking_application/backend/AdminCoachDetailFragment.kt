@@ -32,6 +32,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_coach_detail, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("COACH DETAIL")
 
         setFragmentResultListener("toCoachDetails"){ _, bundle ->
             val coachID = bundle.getString("toCoachDetails")
@@ -42,7 +43,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     val coach = document.toObject(CoachData::class.java)
 
                     dataInitialize(coach?.coachName.toString())
-                    binding.rvCoachDetailClasses.apply{
+                    binding.coachClassRecyclerView.apply{
                         layoutManager = LinearLayoutManager(context)
                         setHasFixedSize(true)
                         coachClassList = arrayListOf()
@@ -51,17 +52,17 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     }
 
                     binding.swUpdateCoach.setOnCheckedChangeListener{ _, isChecked ->
-                        binding.tfCoachDetailName.isEnabled = isChecked
-                        binding.tfCoachDetailEmail.isEnabled = isChecked
-                        binding.tfCoachDetailPhone.isEnabled = isChecked
-                        binding.tfCoachDetailExp.isEnabled = isChecked
+                        binding.coachNameField.isEnabled = isChecked
+                        binding.coachEmailField.isEnabled = isChecked
+                        binding.coachPhoneNoField.isEnabled = isChecked
+                        binding.coachExpField.isEnabled = isChecked
                     }
 
-                    binding.tfCoachDetailID.setText(coach?.coachID.toString())
-                    binding.tfCoachDetailName.setText(coach?.coachName.toString())
-                    binding.tfCoachDetailEmail.setText(coach?.coachEmail.toString())
-                    binding.tfCoachDetailPhone.setText(coach?.coachPhone.toString())
-                    binding.tfCoachDetailExp.setText(coach?.coachExp.toString())
+                    binding.coachIDField.setText(coach?.coachID.toString())
+                    binding.coachNameField.setText(coach?.coachName.toString())
+                    binding.coachEmailField.setText(coach?.coachEmail.toString())
+                    binding.coachPhoneNoField.setText(coach?.coachPhone.toString())
+                    binding.coachExpField.setText(coach?.coachExp.toString())
 
                     binding.imgBtnUpdateCoach.setOnClickListener{
                         val builder = AlertDialog.Builder(requireContext())
@@ -69,10 +70,10 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                         builder.setMessage("Confirm to update coach details?")
                         builder.setPositiveButton("Update"){ _, _ ->
                             val updateCoach = hashMapOf(
-                                "coachName" to binding.tfCoachDetailName.text.toString(),
-                                "coachEmail" to binding.tfCoachDetailEmail.text.toString(),
-                                "coachExp" to binding.tfCoachDetailExp.text.toString(),
-                                "coachPhone" to binding.tfCoachDetailPhone.text.toString()
+                                "coachName" to binding.coachNameField.text.toString(),
+                                "coachEmail" to binding.coachEmailField.text.toString(),
+                                "coachExp" to binding.coachPhoneNoField.text.toString(),
+                                "coachPhone" to binding.coachExpField.text.toString()
                             )
                             docRef.set(updateCoach, SetOptions.merge())
                                 .addOnSuccessListener { Log.d("UPDATE COACH","COACH DETAIL UPDATED SUCCESSFULLY" ) }
@@ -111,7 +112,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
             adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
         }
 
-        binding.imgBtnAddClass1.setOnClickListener{
+        binding.imgBtnAddCoachClass.setOnClickListener{
             adminActivityView.replaceFragment(AdminClassAddFragment(), R.id.adminLayout)
         }
 

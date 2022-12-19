@@ -7,168 +7,168 @@
         android:layout_height="match_parent"
         tools:context=".backend.AdminNotifDetailFragment">
 
+        <TextView
+            android:id="@+id/tvBackNotifDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_admin_back"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminNotifDetail"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminNotifDetail" />
+
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/cardAdminNotifDetail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="60dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="65dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvNotifID"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/notifIDContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/id"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvNotifTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/title"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvNotifMsg"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_margin="4dp"
-                        android:gravity="end"
-                        android:text="@string/message"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvNotifCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/refCode"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvNotifUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:gravity="center|end"
-                        android:text="@string/user"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:id="@+id/tfNotifID"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/id"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <EditText
-                        android:id="@+id/tfNotifTitle"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/notifIDField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/notifTitleContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/title"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <TextView
-                        android:id="@+id/tfNotifMsg"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
-                        android:importantForAutofill="no"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/notifTitleField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="textPersonName"
+                            android:lines="1"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/tfNotifCode"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/notifMsgContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/message"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/notifMsgField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="text"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/notifRefCodeContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/refCode"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
 
-                    <EditText
-                        android:id="@+id/tfNotifUser"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/notifRefCodeField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="numberDecimal"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/notifUserIDContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_margin="4dp"
-                        android:enabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
                         android:hint="@string/user"
-                        android:importantForAutofill="no"
-                        android:inputType="textPersonName"
-                        android:textColor="@drawable/edit_text_selector"
-                        android:textSize="14sp"
-                        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/notifUserField"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:enabled="false"
+                            android:inputType="date"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
                 </LinearLayout>
-
-            </LinearLayout>
+            </ScrollView>
         </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/tvNotifDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/notifDetail"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardView2"
-            app:layout_constraintStart_toStartOf="@+id/cardView2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

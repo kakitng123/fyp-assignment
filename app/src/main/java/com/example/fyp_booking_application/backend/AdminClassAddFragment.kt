@@ -24,6 +24,7 @@ class AdminClassAddFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class_add, container, false)
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("ADD CLASS")
         databaseRef = FirebaseFirestore.getInstance()
 
         // Input Validations

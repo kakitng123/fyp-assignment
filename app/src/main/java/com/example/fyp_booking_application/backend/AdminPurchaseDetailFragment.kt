@@ -25,6 +25,7 @@ class AdminPurchaseDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_purchase_detail, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("PURCHASE DETAIL")
 
         setFragmentResultListener("toPurchaseDetail") { _, bundle ->
             val transactID = bundle.getString("toPurchaseDetail")
@@ -33,10 +34,10 @@ class AdminPurchaseDetailFragment : Fragment() {
                 if(document != null){
                     val transact = document.toObject(PurchaseData::class.java)
 
-                    binding.tfTransactID.setText(transact?.transactID.toString())
-                    binding.tfTransactProductID.setText(transact?.productName.toString())
-                    binding.tfTransactProductQty.setText(transact?.productQty.toString())
-                    binding.tfTransactAmt.setText(transact?.transactAmt.toString())
+                    binding.purchaseIDField.setText(transact?.transactID.toString())
+                    binding.purchasePNameField.setText(transact?.productName.toString())
+                    binding.purchasePQtyField.setText(transact?.productQty.toString())
+                    binding.purchaseAmtField.setText(transact?.transactAmt.toString())
                 }
 
             }.addOnFailureListener { e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)}

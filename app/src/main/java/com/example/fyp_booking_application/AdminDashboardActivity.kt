@@ -65,4 +65,8 @@ class AdminDashboardActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
+
+    internal fun setTitle(title: String){
+        supportActionBar?.title = title
+    }
 }

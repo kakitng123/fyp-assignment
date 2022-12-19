@@ -35,6 +35,7 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product, container, false)
         productArrayList = arrayListOf()
         val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("PRODUCT MANAGEMENT")
 
         binding.btnAddProduct.setOnClickListener{
             adminActivityView.replaceFragment(AdminProductAddFragment(), R.id.adminLayout)

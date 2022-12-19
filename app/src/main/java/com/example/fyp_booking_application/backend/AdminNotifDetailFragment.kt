@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminNotifDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,6 +23,8 @@ class AdminNotifDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_detail, container, false)
+        val adminActivityView = (activity as AdminDashboardActivity)
+        adminActivityView.setTitle("NOTIFICATION DETAIL")
         databaseRef = FirebaseFirestore.getInstance()
 
         setFragmentResultListener("toNotifDetails") { _, bundle ->
@@ -33,11 +36,11 @@ class AdminNotifDetailFragment : Fragment() {
                     val testing = document.toObject(NotificationData::class.java)
 
                     // Set Text for EditText
-                    binding.tfNotifID.setText(testing?.notifyID.toString())
-                    binding.tfNotifTitle.setText(testing?.notifyTitle.toString())
-                    binding.tfNotifMsg.text = testing?.notifyMessage.toString()
-                    binding.tfNotifCode.setText(testing?.referralCode.toString())
-                    binding.tfNotifUser.setText(testing?.userID.toString()) // Get Name instead of UserID
+                    binding.notifIDField.setText(testing?.notifyID.toString())
+                    binding.notifTitleField.setText(testing?.notifyTitle.toString())
+                    binding.notifMsgField.setText(testing?.notifyMessage.toString())
+                    binding.notifRefCodeField.setText(testing?.referralCode.toString())
+                    binding.notifUserField.setText(testing?.userID.toString()) // Get Name instead of UserID
                 }
                 else
                     Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
