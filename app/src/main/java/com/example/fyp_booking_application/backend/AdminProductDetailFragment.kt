@@ -105,7 +105,7 @@ class AdminProductDetailFragment : Fragment() {
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Update Product Details")
                         builder.setMessage("Confirm to update product details?")
-                        builder.setPositiveButton("Ok") { _, _ ->
+                        builder.setPositiveButton("Update") { _, _ ->
                             if(binding.tfProductDetailName.text != null &&  binding.tfProductDetailDesc.text != null
                                 && binding.tfProductDetailPrice.text != null && binding.tfProductDetailQty.text != null){
                                 val updateProduct = hashMapOf(
@@ -138,7 +138,7 @@ class AdminProductDetailFragment : Fragment() {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Deleting Data")
                 builder.setMessage("Delete Product Confirmation?")
-                builder.setPositiveButton("Ok") { _, _ ->
+                builder.setPositiveButton("Delete") { _, _ ->
                     docRef.get().addOnSuccessListener { document ->
                         val imagePath = document["product_image"].toString()
                         storageRef.child(imagePath).delete()

@@ -46,6 +46,9 @@ class AdminNotifDetailFragment : Fragment() {
                     Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
             }
         }
+        binding.tvBackNotifDetail.setOnClickListener {
+            adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
+        }
 
         return binding.root
     }
