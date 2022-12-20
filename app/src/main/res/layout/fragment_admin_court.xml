@@ -8,6 +8,14 @@
         android:layout_height="match_parent"
         tools:context=".backend.AdminCourtFragment">
 
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageButton
             android:id="@+id/imgBtnAddCourt"
             android:layout_width="wrap_content"

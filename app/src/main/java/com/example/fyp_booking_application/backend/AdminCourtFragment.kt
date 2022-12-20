@@ -28,10 +28,9 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentAdminCourtBinding
     private lateinit var databaseRef: FirebaseFirestore
-    private lateinit var courtList : ArrayList<CourtData>
-    private lateinit var timeslotList : ArrayList<CourtTimeslots>
+    private lateinit var courtList: ArrayList<TestCourtData>
+    private lateinit var timeslotList: ArrayList<TestCourtData2>
     private lateinit var courtManageAdapter : CourtAdminAdapter
-    private lateinit var timeslotAdapter : TimeslotAdminAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,16 +89,39 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
             builder.setNegativeButton("Cancel"){ _, _ -> }
             builder.show()
         }
+
         binding.imgBtnRefreshCourt.setOnClickListener{
             adminActivityView.replaceFragment(AdminCourtFragment(), R.id.adminLayout)
         }
+
+
         return binding.root
     }
 
     override fun onItemClick(position: Int) {
+        timeslotList = arrayListOf()
+        databaseRef = FirebaseFirestore.getInstance()
         val currentItem = courtList[position]
 
-        displayTimeslots(currentItem, position)
+        binding.tvTesting.visibility = View.VISIBLE
+        //binding.tvTesting.text = currentItem.courtSlots!!["Slots1"]
+
+        val docRef = databaseRef.collection("court_testing2").document(currentItem.courtID.toString())
+        docRef.get().addOnSuccessListener(){ document ->
+            val court = document.toObject(TestCourtData::class.java)
+            val timeslot = court?.courtSlots
+
+            binding.tvTesting.text = timeslot!!["Slots1"].toString()
+
+
+        }.addOnFailureListener(){
+
+        }
+
+
+
+        /*
+        // displayTimeslots(currentItem, position)
 
         val ss = SpannableString("Click Here to Add Timeslot")
         val clickableSpan: ClickableSpan = object : ClickableSpan() {
@@ -129,9 +151,10 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         ss.setSpan(clickableSpan, 6, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvTesting.text = ss
         binding.tvTesting.movementMethod = LinkMovementMethod.getInstance()
-
+    */
     }
 
+    // Done
     override fun onButtonClick(position: Int) {
         val currentItem = courtList[position]
         databaseRef = FirebaseFirestore.getInstance()
@@ -151,10 +174,10 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         builder.show()
     }
 
-
+    // Done
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("court_testing2") //.whereEqualTo("courtName", "A1")
+        databaseRef.collection("court_testing2")
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -164,7 +187,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                     }
                     for (dc : DocumentChange in value?.documentChanges!! ){
                         if( dc.type ==  DocumentChange.Type.ADDED){
-                            courtList.add(dc.document.toObject(CourtData::class.java))
+                            courtList.add(dc.document.toObject(TestCourtData::class.java))
                         }
                     }
                     courtManageAdapter.notifyDataSetChanged()
@@ -172,6 +195,9 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
             })
     }
 
+    private fun getData(courtID: String){}
+
+    /*
     private fun addData(number: Int, increment: Int, document_id:String){
         val nestedData = hashMapOf(
             "availability" to true,
@@ -181,19 +207,45 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         testing1.update("courtSlots", FieldValue.arrayUnion(nestedData))
     }
 
-    private fun displayTimeslots(currentItem: CourtData, position: Int){
-        timeslotList = arrayListOf()
+     */
 
-        val timeslotSize = (courtList[position].courtSlots!!.size)-1
-        if (timeslotSize < 0){
-            timeslotList.clear()
+    /*
+        binding.btn.setOnClickListener {
+            val courtRef = databaseRef.collection("court_testing2").document("30k3ryu3q0FLZ1rfjdt5")
+            val newCourtData = hashMapOf(
+                "courtID" to "30k3ryu3q0FLZ1rfjdt5",
+                "courtName" to "A13",
+                "courtSlots" to hashMapOf(
+                    "Slots2" to hashMapOf(
+                        "timeslot" to "14:00 - 15:00",
+                        "availability" to true
+                    )
+                )
+            )
+
+            courtRef.set(newCourtData, SetOptions.merge()).addOnSuccessListener {
+                Log.d("ADD TIMESLOT", "KEKW SUCCESSSSFFFFFULLLLLLL")
+            }.addOnFailureListener { e ->
+                Log.e("ADD TIMESLOT", "IDK LA DIU LEI", e)
+            }
+        }
+
+         */
+
+    /*
+    private fun displayTimeslots(currentItem: TestCourtData, position: Int){
+        if(currentItem.courtSlots?.size == 0){
             Toast.makeText(context, "NO TIME SLOTS", Toast.LENGTH_SHORT).show()
             binding.tvTesting.visibility = View.VISIBLE
         }
         else {
             binding.tvTesting.visibility = View.INVISIBLE
+            timeslotList.add()
+        }
+        else {
+            binding.tvTesting.visibility = View.INVISIBLE
             for (i in 0..timeslotSize){
-                timeslotList.add(currentItem.courtSlots!![i])
+                timeslotList.add(currentItem.courtSlots)
             }
         }
         binding.timeslotRecyclerView.apply {
@@ -203,4 +255,6 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
             adapter = timeslotAdapter
         }
     }
+
+     */
 }

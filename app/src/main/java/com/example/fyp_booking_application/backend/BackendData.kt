@@ -80,6 +80,18 @@ data class UserData2 (
     val userType: String ?= null
 )
 
+data class TestCourtData (
+    val courtID: String ?= null,
+    val courtName: String ?= null,
+    val courtSlots: HashMap<String, Any> ?= null
+)
+
+data class TestCourtData2 (
+    val timeslot: String ?= null,
+    val availability: Boolean ?= null
+)
+
+
 
 
 

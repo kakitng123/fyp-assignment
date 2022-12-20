@@ -96,7 +96,7 @@ class AdminCoachAddFragment : Fragment() {
                             newCoachRef.set(newCoach)
                                 .addOnSuccessListener {
                                     Log.d("ADDING NEW COACH", "COACH ADDED SUCCESSFULLY")
-                                    adminActivityView.replaceFragment(AdminCoachFragment(),R.id.adminLayout)
+                                    adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
                                 }
                                 .addOnFailureListener { e -> Log.e("ADDING NEW COACH", "ERROR ADDING NEW COACH", e)}
                         } else Toast.makeText(context, "EXISTING CLASS NAME", Toast.LENGTH_SHORT).show()

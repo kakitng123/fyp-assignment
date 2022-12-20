@@ -9,9 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.CourtData
+import com.example.fyp_booking_application.backend.TestCourtData
 
 class CourtAdminAdapter(
-    private val courtList: ArrayList<CourtData>,
+    private val courtList: ArrayList<TestCourtData>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<CourtAdminAdapter.MyViewHolder>() {
 
