@@ -16,7 +16,7 @@ class UserDashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_dashboard)
 
-        loadFragment(UserHomeFragment()) ////
+        loadFragment(BookingCourtFragment()) ////
         val bottomNav = findViewById<BottomNavigationView>(R.id.userBottomNav)
         bottomNav.setOnNavigationItemSelectedListener() { it ->
             when(it.itemId) {

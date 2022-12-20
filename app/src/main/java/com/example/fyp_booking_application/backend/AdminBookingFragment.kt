@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
@@ -77,6 +78,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
         )
         newNotifyRef.set(newNotify).addOnSuccessListener {
             Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
+            Toast.makeText(context, "Notification Sent", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { e ->
             Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
         }

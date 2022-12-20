@@ -7,10 +7,10 @@
         android:title="@string/all" />
     <item
         android:id="@+id/product_racket"
-        android:title="@string/rackets" />
+        android:title="@string/racket" />
     <item
         android:id="@+id/product_acc"
-        android:title="@string/accs" />
+        android:title="@string/acc" />
     <item
         android:id="@+id/product_etc"
         android:title="@string/etc" />

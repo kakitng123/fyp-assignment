@@ -48,7 +48,7 @@ class AdminUserFragment : Fragment(), UserAdminAdapter.OnItemClickListener {
         val currentItem = userList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
         adminActivityView.replaceFragment(AdminUserDetailFragment(), R.id.adminLayout)
-        setFragmentResult("toUserDetail", bundleOf("toUserDetail" to currentItem.username))
+        setFragmentResult("toUserDetail", bundleOf("toUserDetail" to currentItem.userID))
     }
 
     private fun dataInitialize(){

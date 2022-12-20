@@ -22,7 +22,6 @@ class BookingAdminAdapter(
 
         init {
             itemView.setOnClickListener(this)
-            btnSendNotif.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
@@ -51,6 +50,9 @@ class BookingAdminAdapter(
         holder.tfBookingStatus.text = currentItem.status
         if(currentItem.status == "Pending"){ holder.btnSendNotif.visibility = View.VISIBLE }
         else holder.btnSendNotif.visibility = View.GONE
+        holder.btnSendNotif.setOnClickListener{
+            listener.onButtonClick(position)
+        }
     }
 
     override fun getItemCount(): Int {

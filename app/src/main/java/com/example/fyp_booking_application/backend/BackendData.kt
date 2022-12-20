@@ -73,6 +73,7 @@ data class PurchaseData (
 )
 
 data class UserData2 (
+    val userID: String ?= null,
     val username: String ?= null,
     val email: String ?= null,
     val password: String ?= null,

@@ -62,7 +62,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/productLayout"
-            app:menu="@menu/product_nav">
+            app:menu="@menu/nav_admin_product">
 
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
