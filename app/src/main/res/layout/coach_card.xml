@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".frontend.CoachDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +45,7 @@
                 android:src="@drawable/smashlogo" />
 
             <TextView
-                android:id="@+id/tvCoachName"
+                android:id="@+id/tvUserProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -62,7 +60,7 @@
                 android:id="@+id/tvCoachID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvCoachName"
+                android:layout_below="@id/tvUserProductName"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/tvCoachImage"

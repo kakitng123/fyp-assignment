@@ -6,7 +6,6 @@
         android:layout_height="match_parent"
         tools:context=".frontend.UserHomeFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +18,6 @@
             android:horizontalSpacing="1dp"
             android:numColumns="2"
             android:rowCount="2"></GridView>
-
     </FrameLayout>
 </layout>
 

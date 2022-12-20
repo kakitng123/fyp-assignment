@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
@@ -35,13 +37,17 @@ class CoachDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coach_detail, container, false)
         val userView = (activity as UserDashboardActivity)
 
+        eventChangeListener()
         coachRecView = binding.recyclerView
+        //set layout manager to position the items
         coachRecView.layoutManager = LinearLayoutManager(context)
         coachRecView.setHasFixedSize(true)
+        //Set a array list data
         coachDataArrayList = arrayListOf()
+        //create adapter passing in the array adapter data
         coachAdapter = CoachAdapter(coachDataArrayList)
+        //Attach the adapter to the recyclerView to populate the items
         coachRecView.adapter = coachAdapter
-        eventChangeListener()
 
         return binding.root
     }
@@ -68,10 +74,10 @@ class CoachDetailFragment : Fragment() {
     }
 
     fun onItemClick(position: Int) {
-//        val currentItem = coachDataArrayList[position]
-//        val userView = (activity as UserDashboardActivity)
-//        userView.replaceFragment(TrainingClassFragment())
-//        // Parse Data to Paired-Fragment
-//        setFragmentResult("toCoachDetail", bundleOf("toCoachDetail" to currentItem.coachEmail))
+        val currentItem = coachDataArrayList[position]
+        val userView = (activity as UserDashboardActivity)
+        userView.replaceFragment(TrainingClassFragment())
+        // Parse Data to Paired-Fragment
+        setFragmentResult("toCoachDetail", bundleOf("toCoachDetail" to currentItem.coachEmail))
     }
 }

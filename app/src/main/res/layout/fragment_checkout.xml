@@ -11,7 +11,7 @@
         tools:context=".backend.checkoutFragment">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/titleCheckout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/checkoutLinear"
             android:layout_width="0dp"
             android:layout_height="440dp"
             android:layout_marginStart="8dp"
@@ -29,7 +29,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/titleCheckout">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,42 +106,42 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvBookedDate"
+                    android:id="@+id/checkoutDate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvBookedTime"
+                    android:id="@+id/checkoutTime"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvBookedRate"
+                    android:id="@+id/checkoutRate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvBookedCourt"
+                    android:id="@+id/checkoutCourt"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvBookedStatus"
+                    android:id="@+id/checkoutStatus"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvBookedPrice"
+                    android:id="@+id/checkoutPrice"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="8dp"
@@ -150,7 +150,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvPaymentTitle"
+            android:id="@+id/paymentOptionTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -160,20 +160,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.057"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/checkoutLinear" />
 
         <Button
-            android:id="@+id/btnMyWallet"
+            android:id="@+id/walletBtn"
             android:layout_width="311dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="My Wallet"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPaymentTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/paymentOptionTitle" />
 
         <TextView
-            android:id="@+id/tvTotalTitle"
+            android:id="@+id/tvTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -182,10 +182,10 @@
             android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnMyWallet" />
+            app:layout_constraintTop_toBottomOf="@+id/walletBtn" />
 
         <TextView
-            android:id="@+id/tvTotal"
+            android:id="@+id/tvRM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -193,11 +193,11 @@
             android:text="RM "
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvTotalTitle"
-            app:layout_constraintTop_toBottomOf="@+id/btnMyWallet" />
+            app:layout_constraintStart_toEndOf="@+id/tvTotal"
+            app:layout_constraintTop_toBottomOf="@+id/walletBtn" />
 
         <TextView
-            android:id="@+id/tvAmount"
+            android:id="@+id/totalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
@@ -206,11 +206,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/tvTotal"
-            app:layout_constraintTop_toBottomOf="@+id/btnMyWallet" />
+            app:layout_constraintStart_toEndOf="@+id/tvRM"
+            app:layout_constraintTop_toBottomOf="@+id/walletBtn" />
 
         <Button
-            android:id="@+id/btnCheckout"
+            android:id="@+id/checkoutBtn"
             android:layout_width="311dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
@@ -220,7 +220,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAmount" />
+            app:layout_constraintTop_toBottomOf="@+id/totalAmount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

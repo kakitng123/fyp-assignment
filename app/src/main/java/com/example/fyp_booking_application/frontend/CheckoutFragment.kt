@@ -20,6 +20,7 @@ import com.example.fyp_booking_application.databinding.FragmentUserProfileBindin
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
@@ -37,120 +38,102 @@ class CheckoutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Initialise
-//        auth = FirebaseAuth.getInstance()
-//        fstore = FirebaseFirestore.getInstance()
-//        storage = FirebaseStorage.getInstance()
-//        storageRef = storage.reference
+        auth = FirebaseAuth.getInstance()
+        fstore = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
+
+        binding = FragmentCheckoutBinding.inflate(layoutInflater)
+        val userID = auth.currentUser?.uid
+        val userView = (activity as UserDashboardActivity)
+
+        //Display booking data
+        val retrieveBookingData = fstore.collection("Bookings").document("1KHSCnDyLFt5AhThF3XW")
+        var dateResult = ""
+        var timeResult = ""
+        var rateResult = ""
+        var courtResult = ""
+        var statusResult = ""
+        var priceResult = ""
+
+        retrieveBookingData.get()
+            .addOnCompleteListener { resultData ->
+                if (resultData != null) {
+                    Toast.makeText(activity, "masuk Successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    dateResult= resultData.result.getString("bookingDate").toString()
+                    timeResult = resultData.result.getString("bookingTime").toString()
+                    rateResult = resultData.result.getString("bookingRate").toString()
+                    courtResult = resultData.result.getString("bookingCourt").toString()
+                    statusResult = resultData.result.getString("bookingStatus").toString()
+                    priceResult = resultData.result.getString("bookingID").toString()
+
+                    binding.checkoutDate.setText(dateResult)
+                    binding.checkoutTime.setText(timeResult)
+                    binding.checkoutRate.setText(rateResult)
+                    binding.checkoutCourt.setText(courtResult)
+                    binding.checkoutStatus.setText(statusResult)
+                    binding.checkoutPrice.setText(priceResult)
+                } else {
+                    Log.d("noexits", "No such documents.")
+                }
+                Toast.makeText(activity, "Retrieve Successfully", Toast.LENGTH_SHORT)
+                    .show()
+            }.addOnFailureListener { exception ->
+                Log.d("noexits", "Error getting documents.", exception)
+                Toast.makeText(activity, "Retrieve Failure", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        //Save Updated Data function
+        binding.checkoutBtn.setOnClickListener {
+            var bookingDate: String = binding.checkoutDate.text.toString()
+            var bookingTime: String = binding.checkoutTime.text.toString()
+            var bookingRate: String = binding.checkoutRate.text.toString()
+            var bookingCourt: String = binding.checkoutCourt.text.toString()
+            var bookingPayment:String = binding.checkoutPrice.text.toString()
+
+            val userID = auth.currentUser?.uid
+            //val productID = bundle.getString("toProductDetails")
+            //val bookingID = fstore.collection("Bookings").document().id
+            val bookingId = fstore.collection("Bookings").document(userID.toString())
+
+            val bookingUpdates = hashMapOf(
+                "bookingDate" to bookingDate,
+                "bookingTime" to bookingTime,
+                "bookingRate" to bookingRate,
+                "bookingCourt" to bookingCourt,
+                "bookingStatus" to "Success",
+                "bookingPayment" to bookingPayment,
+            )
+            bookingId.set(bookingUpdates, SetOptions.merge())
+
 //
-//        binding = FragmentCheckoutBinding.inflate(layoutInflater)
-//        val userID = auth.currentUser?.uid
-//        val userView = (activity as UserDashboardActivity)
+//            val map: MutableMap<Any, String> = HashMap()
 //
-//        binding.btnCheckout.setOnClickListener {
+//                fstore.collection("Bookings").document(userID.toString()).set(map, SetOptions.merge())
 //
-//        }
+//            fstore.collection("Bookings").document(userID.toString())
+//                    .update("spinner", spinData)
+//                fstore.collection("Bookings").document(userID.toString())
+//                    .update(mapOf(
+//                        "spinner" to spinData
+//                    ))
 //
-//        //Display user profile data
-//        val retrieveBookingData = fstore.collection("Bookings").document(userID.toString())
-//        var emailResult = ""
-//        var nameResult = ""
-//        var phoneResult = ""
-//        var passResult = ""
-//        var confirmPassResult = ""
-//
-//        retrieveBookingData.get()
-//            .addOnCompleteListener { resultData ->
-//                if (resultData != null) {
-//                    //  Log.d("exits", "Result Document User Data: ${resultData.data}")
-//                    Toast.makeText(activity, "masuk Successfully", Toast.LENGTH_SHORT)
-//                        .show()
-//                    emailResult= resultData.result.getString("email").toString()
-//                    nameResult = resultData.result.getString("username").toString()
-//                    phoneResult = resultData.result.getString("phone").toString()
-//                    passResult = resultData.result.getString("password").toString()
-//                    confirmPassResult = resultData.result.getString("confirmPassword").toString()
-//
-//                    binding.tvDate.setText(emailResult)
-//                    binding.tvTime.setText(nameResult)
-//                    binding.tvRate.setText(phoneResult)
-//                    binding.tvCourt.setText(passResult)
-//                    binding.tvStatus.setText(confirmPassResult)
-//                    binding.tvPrice.setText(confirmPassResult)
-//                } else {
-//                    Log.d("noexits", "No such documents.")
+//                   val updateProduct = hashMapOf(
+//                        "productImage" to "products/product${binding.tfProductDetailName.text}",
+//                        "productName" to binding.tfProductDetailName.text.toString(),
+//                        "productCategory" to productCategory,
+//                        "productDesc" to binding.tfProductDetailDesc.text.toString(),
+//                        "productPrice" to binding.tfProductDetailPrice.text.toString().toDouble(),
+//                        "productQty" to binding.tfProductDetailQty.text.toString().toInt()
+//                    )
+//                    docRef.set(updateProduct, SetOptions.merge())
 //                }
-//                Toast.makeText(activity, "Retrieve Successfully", Toast.LENGTH_SHORT)
-//                    .show()
-//            }.addOnFailureListener { exception ->
-//                Log.d("noexits", "Error getting documents.", exception)
-//                Toast.makeText(activity, "Retrieve Failure", Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//
-//        //Save Updated Data function
-//        binding.saveBtn.setOnClickListener {
-//            var email: String = binding.emailProfile.text.toString()
-//            var username: String = binding.nameProfile.text.toString()
-//            var phone: String = binding.phoneProfile.text.toString()
-//            var password: String = binding.passProfile.text.toString()
-//            var confirmPassword:String = binding.confirmPassProfile.text.toString()
-//
-//            ///Validation for all input field and match the pattern
-//            if (username.isEmpty()) {
-//                binding.nameProfile.setError("Username is required!")
-//                binding.nameProfile.requestFocus()
-//                return@setOnClickListener
-//            }
-//            if (phone.isEmpty()) {
-//                binding.phoneProfile.setError("Phone Number is required!")
-//                binding.phoneProfile.requestFocus()
-//                return@setOnClickListener
-//            } else {
-//                if (!Patterns.PHONE.matcher(phone).matches()) {
-//                    binding.phoneProfile.setError("Please provide valid phone!")
-//                    binding.phoneProfile.requestFocus()
-//                    return@setOnClickListener
-//                }
-//            }
-//
-//            if(password.isEmpty()){
-//                binding.passProfile.setError("Password is required!")
-//                binding.passProfile.requestFocus()
-//                return@setOnClickListener
-//            }else{
-//                if(password.length < 6) {
-//                    binding.passProfile.setError("Min password length should be 6 characters!")
-//                    binding.passProfile.requestFocus()
-//                    return@setOnClickListener
-//                }
-//            }
-//
-//            if(confirmPassword.isEmpty()){
-//                binding.confirmPassProfile.setError("Password is required!")
-//                binding.confirmPassProfile.requestFocus()
-//                return@setOnClickListener
-//            }else{
-//                if(confirmPassword.length < 6) {
-//                    binding.confirmPassProfile.setError("Min password length should be 6 characters!")
-//                    binding.confirmPassProfile.requestFocus()
-//                    return@setOnClickListener
-//                }
-//            }
-//
-//            val userID = auth.currentUser?.uid
-//
-//            val profileUpdates = hashMapOf(
-//                "userID" to userID,
-//                "email" to email,
-//                "username" to username,
-//                "phone" to phone,
-//                "password" to password,
-//                "confirmPassword" to confirmPassword,
-//            )
 //
 //            //Update Data
-//            val updateData = fstore.collection("Users").document(userID.toString())
-//            updateData.set(profileUpdates)
+//            val updateData = fstore.collection("Bookings").document(userID.toString())
+//            updateData.set(bookingUpdates)
 //                .addOnSuccessListener { editData ->
 //                    Log.d("exits", "User profile updated.")
 //                    Toast.makeText(activity, "Save Successfully", Toast.LENGTH_SHORT)
@@ -160,7 +143,7 @@ class CheckoutFragment : Fragment() {
 //                    Log.w(ContentValues.TAG, "Error adding document", e)
 //                    Toast.makeText(activity, "Save Failure", Toast.LENGTH_SHORT).show()
 //                }
-//        }
+        }
       return binding.root
     }
 }

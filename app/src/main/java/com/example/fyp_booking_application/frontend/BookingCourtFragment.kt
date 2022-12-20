@@ -1,6 +1,7 @@
 package com.example.fyp_booking_application.frontend
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.fyp_booking_application.ForgotPasswordActivity
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.backend.Adapters.CourtAdminAdapter
 import com.example.fyp_booking_application.backend.Adapters.TimeslotAdminAdapter
@@ -137,12 +139,15 @@ class BookingCourtFragment : Fragment() {
 
                     //Add Data
                     //fstore.collection("Bookings").document(userID.toString()).collection("Bookings").document().parent.add(booking)
-                    val createData1 = fstore.collection("Bookings").document(userID.toString())
-                        createData1.parent.add(booking)
+                    //val createData = fstore.collection("Bookings").document(userID.toString())
+                        //createData.parent.add(booking)
+                    fstore.collection("Bookings").document(userID.toString())
+                    .parent.add(booking)
                         .addOnSuccessListener { createData ->
                             Log.d("exits", "Booking court record updated.")
                             Toast.makeText(activity, "Added Successfully", Toast.LENGTH_SHORT)
                                 .show()
+                            userView.replaceFragment(CheckoutFragment())
                         }
                         .addOnFailureListener { e ->
                             Log.w(ContentValues.TAG, "Error adding document", e)

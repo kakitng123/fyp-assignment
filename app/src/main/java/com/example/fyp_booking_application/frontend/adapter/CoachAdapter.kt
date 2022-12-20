@@ -1,6 +1,5 @@
 package com.example.fyp_booking_application.frontend.adapter
 
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -21,18 +20,22 @@ class CoachAdapter(
 
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoachAdapter.CoachViewholder {
+        //infate the custom layout
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.coach_card, parent, false)
+        //return a new holder instance
         return CoachViewholder(itemView)
     }
 
+    //Involves the populating data into the item through holder
     override fun onBindViewHolder(holder: CoachAdapter.CoachViewholder, position: Int) {
         // Initialise
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
 
-        // to set data to textview and imageview of each card layout
+        //Get the data model based on position
         val coachModel: CoachData = coachDataArrayList[position]
 
+        // to set data to textview and imageview of each card layout
         val img = storageRef.child("images/coachProfile/coach_"+ coachModel.coachName)
         val file = File.createTempFile("temp", "png")
 
@@ -61,6 +64,7 @@ class CoachAdapter(
 //        }
     }
 
+    //Return the total count of items in the list
     override fun getItemCount(): Int {
         // this method is used for showing number of card items in recycler view.
         return coachDataArrayList.size
@@ -76,7 +80,7 @@ class CoachAdapter(
          val coachEmail: TextView
          init {
             coachImage = itemView.findViewById(R.id.tvCoachImage)
-            coachName = itemView.findViewById(R.id.tvCoachName)
+            coachName = itemView.findViewById(R.id.tvUserProductName)
             coachID = itemView.findViewById(R.id.tvCoachID)
             coachExperience = itemView.findViewById(R.id.tvCoachExperience)
             coachPhone = itemView.findViewById(R.id.tvCoachPhone)

@@ -24,8 +24,8 @@ import com.google.firebase.firestore.QuerySnapshot
 class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener {
 
     private lateinit var binding : FragmentAdminProductBinding
-    private lateinit var productArrayList : ArrayList<ProductData>
     private lateinit var databaseRef: FirebaseFirestore
+    private lateinit var productArrayList : ArrayList<ProductData>
     private lateinit var productAdapter : ProductAdminAdapter
 
     override fun onCreateView(
