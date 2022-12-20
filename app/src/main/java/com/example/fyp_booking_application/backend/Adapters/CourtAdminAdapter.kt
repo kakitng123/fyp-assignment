@@ -56,6 +56,7 @@ class CourtAdminAdapter(
             listener.onButtonClick(position)
         }
         holder.courtID.text = currentItem.courtID
+        holder.courtID.textSize = 14F
         holder.courtName.text = currentItem.courtName
     }
 
