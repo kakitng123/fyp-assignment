@@ -13,6 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentCheckoutBinding
@@ -46,34 +48,34 @@ class CheckoutFragment : Fragment() {
         binding = FragmentCheckoutBinding.inflate(layoutInflater)
         val userID = auth.currentUser?.uid
         val userView = (activity as UserDashboardActivity)
+        userView.setTitle("Checkout")
 
-        //Display booking data
-        val retrieveBookingData = fstore.collection("Bookings").document("1KHSCnDyLFt5AhThF3XW")
-        var dateResult = ""
-        var timeResult = ""
-        var rateResult = ""
-        var courtResult = ""
-        var statusResult = ""
-        var priceResult = ""
-
-        retrieveBookingData.get()
-            .addOnCompleteListener { resultData ->
+        //Retrieve Booking Data
+        //Display Booking Details in Checkout Page
+        setFragmentResultListener("toCheckoutPage"){_, bundle ->
+            val bookingID = bundle.getString("toCheckoutPage")
+            val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
+            retrieveBookingRef.get().addOnCompleteListener { resultData ->
                 if (resultData != null) {
-                    Toast.makeText(activity, "masuk Successfully", Toast.LENGTH_SHORT)
-                        .show()
-                    dateResult= resultData.result.getString("bookingDate").toString()
-                    timeResult = resultData.result.getString("bookingTime").toString()
-                    rateResult = resultData.result.getString("bookingRate").toString()
-                    courtResult = resultData.result.getString("bookingCourt").toString()
-                    statusResult = resultData.result.getString("bookingStatus").toString()
-                    priceResult = resultData.result.getString("bookingID").toString()
+                    val dateResult= resultData.result.getString("bookingDate").toString()
+                    val timeResult = resultData.result.getString("bookingTime").toString()
+                    val rateResult = resultData.result.getString("bookingRate").toString()
+                    val courtResult = resultData.result.getString("bookingCourt").toString()
+                    val statusResult = resultData.result.getString("bookingStatus").toString()
+                    var price:String = ""
+
+                    if(rateResult == "1 Hours"){
+                        price = "RM10.00"
+                    }else{
+                        price = "RM20.00"
+                    }
 
                     binding.checkoutDate.setText(dateResult)
                     binding.checkoutTime.setText(timeResult)
                     binding.checkoutRate.setText(rateResult)
                     binding.checkoutCourt.setText(courtResult)
                     binding.checkoutStatus.setText(statusResult)
-                    binding.checkoutPrice.setText(priceResult)
+//                    binding.totalAmount.setText(price)
                 } else {
                     Log.d("noexits", "No such documents.")
                 }
@@ -85,64 +87,27 @@ class CheckoutFragment : Fragment() {
                     .show()
             }
 
-        //Save Updated Data function
-        binding.checkoutBtn.setOnClickListener {
-            var bookingDate: String = binding.checkoutDate.text.toString()
-            var bookingTime: String = binding.checkoutTime.text.toString()
-            var bookingRate: String = binding.checkoutRate.text.toString()
-            var bookingCourt: String = binding.checkoutCourt.text.toString()
-            var bookingPayment:String = binding.checkoutPrice.text.toString()
+            //Save Updated Booking Data
+            binding.checkoutBtn.setOnClickListener {
+                var bookingDate: String = binding.checkoutDate.text.toString()
+                var bookingTime: String = binding.checkoutTime.text.toString()
+                var bookingRate: String = binding.checkoutRate.text.toString()
+                var bookingCourt: String = binding.checkoutCourt.text.toString()
+                var bookingPayment: String = binding.totalAmount.text.toString()
 
-            val userID = auth.currentUser?.uid
-            //val productID = bundle.getString("toProductDetails")
-            //val bookingID = fstore.collection("Bookings").document().id
-            val bookingId = fstore.collection("Bookings").document(userID.toString())
+                val userID = auth.currentUser?.uid
+                val bookingId = fstore.collection("Bookings").document(bookingID.toString())
 
-            val bookingUpdates = hashMapOf(
-                "bookingDate" to bookingDate,
-                "bookingTime" to bookingTime,
-                "bookingRate" to bookingRate,
-                "bookingCourt" to bookingCourt,
-                "bookingStatus" to "Success",
-                "bookingPayment" to bookingPayment,
-            )
-            bookingId.set(bookingUpdates, SetOptions.merge())
-
-//
-//            val map: MutableMap<Any, String> = HashMap()
-//
-//                fstore.collection("Bookings").document(userID.toString()).set(map, SetOptions.merge())
-//
-//            fstore.collection("Bookings").document(userID.toString())
-//                    .update("spinner", spinData)
-//                fstore.collection("Bookings").document(userID.toString())
-//                    .update(mapOf(
-//                        "spinner" to spinData
-//                    ))
-//
-//                   val updateProduct = hashMapOf(
-//                        "productImage" to "products/product${binding.tfProductDetailName.text}",
-//                        "productName" to binding.tfProductDetailName.text.toString(),
-//                        "productCategory" to productCategory,
-//                        "productDesc" to binding.tfProductDetailDesc.text.toString(),
-//                        "productPrice" to binding.tfProductDetailPrice.text.toString().toDouble(),
-//                        "productQty" to binding.tfProductDetailQty.text.toString().toInt()
-//                    )
-//                    docRef.set(updateProduct, SetOptions.merge())
-//                }
-//
-//            //Update Data
-//            val updateData = fstore.collection("Bookings").document(userID.toString())
-//            updateData.set(bookingUpdates)
-//                .addOnSuccessListener { editData ->
-//                    Log.d("exits", "User profile updated.")
-//                    Toast.makeText(activity, "Save Successfully", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//                .addOnFailureListener { e ->
-//                    Log.w(ContentValues.TAG, "Error adding document", e)
-//                    Toast.makeText(activity, "Save Failure", Toast.LENGTH_SHORT).show()
-//                }
+                val bookingUpdates = hashMapOf(
+                    "bookingDate" to bookingDate,
+                    "bookingTime" to bookingTime,
+                    "bookingRate" to bookingRate,
+                    "bookingCourt" to bookingCourt,
+                    "bookingStatus" to "Success",
+                    "bookingPayment" to bookingPayment,
+                )
+                bookingId.set(bookingUpdates, SetOptions.merge())
+            }
         }
       return binding.root
     }

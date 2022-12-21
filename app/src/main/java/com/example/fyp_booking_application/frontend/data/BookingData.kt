@@ -8,7 +8,8 @@ data class BookingData(
     val bookingDate: String ?= null,
     val bookingTime: String ?= null,
     val spinner: String ?= null,
-    //val bookingPrice: Double = 0.0,
+    val bookingPayment: String ?= null,
     val bookingStatus: String ?= null,
     val userID: String ?= null
 )
+//

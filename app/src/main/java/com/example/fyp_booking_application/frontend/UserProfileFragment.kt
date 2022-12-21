@@ -1,36 +1,31 @@
 package com.example.fyp_booking_application.frontend
 
+import android.R
 import android.app.Activity
 import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.Editable
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.fyp_booking_application.MainActivity
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentUserProfileBinding
-import com.example.fyp_booking_application.frontend.data.UserData
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import java.io.File
-import java.io.IOException
 import java.util.*
 
 
@@ -61,6 +56,7 @@ class UserProfileFragment : Fragment() {
 
         binding = FragmentUserProfileBinding.inflate(layoutInflater)
         val userView = (activity as UserDashboardActivity)
+        userView.setTitle("Profile")
 
 //        // Logout Function
 //        binding.logoutBtn.setOnClickListener {
@@ -280,5 +276,6 @@ class UserProfileFragment : Fragment() {
             Toast.makeText(activity, "Please Upload an Image", Toast.LENGTH_SHORT).show()
         }
     }
+
 }
 

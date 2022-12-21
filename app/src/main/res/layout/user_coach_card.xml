@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".frontend.CoachDetailFragment">
+    tools:context=".frontend.CoachFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -21,16 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--            &lt;!&ndash; ImageVIew to display our Course Image &ndash;&gt;-->
-            <!--            <de.hdodenhof.circleimageview.CircleImageView-->
-            <!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
-            <!--                android:id="@+id/tvCoachImage"-->
-            <!--                android:layout_width="96dp"-->
-            <!--                android:layout_height="96dp"-->
-            <!--                android:src="@drawable/smashlogo"-->
-            <!--                app:civ_border_width="2dp"-->
-            <!--                app:civ_border_color="#FF000000"/>-->
-
             <ImageView
                 android:id="@+id/tvCoachImage"
                 android:layout_width="100dp"
@@ -45,11 +35,12 @@
                 android:src="@drawable/smashlogo" />
 
             <TextView
-                android:id="@+id/tvUserProductName"
+                android:id="@+id/tvCoachName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_toEndOf="@id/tvCoachImage"
                 android:text="coachName"
                 android:textColor="@color/black"
@@ -57,21 +48,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvCoachID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvUserProductName"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/tvCoachImage"
-                android:drawablePadding="2dp"
-                android:text="coachID" />
-
-            <TextView
                 android:id="@+id/tvCoachExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvCoachID"
+                android:layout_below="@id/tvCoachName"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/tvCoachImage"

@@ -1,4 +1,4 @@
-package com.example.fyp_booking_application.frontend.adapter
+package com.example.fyp_booking_application.frontend.data
 
 data class PaymentData(
     val paymentID: String ?= null,

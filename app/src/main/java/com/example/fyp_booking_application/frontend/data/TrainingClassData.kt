@@ -1,11 +1,11 @@
 package com.example.fyp_booking_application.frontend.data
 
 data class TrainingClassData(
-    //val trainingClassID: String ?= null,//
-    val trainingClassName: String ?= null,
-   // val trainingClassDetail: String ?= null,//
-    val trainingClassPrice: Double = 0.00,
-   // val trainingClassStatus: String ?= null,//
-    val trainingClassDate: String ?= null,
-    val trainingClassTime: String ?= null,
+    val classID: String ?= null,
+    val className: String ?= null,
+    val classDesc: String ?= null,//
+    val classPrice: Double = 0.00,
+   // val classStatus: String ?= null,//
+    val classDate: String ?= null,
+    val classTime: String ?= null,
 )

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -21,19 +20,18 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/tvProductImage"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerInParent="true"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/smashlogo" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/tvProductImage"-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="150dp"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:contentDescription="@string/app_name"-->
+<!--                    android:src="@drawable/smashlogo" />-->
 
                 <TextView
                     android:id="@+id/tvProductName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvProductImage"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="20dp"
                     android:layout_marginStart="20dp"
