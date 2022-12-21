@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -40,6 +42,22 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
             val coachID = bundle.getString("toCoachDetails")
             databaseRef = FirebaseFirestore.getInstance()
             val docRef = databaseRef.collection("coach_testing1").document(coachID.toString())
+
+            val expType = arrayListOf<String>()
+            val expRef = databaseRef.collection("system_testing1").document("experience")
+            expRef.get().addOnSuccessListener { document ->
+                if(document != null){
+                    document.data!!.forEach { fieldName ->
+                        expType.add(fieldName.value.toString())
+                    }
+                    val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, expType)
+                    binding.coachExpField.isEnabled = false
+                    binding.coachExpField.adapter = spinnerAdapter
+                }
+            }.addOnFailureListener { e ->
+                Log.e("NO EXPERIENCE", "ERROR FETCHING EXPERIENCE", e)
+            }
+
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
                     val coach = document.toObject(CoachData::class.java)
@@ -64,7 +82,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     binding.coachNameField.setText(coach?.coachName.toString())
                     binding.coachEmailField.setText(coach?.coachEmail.toString())
                     binding.coachPhoneNoField.setText(coach?.coachPhone.toString())
-                    binding.coachExpField.setText(coach?.coachExp.toString())
+                    binding.coachExpField.setSelection(getIndex(binding.coachExpField, coach?.coachExp.toString()))
 
                     binding.coachNameField.setOnFocusChangeListener { _, focused ->
                         if(!focused && binding.coachNameField.text!!.isEmpty()){
@@ -99,20 +117,12 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                         else binding.coachPhoneNoContainer.helperText = null
                     }
 
-                    binding.coachExpField.setOnFocusChangeListener { _, focused ->
-                        if(!focused && binding.coachExpField.text!!.isEmpty()){
-                            binding.coachExpContainer.helperText = "Experience is Required"
-                        }
-                        else binding.coachExpContainer.helperText = null
-                    }
-
                     binding.imgBtnUpdateCoach.setOnClickListener{
                         val validName = binding.coachNameContainer.helperText == null
                         val validEmail = binding.coachEmailContainer.helperText == null
                         val validPhone = binding.coachPhoneNoContainer.helperText == null
-                        val validExp = binding.coachExpContainer.helperText == null
 
-                        if(validName && validEmail && validExp && validPhone){
+                        if(validName && validEmail && validPhone){
                             val builder = AlertDialog.Builder(requireContext())
                             builder.setTitle("Update Coach Details")
                             builder.setMessage("Confirm to update coach details?")
@@ -121,7 +131,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                                     "coachName" to binding.coachNameField.text.toString(),
                                     "coachEmail" to binding.coachEmailField.text.toString(),
                                     "coachExp" to binding.coachPhoneNoField.text.toString(),
-                                    "coachPhone" to binding.coachExpField.text.toString()
+                                    "coachPhone" to binding.coachExpField.selectedItem.toString()
                                 )
                                 docRef.set(updateCoach, SetOptions.merge())
                                     .addOnSuccessListener { Log.d("UPDATE COACH","COACH DETAIL UPDATED SUCCESSFULLY" ) }
@@ -195,5 +205,13 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                 }
 
             })
+    }
+
+    private fun getIndex(spinner: Spinner, exp: String): Int {
+        for (i in 0..spinner.count){
+            if(spinner.getItemAtPosition(i).toString() == exp)
+                return i
+        }
+        return 0
     }
 }
