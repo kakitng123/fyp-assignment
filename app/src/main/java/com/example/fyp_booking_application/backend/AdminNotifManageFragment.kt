@@ -62,9 +62,8 @@ class AdminNotifManageFragment : Fragment() {
             }
         })
 
-        listView.onItemSelectedListener
-
         listView.setOnItemClickListener { parent:AdapterView<*>, view:View, position:Int, id:Long ->
+            binding.notifUserSearchView.queryHint = userList[position]
             Toast.makeText(context, userList[position], Toast.LENGTH_SHORT).show()
         }
 
