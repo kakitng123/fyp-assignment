@@ -27,7 +27,6 @@ class AdminClassAddFragment : Fragment() {
         adminActivityView.setTitle("ADD CLASS")
         databaseRef = FirebaseFirestore.getInstance()
 
-        // Input Validations
         binding.tfAddClassName.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddClassName.text!!.isEmpty()){
                 binding.nameContainer.helperText = "Name is Required"
@@ -50,21 +49,21 @@ class AdminClassAddFragment : Fragment() {
                 binding.priceContainer.helperText = "Price is Required"
             }
             else if(!focused && !(binding.tfAddClassPrice.text!!.all { it.isDigit() })){
-                binding.priceContainer.helperText = "Invalid Price"
+                binding.priceContainer.helperText = "Only Numbers Allowed"
             }
             else binding.priceContainer.helperText = null
         }
 
         binding.tfAddClassDate.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddClassDate.text!!.isEmpty()){
-                binding.dateContainer.helperText = "Name is Required"
+                binding.dateContainer.helperText = "Date is Required"
             }
             else binding.dateContainer.helperText = null
         }
 
         binding.tfAddClassTime.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddClassTime.text!!.isEmpty()){
-                binding.timeContainer.helperText = "Name is Required"
+                binding.timeContainer.helperText = "Time is Required"
             }
             else binding.timeContainer.helperText = null
         }
@@ -98,7 +97,7 @@ class AdminClassAddFragment : Fragment() {
                             newClassRef.set(newClass)
                                 .addOnSuccessListener {
                                     Log.d("ADDING NEW CLASS", "CLASS ADDED SUCCESSFULLY")
-                                    adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
+                                    adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
                                 }
                                 .addOnFailureListener { e ->
                                     Log.e("ADDING NEW CLASS", "ERROR ADDING NEW CLASS", e)

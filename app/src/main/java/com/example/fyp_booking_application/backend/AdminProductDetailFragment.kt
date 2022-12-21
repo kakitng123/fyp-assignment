@@ -45,10 +45,21 @@ class AdminProductDetailFragment : Fragment() {
             val productID = bundle.getString("toProductDetails")
             val docRef = databaseRef.collection("Products").document(productID.toString())
             storageRef = FirebaseStorage.getInstance().reference
-            val categoryType = arrayOf("Racket", "Accessories", "Etc")
-            val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
-            binding.tfProductDetailCate.isEnabled = false
-            binding.tfProductDetailCate.adapter = spinnerAdapter
+
+            val categoryType = arrayListOf<String>()
+            val categoryRef = databaseRef.collection("system_testing1").document("category")
+            categoryRef.get().addOnSuccessListener { document ->
+                if(document != null){
+                    document.data!!.forEach { fieldName ->
+                        categoryType.add(fieldName.value.toString())
+                    }
+                    val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
+                    binding.tfProductDetailCate.isEnabled = false
+                    binding.tfProductDetailCate.adapter = spinnerAdapter
+                }
+            }.addOnFailureListener { e ->
+                Log.e("NO CATEGORY", "ERROR FETCHING CATEGORY", e)
+            }
 
             docRef.get().addOnSuccessListener { document ->
                 if (document != null) {
@@ -76,6 +87,41 @@ class AdminProductDetailFragment : Fragment() {
                     binding.tfProductDetailDesc.setText(product?.productDesc.toString())
                     binding.tfProductDetailPrice.setText(product?.productPrice.toString())
                     binding.tfProductDetailQty.setText(product?.productQty.toString())
+
+                    binding.tfProductDetailName.setOnFocusChangeListener { _, focused ->
+                        if(!focused && binding.tfProductDetailName.text.isEmpty()){
+                            binding.tfProductDetailName.error = "Name is Required"
+                        }
+                        else if(!focused && !(binding.tfProductDetailName.text!!.matches("^[a-zA-Z0-9_]*$".toRegex()))){
+                            binding.tfProductDetailName.error = "Invalid Name"
+                        }
+                        else binding.tfProductDetailName.error = null
+                    }
+
+                    binding.tfProductDetailDesc.setOnFocusChangeListener { _, focused ->
+                        if(!focused && binding.tfProductDetailDesc.text!!.isEmpty()){
+                            binding.tfProductDetailDesc.error = "Description is Required"
+                        }
+                        else binding.tfProductDetailDesc.error = null
+                    }
+
+                    binding.tfProductDetailPrice.setOnFocusChangeListener { _, focused ->
+                        if(!focused && binding.tfProductDetailPrice.text!!.isEmpty()){
+                            binding.tfProductDetailPrice.error = "Price is Required"
+                        }
+                        else binding.tfProductDetailPrice.error = null
+                    }
+
+                    binding.tfProductDetailQty.setOnFocusChangeListener { _, focused ->
+                        if(!focused && binding.tfProductDetailQty.text!!.isEmpty()){
+                            binding.tfProductDetailQty.error = "Quantity is Required"
+                        }
+                        else if(!focused && !(binding.tfProductDetailQty.text!!.all { it.isDigit() })){
+                            binding.tfProductDetailQty.error = "Invalid Quantity"
+                        }
+                        else binding.tfProductDetailQty.error = null
+                    }
+
 
                     binding.imgViewProductDetail.setOnClickListener {
                         val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -105,7 +151,7 @@ class AdminProductDetailFragment : Fragment() {
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Update Product Details")
                         builder.setMessage("Confirm to update product details?")
-                        builder.setPositiveButton("Ok") { _, _ ->
+                        builder.setPositiveButton("Update") { _, _ ->
                             if(binding.tfProductDetailName.text != null &&  binding.tfProductDetailDesc.text != null
                                 && binding.tfProductDetailPrice.text != null && binding.tfProductDetailQty.text != null){
                                 val updateProduct = hashMapOf(
@@ -138,7 +184,7 @@ class AdminProductDetailFragment : Fragment() {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.setTitle("Deleting Data")
                 builder.setMessage("Delete Product Confirmation?")
-                builder.setPositiveButton("Ok") { _, _ ->
+                builder.setPositiveButton("Delete") { _, _ ->
                     docRef.get().addOnSuccessListener { document ->
                         val imagePath = document["product_image"].toString()
                         storageRef.child(imagePath).delete()

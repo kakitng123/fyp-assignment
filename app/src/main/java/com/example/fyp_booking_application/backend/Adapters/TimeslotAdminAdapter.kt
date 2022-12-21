@@ -3,13 +3,17 @@ package com.example.fyp_booking_application.backend.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.CourtTimeslots
+import com.example.fyp_booking_application.backend.TestCourtData
+import com.example.fyp_booking_application.backend.TestCourtData2
 
 class TimeslotAdminAdapter(
-    private val timeslotList: ArrayList<CourtTimeslots>,
+    private val timeslotList: ArrayList<TestCourtData2>,
 ) : RecyclerView.Adapter<TimeslotAdminAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

@@ -49,11 +49,20 @@ class AdminProductAddFragment : Fragment() {
             val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(selectImage, 100)
         }
-
-        val categoryType = arrayOf("Racket", "Accessories", "Etc")
-        val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
-        binding.spinnerAddProductCat.adapter = spinnerAdapter
-        binding.spinnerAddProductCat.setSelection(0)
+        val categoryType = arrayListOf<String>()
+        val categoryRef = databaseRef.collection("system_testing1").document("category")
+        categoryRef.get().addOnSuccessListener { document ->
+            if(document != null){
+                document.data!!.forEach { fieldName ->
+                    categoryType.add(fieldName.value.toString())
+                }
+                val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
+                binding.spinnerAddProductCat.adapter = spinnerAdapter
+                binding.spinnerAddProductCat.setSelection(0)
+            }
+        }.addOnFailureListener { e ->
+            Log.e("NO CATEGORY", "ERROR FETCHING CATEGORY", e)
+        }
 
         binding.tfAddProductDesc.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddProductDesc.text!!.isEmpty()){
@@ -66,13 +75,9 @@ class AdminProductAddFragment : Fragment() {
             if(!focused && binding.tfAddProductPrice.text!!.isEmpty()){
                 binding.pPriceContainer.helperText = "Price is Required"
             }
-            else if(!focused && !(binding.tfAddProductPrice.text!!.all { it.isDigit() })){
-                binding.pPriceContainer.helperText = "Invalid Price"
-            }
             else binding.pPriceContainer.helperText = null
         }
 
-        //Qty
         binding.tfAddProductQty.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddProductQty.text!!.isEmpty()){
                 binding.pQtyContainer.helperText = "Quantity is Required"
@@ -100,23 +105,16 @@ class AdminProductAddFragment : Fragment() {
                         }
                         if(nameValidation == 0){
                             val productName: String = binding.tfAddProductName.text.toString()
-                            var productCategory = ""
-                            when(binding.spinnerAddProductCat.selectedItemPosition){
-                                0 -> productCategory = "Racket"
-                                1 -> productCategory = "Accessories"
-                                2 -> productCategory = "Etc"
-                            }
                             storageRef = FirebaseStorage.getInstance().getReference("products/product$productName")
                             storageRef.putFile(imgUri).addOnSuccessListener {
                                 binding.imgProduct.setImageURI(null)
                             }
-
                             val newProductRef = databaseRef.collection("Products").document()
                             val newProduct = hashMapOf(
                                 "productID" to newProductRef.id,
                                 "productName" to productName,
                                 "productImage" to "products/product$productName",
-                                "productCategory" to productCategory,
+                                "productCategory" to binding.spinnerAddProductCat.selectedItem.toString(),
                                 "productDesc" to binding.tfAddProductDesc.text.toString(),
                                 "productPrice" to binding.tfAddProductPrice.text.toString().toDouble(),
                                 "productQty" to binding.tfAddProductQty.text.toString().toInt()
@@ -129,7 +127,10 @@ class AdminProductAddFragment : Fragment() {
                             adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
                         }
                     }.addOnFailureListener{ e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }
-            } else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
         }
         binding.tvBackAddProduct.setOnClickListener{
             adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
@@ -142,7 +143,7 @@ class AdminProductAddFragment : Fragment() {
         if (requestCode == 100 && data != null && data.data != null) {
             imgUri = data.data!!
             binding.imgProduct.setImageURI(imgUri)
-        }
+        } else Log.d("NO IMAGE URI", "NO IMAGE HAHA")
         super.onActivityResult(requestCode, resultCode, data)
     }
 }

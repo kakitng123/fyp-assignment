@@ -93,7 +93,8 @@
                         android:hint="@string/id"
                         app:boxBackgroundColor="#F4F4F4"
                         app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp">
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:errorEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/classIDField"

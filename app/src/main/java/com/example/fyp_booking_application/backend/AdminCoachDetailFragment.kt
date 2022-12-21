@@ -4,10 +4,14 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
@@ -38,6 +42,22 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
             val coachID = bundle.getString("toCoachDetails")
             databaseRef = FirebaseFirestore.getInstance()
             val docRef = databaseRef.collection("coach_testing1").document(coachID.toString())
+
+            val expType = arrayListOf<String>()
+            val expRef = databaseRef.collection("system_testing1").document("experience")
+            expRef.get().addOnSuccessListener { document ->
+                if(document != null){
+                    document.data!!.forEach { fieldName ->
+                        expType.add(fieldName.value.toString())
+                    }
+                    val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, expType)
+                    binding.coachExpField.isEnabled = false
+                    binding.coachExpField.adapter = spinnerAdapter
+                }
+            }.addOnFailureListener { e ->
+                Log.e("NO EXPERIENCE", "ERROR FETCHING EXPERIENCE", e)
+            }
+
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
                     val coach = document.toObject(CoachData::class.java)
@@ -62,25 +82,65 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     binding.coachNameField.setText(coach?.coachName.toString())
                     binding.coachEmailField.setText(coach?.coachEmail.toString())
                     binding.coachPhoneNoField.setText(coach?.coachPhone.toString())
-                    binding.coachExpField.setText(coach?.coachExp.toString())
+                    binding.coachExpField.setSelection(getIndex(binding.coachExpField, coach?.coachExp.toString()))
+
+                    binding.coachNameField.setOnFocusChangeListener { _, focused ->
+                        if(!focused && binding.coachNameField.text!!.isEmpty()){
+                            binding.coachNameContainer.helperText = "Name is Required"
+                        }
+                        else if(!focused && !(binding.coachNameField.text!!.matches("^\\p{L}+(?: \\p{L}+)*\$".toRegex()))){
+                            binding.coachNameContainer.helperText = "Invalid Name"
+                        }
+                        else binding.coachNameContainer.helperText = null
+                    }
+
+                    binding.coachEmailField.setOnFocusChangeListener { _, focused ->
+                        if(!focused && binding.coachEmailField.text!!.isEmpty()){
+                            binding.coachEmailContainer.helperText = "Email is Required"
+                        }
+                        else if(!focused && !Patterns.EMAIL_ADDRESS.matcher(binding.coachEmailField.text.toString()).matches()){
+                            binding.coachEmailContainer.helperText = "Invalid Email"
+                        }
+                        else binding.coachEmailContainer.helperText = null
+                    }
+
+                    binding.coachPhoneNoField.setOnFocusChangeListener { _, focused ->
+                        if(!focused && binding.coachPhoneNoField.text!!.isEmpty()){
+                            binding.coachPhoneNoContainer.helperText = "Phone No. is Required"
+                        }
+                        else if(!focused && !(binding.coachPhoneNoField.text!!.all { it.isDigit() })){
+                            binding.coachPhoneNoContainer.helperText = "Invalid Phone No."
+                        }
+                        else if(!focused && binding.coachPhoneNoField.text!!.length < 10){
+                            binding.coachPhoneNoContainer.helperText = "Invalid Phone No."
+                        }
+                        else binding.coachPhoneNoContainer.helperText = null
+                    }
 
                     binding.imgBtnUpdateCoach.setOnClickListener{
-                        val builder = AlertDialog.Builder(requireContext())
-                        builder.setTitle("Update Coach Details")
-                        builder.setMessage("Confirm to update coach details?")
-                        builder.setPositiveButton("Update"){ _, _ ->
-                            val updateCoach = hashMapOf(
-                                "coachName" to binding.coachNameField.text.toString(),
-                                "coachEmail" to binding.coachEmailField.text.toString(),
-                                "coachExp" to binding.coachPhoneNoField.text.toString(),
-                                "coachPhone" to binding.coachExpField.text.toString()
-                            )
-                            docRef.set(updateCoach, SetOptions.merge())
-                                .addOnSuccessListener { Log.d("UPDATE COACH","COACH DETAIL UPDATED SUCCESSFULLY" ) }
-                                .addOnFailureListener { e -> Log.e("UPDATE COACH", "ERROR UPDATING COACH DETAIL", e) }
+                        val validName = binding.coachNameContainer.helperText == null
+                        val validEmail = binding.coachEmailContainer.helperText == null
+                        val validPhone = binding.coachPhoneNoContainer.helperText == null
+
+                        if(validName && validEmail && validPhone){
+                            val builder = AlertDialog.Builder(requireContext())
+                            builder.setTitle("Update Coach Details")
+                            builder.setMessage("Confirm to update coach details?")
+                            builder.setPositiveButton("Update"){ _, _ ->
+                                val updateCoach = hashMapOf(
+                                    "coachName" to binding.coachNameField.text.toString(),
+                                    "coachEmail" to binding.coachEmailField.text.toString(),
+                                    "coachExp" to binding.coachPhoneNoField.text.toString(),
+                                    "coachPhone" to binding.coachExpField.selectedItem.toString()
+                                )
+                                docRef.set(updateCoach, SetOptions.merge())
+                                    .addOnSuccessListener { Log.d("UPDATE COACH","COACH DETAIL UPDATED SUCCESSFULLY" ) }
+                                    .addOnFailureListener { e -> Log.e("UPDATE COACH", "ERROR UPDATING COACH DETAIL", e) }
+                            }
+                            builder.setNegativeButton("Cancel"){ _, _ -> }
+                            builder.show()
                         }
-                        builder.setNegativeButton("Cancel"){ _, _ -> }
-                        builder.show()
+                        else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else {
@@ -145,5 +205,13 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                 }
 
             })
+    }
+
+    private fun getIndex(spinner: Spinner, exp: String): Int {
+        for (i in 0..spinner.count){
+            if(spinner.getItemAtPosition(i).toString() == exp)
+                return i
+        }
+        return 0
     }
 }

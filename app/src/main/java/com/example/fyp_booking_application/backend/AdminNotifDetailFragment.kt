@@ -35,7 +35,6 @@ class AdminNotifDetailFragment : Fragment() {
                 if(document != null){
                     val testing = document.toObject(NotificationData::class.java)
 
-                    // Set Text for EditText
                     binding.notifIDField.setText(testing?.notifyID.toString())
                     binding.notifTitleField.setText(testing?.notifyTitle.toString())
                     binding.notifMsgField.setText(testing?.notifyMessage.toString())
@@ -45,6 +44,9 @@ class AdminNotifDetailFragment : Fragment() {
                 else
                     Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
             }
+        }
+        binding.tvBackNotifDetail.setOnClickListener {
+            adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
         }
 
         return binding.root

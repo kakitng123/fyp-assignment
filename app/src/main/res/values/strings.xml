@@ -7,13 +7,15 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="back">Back</string>
-    <string name="update">Update</string>
     <string name="textView">TextView</string>
+    <string name="example">Example</string>
 
     <!-- Admin Nav Bar -->
     <string name="management">MANAGEMENT</string>
     <string name="transactions">TRANSACTIONS</string>
     <string name="system">SYSTEM</string>
+    <string name="history">HISTORY</string>
+
     <string name="admin">Admin</string>
     <string name="coach">Coach</string>
     <string name="trainingClass">Class</string>
@@ -22,8 +24,8 @@
     <string name="notification">Notification</string>
     <string name="booking">Booking</string>
     <string name="purchase">Purchase</string>
-    <string name="settings">System Settings</string>
     <string name="signOut">Sign Out</string>
+
     <string name="pending">Pending</string>
 
     <!-- Add Item -->
@@ -49,13 +51,16 @@
     <string name="message">Message</string>
     <string name="refCode">Referral Code</string>
     <string name="user">User</string>
+    <string name="password">Password</string>
+    <string name="userType">User Type</string>
+    <string name="update">Update</string>
 
     <!-- Add Category -->
-    <string name="all">All</string>
-    <string name="accs">Accessories</string>
-    <string name="rackets">Rackets</string>
-    <string name="etc">Etc</string>
-    <string name="example">Example</string>
+    <string name="all">ALL</string>
+    <string name="acc">ACCESSORIES</string>
+    <string name="racket">RACKET</string>
+    <string name="etc">ETC</string>
+
 
     <!-- ACTIVITY/FRAGMENT HEADINGS -->
 

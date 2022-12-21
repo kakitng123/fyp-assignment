@@ -37,10 +37,10 @@ class AdminDashboardActivity : AppCompatActivity() {
                     R.id.nav_court -> replaceFragment(AdminCourtFragment(), R.id.adminLayout)
                     R.id.nav_product -> replaceFragment(AdminProductFragment(), R.id.adminLayout)
                     R.id.nav_notification -> replaceFragment(AdminNotifFragment(), R.id.adminLayout)
+                    R.id.nav_user -> replaceFragment(AdminUserFragment(), R.id.adminLayout)
                     R.id.nav_booking -> replaceFragment(AdminBookingFragment(), R.id.adminLayout)
                     R.id.nav_purchase -> replaceFragment(AdminPurchaseFragment(), R.id.adminLayout)
-                    R.id.nav_settings -> replaceFragment(AdminUserFragment(), R.id.adminLayout)
-                    R.id.nav_signout -> {
+                    R.id.nav_signOut -> {
                         startActivity(Intent(this@AdminDashboardActivity, MainActivity::class.java))
                         finish()
                     }

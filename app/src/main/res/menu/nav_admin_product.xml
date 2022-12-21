@@ -7,11 +7,14 @@
         android:title="@string/all" />
     <item
         android:id="@+id/product_racket"
-        android:title="@string/rackets" />
+        android:icon="@drawable/ic_all"
+        android:title="@string/racket" />
     <item
         android:id="@+id/product_acc"
-        android:title="@string/accs" />
+        android:icon="@drawable/ic_all"
+        android:title="@string/acc" />
     <item
         android:id="@+id/product_etc"
+        android:icon="@drawable/ic_all"
         android:title="@string/etc" />
 </menu>

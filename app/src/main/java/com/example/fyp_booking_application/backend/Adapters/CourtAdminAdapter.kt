@@ -9,9 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.CourtData
+import com.example.fyp_booking_application.backend.TestCourtData
 
 class CourtAdminAdapter(
-    private val courtList: ArrayList<CourtData>,
+    private val courtList: ArrayList<TestCourtData>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<CourtAdminAdapter.MyViewHolder>() {
 
@@ -50,11 +51,12 @@ class CourtAdminAdapter(
 
         holder.tvCourtID.text = "Court ID"
         holder.tvCourtName.text = "Court Name"
-        holder.imgBtnDelete.visibility = View.VISIBLE
+        // holder.imgBtnDelete.visibility = View.VISIBLE
         holder.imgBtnDelete.setOnClickListener(){
             listener.onButtonClick(position)
         }
         holder.courtID.text = currentItem.courtID
+        holder.courtID.textSize = 14F
         holder.courtName.text = currentItem.courtName
     }
 

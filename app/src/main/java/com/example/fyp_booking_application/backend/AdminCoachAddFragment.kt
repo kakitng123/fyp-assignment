@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
@@ -28,7 +29,6 @@ class AdminCoachAddFragment : Fragment() {
         adminActivityView.setTitle("ADD COACH")
         databaseRef = FirebaseFirestore.getInstance()
 
-        // Input Validations
         binding.tfAddCoachName.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddCoachName.text!!.isEmpty()){
                 binding.coachNameContainer.helperText = "Name is Required"
@@ -49,13 +49,6 @@ class AdminCoachAddFragment : Fragment() {
             else binding.coachEmailContainer.helperText = null
         }
 
-        binding.tfAddCoachExp.setOnFocusChangeListener { _, focused ->
-            if(!focused && binding.tfAddCoachExp.text!!.isEmpty()){
-                binding.coachExpContainer.helperText = "Experience is Required"
-            }
-            else binding.coachExpContainer.helperText = null
-        }
-
         binding.tfAddCoachPhone.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddCoachPhone.text!!.isEmpty()){
                 binding.coachPhoneContainer.helperText = "Phone No. is Required"
@@ -69,13 +62,28 @@ class AdminCoachAddFragment : Fragment() {
             else binding.coachPhoneContainer.helperText = null
         }
 
+        val expType = arrayListOf<String>()
+        val categoryRef = databaseRef.collection("system_testing1").document("experience")
+        categoryRef.get().addOnSuccessListener { document ->
+            if(document != null){
+                document.data!!.forEach { fieldName ->
+                    expType.add(fieldName.value.toString())
+                }
+                expType.sortBy { list -> list.reversed() }
+                val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, expType)
+                binding.spinnerExpField.adapter = spinnerAdapter
+                binding.spinnerExpField.setSelection(0)
+            }
+        }.addOnFailureListener { e ->
+            Log.e("NO CATEGORY", "ERROR FETCHING CATEGORY", e)
+        }
+
         binding.imgBtnAddCoach.setOnClickListener {
             val validName = binding.coachNameContainer.helperText == null
             val validEmail = binding.coachEmailContainer.helperText == null
-            val validExp = binding.coachExpContainer.helperText == null
             val validPhone = binding.coachPhoneContainer.helperText == null
 
-            if(validName && validEmail && validExp && validPhone){
+            if(validName && validEmail && validPhone){
                 var nameValidation = 0
                 databaseRef.collection("coach_testing1").get()
                     .addOnSuccessListener { results ->
@@ -90,13 +98,13 @@ class AdminCoachAddFragment : Fragment() {
                                 "coachID" to newCoachRef.id,
                                 "coachName" to binding.tfAddCoachName.text.toString(),
                                 "coachEmail" to binding.tfAddCoachEmail.text.toString(),
-                                "coachExp" to binding.tfAddCoachExp.text.toString(), // Could Use Spinner
+                                "coachExp" to binding.spinnerExpField.selectedItem.toString(), // Could Use Spinner
                                 "coachPhone" to binding.tfAddCoachPhone.text.toString(),
                             )
                             newCoachRef.set(newCoach)
                                 .addOnSuccessListener {
                                     Log.d("ADDING NEW COACH", "COACH ADDED SUCCESSFULLY")
-                                    adminActivityView.replaceFragment(AdminCoachFragment(),R.id.adminLayout)
+                                    adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
                                 }
                                 .addOnFailureListener { e -> Log.e("ADDING NEW COACH", "ERROR ADDING NEW COACH", e)}
                         } else Toast.makeText(context, "EXISTING CLASS NAME", Toast.LENGTH_SHORT).show()

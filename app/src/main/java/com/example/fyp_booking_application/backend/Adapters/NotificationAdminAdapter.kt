@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
@@ -18,7 +19,7 @@ class NotificationAdminAdapter(
         val tvNotifyID: TextView = itemView.findViewById(R.id.tvDisplay1)
         val tvRefCode: TextView = itemView.findViewById(R.id.tvDisplay2)
         val tfNotifyID: TextView = itemView.findViewById(R.id.tfDisplay1)
-        val tfRefCode: TextView =itemView.findViewById(R.id.tfDisplay2)
+        val tfRefCode: TextView = itemView.findViewById(R.id.tfDisplay2)
 
         init {
             itemView.setOnClickListener(this)

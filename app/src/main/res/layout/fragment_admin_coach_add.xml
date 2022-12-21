@@ -87,27 +87,6 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/coachExpContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:hint="@string/exp"
-                        app:endIconMode="clear_text"
-                        app:helperText="@string/required"
-                        app:helperTextTextColor="@color/red_decline">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tfAddCoachExp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:lines="1"
-                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/coachPhoneContainer"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
@@ -132,6 +111,26 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/exp"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerExpField"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        tools:ignore="SpeakableTextPresentCheck">
+
+                    </Spinner>
                 </LinearLayout>
             </ScrollView>
 

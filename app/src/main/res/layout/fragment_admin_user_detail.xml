@@ -1,16 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".backend.AdminUserDetailFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="KEKW USER DETAIL" />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swUpdateUser"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/update"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminUserDetail"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminUserDetail"
+            tools:ignore="TouchTargetSizeCheck" />
 
+        <TextView
+            android:id="@+id/tvBackUserDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/back"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_admin_back"
+            app:layout_constraintBottom_toTopOf="@+id/cardAdminUserDetail"
+            app:layout_constraintStart_toStartOf="@+id/cardAdminUserDetail" />
+
+        <ImageButton
+            android:id="@+id/imgBtnDeleteUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/btn_circle"
+            android:contentDescription="@string/delete"
+            app:layout_constraintEnd_toEndOf="@+id/cardAdminUserDetail"
+            app:layout_constraintTop_toBottomOf="@+id/cardAdminUserDetail"
+            app:srcCompat="@drawable/ic_admin_delete_white"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/imgBtnUpdateUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_circle"
+            android:contentDescription="@string/update"
+            app:layout_constraintEnd_toStartOf="@+id/imgBtnDeleteUser"
+            app:layout_constraintTop_toTopOf="@+id/imgBtnDeleteUser"
+            app:srcCompat="@drawable/ic_admin_update30"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAdminUserDetail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="65dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userIDContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/id"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/userIDField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userNameContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/name"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/userNameField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="textPersonName"
+                            android:lines="1"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userEmailContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/email"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/userEmailField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userPasswordContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/password"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/userPasswordField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="textPassword"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userTypeContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:hint="@string/userType"
+                        app:boxBackgroundColor="#F4F4F4"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusTopStart="8dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/userTypeField"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:enabled="false"
+                            android:inputType="numberDecimal"
+                            android:textColor="@drawable/edit_text_selector"
+                            android:textSize="16sp"
+                            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
