@@ -51,7 +51,7 @@ class CourtAdminAdapter(
 
         holder.tvCourtID.text = "Court ID"
         holder.tvCourtName.text = "Court Name"
-        holder.imgBtnDelete.visibility = View.VISIBLE
+        // holder.imgBtnDelete.visibility = View.VISIBLE
         holder.imgBtnDelete.setOnClickListener(){
             listener.onButtonClick(position)
         }

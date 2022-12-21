@@ -28,7 +28,6 @@ class AdminCoachAddFragment : Fragment() {
         adminActivityView.setTitle("ADD COACH")
         databaseRef = FirebaseFirestore.getInstance()
 
-        // Input Validations
         binding.tfAddCoachName.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddCoachName.text!!.isEmpty()){
                 binding.coachNameContainer.helperText = "Name is Required"
