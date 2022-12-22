@@ -1,13 +1,18 @@
 package com.example.fyp_booking_application.frontend
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
+import com.example.fyp_booking_application.backend.addProductFragment
+import com.example.fyp_booking_application.databinding.FragmentProductDetailsBinding
+import com.example.fyp_booking_application.databinding.ProductCardBinding
 import com.example.fyp_booking_application.databinding.ProductCardDetailsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

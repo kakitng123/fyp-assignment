@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.frontend
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,9 +11,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.ProductData
 import com.example.fyp_booking_application.databinding.FragmentUserHomeBinding
-import com.example.fyp_booking_application.frontend.adapter.ProductAdapter
+import com.example.fyp_booking_application.frontend.adapter.UserProductAdapter
+import com.example.fyp_booking_application.frontend.data.ProductData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
@@ -25,7 +26,7 @@ class UserHomeFragment : Fragment() {
     private lateinit var fstore: FirebaseFirestore //get the shared instance of the FirebaseAuth object
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
-    private lateinit var productAdapter: ProductAdapter
+    private lateinit var productAdapter: UserProductAdapter
     private lateinit var productArrayList: ArrayList<ProductData>
     private lateinit var gridView: GridView
 
@@ -39,7 +40,7 @@ class UserHomeFragment : Fragment() {
         // Variables Declaration
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_home, container, false)
         val userView = (activity as UserDashboardActivity)
-
+        userView.setTitle("Home")
 
         //Initialise
         auth = FirebaseAuth.getInstance()
@@ -69,14 +70,9 @@ class UserHomeFragment : Fragment() {
         eventChangeListener()
         productArrayList = arrayListOf()
         gridView = binding.gridView
-        gridView.adapter = context?.let { ProductAdapter(it, productArrayList) }
-
-
-//         //gridView.adapter = CustomGridAdapter(Context context, String[] items)
-//         //gridView.adapter =
-//        productArrayList = arrayListOf()
-//        productAdapter = ProductAdapter(    productArrayList, this@UserHomeFragment)
-
+        gridView.adapter = context?.let { UserProductAdapter(it, productArrayList) }
+        //gridView.adapter = productArrayList = arrayListOf()
+        //productAdapter = ProductAdapter(    productArrayList, this@UserHomeFragment
 
         return binding.root
     }

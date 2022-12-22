@@ -9,8 +9,7 @@
 <!-- TODO: Update blank fragment layout -->
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".edit_e_password">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/titleBooking"
@@ -21,37 +20,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <Spinner
         android:id="@+id/courtNameBooking"
         android:layout_width="311dp"
         android:layout_height="52dp"
-        android:layout_marginTop="15dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="bookedCourtName"
-        android:minHeight="48dp"
+        android:layout_marginTop="150dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/titleBooking" />
 
-    <EditText
+    <Spinner
         android:id="@+id/courtRateBooking"
         android:layout_width="311dp"
         android:layout_height="52dp"
         android:layout_marginTop="15dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="bookedRate"
-        android:minHeight="48dp"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courtNameBooking" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/courtNameBooking"-->
+<!--        android:layout_width="311dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:autofillHints=""-->
+<!--        android:ems="10"-->
+<!--        android:hint="bookedCourtName"-->
+<!--        android:minHeight="48dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/spinner" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/courtRateBooking"-->
+<!--        android:layout_width="311dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:autofillHints=""-->
+<!--        android:ems="10"-->
+<!--        android:hint="bookedRate"-->
+<!--        android:minHeight="48dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/courtNameBooking" />-->
 
     <EditText
         android:id="@+id/courtPhoneBooking"
         android:layout_width="311dp"
         android:layout_height="52dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="bookedPhone"
@@ -95,15 +114,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courtTimeBooking" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 

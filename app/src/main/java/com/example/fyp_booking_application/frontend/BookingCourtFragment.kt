@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.example.fyp_booking_application.ForgotPasswordActivity
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.backend.Adapters.CourtAdminAdapter
@@ -21,6 +23,7 @@ import com.example.fyp_booking_application.frontend.data.BookingData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlin.collections.ArrayList
@@ -33,24 +36,13 @@ class BookingCourtFragment : Fragment() {
     private lateinit var fstore: FirebaseFirestore //get the shared instance of the FirebaseAuth object
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
-    private lateinit var bookingRef: DocumentReference
-    private lateinit var binding : FragmentBookingCourtBinding
-
-    private lateinit var courtList : ArrayList<CourtData>
-    private lateinit var timeslotList : ArrayList<CourtTimeslots>
-    private lateinit var courtManageAdapter : CourtAdminAdapter
-    private lateinit var timeslotAdapter : TimeslotAdminAdapter
-
-    private lateinit var testing: ArrayList<BookingData>
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val spinnerData = arrayOf("A1","A2","A3")
-        // binding = DataBindingUtil.inflate()
+        val spinnerCourtData = arrayOf("A1", "A2", "A3")
+        val spinnerRateData = arrayOf("1 Hours", "2 Hours")
 
         // Initialise
         auth = FirebaseAuth.getInstance()
@@ -58,141 +50,118 @@ class BookingCourtFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
 
-        //bookingRef = fstore.collection("court_testing2").document()
-        val spinnerData1: List<String> = ArrayList()
-
         val binding = FragmentBookingCourtBinding.inflate(layoutInflater)
         val userView = (activity as UserDashboardActivity)
+        userView.setTitle("Booking Court")
 
-        val spinner = binding.spinner
-        spinner.adapter = ArrayAdapter(userView, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, spinnerData)
-        spinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+        val spinnerCourtName = binding.courtNameBooking
+        val spinnerCourtRate = binding.courtRateBooking
+        //Spinner for Court Name
+        spinnerCourtName.adapter = ArrayAdapter(
+            userView,
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            spinnerCourtData
+        )
+        spinnerCourtName.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("error")
             }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val spinData:String = parent?.getItemAtPosition(position).toString()
-                println(spinData)
-                Log.d("TESTING123", "$spinData")
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val spinBookingCourtData: String = parent?.getItemAtPosition(position).toString()
+                println(spinBookingCourtData)
 
-                //Save Updated Data function
-                binding.nextBtn.setOnClickListener {
-                    var bookingCourt: String = binding.courtNameBooking.text.toString()
-                    var bookingRate: String = binding.courtRateBooking.text.toString()
-                    var bookingPhone: String = binding.courtPhoneBooking.text.toString()
-                    var bookingDate: String = binding.courtDateBooking.text.toString()
-                    var bookingTime:String = binding.courtTimeBooking.text.toString()
+                //Spinner for Hours Rate
+                spinnerCourtRate.adapter = ArrayAdapter(
+                    userView,
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+                    spinnerRateData
+                )
+                spinnerCourtRate.onItemSelectedListener =
+                    object : AdapterView.OnItemSelectedListener {
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+                            println("error")
+                        }
 
-                    ///Validation for all input field and match the pattern
-                    if (bookingCourt.isEmpty()) {
-                        binding.courtNameBooking.setError("Booking Court is required!")
-                        binding.courtNameBooking.requestFocus()
-                        return@setOnClickListener
-                    }
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            val spinBookingRateData: String =
+                                parent?.getItemAtPosition(position).toString()
+                            println(spinBookingRateData)
 
-                    if (bookingRate.isEmpty()) {
-                        binding.courtRateBooking.setError("Booking Rate is required!")
-                        binding.courtRateBooking.requestFocus()
-                        return@setOnClickListener
-                    }
+                            //Save Updated Data function
+                            binding.nextBtn.setOnClickListener {
+                                var bookingPhone: String = binding.courtPhoneBooking.text.toString()
+                                var bookingDate: String = binding.courtDateBooking.text.toString()
+                                var bookingTime: String = binding.courtTimeBooking.text.toString()
 
-                    if (bookingPhone.isEmpty()) {
-                        binding.courtPhoneBooking.setError("Booking Phone Number is required!")
-                        binding.courtPhoneBooking.requestFocus()
-                        return@setOnClickListener
-                    } else {
-                        if (!Patterns.PHONE.matcher(bookingPhone).matches()) {
-                            binding.courtPhoneBooking.setError("Please provide valid phone!")
-                            binding.courtPhoneBooking.requestFocus()
-                            return@setOnClickListener
+                                if (bookingPhone.isEmpty()) {
+                                    binding.courtPhoneBooking.setError("Booking Phone Number is required!")
+                                    binding.courtPhoneBooking.requestFocus()
+                                    return@setOnClickListener
+                                } else {
+                                    if (!Patterns.PHONE.matcher(bookingPhone).matches()) {
+                                        binding.courtPhoneBooking.setError("Please provide valid phone!")
+                                        binding.courtPhoneBooking.requestFocus()
+                                        return@setOnClickListener
+                                    }
+                                }
+
+                                if (bookingDate.isEmpty()) {
+                                    binding.courtDateBooking.setError("Booking Date is required!")
+                                    binding.courtDateBooking.requestFocus()
+                                    return@setOnClickListener
+                                }
+
+                                if (bookingTime.isEmpty()) {
+                                    binding.courtTimeBooking.setError("Booking Time is required!")
+                                    binding.courtTimeBooking.requestFocus()
+                                    return@setOnClickListener
+                                }
+
+                                val userID = auth.currentUser?.uid
+                                val bookingId = fstore.collection("Bookings").document()
+                                val booking = hashMapOf(
+                                    "bookingID" to bookingId.id,
+                                    "bookingCourt" to spinBookingCourtData,
+                                    "bookingRate" to spinBookingRateData,
+                                    "bookingPhone" to bookingPhone,
+                                    "bookingDate" to bookingDate,
+                                    "bookingTime" to bookingTime,
+                                    "bookingStatus" to "Pending",
+                                    "userID" to userID
+                                )
+                                Log.d("testing", booking.toString())
+                                bookingId.set(booking, SetOptions.merge()).addOnSuccessListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Added Successfully",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    setFragmentResult(
+                                        "toCheckoutPage",
+                                        bundleOf("toCheckoutPage" to bookingId.id)
+                                    )
+                                    userView.replaceFragment(CheckoutFragment())
+                                }.addOnFailureListener() {
+                                    Toast.makeText(context, "Added Failure", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                                Log.d("testing2", bookingId.toString())
+                            }
                         }
                     }
-
-                    if(bookingDate.isEmpty()){
-                        binding.courtDateBooking.setError("Booking Date is required!")
-                        binding.courtDateBooking.requestFocus()
-                        return@setOnClickListener
-                    }
-
-                    if(bookingTime.isEmpty()){
-                        binding.courtTimeBooking.setError("Booking Time is required!")
-                        binding.courtTimeBooking.requestFocus()
-                        return@setOnClickListener
-                    }
-
-                    val userID = auth.currentUser?.uid
-                    val bookingId = fstore.collection("Bookings").document().id
-                    val booking = hashMapOf(
-                        "bookingID" to bookingId,
-                        "bookingCourt" to bookingCourt,
-                        "bookingRate" to bookingRate,
-                        "bookingPhone" to bookingPhone,
-                        "bookingDate" to bookingDate,
-                        "bookingTime" to bookingTime,
-                        "bookingStatus" to "Pending",
-                        "spinner" to spinData,
-                        "userID" to userID
-                    )
-                    // testing
-                    // bookingId.set(booking)
-
-                    //Add Data
-                    //fstore.collection("Bookings").document(userID.toString()).collection("Bookings").document().parent.add(booking)
-                    //val createData = fstore.collection("Bookings").document(userID.toString())
-                        //createData.parent.add(booking)
-                    fstore.collection("Bookings").document(userID.toString())
-                    .parent.add(booking)
-                        .addOnSuccessListener { createData ->
-                            Log.d("exits", "Booking court record updated.")
-                            Toast.makeText(activity, "Added Successfully", Toast.LENGTH_SHORT)
-                                .show()
-                            userView.replaceFragment(CheckoutFragment())
-                        }
-                        .addOnFailureListener { e ->
-                            Log.w(ContentValues.TAG, "Error adding document", e)
-                            Toast.makeText(activity, "Added Failure", Toast.LENGTH_SHORT).show()
-                        }
-                }
-//                val data = hashMapOf("spinner" to spinData)
-//                val userID = auth.currentUser?.uid
-//                val postsRef = fstore.collection("Bookings")
-//                val postIdRef = postsRef.document(userID.toString())
-//                postIdRef.update(data as Map<String, Any>)
-
-//                val map: MutableMap<Any, String> = HashMap()
-//                map["spinner"] = "A5"
-//                fstore.collection("Bookings").document(userID.toString()).set(map, SetOptions.merge())
-                //    booking.put("spinner", spinData);
-                // docRef = database.collection(yourCollection).document()
-                // newData["id"] = docRef.id
-                // docRef.set(newData, SetOptions.merge())
-                //data["spinner"] = spinData
-
-
-//                fstore.collection("Bookings").document(userID.toString())
-//                    .update("spinner", spinData)
-//                fstore.collection("Bookings").document(userID.toString())
-//                    .update(mapOf(
-//                        "spinner" to spinData
-//                    ))
             }
         }
-
-//        val spinnerData: List<String> = ArrayList()
-//        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(ApplicationProvider.getApplicationContext(), android.R.layout.simple_spinner_item, spinnerData)
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = adapter
-//        courtRef.get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
-//            if (task.isSuccessful) {
-//                for (document in task.result) {
-//                    val subject = document.getString("bookingCourt")
-//                    spinnerData.add(subject)
-//                }
-//                adapter.notifyDataSetChanged()
-//            }
-//        })
-
         return binding.root
     }
 }

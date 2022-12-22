@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".frontend.TrainingClassFragment">
-
-        <!-- TODO: Update blank fragment layout -->
-        <!--    <GridLayout-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="match_parent"-->
-        <!--        android:rowCount="2"-->
-        <!--        android:columnCount="6"-->
-        <!--        android:layout_weight="3">-->
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -25,33 +15,23 @@
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <!--            &lt;!&ndash; ImageVIew to display our Course Image &ndash;&gt;-->
-                <!--            <de.hdodenhof.circleimageview.CircleImageView-->
-                <!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
-                <!--                android:id="@+id/tvCoachImage"-->
-                <!--                android:layout_width="96dp"-->
-                <!--                android:layout_height="96dp"-->
-                <!--                android:src="@drawable/smashlogo"-->
-                <!--                app:civ_border_width="2dp"-->
-                <!--                app:civ_border_color="#FF000000"/>-->
-
-                <ImageView
-                    android:id="@+id/tvProductImage"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_centerInParent="true"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/smashlogo" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/tvProductImage"-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="150dp"-->
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:contentDescription="@string/app_name"-->
+<!--                    android:src="@drawable/smashlogo" />-->
 
                 <TextView
-                    android:id="@+id/tvCoachName"
+                    android:id="@+id/tvProductName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvProductImage"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="20dp"
                     android:layout_marginStart="20dp"
@@ -62,7 +42,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
-            </RelativeLayout>
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

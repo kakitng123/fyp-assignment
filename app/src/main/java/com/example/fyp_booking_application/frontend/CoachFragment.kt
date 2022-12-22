@@ -13,20 +13,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.databinding.FragmentCoachDetailBinding
-import com.example.fyp_booking_application.frontend.adapter.CoachAdapter
+import com.example.fyp_booking_application.databinding.FragmentCoachBinding
+import com.example.fyp_booking_application.frontend.adapter.UserCoachAdapter
 import com.example.fyp_booking_application.frontend.data.CoachData
 import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 
-class CoachDetailFragment : Fragment() {
-    private lateinit var binding: FragmentCoachDetailBinding
+class CoachFragment : Fragment(), UserCoachAdapter.OnItemClickListener {
+    private lateinit var binding: FragmentCoachBinding
     private lateinit var storage: FirebaseStorage
     private lateinit var fstore: FirebaseFirestore
     private lateinit var storageRef: StorageReference
-    private lateinit var coachAdapter: CoachAdapter
+    private lateinit var coachAdapter: UserCoachAdapter
     private lateinit var coachDataArrayList: ArrayList<CoachData>
     private lateinit var coachRecView: RecyclerView
     override fun onCreateView(
@@ -34,18 +34,19 @@ class CoachDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //Declare the variable
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coach_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coach, container, false)
         val userView = (activity as UserDashboardActivity)
+        userView.setTitle("Coach")
 
         eventChangeListener()
-        coachRecView = binding.recyclerView
+        coachRecView = binding.coachRecyclerView
         //set layout manager to position the items
         coachRecView.layoutManager = LinearLayoutManager(context)
         coachRecView.setHasFixedSize(true)
         //Set a array list data
         coachDataArrayList = arrayListOf()
         //create adapter passing in the array adapter data
-        coachAdapter = CoachAdapter(coachDataArrayList)
+        coachAdapter = UserCoachAdapter(coachDataArrayList, this@CoachFragment)
         //Attach the adapter to the recyclerView to populate the items
         coachRecView.adapter = coachAdapter
 
@@ -56,7 +57,7 @@ class CoachDetailFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
 
-        fstore.collection("CoachProfile")
+        fstore.collection("coach_testing1")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){
@@ -73,11 +74,12 @@ class CoachDetailFragment : Fragment() {
             })
     }
 
-    fun onItemClick(position: Int) {
+
+    override fun onItemClick(position: Int) {
         val currentItem = coachDataArrayList[position]
         val userView = (activity as UserDashboardActivity)
         userView.replaceFragment(TrainingClassFragment())
         // Parse Data to Paired-Fragment
-        setFragmentResult("toCoachDetail", bundleOf("toCoachDetail" to currentItem.coachEmail))
+        setFragmentResult("toCoachClass", bundleOf("toCoachClass" to currentItem.coachName))
     }
 }

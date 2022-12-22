@@ -108,7 +108,7 @@ tools:context=".frontend.MyWalletFragment">
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="284dp"
-            tools:listitem="@layout/coach_card"
+            tools:listitem="@layout/user_coach_card"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

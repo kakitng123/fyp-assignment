@@ -1,6 +1,5 @@
 package com.example.fyp_booking_application.frontend.adapter
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -10,31 +9,36 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.frontend.data.CoachData
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
 
-class CoachAdapter(
-    private val coachDataArrayList: ArrayList<CoachData>) : RecyclerView.Adapter<CoachAdapter.CoachViewholder>() {
+class UserCoachAdapter(
+    private val coachDataArrayList: ArrayList<CoachData>,
+    private val listener: OnItemClickListener
+    ) : RecyclerView.Adapter<UserCoachAdapter.CoachViewholder>() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
 
+
     // to inflate the layout for each item of recycler view.
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoachAdapter.CoachViewholder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.coach_card, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserCoachAdapter.CoachViewholder {
+        //infate the custom layout
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_coach_card, parent, false)
+        //return a new holder instance
         return CoachViewholder(itemView)
     }
 
-    override fun onBindViewHolder(holder: CoachAdapter.CoachViewholder, position: Int) {
+    //Involves the populating data into the item through holder
+    override fun onBindViewHolder(holder: UserCoachAdapter.CoachViewholder, position: Int) {
         // Initialise
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
 
-        // to set data to textview and imageview of each card layout
+        //Get the data model based on position
         val coachModel: CoachData = coachDataArrayList[position]
 
+        // to set data to textview and imageview of each card layout
         val img = storageRef.child("images/coachProfile/coach_"+ coachModel.coachName)
         val file = File.createTempFile("temp", "png")
 
@@ -44,32 +48,41 @@ class CoachAdapter(
         }
 
         holder.coachName.text = coachModel.coachName
-        holder.coachID.text = coachModel.coachID
-        holder.coachExperience.text = coachModel.coachExperience
+        holder.coachExperience.text = coachModel.coachExp
         holder.coachPhone.text = coachModel.coachPhone
         holder.coachEmail.text = coachModel.coachEmail
     }
 
+    //Return the total count of items in the list
     override fun getItemCount(): Int {
         // this method is used for showing number of card items in recycler view.
         return coachDataArrayList.size
     }
 
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
     // View holder class for initializing of your views such as TextView and Imageview.
-    class CoachViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CoachViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
          val coachImage: ImageView
          val coachName: TextView
-         val coachID: TextView
          val coachExperience: TextView
          val coachPhone: TextView
          val coachEmail: TextView
-        init {
+         init {
             coachImage = itemView.findViewById(R.id.tvCoachImage)
             coachName = itemView.findViewById(R.id.tvCoachName)
-            coachID = itemView.findViewById(R.id.tvCoachID)
             coachExperience = itemView.findViewById(R.id.tvCoachExperience)
             coachPhone = itemView.findViewById(R.id.tvCoachPhone)
             coachEmail = itemView.findViewById(R.id.tvCoachEmail)
+             itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            if (adapterPosition != RecyclerView.NO_POSITION){
+                listener.onItemClick(adapterPosition)
+            }
         }
     }
 }
