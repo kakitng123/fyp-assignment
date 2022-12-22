@@ -20,7 +20,7 @@ class UserDashboardActivity : AppCompatActivity() {
         binding.apply {
             userBottomNav.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.home -> replaceFragment(BookingCourtHistoryFragment())
+                    R.id.home -> replaceFragment(UserHomeFragment())
                     R.id.training -> replaceFragment(CoachFragment())
                     R.id.court -> replaceFragment(BookingCourtFragment())
                     R.id.myWallet -> replaceFragment(MyWalletFragment())
@@ -29,20 +29,6 @@ class UserDashboardActivity : AppCompatActivity() {
                 true
             }
         }
-
-
-//
-//        val bottomNav = findViewById<BottomNavigationView>(R.id.userBottomNav)
-//        bottomNav.setOnNavigationItemSelectedListener() { it ->
-//            when(it.itemId) {
-//                R.id.home -> loadFragment(UserHomeFragment())
-//                R.id.training -> loadFragment(CoachDetailFragment())
-//                R.id.court -> loadFragment(BookingCourtFragment())
-//                R.id.myWallet -> loadFragment(MyWalletFragment())
-//                R.id.profile -> loadFragment(UserProfileFragment())
-//            }
-//            true
-//        }
     }
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()

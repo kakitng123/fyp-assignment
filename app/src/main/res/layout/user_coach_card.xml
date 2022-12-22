@@ -84,15 +84,4 @@
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btnSignIn"-->
-    <!--        android:layout_width="311dp"-->
-    <!--        android:layout_height="52dp"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:text="Login"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/cardTraining" />-->
-
 </FrameLayout>

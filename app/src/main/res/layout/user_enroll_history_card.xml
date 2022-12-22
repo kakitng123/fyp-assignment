@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".frontend.TrainingClassFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".frontend.EnrollClassHistoryFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -24,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/historyClassName"
+                android:id="@+id/tvHistoryClassName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -37,47 +35,47 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/historyClassRM"
+                android:id="@+id/tvHistoryClassRM"
                 android:layout_width="66dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/historyClassName"
-                android:layout_marginStart="107dp"
-                android:layout_marginTop="-31dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="72dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_toEndOf="@id/historyClassName"
+                android:layout_toEndOf="@id/tvHistoryClassName"
                 android:drawablePadding="2dp"
                 android:text="RM"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="21sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/historyClassPrice"
-                android:layout_width="116dp"
+                android:id="@+id/tvHistoryClassPrice"
+                android:layout_width="134dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/historyClassRM"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="170dp"
-                android:layout_marginTop="-37dp"
+                android:layout_marginStart="-19dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_toEndOf="@id/historyClassName"
+                android:layout_toEndOf="@+id/tvHistoryClassRM"
                 android:drawablePadding="2dp"
                 android:text="100.00"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
-                android:textSize="25sp"
+                android:textSize="21sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/historyClassDate"
+                android:id="@+id/tvHistoryClassDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/historyClassPrice"
+                android:layout_below="@id/tvHistoryClassPrice"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
@@ -86,43 +84,32 @@
                 android:text="20-12-2022" />
 
             <TextView
-                android:id="@+id/historyClassTime"
+                android:id="@+id/tvHistoryClassTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/historyClassPrice"
+                android:layout_below="@id/tvHistoryClassPrice"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_toEndOf="@id/historyClassDate"
+                android:layout_toEndOf="@id/tvHistoryClassDate"
                 android:drawablePadding="2dp"
                 android:text="11:00pm" />
 
             <TextView
-                android:id="@+id/historyClassStatus"
+                android:id="@+id/tvHistoryClassStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/historyClassTime"
-                android:layout_marginTop="-30dp"
+                android:layout_below="@+id/tvHistoryClassRM"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="15dp"
-                android:layout_toEndOf="@id/historyClassTime"
+                android:layout_toEndOf="@id/tvHistoryClassTime"
                 android:drawablePadding="2dp"
                 android:text="Success"
                 android:textAlignment="textEnd" />
 
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btnSignIn"-->
-    <!--        android:layout_width="311dp"-->
-    <!--        android:layout_height="52dp"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:text="Login"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/cardTraining" />-->
-
 </FrameLayout>

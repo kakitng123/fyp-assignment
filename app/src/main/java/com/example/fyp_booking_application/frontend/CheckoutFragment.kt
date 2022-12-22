@@ -1,60 +1,119 @@
 package com.example.fyp_booking_application.frontend
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fyp_booking_application.R
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.fragment.app.setFragmentResultListener
+import com.example.fyp_booking_application.UserDashboardActivity
+import com.example.fyp_booking_application.databinding.FragmentCheckoutBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CheckoutFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CheckoutFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
+    private lateinit var fstore: FirebaseFirestore //get the shared instance of the FirebaseAuth object
+    private lateinit var binding : FragmentCheckoutBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_checkout, container, false)
-    }
+        val spinnerPaymentOption = arrayOf("My Wallet")
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CheckoutFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CheckoutFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        // Initialise
+        auth = FirebaseAuth.getInstance()
+        fstore = FirebaseFirestore.getInstance()
+
+        binding = FragmentCheckoutBinding.inflate(layoutInflater)
+        val userID = auth.currentUser?.uid
+        val userView = (activity as UserDashboardActivity)
+        userView.setTitle("Checkout")
+
+        //Spinner for Payment Option
+        val spinnerPayment = binding.checkoutPayment
+        spinnerPayment.adapter = ArrayAdapter(
+            userView,
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            spinnerPaymentOption
+        )
+        spinnerPayment.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                println("error")
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val spinPaymentData: String = parent?.getItemAtPosition(position).toString()
+                println(spinPaymentData)
+
+                //Retrieve Booking Data and Display Booking Details in Checkout Page
+                setFragmentResultListener("toCheckoutPage") { _, bundle ->
+                    val bookingID = bundle.getString("toCheckoutPage")
+                    val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
+                    retrieveBookingRef.get().addOnCompleteListener { resultData ->
+                        if (resultData != null) {
+                            val dateResult = resultData.result.getString("bookingDate").toString()
+                            val timeResult = resultData.result.getString("bookingTime").toString()
+                            val rateResult = resultData.result.getString("bookingRate").toString()
+                            val courtResult = resultData.result.getString("bookingCourt").toString()
+                            var price: String = ""
+
+                            if (rateResult == "1 Hours") {
+                                price = "10.00"
+                            } else {
+                                price = "20.00"
+                            }
+
+                            binding.checkoutDate.setText(dateResult)
+                            binding.checkoutTime.setText(timeResult)
+                            binding.checkoutRate.setText(rateResult)
+                            binding.checkoutCourt.setText(courtResult)
+                            binding.totalAmount.setText(price)
+                        } else {
+                            Log.d("noexits", "No such documents.")
+                        }
+                    }.addOnFailureListener { exception ->
+                        Log.d("noexits", "Error getting documents.", exception)
+                    }
+
+                    //Save Updated Booking Data
+                    binding.checkoutBtn.setOnClickListener {
+                        var bookingDate: String = binding.checkoutDate.text.toString()
+                        var bookingTime: String = binding.checkoutTime.text.toString()
+                        var bookingRate: String = binding.checkoutRate.text.toString()
+                        var bookingCourt: String = binding.checkoutCourt.text.toString()
+                        var bookingPayment: String = binding.totalAmount.text.toString()
+
+                        val userID = auth.currentUser?.uid
+                        val bookingId = fstore.collection("Bookings").document(bookingID.toString())
+
+                        val bookingUpdates = hashMapOf(
+                            "bookingDate" to bookingDate,
+                            "bookingTime" to bookingTime,
+                            "bookingRate" to bookingRate,
+                            "bookingCourt" to bookingCourt,
+                            "bookingStatus" to "Success",
+                            "bookingPayment" to bookingPayment,
+                            "bookingPaymentMethod" to spinPaymentData,
+                        )
+                        bookingId.set(bookingUpdates, SetOptions.merge()).addOnSuccessListener {
+                            Toast.makeText(context, "Checkout Successfully", Toast.LENGTH_SHORT).show()
+                            userView.replaceFragment(BookingCourtFragment())
+                        }
+                    }
                 }
             }
+        }
+        return binding.root
     }
 }

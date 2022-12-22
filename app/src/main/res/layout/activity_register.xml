@@ -83,13 +83,13 @@
             android:id="@+id/isUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Player" />
+            android:text="User" />
 
         <RadioButton
             android:id="@+id/isAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Coach" />
+            android:text="Admin" />
     </RadioGroup>
 
     <Button
@@ -98,6 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Sign Up"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupRole" />

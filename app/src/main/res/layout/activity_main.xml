@@ -23,8 +23,9 @@
         android:id="@+id/btnSignIn"
         android:layout_width="311dp"
         android:layout_height="52dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:text="Login"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editLogPass" />
@@ -65,15 +66,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btnAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="toAdmin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="280dp"
@@ -87,13 +79,4 @@
         app:layout_constraintVertical_bias="0.089"
         app:srcCompat="@drawable/smashlogo" />
 
-    <Button
-        android:id="@+id/btntoUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:text="TOUSER"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdmin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

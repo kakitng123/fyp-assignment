@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import android.widget.GridView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentUserHomeBinding
+import com.example.fyp_booking_application.frontend.adapter.UserCoachAdapter
 import com.example.fyp_booking_application.frontend.adapter.UserProductAdapter
 import com.example.fyp_booking_application.frontend.data.ProductData
 import com.google.firebase.auth.FirebaseAuth
@@ -27,10 +30,10 @@ class UserHomeFragment : Fragment() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
     private lateinit var productAdapter: UserProductAdapter
-    private lateinit var productArrayList: ArrayList<ProductData>
-    private lateinit var gridView: GridView
+    private lateinit var userProDataArrayList: ArrayList<ProductData>
+    private lateinit var userProRecView: RecyclerView
+    //private lateinit var gridView: GridView
 
-    private lateinit var items: Array<String>
     var inflater: LayoutInflater? = null
 
     override fun onCreateView(
@@ -48,40 +51,36 @@ class UserHomeFragment : Fragment() {
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
 
-
-//        testing123()
-//        Log.d("TESTING 12", productArrayList.toString())
-//
-////        Log.d("TESTING 123", productDataArrayList.toString())
-////        Log.d("TESTING 1234", context.toString())
-//        binding.gridView.apply{
-//            Log.d("TESTING 123", productArrayList.toString())
-//            Log.d("TESTING 1234", context.toString())
-//            productAdapter = ProductAdapter(context, productArrayList)
-//            adapter = productAdapter
-//        }
-
-//        binding.gridView.adapter = CustomGridAdap
-//        binding.gridView.apply{
-//            productDataArrayList = arrayListOf()
-//
-//        }
-
         eventChangeListener()
-        productArrayList = arrayListOf()
-        gridView = binding.gridView
-        gridView.adapter = context?.let { UserProductAdapter(it, productArrayList) }
-        //gridView.adapter = productArrayList = arrayListOf()
-        //productAdapter = ProductAdapter(    productArrayList, this@UserHomeFragment
+        userProRecView = binding.userProductRecyclerView
+        //set layout manager to position the items
+        userProRecView.layoutManager = LinearLayoutManager(context)
+        val linearLayoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
+        userProRecView.setLayoutManager(linearLayoutManager)
+//        userProRecView.isHorizontalScrollBarEnabled
+        userProRecView.setHasFixedSize(true)
+        //Set a array list data
+        userProDataArrayList = arrayListOf()
+        //create adapter passing in the array adapter data
+        productAdapter = UserProductAdapter(userProDataArrayList)
+        //Attach the adapter to the recyclerView to populate the items
+        userProRecView.adapter = productAdapter
+
+
+//        eventChangeListener()
+//        productArrayList = arrayListOf()
+//        gridView = binding.gridView
+//        gridView.adapter = context?.let { UserProductAdapter(it, productArrayList) }
+//        //gridView.adapter = productArrayList = arrayListOf()
+//        //productAdapter = ProductAdapter(    productArrayList, this@UserHomeFragment
 
         return binding.root
     }
 
-
     private fun eventChangeListener() {
         fstore = FirebaseFirestore.getInstance()
-        //storage = FirebaseStorage.getInstance()
-        //storageRef = storage.reference
 
         fstore.collection("Products")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
@@ -92,31 +91,11 @@ class UserHomeFragment : Fragment() {
                     }
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
-                            productArrayList.add(dc.document.toObject(ProductData::class.java))
+                            userProDataArrayList.add(dc.document.toObject(ProductData::class.java))
                         }
                     }
                     productAdapter.notifyDataSetChanged()
                 }
             })
     }
-
-//    private var context: Context? = null
-//    private var items: Array<String>
-//    var inflater: LayoutInflater? = null
-//
-
-
-
 }
-
-
-//
-//button.setOnClickListener(new View.OnClickListener() {
-//
-//    @Override
-//    public void onClick(View v) {
-//        if(context instanceof MainActivity) {
-//            ((MainActivity) context).itemClicked(position);
-//        }
-//    }
-//});

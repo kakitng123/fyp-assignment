@@ -7,8 +7,6 @@
     android:background="#ffffff"
     tools:context=".MainActivity">
 
-
-
     <FrameLayout
         android:id="@+id/userContainerLayout"
         android:layout_width="0dp"
@@ -18,8 +16,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/userBottomNav"
@@ -31,7 +27,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userContainerLayout"
         app:menu="@menu/user_nav" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

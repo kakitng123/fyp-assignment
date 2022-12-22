@@ -7,12 +7,6 @@
         android:layout_height="wrap_content"
         tools:context=".frontend.CoachFragment">
 
-        <TextView
-            android:id="@+id/tvCoachDetailTitle"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="Coach Fragment" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/coachRecyclerView"
             android:layout_width="match_parent"

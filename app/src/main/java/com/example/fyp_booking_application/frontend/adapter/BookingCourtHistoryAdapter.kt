@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.frontend.data.BookingData
-import com.google.firebase.storage.FirebaseStorage
 
 class BookingCourtHistoryAdapter(
     private val bookingHistoryDataArrayList: ArrayList<BookingData>
@@ -51,11 +50,11 @@ class BookingCourtHistoryAdapter(
         val historyTime: TextView
         val historyStatus: TextView
         init {
-            historyCourt = itemView.findViewById(R.id.historyCourtName)
-            historyPrice = itemView.findViewById(R.id.historyCourtPrice)
-            historyDate = itemView.findViewById(R.id.historyCourtDate)
-            historyTime = itemView.findViewById(R.id.historyCourtTime)
-            historyStatus = itemView.findViewById(R.id.historyCourtStatus)
+            historyCourt = itemView.findViewById(R.id.tvHistoryCourtName)
+            historyPrice = itemView.findViewById(R.id.tvHistoryCourtPrice)
+            historyDate = itemView.findViewById(R.id.tvHistoryCourtDate)
+            historyTime = itemView.findViewById(R.id.tvHistoryCourtTime)
+            historyStatus = itemView.findViewById(R.id.tvHistoryCourtStatus)
         }
     }
 }

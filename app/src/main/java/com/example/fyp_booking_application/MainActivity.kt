@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         val signInBtn = findViewById<Button>(R.id.btnSignIn)
         val navForgotPass = findViewById<TextView>(R.id.linkForgotPass)
         val navRegister = findViewById<TextView>(R.id.linkSignUp)
-        val btntoUser = findViewById<Button>(R.id.btntoUser)
-        val btntoAdmin = findViewById<Button>(R.id.btnAdmin)
 
         // Initialise
         auth = FirebaseAuth.getInstance()
@@ -41,16 +39,6 @@ class MainActivity : AppCompatActivity() {
         //Navigate to Register Page
         navRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
-        }
-
-        // TO DELETE AFTER
-        btntoAdmin.setOnClickListener(){
-            startActivity(Intent(this, AdminDashboardActivity::class.java))
-            finish()
-        }
-        btntoUser.setOnClickListener(){
-            startActivity(Intent(this, UserDashboardActivity::class.java))
             finish()
         }
 
@@ -71,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
+
             if(password.isEmpty()){
                 passwordLogin.error = "Password is required!"
                 passwordLogin.requestFocus()
@@ -92,8 +81,6 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT)
                                 .show() //Show successfully Toast Message
                             checkUserAccessLevel(auth.currentUser?.uid)
-                            //startActivity(Intent(applicationContext, UserDashboardActivity::class.java))
-                            //finish()
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(ContentValues.TAG, "signInWithEmail:failure", signIn.exception)
@@ -104,8 +91,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Please insert your information!", Toast.LENGTH_SHORT).show() //Show failure Toast Message
             }
         }
-
-
     }
 
     //Function checking role
@@ -127,11 +112,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Log.d("noexits", "No such documents.")
             }
-            Toast.makeText(applicationContext, "Check Successfully", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { exception ->
             Log.d("noexits", "Error getting documents.", exception)
-            Toast.makeText(applicationContext, "Check Failure", Toast.LENGTH_SHORT)
-                .show()
         }
     }
 }

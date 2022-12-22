@@ -19,15 +19,11 @@ import com.example.fyp_booking_application.frontend.adapter.UserTrainingClassAda
 import com.example.fyp_booking_application.frontend.data.TrainingClassData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickListener{
     private lateinit var binding: FragmentTrainingClassBinding
     private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
-    private lateinit var storage: FirebaseStorage
     private lateinit var fstore: FirebaseFirestore
-    private lateinit var storageRef: StorageReference
     private lateinit var trainingClassAdapter: UserTrainingClassAdapter
     private lateinit var trainingClassDataArrayList: ArrayList<TrainingClassData>
     private lateinit var trainingClassRecView: RecyclerView
@@ -43,8 +39,6 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
         // Initialise
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
-        storage = FirebaseStorage.getInstance()
-        storageRef = storage.reference
 
         trainingClassRecView = binding.classRecyclerView
         trainingClassRecView.layoutManager = LinearLayoutManager(context)
@@ -56,18 +50,18 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
 
         return binding.root
     }
+
     private fun eventChangeListener(){
         fstore = FirebaseFirestore.getInstance()
-        storage = FirebaseStorage.getInstance()
-        storageRef = storage.reference
         val userID = auth.currentUser?.uid
+
         setFragmentResultListener("toCoachClass") { _, bundle ->
             val coachName = bundle.getString("toCoachClass")
             Log.d("haha", coachName.toString())
 
             //Retrieve Training Class Data
             fstore.collection("class_testing1").whereEqualTo("entitledCoach",coachName.toString())
-              .addSnapshotListener(object : EventListener<QuerySnapshot> {
+                .addSnapshotListener(object : EventListener<QuerySnapshot> {
                     override fun onEvent(
                         value: QuerySnapshot?,
                         error: FirebaseFirestoreException?

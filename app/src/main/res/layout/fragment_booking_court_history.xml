@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".frontend.BookingCourtHistoryFragment">
-
-    <TextView
-        android:id="@+id/tvHistoryBookingTitle"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:text="Booking History Fragment" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/historyBookingRecyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/user_booking_history_card" />
-</FrameLayout>
+        tools:context=".frontend.BookingCourtHistoryFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historyBookingRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/user_booking_history_card" />
+    </FrameLayout>
 </layout>
 
 

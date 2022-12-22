@@ -4,6 +4,7 @@ data class CourtData(
     val courtID: String ?= null,
     val courtName: String ?= null,
     val courtStatus: String ?= null,
+    val courtRate: String ?= null,
     val courtDate: String ?= null,
     val courtTime: String ?= null,
 )

@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".frontend.TrainingClassFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,27 +28,46 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="trainingClassName"
+                android:text="Class Name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvTrainingClassPrice"
-                android:layout_width="match_parent"
+                android:id="@+id/tvTrainingClassRM"
+                android:layout_width="66dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvTrainingClassName"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="-26dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="110dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@id/tvTrainingClassName"
                 android:drawablePadding="2dp"
-                android:text="trainingClassPrice"
-                android:textColor="@color/black"
-                android:textSize="22sp"
+                android:text="RM"
                 android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTrainingClassPrice"
+                android:layout_width="93dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/tvTrainingClassRM"
+                android:drawablePadding="2dp"
+                android:text="100.00"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="21sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -63,7 +80,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:drawablePadding="2dp"
-                android:text="trainingClassTime" />
+                android:text="Class Time" />
 
             <TextView
                 android:id="@+id/tvTrainingClassDate"
@@ -77,20 +94,8 @@
                 android:layout_toEndOf="@id/tvTrainingClassTime"
                 android:drawablePadding="2dp"
                 android:textAlignment="textEnd"
-                android:text="trainingClassDate" />
-
+                android:text="Class Date" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btnSignIn"-->
-    <!--        android:layout_width="311dp"-->
-    <!--        android:layout_height="52dp"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:text="Login"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/cardTraining" />-->
-
 </FrameLayout>

@@ -50,7 +50,6 @@ class RegisterActivity : AppCompatActivity() {
             var radioGroup = radioRoleReg.checkedRadioButtonId.toString()
             var isPlayer = playerRegBtn
             var isCoach = coachRegBtn
-            var role = ""
 
             //Validation for all input field and match the pattern
             if(email.isEmpty()) {
@@ -64,6 +63,7 @@ class RegisterActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
+
             if(username.isEmpty()){
                 usernameRegister.setError("Username is required!")
                 usernameRegister.requestFocus()
@@ -81,6 +81,7 @@ class RegisterActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
+
             if(confirmPassword.isEmpty()){
                 passwordRegister2.setError("Password is required!")
                 passwordRegister2.requestFocus()
@@ -98,18 +99,6 @@ class RegisterActivity : AppCompatActivity() {
                 passwordRegister2.requestFocus()
                 return@setOnClickListener
             }
-
-//            if(!password.equals(confirmPassword)){
-//                passwordRegister2.setError("Password would not be matched!")
-//                passwordRegister2.requestFocus()
-//                return@setOnClickListener
-//            }else{
-//                passwordRegister2.setError("Password Matched!")
-//                passwordRegister2.requestFocus()
-//                return@setOnClickListener
-//
-//            }
-
 
             if(!(isPlayer.isChecked() || isCoach.isChecked())){
                 Toast.makeText(this, "Please select the role type", Toast.LENGTH_SHORT).show()

@@ -16,10 +16,9 @@ import java.io.File
 class UserCoachAdapter(
     private val coachDataArrayList: ArrayList<CoachData>,
     private val listener: OnItemClickListener
-    ) : RecyclerView.Adapter<UserCoachAdapter.CoachViewholder>() {
+) : RecyclerView.Adapter<UserCoachAdapter.CoachViewholder>() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
-
 
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserCoachAdapter.CoachViewholder {
@@ -48,7 +47,7 @@ class UserCoachAdapter(
         }
 
         holder.coachName.text = coachModel.coachName
-        holder.coachExperience.text = coachModel.coachExp
+        holder.coachExperience.text = coachModel.coachExperience
         holder.coachPhone.text = coachModel.coachPhone
         holder.coachEmail.text = coachModel.coachEmail
     }
@@ -65,18 +64,18 @@ class UserCoachAdapter(
 
     // View holder class for initializing of your views such as TextView and Imageview.
     inner class CoachViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
-         val coachImage: ImageView
-         val coachName: TextView
-         val coachExperience: TextView
-         val coachPhone: TextView
-         val coachEmail: TextView
-         init {
+        val coachImage: ImageView
+        val coachName: TextView
+        val coachExperience: TextView
+        val coachPhone: TextView
+        val coachEmail: TextView
+        init {
             coachImage = itemView.findViewById(R.id.tvCoachImage)
             coachName = itemView.findViewById(R.id.tvCoachName)
             coachExperience = itemView.findViewById(R.id.tvCoachExperience)
             coachPhone = itemView.findViewById(R.id.tvCoachPhone)
             coachEmail = itemView.findViewById(R.id.tvCoachEmail)
-             itemView.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {

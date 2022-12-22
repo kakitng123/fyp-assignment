@@ -12,4 +12,3 @@ data class BookingData(
     val bookingStatus: String ?= null,
     val userID: String ?= null
 )
-//
