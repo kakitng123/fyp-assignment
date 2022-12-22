@@ -130,6 +130,17 @@
                         app:helperText="@string/required"
                         app:helperTextTextColor="@color/red_decline">
 
+                        <ImageButton
+                            android:id="@+id/imgBtnCalendarAdd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="315dp"
+                            android:layout_marginTop="-65dp"
+                            android:background="@null"
+                            android:contentDescription="@string/image"
+                            app:srcCompat="@drawable/ic_admin_calendar"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tfAddClassDate"
                             android:layout_width="match_parent"
@@ -149,6 +160,17 @@
                         android:hint="@string/time"
                         app:helperText="@string/required"
                         app:helperTextTextColor="@color/red_decline">
+
+                        <ImageButton
+                            android:id="@+id/imgBtnTimeAdd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="315dp"
+                            android:layout_marginTop="-65dp"
+                            android:background="@null"
+                            android:contentDescription="@string/image"
+                            app:srcCompat="@drawable/ic_admin_time"
+                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tfAddClassTime"

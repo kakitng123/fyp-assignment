@@ -1,28 +1,48 @@
 package com.example.fyp_booking_application.backend
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminClassAddBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import kotlin.math.min
 
-class AdminClassAddFragment : Fragment() {
+class AdminClassAddFragment : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private lateinit var binding: FragmentAdminClassAddBinding
     private lateinit var databaseRef: FirebaseFirestore
+    private val calendar = Calendar.getInstance()
+    @SuppressLint("SimpleDateFormat")
+    private val dateFormatter = SimpleDateFormat("dd/MM/yyyy")
+    @SuppressLint("SimpleDateFormat")
+    private val timeFormatter = SimpleDateFormat("HH:mm")
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class_add, container, false)
+        binding.imgBtnCalendarAdd.bringToFront()
+        binding.imgBtnTimeAdd.bringToFront()
+
         val adminActivityView = (activity as AdminDashboardActivity)
         adminActivityView.setTitle("ADD CLASS")
         databaseRef = FirebaseFirestore.getInstance()
@@ -54,11 +74,27 @@ class AdminClassAddFragment : Fragment() {
             else binding.priceContainer.helperText = null
         }
 
+        binding.imgBtnCalendarAdd.setOnClickListener {
+            DatePickerDialog(requireContext(), this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+
         binding.tfAddClassDate.setOnFocusChangeListener { _, focused ->
-            if(!focused && binding.tfAddClassDate.text!!.isEmpty()){
+            if(binding.tfAddClassDate.text!!.isEmpty()){
                 binding.dateContainer.helperText = "Date is Required"
             }
             else binding.dateContainer.helperText = null
+        }
+
+        binding.imgBtnTimeAdd.setOnClickListener{
+            TimePickerDialog(requireContext(), AlertDialog.THEME_HOLO_LIGHT, this,
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+            ).show()
         }
 
         binding.tfAddClassTime.setOnFocusChangeListener { _, focused ->
@@ -91,7 +127,7 @@ class AdminClassAddFragment : Fragment() {
                                 "className" to binding.tfAddClassName.text.toString(),
                                 "classDesc" to binding.tfAddClassDesc.text.toString(),
                                 "classPrice" to binding.tfAddClassPrice.text.toString().toDouble(),
-                                "classDate" to binding.tfAddClassDate.text.toString(), // ClassDate can use Calendar method
+                                "classDate" to binding.tfAddClassDate.text.toString(),
                                 "classTime" to binding.tfAddClassTime.text.toString() // ClassTime can use Spinner
                             )
                             newClassRef.set(newClass)
@@ -115,6 +151,27 @@ class AdminClassAddFragment : Fragment() {
         }
         return binding.root
     }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        calendar.set(year, month, dayOfMonth)
+        displayFormattedDate(calendar.timeInMillis)
+    }
+
+    override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
+        calendar.apply{
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+        }
+        displayFormattedDate(calendar.timeInMillis)
+    }
+
+    private fun displayFormattedDate(timestamp: Long){
+        binding.tfAddClassDate.setText(dateFormatter.format(timestamp))
+        binding.tfAddClassTime.setText(timeFormatter.format(timestamp))
+    }
+
+
+
 }
 
 

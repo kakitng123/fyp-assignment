@@ -29,12 +29,13 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_history, container, false)
+        notificationList = arrayListOf()
 
         dataInitialize()
         binding.notificationRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            notificationList = arrayListOf()
+            notificationList.sortBy { it.referralCode }
             notificationAdminAdapter = NotificationAdminAdapter(notificationList, this@AdminNotifHistoryFragment)
             adapter = notificationAdminAdapter
         }
@@ -63,6 +64,7 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
                             notificationList.add(dc.document.toObject(NotificationData::class.java))
                         }
                     }
+                    notificationList.sortByDescending { it.referralCode }
                     notificationAdminAdapter.notifyDataSetChanged()
                 }
             })
