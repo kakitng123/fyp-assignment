@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.ClassData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.ClassData2
 
 class CoachClassAdminAdapter (
-    private val coachClassList: ArrayList<ClassData2>,
+    private val coachClassList: ArrayList<ClassData>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<CoachClassAdminAdapter.MyViewHolder>() {
 

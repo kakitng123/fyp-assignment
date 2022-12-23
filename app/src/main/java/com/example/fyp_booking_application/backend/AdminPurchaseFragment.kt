@@ -49,7 +49,7 @@ class AdminPurchaseFragment : Fragment(), PurchaseAdminAdapter.OnItemClickListen
         }
 
         dataInitialize()
-        binding.transactRecyclerView.apply {
+        binding.transactionRV.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             purchaseList = arrayListOf()

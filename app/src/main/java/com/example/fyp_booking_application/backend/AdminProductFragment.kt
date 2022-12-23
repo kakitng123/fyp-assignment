@@ -37,7 +37,7 @@ class AdminProductFragment : Fragment(), ProductAdminAdapter.OnItemClickListener
         val adminActivityView = (activity as AdminDashboardActivity)
         adminActivityView.setTitle("PRODUCT MANAGEMENT")
 
-        binding.btnAddProduct.setOnClickListener{
+        binding.imgBtnAddProduct.setOnClickListener{
             adminActivityView.replaceFragment(AdminProductAddFragment(), R.id.adminLayout)
         }
 

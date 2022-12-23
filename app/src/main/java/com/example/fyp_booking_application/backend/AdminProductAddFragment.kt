@@ -49,6 +49,7 @@ class AdminProductAddFragment : Fragment() {
             val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(selectImage, 100)
         }
+
         val categoryType = arrayListOf<String>()
         val categoryRef = databaseRef.collection("system_testing1").document("category")
         categoryRef.get().addOnSuccessListener { document ->
@@ -88,7 +89,7 @@ class AdminProductAddFragment : Fragment() {
             else binding.pQtyContainer.helperText = null
         }
 
-        binding.imgBtnAddProduct.setOnClickListener {
+        binding.imgBtnAddNewProduct.setOnClickListener {
             val validName = binding.pNameContainer.helperText == null
             val validDesc = binding.pDescContainer.helperText == null
             val validPrice = binding.pPriceContainer.helperText == null

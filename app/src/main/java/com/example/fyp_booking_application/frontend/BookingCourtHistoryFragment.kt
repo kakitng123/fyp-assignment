@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fyp_booking_application.BookingData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentBookingCourtHistoryBinding
 import com.example.fyp_booking_application.frontend.adapter.BookingCourtHistoryAdapter
-import com.example.fyp_booking_application.frontend.data.BookingData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
@@ -48,7 +48,7 @@ class BookingCourtHistoryFragment : Fragment()  {
         val userID = auth.currentUser?.uid
 
         //Retrieve Training Class Data
-        val bookingHistory = fstore.collection("Bookings").whereEqualTo("userID",userID)
+        val bookingHistory = fstore.collection("Bookings").whereEqualTo("userID", userID)
         bookingHistory.addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?
             ) {

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.AdminDashboardActivity
+import com.example.fyp_booking_application.BookingData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminBookingDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,23 +30,22 @@ class AdminBookingDetailFragment : Fragment() {
         setFragmentResultListener("toAdminBookingDetails") {_, bundle ->
             val bookingID = bundle.getString("toAdminBookingDetails")
             databaseRef = FirebaseFirestore.getInstance()
-            val docRef = databaseRef.collection("court_testing").document(bookingID.toString())
+            val docRef = databaseRef.collection("Bookings").document(bookingID.toString())
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
-                    val booking = document.toObject(BookingDataTesting::class.java)
+                    val booking = document.toObject(BookingData::class.java)
 
                     binding.bookingIDField.setText(booking?.bookingID.toString())
+                    binding.bookingCourtNameField.setText(booking?.bookingCourt.toString())
                     binding.bookingDateField.setText(booking?.bookingDate.toString())
                     binding.bookingTimeField.setText(booking?.bookingTime.toString())
-                    binding.bookingCourtIDField.setText(booking?.courtID.toString())
-                    binding.bookingStatusField.setText(booking?.status.toString())
+                    binding.bookingStatusField.setText(booking?.bookingStatus.toString())
                     binding.bookingUserIDField.setText(booking?.userID.toString())
+                    binding.bookingAmountField.setText(booking?.bookingPayment.toString())
                 }
                 else Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
-            }.addOnFailureListener { e ->
-                Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
-            }
+            }.addOnFailureListener { e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }
         }
 
         binding.tvBackBookingDetail.setOnClickListener{

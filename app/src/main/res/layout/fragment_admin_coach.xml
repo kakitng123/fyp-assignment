@@ -9,7 +9,7 @@
         tools:context=".backend.AdminCoachFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/coachRecyclerView"
+            android:id="@+id/coachRV"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +19,7 @@
             tools:listitem="@layout/recyclerview_admin_cardview" />
 
         <ImageButton
-            android:id="@+id/btnAddCoach"
+            android:id="@+id/imgBtnAddCoach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

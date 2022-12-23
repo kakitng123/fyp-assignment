@@ -37,7 +37,7 @@ class AdminCoachFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
         adminActivityView.setTitle("COACH MANAGEMENT")
 
         dataInitialize()
-        binding.coachRecyclerView.apply {
+        binding.coachRV.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             coachArrayList = arrayListOf()
@@ -45,7 +45,7 @@ class AdminCoachFragment : Fragment(), CoachAdminAdapter.OnItemClickListener {
             adapter = coachAdminAdapter
         }
 
-        binding.btnAddCoach.setOnClickListener{
+        binding.imgBtnAddCoach.setOnClickListener{
             adminActivityView.replaceFragment(AdminCoachAddFragment(), R.id.adminLayout)
         }
 

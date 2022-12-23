@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         val signInBtn = findViewById<Button>(R.id.btnSignIn)
         val navForgotPass = findViewById<TextView>(R.id.linkForgotPass)
         val navRegister = findViewById<TextView>(R.id.linkSignUp)
+        val toAdmin = findViewById<Button>(R.id.btnAdminHELLO)
+        val toUser = findViewById<Button>(R.id.btnUserHELLO)
 
         // Initialise
         auth = FirebaseAuth.getInstance()
@@ -33,6 +35,15 @@ class MainActivity : AppCompatActivity() {
         //Navigate to Forgot Password Page
         navForgotPass.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
+            finish()
+        }
+
+        toAdmin.setOnClickListener(){
+            startActivity(Intent(this, AdminDashboardActivity::class.java))
+            finish()
+        }
+        toUser.setOnClickListener(){
+            startActivity(Intent(this, UserDashboardActivity::class.java))
             finish()
         }
 

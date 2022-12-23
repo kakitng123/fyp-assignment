@@ -78,7 +78,7 @@ class AdminCoachAddFragment : Fragment() {
             Log.e("NO CATEGORY", "ERROR FETCHING CATEGORY", e)
         }
 
-        binding.imgBtnAddCoach.setOnClickListener {
+        binding.imgBtnAddNewCoach.setOnClickListener {
             val validName = binding.coachNameContainer.helperText == null
             val validEmail = binding.coachEmailContainer.helperText == null
             val validPhone = binding.coachPhoneContainer.helperText == null
@@ -98,15 +98,16 @@ class AdminCoachAddFragment : Fragment() {
                                 "coachID" to newCoachRef.id,
                                 "coachName" to binding.tfAddCoachName.text.toString(),
                                 "coachEmail" to binding.tfAddCoachEmail.text.toString(),
-                                "coachExp" to binding.spinnerExpField.selectedItem.toString(), // Could Use Spinner
+                                "coachExp" to binding.spinnerExpField.selectedItem.toString(),
                                 "coachPhone" to binding.tfAddCoachPhone.text.toString(),
                             )
                             newCoachRef.set(newCoach)
                                 .addOnSuccessListener {
                                     Log.d("ADDING NEW COACH", "COACH ADDED SUCCESSFULLY")
                                     adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+                                }.addOnFailureListener { e ->
+                                    Log.e("ADDING NEW COACH", "ERROR ADDING NEW COACH", e)
                                 }
-                                .addOnFailureListener { e -> Log.e("ADDING NEW COACH", "ERROR ADDING NEW COACH", e)}
                         } else Toast.makeText(context, "EXISTING CLASS NAME", Toast.LENGTH_SHORT).show()
 
                     }.addOnFailureListener { e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }

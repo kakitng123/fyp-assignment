@@ -1,83 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".frontend.BookingCourtFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<layout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".frontend.BookingCourtFragment">
 
-        <Spinner
-            android:id="@+id/courtNameBooking"
-            android:layout_width="311dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="150dp"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/courtRateBooking"
-            android:layout_width="311dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="15dp"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courtNameBooking" />
+            <Spinner
+                android:id="@+id/courtNameBooking"
+                android:layout_width="311dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="150dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/courtPhoneBooking"
-            android:layout_width="311dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="15dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="Booking Phone"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courtRateBooking" />
+            <Spinner
+                android:id="@+id/courtRateBooking"
+                android:layout_width="311dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="15dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courtNameBooking" />
 
-        <EditText
-            android:id="@+id/courtDateBooking"
-            android:layout_width="311dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="15dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="Booking Date"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courtPhoneBooking" />
+            <EditText
+                android:id="@+id/courtPhoneBooking"
+                android:layout_width="311dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Booking Phone"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courtRateBooking" />
 
-        <Spinner
-            android:id="@+id/courtTimeBooking"
-            android:layout_width="311dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="15dp"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courtDateBooking" />
+            <EditText
+                android:id="@+id/courtDateBooking"
+                android:layout_width="311dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Booking Date"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courtPhoneBooking" />
 
-        <Button
-            android:id="@+id/nextBtn"
-            android:layout_width="311dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Next"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courtTimeBooking"
-            app:layout_constraintVertical_bias="0.006" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Spinner
+                android:id="@+id/courtTimeBooking"
+                android:layout_width="311dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="15dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courtDateBooking" />
 
-</FrameLayout>
+            <Button
+                android:id="@+id/nextBtn"
+                android:layout_width="311dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Next"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/courtTimeBooking"
+                app:layout_constraintVertical_bias="0.006" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

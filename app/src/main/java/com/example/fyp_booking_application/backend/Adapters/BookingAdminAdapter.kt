@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.BookingData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.BookingDataTesting
 
 class BookingAdminAdapter(
-    private val bookingList: ArrayList<BookingDataTesting>,
+    private val bookingList: ArrayList<BookingData>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<BookingAdminAdapter.MyViewHolder>() {
 
@@ -47,8 +48,8 @@ class BookingAdminAdapter(
 
         holder.tfBookingDate.text = currentItem.bookingDate
         holder.tfBookingTime.text = currentItem.bookingTime
-        holder.tfBookingStatus.text = currentItem.status
-        if(currentItem.status == "Pending"){ holder.btnSendNotif.visibility = View.VISIBLE }
+        holder.tfBookingStatus.text = currentItem.bookingStatus
+        if(currentItem.bookingStatus == "Pending"){ holder.btnSendNotif.visibility = View.VISIBLE }
         else holder.btnSendNotif.visibility = View.GONE
         holder.btnSendNotif.setOnClickListener{
             listener.onButtonClick(position)

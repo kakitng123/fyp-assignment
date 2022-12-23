@@ -9,14 +9,12 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminNotifManageBinding
 import com.google.firebase.firestore.AggregateSource
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class AdminNotifManageFragment : Fragment() {
 
@@ -26,8 +24,6 @@ class AdminNotifManageFragment : Fragment() {
     private lateinit var listAdapter: ArrayAdapter<String>
     private lateinit var listView: ListView
 
-    private lateinit var userID: String
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,19 +31,19 @@ class AdminNotifManageFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_manage, container, false)
         databaseRef = FirebaseFirestore.getInstance()
         userList = arrayListOf()
-        listView = binding.userListView
+        listView = binding.userLV
 
-        databaseRef.collection("Users").get().addOnSuccessListener(){ results ->
+        databaseRef.collection("Users").get().addOnSuccessListener { results ->
             for (document in results){
                 userList.add(document["username"].toString())
 
             }
-        }.addOnFailureListener(){ e ->
+        }.addOnFailureListener { e ->
             Log.d("TEST DATA", "Error getting documents: ", e)
         }
 
         listAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, userList)
-        binding.userListView.adapter = listAdapter
+        binding.userLV.adapter = listAdapter
 
         binding.notifUserSearchView.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -64,7 +60,7 @@ class AdminNotifManageFragment : Fragment() {
             }
         })
 
-        listView.setOnItemClickListener { parent:AdapterView<*>, view:View, position:Int, id:Long ->
+        listView.setOnItemClickListener { _:AdapterView<*>, _:View, position:Int, _:Long ->
             val testing = listAdapter.getItem(position).toString()
             val getUser = databaseRef.collection("Users").whereEqualTo("username", testing)
             getUser.get().addOnSuccessListener { documents ->

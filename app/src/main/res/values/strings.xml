@@ -15,6 +15,7 @@
     <string name="transactions">TRANSACTIONS</string>
     <string name="system">SYSTEM</string>
     <string name="history">HISTORY</string>
+    <string name="pending">PENDING</string>
 
     <string name="admin">Admin</string>
     <string name="coach">Coach</string>
@@ -25,8 +26,6 @@
     <string name="booking">Booking</string>
     <string name="purchase">Purchase</string>
     <string name="signOut">Sign Out</string>
-
-    <string name="pending">Pending</string>
 
     <!-- Add Item -->
     <string name="name">Name</string>

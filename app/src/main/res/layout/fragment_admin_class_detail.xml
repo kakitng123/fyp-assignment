@@ -180,54 +180,6 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/classDateContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:hint="@string/date"
-                        app:boxBackgroundColor="#F4F4F4"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/classDateField"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:enabled="false"
-                            android:inputType="date"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="16sp"
-                            tools:ignore="TextContrastCheck" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/classTimeContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:hint="@string/time"
-                        app:boxBackgroundColor="#F4F4F4"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/classTimeField"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:enabled="false"
-                            android:inputType="time"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="16sp"
-                            tools:ignore="TextContrastCheck" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/classCoachContainer"
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"

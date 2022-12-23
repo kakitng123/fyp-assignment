@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.AdminDashboardActivity
+import com.example.fyp_booking_application.ClassData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminClassDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,22 +37,18 @@ class AdminClassDetailFragment : Fragment() {
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
-                    val trainingClass = document.toObject(ClassData2::class.java)
+                    val trainingClass = document.toObject(ClassData::class.java)
 
                     binding.swUpdateClass.setOnCheckedChangeListener { _, isChecked ->
                         binding.classNameField.isEnabled = isChecked
                         binding.classDescField.isEnabled = isChecked
                         binding.classPriceField.isEnabled = isChecked
-                        binding.classDateField.isEnabled = isChecked
-                        binding.classTimeField.isEnabled = isChecked
                     }
 
                     binding.classIDField.setText(trainingClass?.classID.toString())
                     binding.classNameField.setText(trainingClass?.className.toString())
                     binding.classDescField.setText(trainingClass?.classDesc.toString())
                     binding.classPriceField.setText(trainingClass?.classPrice.toString())
-                    binding.classDateField.setText(trainingClass?.classDate.toString())
-                    binding.classTimeField.setText(trainingClass?.classTime.toString())
                     binding.classCoachField.setText(trainingClass?.entitledCoach.toString())
 
                     binding.classNameField.setOnFocusChangeListener { _, focused ->
@@ -81,28 +78,12 @@ class AdminClassDetailFragment : Fragment() {
                         else binding.classPriceContainer.helperText = null
                     }
 
-                    binding.classDateField.setOnFocusChangeListener { _, focused ->
-                        if(!focused && binding.classDateField.text!!.isEmpty()){
-                            binding.classDateContainer.helperText = "Date is Required"
-                        }
-                        else binding.classDateContainer.helperText = null
-                    }
-
-                    binding.classTimeField.setOnFocusChangeListener { _, focused ->
-                        if(!focused && binding.classTimeField.text!!.isEmpty()){
-                            binding.classTimeContainer.helperText = "Time is Required"
-                        }
-                        else binding.classTimeContainer.helperText = null
-                    }
-
                     binding.imgBtnUpdateClass.setOnClickListener {
                         val validName = binding.classNameContainer.helperText == null
                         val validDesc = binding.classDescContainer.helperText == null
                         val validPrice = binding.classPriceContainer.helperText == null
-                        val validDate = binding.classDateContainer.helperText == null
-                        val validTime = binding.classTimeContainer.helperText == null
 
-                        if(validName && validDesc && validPrice && validDate && validTime){
+                        if(validName && validDesc && validPrice){
                             val builder = AlertDialog.Builder(requireContext())
                             builder.setTitle("Update Class Details")
                             builder.setMessage("Confirm to update class details?")
@@ -111,13 +92,11 @@ class AdminClassDetailFragment : Fragment() {
                                     "className" to binding.classNameField.text.toString(),
                                     "classDesc" to binding.classDescField.text.toString(),
                                     "classPrice" to binding.classPriceField.text.toString().toDouble(),
-                                    "classDate" to binding.classDateField.text.toString(), // ClassDate can use Calendar
-                                    "classTime" to binding.classTimeField.text.toString() // ClassTime can use Spinner
                                 )
                                 docRef.set(updateClass, SetOptions.merge())
                                     .addOnSuccessListener {
                                         Log.d("UPDATE CLASS","CLASS DETAIL UPDATED SUCCESSFULLY" )
-                                        adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
+                                        adminActivityView.replaceFragment(AdminClassFragment(), R.id.classAdminLayout)
                                     }
                                     .addOnFailureListener { e -> Log.e("UPDATE CLASS", "ERROR UPDATING CLASS DETAIL", e) }
                             }

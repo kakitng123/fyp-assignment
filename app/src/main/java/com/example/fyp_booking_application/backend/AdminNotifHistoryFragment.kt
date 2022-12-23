@@ -35,7 +35,6 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
         binding.notificationRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            notificationList.sortBy { it.referralCode }
             notificationAdminAdapter = NotificationAdminAdapter(notificationList, this@AdminNotifHistoryFragment)
             adapter = notificationAdminAdapter
         }

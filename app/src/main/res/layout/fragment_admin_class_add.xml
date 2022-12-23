@@ -75,6 +75,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
                             android:lines="1"
+                            android:textColor="@drawable/edit_text_selector"
                             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -95,6 +96,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
+                            android:textColor="@drawable/edit_text_selector"
                             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -116,71 +118,72 @@
                             android:inputType="number"
                             android:lines="1"
                             android:maxLength="4"
+                            android:textColor="@drawable/edit_text_selector"
                             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/dateContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:hint="@string/date"
-                        app:helperText="@string/required"
-                        app:helperTextTextColor="@color/red_decline">
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:id="@+id/dateContainer"-->
+<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:hint="@string/date">-->
 
-                        <ImageButton
-                            android:id="@+id/imgBtnCalendarAdd"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="315dp"
-                            android:layout_marginTop="-65dp"
-                            android:background="@null"
-                            android:contentDescription="@string/image"
-                            app:srcCompat="@drawable/ic_admin_calendar"
-                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/imgBtnCalendarAdd"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_marginStart="300dp"-->
+<!--                            android:layout_marginTop="-45dp"-->
+<!--                            android:background="@null"-->
+<!--                            android:contentDescription="@string/image"-->
+<!--                            app:srcCompat="@drawable/ic_admin_calendar"-->
+<!--                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />-->
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tfAddClassDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="date"
-                            android:lines="1"
-                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:id="@+id/tfAddClassDate"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:enabled="false"-->
+<!--                            android:inputType="date"-->
+<!--                            android:lines="1"-->
+<!--                            android:textColor="@drawable/edit_text_selector"-->
+<!--                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />-->
 
-                    </com.google.android.material.textfield.TextInputLayout>
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/timeContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:hint="@string/time"
-                        app:helperText="@string/required"
-                        app:helperTextTextColor="@color/red_decline">
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:id="@+id/timeContainer"-->
+<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_margin="8dp"-->
+<!--                        android:hint="@string/time">-->
 
-                        <ImageButton
-                            android:id="@+id/imgBtnTimeAdd"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="315dp"
-                            android:layout_marginTop="-65dp"
-                            android:background="@null"
-                            android:contentDescription="@string/image"
-                            app:srcCompat="@drawable/ic_admin_time"
-                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/imgBtnTimeAdd"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_marginStart="300dp"-->
+<!--                            android:layout_marginTop="-45dp"-->
+<!--                            android:background="@null"-->
+<!--                            android:contentDescription="@string/image"-->
+<!--                            app:srcCompat="@drawable/ic_admin_time"-->
+<!--                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />-->
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/tfAddClassTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="time"
-                            android:lines="1"
-                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:id="@+id/tfAddClassTime"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:enabled="false"-->
+<!--                            android:inputType="time"-->
+<!--                            android:lines="1"-->
+<!--                            android:textColor="@drawable/edit_text_selector"-->
+<!--                            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />-->
 
-                    </com.google.android.material.textfield.TextInputLayout>
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                 </LinearLayout>
             </ScrollView>

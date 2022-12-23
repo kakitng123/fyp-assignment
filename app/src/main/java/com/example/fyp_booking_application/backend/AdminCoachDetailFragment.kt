@@ -18,6 +18,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
+import com.example.fyp_booking_application.ClassData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.Adapters.CoachClassAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentAdminCoachDetailBinding
@@ -27,7 +28,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
 
     private lateinit var binding: FragmentAdminCoachDetailBinding
     private lateinit var databaseRef: FirebaseFirestore
-    private lateinit var coachClassList: ArrayList<ClassData2>
+    private lateinit var coachClassList: ArrayList<ClassData>
     private lateinit var coachClassAdminAdapter: CoachClassAdminAdapter
 
     override fun onCreateView(
@@ -165,17 +166,14 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                 builder.setNegativeButton("Cancel"){ _, _ -> }
                 builder.show()
             }
-
-
+            binding.imgBtnAddCoachClass.setOnClickListener{
+                adminActivityView.replaceFragment(AdminClassAddFragment(), R.id.adminLayout)
+                setFragmentResult("toClassAdd", bundleOf("toClassAdd" to coachID))
+            }
         }
         binding.tvBackCoachDetail.setOnClickListener{
             adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
         }
-
-        binding.imgBtnAddCoachClass.setOnClickListener{
-            adminActivityView.replaceFragment(AdminClassAddFragment(), R.id.adminLayout)
-        }
-
         return binding.root
     }
 
@@ -198,7 +196,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     }
                     for (dc: DocumentChange in value?.documentChanges!!){
                         if (dc.type == DocumentChange.Type.ADDED){
-                            coachClassList.add(dc.document.toObject(ClassData2::class.java))
+                            coachClassList.add(dc.document.toObject(ClassData::class.java))
                         }
                     }
                     coachClassAdminAdapter.notifyDataSetChanged()

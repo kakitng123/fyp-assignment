@@ -19,11 +19,11 @@ import com.google.firebase.firestore.SetOptions
 class CheckoutFragment : Fragment() {
     private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
     private lateinit var fstore: FirebaseFirestore //get the shared instance of the FirebaseAuth object
-    private lateinit var binding : FragmentCheckoutBinding
+    private lateinit var binding: FragmentCheckoutBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val spinnerPaymentOption = arrayOf("My Wallet")
 
         // Initialise
@@ -35,82 +35,76 @@ class CheckoutFragment : Fragment() {
         val userView = (activity as UserDashboardActivity)
         userView.setTitle("Checkout")
 
-        //Spinner for Payment Option
+        //Spinner for Payment Option (KK - Double Checking)
         val spinnerPayment = binding.checkoutPayment
-        spinnerPayment.adapter = ArrayAdapter(
-            userView,
-            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-            spinnerPaymentOption
-        )
+        spinnerPayment.adapter = ArrayAdapter(userView, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, spinnerPaymentOption)
+
         spinnerPayment.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("error")
             }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val spinPaymentData: String = parent?.getItemAtPosition(position).toString()
                 println(spinPaymentData)
+            }
+        }
 
-                //Retrieve Booking Data and Display Booking Details in Checkout Page
-                setFragmentResultListener("toCheckoutPage") { _, bundle ->
-                    val bookingID = bundle.getString("toCheckoutPage")
-                    val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
-                    retrieveBookingRef.get().addOnCompleteListener { resultData ->
-                        if (resultData != null) {
-                            val dateResult = resultData.result.getString("bookingDate").toString()
-                            val timeResult = resultData.result.getString("bookingTime").toString()
-                            val rateResult = resultData.result.getString("bookingRate").toString()
-                            val courtResult = resultData.result.getString("bookingCourt").toString()
-                            var price: String = ""
 
-                            if (rateResult == "1 Hours") {
-                                price = "10.00"
-                            } else {
-                                price = "20.00"
-                            }
+        //Retrieve Booking Data and Display Booking Details in Checkout Page
+        setFragmentResultListener("toCheckoutPage") { _, bundle ->
+            val bookingID = bundle.getString("toCheckoutPage")
+            val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
+            retrieveBookingRef.get().addOnCompleteListener { resultData ->
+                if (resultData != null) {
+                    val dateResult = resultData.result.getString("bookingDate").toString()
+                    val timeResult = resultData.result.getString("bookingTime").toString()
+                    val courtResult = resultData.result.getString("bookingCourt").toString()
 
-                            binding.checkoutDate.setText(dateResult)
-                            binding.checkoutTime.setText(timeResult)
-                            binding.checkoutRate.setText(rateResult)
-                            binding.checkoutCourt.setText(courtResult)
-                            binding.totalAmount.setText(price)
-                        } else {
-                            Log.d("noexits", "No such documents.")
-                        }
-                    }.addOnFailureListener { exception ->
-                        Log.d("noexits", "Error getting documents.", exception)
-                    }
+                    binding.checkoutDate.text = dateResult
+                    binding.checkoutTime.text = timeResult
+                    binding.checkoutCourt.text = courtResult
+                    binding.totalAmount.text = "100.0"
+                } else {
+                    Log.d("noexits", "No such documents.")
+                }
+            }.addOnFailureListener { exception ->
+                Log.d("noexits", "Error getting documents.", exception)
+            }
 
-                    //Save Updated Booking Data
-                    binding.checkoutBtn.setOnClickListener {
-                        var bookingDate: String = binding.checkoutDate.text.toString()
-                        var bookingTime: String = binding.checkoutTime.text.toString()
-                        var bookingRate: String = binding.checkoutRate.text.toString()
-                        var bookingCourt: String = binding.checkoutCourt.text.toString()
-                        var bookingPayment: String = binding.totalAmount.text.toString()
+            // few comments, actually when you use SetOptions.merge(), you dont have to get dateResult/timeResult/courtResult
+            // SetOptions.merge() work as if "fieldName" exists == update, if no exists then add new "fieldName"
+            // only if you have to change "fieldName" then you put into new hashMapOf()
+            // but right now I comment here first before I confused you
 
-                        val userID = auth.currentUser?.uid
-                        val bookingId = fstore.collection("Bookings").document(bookingID.toString())
+            //Save Updated Booking Data
+            binding.checkoutBtn.setOnClickListener {
+                val bookingDate: String = binding.checkoutDate.text.toString()
+                val bookingTime: String = binding.checkoutTime.text.toString()
+                val bookingCourt: String = binding.checkoutCourt.text.toString()
+                val bookingPayment: Double = binding.totalAmount.text.toString().toDouble()
 
-                        val bookingUpdates = hashMapOf(
-                            "bookingDate" to bookingDate,
-                            "bookingTime" to bookingTime,
-                            "bookingRate" to bookingRate,
-                            "bookingCourt" to bookingCourt,
-                            "bookingStatus" to "Success",
-                            "bookingPayment" to bookingPayment,
-                            "bookingPaymentMethod" to spinPaymentData,
-                        )
-                        bookingId.set(bookingUpdates, SetOptions.merge()).addOnSuccessListener {
-                            Toast.makeText(context, "Checkout Successfully", Toast.LENGTH_SHORT).show()
-                            userView.replaceFragment(BookingCourtFragment())
-                        }
-                    }
+                // Comment first cuz not used
+                // val userID = auth.currentUser?.uid
+
+                val bookingId = fstore.collection("Bookings").document(bookingID.toString())
+                val bookingUpdates = hashMapOf(
+                    "bookingDate" to bookingDate, // Example this is just "get" you do ntg, then no need put here
+                    "bookingTime" to bookingTime, // same here
+                    "bookingCourt" to bookingCourt, // same here
+                    // that means you only need to have these below 3 inside this bookingUpdates = hashMapOf()
+                    // if you don't understand I'll explain to you again
+                    "bookingStatus" to "Success",
+                    "bookingPayment" to bookingPayment,
+                    "bookingPaymentMethod" to spinnerPayment.selectedItem.toString()
+                )
+                bookingId.set(bookingUpdates, SetOptions.merge()).addOnSuccessListener {
+                    Toast.makeText(context, "Checkout Successfully", Toast.LENGTH_SHORT).show()
+                    userView.replaceFragment(BookingCourtFragment())
+
+                    // To-do if checkout successfully then take courtName and time and set availability of timeslot
+
+
                 }
             }
         }

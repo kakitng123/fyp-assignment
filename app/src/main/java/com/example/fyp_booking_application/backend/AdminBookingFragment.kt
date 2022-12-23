@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
+import com.example.fyp_booking_application.BookingData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.Adapters.BookingAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentAdminBookingBinding
@@ -22,7 +23,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
 
     private lateinit var binding: FragmentAdminBookingBinding
     private lateinit var databaseRef: FirebaseFirestore
-    private lateinit var bookingArrayList: ArrayList<BookingDataTesting>
+    private lateinit var bookingArrayList: ArrayList<BookingData>
     private lateinit var bookingAdminAdapter: BookingAdminAdapter
 
     override fun onCreateView(
@@ -36,7 +37,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
 
         dataApproved()
         binding.bookingNavView.setOnItemSelectedListener {
-            binding.bookingRecyclerView.visibility = View.VISIBLE
+            binding.bookingRV.visibility = View.VISIBLE
             when(it.itemId){
                 R.id.nav_bookingPending -> dataPending()
                 R.id.nav_bookingHistory -> dataApproved()
@@ -44,13 +45,34 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
             true
         }
 
-        binding.bookingRecyclerView.apply{
+        binding.bookingRV.apply{
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             bookingArrayList = arrayListOf()
             bookingAdminAdapter = BookingAdminAdapter(bookingArrayList, this@AdminBookingFragment)
             adapter = bookingAdminAdapter
         }
+        /*
+        binding.btnTest.setOnClickListener {
+            val newBookingRef = databaseRef.collection("Bookings").document()
+            val newBooking = hashMapOf(
+                "bookingID" to newBookingRef.id,
+                "bookingDate" to "12/12/2022",
+                "bookingTime" to "10:00 - 11:00",
+                "status" to "Pending",
+                "courtID" to "2Z5YrnKilHMwVi1vmW7j",
+                "userID" to "77zKszKcbYSpmI7IweDc",
+                "bookingPayment" to ""
+            )
+            newBookingRef.set(newBooking)
+                .addOnSuccessListener {
+                    Log.d("ADDING NEW BOOKING", "BOOKING ADDED SUCCESSFULLY")
+                }.addOnFailureListener { e ->
+                    Log.e("ADDING NEW BOOKING", "ERROR ADDING NEW BOOKING", e)
+                }
+        }
+
+         */
 
         return binding.root
     }
@@ -66,21 +88,27 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
         val currentItem = bookingArrayList[position]
         databaseRef = FirebaseFirestore.getInstance()
 
-        // TESTING (USABLE)
-        val newNotifyRef = databaseRef.collection("notification_testing1").document()
-        val newNotify = hashMapOf(
-            "notifyID" to newNotifyRef.id,
-            "userID" to currentItem.userID.toString(),
-            "notifyTitle" to "PENDING PAYMENT",
-            "notifyMessage" to "YOUR PAYMENT FOR BOOKING ID:${currentItem.bookingID} IS STILL PENDING, " +
-                    "PLEASE PROCEED TO XXX PAGE TO CONTINUE PAYMENT!",
-            "referralCode" to "R100001" // NEED TO GENERATE
-        )
-        newNotifyRef.set(newNotify).addOnSuccessListener {
-            Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
-            Toast.makeText(context, "Notification Sent", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener { e ->
-            Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
+        var collectionSize: Int? = null
+        val collection = databaseRef.collection("notification_testing1").count()
+        collection.get(AggregateSource.SERVER).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                collectionSize = task.result.count.toInt()
+            }
+            val newNotifyRef = databaseRef.collection("notification_testing1").document()
+            val newNotify = hashMapOf(
+                "notifyID" to newNotifyRef.id,
+                "notifyTitle" to "PENDING PAYMENT",
+                "notifyMessage" to "YOUR PAYMENT FOR BOOKING ID:${currentItem.bookingID} IS STILL PENDING, " +
+                        "PLEASE PROCEED TO XXX PAGE TO CONTINUE PAYMENT!",
+                "referralCode" to "R${100000+collectionSize!!}",
+                "userID" to currentItem.userID.toString()
+            )
+            newNotifyRef.set(newNotify).addOnSuccessListener {
+                Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
+                Toast.makeText(context, "Notification Sent", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener { e ->
+                Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
+            }
         }
     }
 
@@ -88,7 +116,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
     private fun dataPending() {
         bookingArrayList.clear()
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("court_testing").whereEqualTo("status","Pending")
+        databaseRef.collection("Bookings").whereEqualTo("bookingStatus","Pending")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -98,7 +126,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
                     }
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
-                            bookingArrayList.add(dc.document.toObject(BookingDataTesting::class.java))
+                            bookingArrayList.add(dc.document.toObject(BookingData::class.java))
                         }
                     }
                     bookingAdminAdapter.notifyDataSetChanged()
@@ -109,7 +137,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
     private fun dataApproved() {
         bookingArrayList.clear()
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("court_testing").whereNotEqualTo("status","Pending")
+        databaseRef.collection("Bookings").whereNotEqualTo("bookingStatus","Pending")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -119,7 +147,7 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
                     }
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
-                            bookingArrayList.add(dc.document.toObject(BookingDataTesting::class.java))
+                            bookingArrayList.add(dc.document.toObject(BookingData::class.java))
                         }
                     }
                     bookingAdminAdapter.notifyDataSetChanged()

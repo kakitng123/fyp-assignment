@@ -19,7 +19,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fyp_booking_application.AdminDashboardActivity
+import com.example.fyp_booking_application.*
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.Adapters.CourtAdminAdapter
 import com.example.fyp_booking_application.backend.Adapters.TimeslotAdminAdapter
@@ -31,8 +31,8 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentAdminCourtBinding
     private lateinit var databaseRef: FirebaseFirestore
-    private lateinit var courtList: ArrayList<TestCourtData>
-    private lateinit var timeslotList: ArrayList<TestCourtData2>
+    private lateinit var courtList: ArrayList<CourtData>
+    private lateinit var timeslotList: ArrayList<CourtDataTimeslot>
     private lateinit var courtManageAdapter: CourtAdminAdapter
     private lateinit var timeslotAdapter: TimeslotAdminAdapter
 
@@ -72,7 +72,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                     return@setPositiveButton
                 }
                 var nameValidation = 0
-                databaseRef.collection("court_testing2").get()
+                databaseRef.collection("court_testing1").get()
                     .addOnSuccessListener { results ->
                         for (document in results) {
                             if (document["courtName"] == editText.text.toString()) {
@@ -80,25 +80,16 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                             }
                         }
                         if (nameValidation == 0) {
-                            val newCourtRef = databaseRef.collection("court_testing2").document()
+                            val newCourtRef = databaseRef.collection("court_testing1").document()
                             val newCourtData = hashMapOf(
                                 "courtID" to newCourtRef.id,
                                 "courtName" to editText.text.toString()
                             )
-                            newCourtRef.set(newCourtData)
-                                .addOnSuccessListener {
-                                    Log.d(
-                                        "ADDING COURT DATA",
-                                        "COURT ADDED SUCCESSFULLY"
-                                    )
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.e(
-                                        "ADDING COURT DATA",
-                                        "ERROR ADDING DATA",
-                                        e
-                                    )
-                                }
+                            newCourtRef.set(newCourtData).addOnSuccessListener {
+                                Log.d("ADDING COURT DATA", "COURT ADDED SUCCESSFULLY")
+                            }.addOnFailureListener { e ->
+                                Log.e("ADDING COURT DATA", "ERROR ADDING DATA", e)
+                            }
                         } else Toast.makeText(context, "EXISTING COURT NAME", Toast.LENGTH_SHORT)
                             .show()
                     }
@@ -111,20 +102,26 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
             adminActivityView.replaceFragment(AdminCourtFragment(), R.id.adminLayout)
         }
 
-        ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
-            ): Boolean { return false }
+            ): Boolean {
+                return false
+            }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val deletedCourt: TestCourtData = courtList[viewHolder.adapterPosition]
+                val deletedCourt: CourtData = courtList[viewHolder.adapterPosition]
                 val position = viewHolder.adapterPosition
                 courtList.removeAt(viewHolder.adapterPosition)
                 courtManageAdapter.notifyItemRemoved(viewHolder.adapterPosition)
 
-                Snackbar.make(binding.courtRecyclerView, "Deleted ${deletedCourt.courtName}", Snackbar.LENGTH_LONG)
+                Snackbar.make(
+                    binding.courtRecyclerView,
+                    "Deleted ${deletedCourt.courtName}",
+                    Snackbar.LENGTH_LONG
+                )
                     .setAction("Undo") {
                         courtList.add(position, deletedCourt)
                         courtManageAdapter.notifyItemInserted(position)
@@ -172,8 +169,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         val currentItem = courtList[position]
         databaseRef = FirebaseFirestore.getInstance()
         val docRef =
-            databaseRef.collection("court_testing2").document(currentItem.courtID.toString())
-
+            databaseRef.collection("court_testing1").document(currentItem.courtID.toString())
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Delete Court Data")
         builder.setMessage("Confirm to delete court data?")
@@ -190,7 +186,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
     private fun dataInitialize() {
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("court_testing2")
+        databaseRef.collection("court_testing1")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -200,34 +196,39 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                     }
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
-                            courtList.add(dc.document.toObject(TestCourtData::class.java))
+                            courtList.add(dc.document.toObject(CourtData::class.java))
                         }
                     }
+                    courtList.sortByDescending { it.courtName }
                     courtManageAdapter.notifyDataSetChanged()
                 }
             })
     }
 
-    private fun displayTimeslots(currentItem: TestCourtData) {
+    private fun displayTimeslots(currentItem: CourtData) {
         timeslotList = arrayListOf()
         databaseRef = FirebaseFirestore.getInstance()
 
         if (currentItem.courtSlots?.size == null) {
             Toast.makeText(context, "NO TIME SLOTS", Toast.LENGTH_SHORT).show()
+            binding.timeslotRecyclerView.visibility = View.INVISIBLE
             binding.tvTesting.visibility = View.VISIBLE
         } else {
+            binding.timeslotRecyclerView.visibility = View.VISIBLE
             binding.tvTesting.visibility = View.INVISIBLE
-            val docRef = databaseRef.collection("court_testing2").document(currentItem.courtID.toString())
+            val docRef = databaseRef.collection("court_testing1").document(currentItem.courtID.toString())
             docRef.get().addOnCompleteListener { document ->
                 if (document.isSuccessful) {
                     val courtSlot = document.result["courtSlots"] as Map<*, *>
                     courtSlot.let {
-                        for ((key, value) in courtSlot) {
+                        for ((_, value) in courtSlot) {
                             val timeslot = value as Map<*, *>
                             val slots = timeslot["timeslot"]
                             val available = timeslot["availability"]
-                            val testing123 =
-                                TestCourtData2(slots.toString(), available.toString().toBoolean())
+                            val testing123 = CourtDataTimeslot(
+                                slots.toString(),
+                                available.toString().toBoolean()
+                            )
 
                             timeslotList.add(testing123)
                         }
@@ -245,7 +246,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
     }
 
     private fun addData(increment: Int, court_id: String) {
-        val courtRef = databaseRef.collection("court_testing2").document(court_id)
+        val courtRef = databaseRef.collection("court_testing1").document(court_id)
         var alphabet = 'A'
 
         for (j in 10..22 step increment) {

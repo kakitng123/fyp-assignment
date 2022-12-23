@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.BookingData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.frontend.data.BookingData
 
 class BookingCourtHistoryAdapter(
     private val bookingHistoryDataArrayList: ArrayList<BookingData>
@@ -14,7 +14,7 @@ class BookingCourtHistoryAdapter(
 
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingCourtHistoryAdapter.BookingHistoryViewHolder {
-        //infate the custom layout
+        //inflate the custom layout
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_booking_history_card, parent, false)
         //return a new holder instance
         return BookingHistoryViewHolder(itemView)
@@ -26,7 +26,7 @@ class BookingCourtHistoryAdapter(
         val bookingHistoryModel = bookingHistoryDataArrayList[position]
 
         holder.historyCourt.text = bookingHistoryModel.bookingCourt
-        holder.historyPrice.text = bookingHistoryModel.bookingPayment
+        holder.historyPrice.text = bookingHistoryModel.bookingPayment.toString()
         holder.historyDate.text = bookingHistoryModel.bookingDate
         holder.historyTime.text = bookingHistoryModel.bookingTime
         holder.historyStatus.text = bookingHistoryModel.bookingStatus
