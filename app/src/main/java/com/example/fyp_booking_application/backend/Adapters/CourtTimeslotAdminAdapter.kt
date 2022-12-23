@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.CourtDataTimeslot
 import com.example.fyp_booking_application.R
 
-class TimeslotAdminAdapter(
+class CourtTimeslotAdminAdapter(
     private val timeslotList: ArrayList<CourtDataTimeslot>,
-) : RecyclerView.Adapter<TimeslotAdminAdapter.MyViewHolder>(){
+) : RecyclerView.Adapter<CourtTimeslotAdminAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val timeslot: TextView = itemView.findViewById(R.id.tvTimeslot)

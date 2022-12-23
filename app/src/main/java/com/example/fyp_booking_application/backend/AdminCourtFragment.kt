@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.Toast
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.*
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.Adapters.CourtAdminAdapter
-import com.example.fyp_booking_application.backend.Adapters.TimeslotAdminAdapter
+import com.example.fyp_booking_application.backend.Adapters.CourtTimeslotAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentAdminCourtBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.*
@@ -34,8 +32,9 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
     private lateinit var courtList: ArrayList<CourtData>
     private lateinit var timeslotList: ArrayList<CourtDataTimeslot>
     private lateinit var courtManageAdapter: CourtAdminAdapter
-    private lateinit var timeslotAdapter: TimeslotAdminAdapter
+    private lateinit var timeslotAdapter: CourtTimeslotAdminAdapter
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,41 +57,59 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         }
 
         binding.imgBtnAddCourt.setOnClickListener {
-            val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_edittext1, null)
-            val editText = dialogLayout.findViewById<EditText>(R.id.dataEditText)
+            val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_add_court, null)
+            val newCourtName = dialogLayout.findViewById<EditText>(R.id.courtNameField)
+            val newCourtSlots = dialogLayout.findViewById<RadioGroup>(R.id.courtTimeslotField)
+            val tvCourtPrice = dialogLayout.findViewById<TextView>(R.id.tvCourtPrice)
+
+            
+            newCourtSlots.setOnCheckedChangeListener { _, checkedButtonID ->
+                when(checkedButtonID){
+                    R.id.rdbtnTimeslot1 -> tvCourtPrice.text = "Price per booking: RM 15"
+                    R.id.rdbtnTimeslot2 -> tvCourtPrice.text = "Price per booking: RM 25"
+                }
+            }
+
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Enter Court Name")
             builder.setView(dialogLayout)
             builder.setPositiveButton("Add") { _, _ ->
-                if (editText.text.isEmpty()) {
+                if (newCourtName.text.isEmpty()) {
                     Toast.makeText(context, "EMPTY FIELD", Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
-                } else if (!editText.text.matches("^[a-zA-Z0-9_]*$".toRegex())) {
+                } else if (!newCourtName.text.matches("^[a-zA-Z0-9_]*$".toRegex())) {
                     Toast.makeText(context, "ONLY ALPHANUMERIC ALLOWED", Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
+
                 var nameValidation = 0
-                databaseRef.collection("court_testing1").get()
+                databaseRef.collection("Courts").get()
                     .addOnSuccessListener { results ->
                         for (document in results) {
-                            if (document["courtName"] == editText.text.toString()) {
+                            if (document["courtName"] == newCourtName.text.toString()) {
                                 nameValidation += 1
                             }
                         }
                         if (nameValidation == 0) {
-                            val newCourtRef = databaseRef.collection("court_testing1").document()
+                            val newCourtPrice: Double = when(newCourtSlots.checkedRadioButtonId){
+                                R.id.rdbtnTimeslot1 -> 15.0
+                                R.id.rdbtnTimeslot2 -> 25.0
+                                else -> 0.0
+                            }
+                            val newCourtRef = databaseRef.collection("Courts").document()
                             val newCourtData = hashMapOf(
                                 "courtID" to newCourtRef.id,
-                                "courtName" to editText.text.toString()
+                                "courtName" to newCourtName.text.toString(),
+                                "courtPrice" to newCourtPrice
                             )
                             newCourtRef.set(newCourtData).addOnSuccessListener {
                                 Log.d("ADDING COURT DATA", "COURT ADDED SUCCESSFULLY")
                             }.addOnFailureListener { e ->
                                 Log.e("ADDING COURT DATA", "ERROR ADDING DATA", e)
                             }
-                        } else Toast.makeText(context, "EXISTING COURT NAME", Toast.LENGTH_SHORT)
-                            .show()
+                        } else Toast.makeText(context, "EXISTING COURT NAME", Toast.LENGTH_SHORT).show()
                     }
+
             }
             builder.setNegativeButton("Cancel") { _, _ -> }
             builder.show()
@@ -103,11 +120,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         }
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 return false
             }
 
@@ -117,11 +130,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                 courtList.removeAt(viewHolder.adapterPosition)
                 courtManageAdapter.notifyItemRemoved(viewHolder.adapterPosition)
 
-                Snackbar.make(
-                    binding.courtRecyclerView,
-                    "Deleted ${deletedCourt.courtName}",
-                    Snackbar.LENGTH_LONG
-                )
+                Snackbar.make(binding.courtRecyclerView, "Deleted ${deletedCourt.courtName}", Snackbar.LENGTH_LONG)
                     .setAction("Undo") {
                         courtList.add(position, deletedCourt)
                         courtManageAdapter.notifyItemInserted(position)
@@ -136,57 +145,27 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         val currentItem = courtList[position]
         displayTimeslots(currentItem)
 
+        // Unable to add timeslot for now
+        // courtPrice issue / design issue, radio btn needs to be clicked
         val ss = SpannableString("Click Here to Add Timeslot")
         val clickableSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {
-                val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_add_timeslot, null)
-                val radioGroup = dialogLayout.findViewById<RadioGroup>(R.id.radioGroup1)
-                val builder = AlertDialog.Builder(requireContext())
-
-                builder.setTitle("Select Timeslot")
-                builder.setView(dialogLayout)
-                builder.setPositiveButton("Add") { _, _ ->
-                    val increment: Int = when (radioGroup.checkedRadioButtonId) {
-                        R.id.rdBtnSlotA -> 1
-                        R.id.rdBtnSlotB -> 2
-                        else -> {
-                            Log.d("FAIL TIMESLOT", "FAIL TIMESLOT")
-                        }
-                    }
-                    addData(increment, currentItem.courtID.toString())
-
+                if(currentItem.courtPrice.toString() == "15"){
+                    addData(1, currentItem.courtID.toString())
+                }else if (currentItem.courtPrice.toString() == "25"){
+                    addData(2, currentItem.courtID.toString())
                 }
-                builder.setNegativeButton("Cancel") { _, _ -> }
-                builder.show()
             }
+
         }
         ss.setSpan(clickableSpan, 6, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvTesting.text = ss
         binding.tvTesting.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    override fun onButtonClick(position: Int) {
-        val currentItem = courtList[position]
-        databaseRef = FirebaseFirestore.getInstance()
-        val docRef =
-            databaseRef.collection("court_testing1").document(currentItem.courtID.toString())
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Delete Court Data")
-        builder.setMessage("Confirm to delete court data?")
-        builder.setPositiveButton("Delete") { _, _ ->
-            docRef.delete().addOnSuccessListener {
-                Log.d("DELETE COURT", "COURT DELETED SUCCESSFULLY")
-            }.addOnFailureListener { e ->
-                Log.e("DELETE COURT", "ERROR DELETING COURT", e)
-            }
-        }
-        builder.setNegativeButton("Cancel") { _, _ -> }
-        builder.show()
-    }
-
     private fun dataInitialize() {
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("court_testing1")
+        databaseRef.collection("Courts")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -210,13 +189,12 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         databaseRef = FirebaseFirestore.getInstance()
 
         if (currentItem.courtSlots?.size == null) {
-            Toast.makeText(context, "NO TIME SLOTS", Toast.LENGTH_SHORT).show()
             binding.timeslotRecyclerView.visibility = View.INVISIBLE
             binding.tvTesting.visibility = View.VISIBLE
         } else {
             binding.timeslotRecyclerView.visibility = View.VISIBLE
             binding.tvTesting.visibility = View.INVISIBLE
-            val docRef = databaseRef.collection("court_testing1").document(currentItem.courtID.toString())
+            val docRef = databaseRef.collection("Courts").document(currentItem.courtID.toString())
             docRef.get().addOnCompleteListener { document ->
                 if (document.isSuccessful) {
                     val courtSlot = document.result["courtSlots"] as Map<*, *>
@@ -225,11 +203,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                             val timeslot = value as Map<*, *>
                             val slots = timeslot["timeslot"]
                             val available = timeslot["availability"]
-                            val testing123 = CourtDataTimeslot(
-                                slots.toString(),
-                                available.toString().toBoolean()
-                            )
-
+                            val testing123 = CourtDataTimeslot(slots.toString(), available.toString().toBoolean())
                             timeslotList.add(testing123)
                         }
                     }
@@ -237,7 +211,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                         timeslotList.sortBy { list -> list.timeslot }
                         layoutManager = LinearLayoutManager(context)
                         setHasFixedSize(true)
-                        timeslotAdapter = TimeslotAdminAdapter(timeslotList)
+                        timeslotAdapter = CourtTimeslotAdminAdapter(timeslotList)
                         adapter = timeslotAdapter
                     }
                 }
@@ -246,7 +220,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
     }
 
     private fun addData(increment: Int, court_id: String) {
-        val courtRef = databaseRef.collection("court_testing1").document(court_id)
+        val courtRef = databaseRef.collection("Courts").document(court_id)
         var alphabet = 'A'
 
         for (j in 10..22 step increment) {

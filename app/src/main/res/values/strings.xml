@@ -1,5 +1,4 @@
 <resources>
-    <!-- System -->
     <string name="app_name">FYP BOOKING APPLICATION</string>
     <string name="Home">Home</string>
     <string name="Booking">Booking</string>
@@ -9,6 +8,7 @@
     <string name="back">Back</string>
     <string name="textView">TextView</string>
     <string name="example">Example</string>
+    <string name="required">Required</string>
 
     <!-- Admin Nav Bar -->
     <string name="management">MANAGEMENT</string>
@@ -23,6 +23,8 @@
     <string name="court">Court</string>
     <string name="product">Product</string>
     <string name="notification">Notification</string>
+    <string name="voucher">Voucher</string>
+    <string name="redeem">Redeem</string>
     <string name="booking">Booking</string>
     <string name="purchase">Purchase</string>
     <string name="signOut">Sign Out</string>
@@ -36,7 +38,6 @@
     <string name="qty">Quantity</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
-    <string name="required">Required</string>
     <string name="phoneNo">Phone No.</string>
     <string name="exp">Experience</string>
     <string name="email">Email</string>
@@ -52,7 +53,7 @@
     <string name="user">User</string>
     <string name="password">Password</string>
     <string name="userType">User Type</string>
-    <string name="update">Update</string>
+
 
     <!-- Add Category -->
     <string name="all">ALL</string>
@@ -62,7 +63,6 @@
 
 
     <!-- ACTIVITY/FRAGMENT HEADINGS -->
-
     <string name="addCoach">ADD COACH</string>
     <string name="addProduct">ADD PRODUCT</string>
     <string name="addClass">ADD TRAINING CLASS</string>
@@ -74,12 +74,12 @@
     <string name="coachDetail">COACH DETAIL</string>
     <string name="notifDetail">NOTIFICATION DETAIL</string>
 
-    <!-- Buttons ETC ETC -->
+    <!-- Buttons or ETC ETC --> <!-- System -->
     <string name="finish">Finish</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="update">Update</string>
     <string name="add">Add</string>
-    <string name="newData">Enter New Data</string>
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
     <string name="selectImage">Click to Select Image</string>
@@ -87,6 +87,11 @@
     <string name="sendReminder">Send Reminder</string>
     <string name="bookingDate">Booking Date</string>
     <string name="bookingTime">Booking Time</string>
+    <string name="newData">Enter New Data</string>
+    <string name="newCourtName">Enter Court Nane</string>
+    <string name="newCourtPrice">Enter Court Price</string>
+    <string name="timeslotA">Timeslot A (From 10am w/ 1hr Interval)</string>
+    <string name="timeslotB">Timeslot B (From 10am w/ 2hr Interval)</string>
 
     <!--RecyclerView -->
     <string name="timeslot">Timeslot</string>

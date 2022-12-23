@@ -98,13 +98,31 @@ class CheckoutFragment : Fragment() {
                     "bookingPayment" to bookingPayment,
                     "bookingPaymentMethod" to spinnerPayment.selectedItem.toString()
                 )
-                bookingId.set(bookingUpdates, SetOptions.merge()).addOnSuccessListener {
-                    Toast.makeText(context, "Checkout Successfully", Toast.LENGTH_SHORT).show()
-                    userView.replaceFragment(BookingCourtFragment())
-
-                    // To-do if checkout successfully then take courtName and time and set availability of timeslot
-
-
+                bookingId.set(bookingUpdates, SetOptions.merge())
+                // To-do if checkout successfully then take courtName and time and set availability of timeslot
+                val courtRef = fstore.collection("court_testing1").whereEqualTo("courtName", bookingCourt)
+                courtRef.get().addOnSuccessListener(){ documents ->
+                    for (document in documents){
+                        val courtID = document["courtID"]
+                        val courtSlot = document["courtSlots"] as Map<*, *> // Used when firebase used mapOf<smtg>
+                        courtSlot.let {
+                            for ((key, value) in courtSlot) {
+                                val timeslot = value as Map<*, *>
+                                if (timeslot["timeslot"] == bookingTime){
+                                    val courtUpdateRef = fstore.collection("court_testing1").document(courtID.toString())
+                                    val updateAvailability = hashMapOf("courtSlots" to hashMapOf(
+                                        "$key" to hashMapOf("availability" to false ))
+                                    )
+                                    courtUpdateRef.set(updateAvailability, SetOptions.merge()).addOnSuccessListener(){
+                                        Toast.makeText(context, "Checkout Successfully", Toast.LENGTH_SHORT).show()
+                                        userView.replaceFragment(BookingCourtFragment())
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }.addOnFailureListener(){
+                    // for now do ntg, or just logErrpr
                 }
             }
         }

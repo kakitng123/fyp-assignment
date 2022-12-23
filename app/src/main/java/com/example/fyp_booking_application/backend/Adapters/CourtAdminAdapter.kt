@@ -20,8 +20,6 @@ class CourtAdminAdapter(
         val courtName: TextView = itemView.findViewById(R.id.tfDisplay2)
         val tvCourtID: TextView = itemView.findViewById(R.id.tvDisplay1)
         val tvCourtName: TextView = itemView.findViewById(R.id.tvDisplay2)
-        val imgBtnDelete: ImageButton = itemView.findViewById(R.id.imgBtnDeleteItem)
-
         init {
             itemView.setOnClickListener(this)
         }
@@ -36,7 +34,6 @@ class CourtAdminAdapter(
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
-        fun onButtonClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -50,10 +47,6 @@ class CourtAdminAdapter(
 
         holder.tvCourtID.text = "Court ID"
         holder.tvCourtName.text = "Court Name"
-        // holder.imgBtnDelete.visibility = View.VISIBLE
-        holder.imgBtnDelete.setOnClickListener(){
-            listener.onButtonClick(position)
-        }
         holder.courtID.text = currentItem.courtID
         holder.courtID.textSize = 14F
         holder.courtName.text = currentItem.courtName

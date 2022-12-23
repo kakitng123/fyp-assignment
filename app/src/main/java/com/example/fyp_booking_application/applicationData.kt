@@ -10,10 +10,12 @@ data class ClassData (
     val entitledCoach: String ?= null,
 )
 
+
 // Court Management Data (Complete)
 data class CourtData (
     val courtID: String ?= null,
     val courtName: String ?= null,
+    val courtPrice: Double ?= null,
     val courtSlots: HashMap<String, Any> ?= null
 )
 data class CourtDataTimeslot (
