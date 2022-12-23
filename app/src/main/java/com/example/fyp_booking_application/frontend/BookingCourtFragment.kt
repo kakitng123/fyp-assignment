@@ -31,7 +31,6 @@ class BookingCourtFragment : Fragment() {
     // Ka Kit's Binding
     private lateinit var binding: FragmentBookingCourtBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +51,7 @@ class BookingCourtFragment : Fragment() {
 
         // Retrieve Available Court (KK - From Database)
         val availableCourtData = arrayListOf<String>()
-        val availableCourtRef = fstore.collection("court_testing1") // Used to get ALL document from this collection
+        val availableCourtRef = fstore.collection("Courts") // Used to get ALL document from this collection
 
         availableCourtRef.get().addOnSuccessListener { documents -> // <- more than 1 data
             if (documents != null) {
@@ -76,17 +75,19 @@ class BookingCourtFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val itemSelected = parent?.getItemAtPosition(position).toString()
                 val availableTimeslotData = arrayListOf<String>()
-                val availableTimeSlotRef = fstore.collection("court_testing1").whereEqualTo("courtName", itemSelected)
+                val availableTimeSlotRef = fstore.collection("Courts").whereEqualTo("courtName", itemSelected)
                 availableTimeSlotRef.get().addOnSuccessListener { documents ->
                     for (document in documents) {
+                        binding.courtPriceBooking.setText(document["courtPrice"].toString())
                         val courtSlot = document["courtSlots"] as Map<*, *> // Used when firebase used mapOf<smtg>
                         courtSlot.let {
                             for ((_, value) in courtSlot) {
                                 // Validation will be done later for now usable *only will show true
-
-
-                                val timeslot = value as Map<*, *> // this func is used to loop through maps . so this function is only used to mapOf<mapOf<smtg>>,
-                                availableTimeslotData.add(timeslot["timeslot"].toString()) // just like my courtslot
+                                val timeslot = value as Map<*, *> // this func is used to loop through maps . so this function is only used to mapOf<mapOf<smtg>>
+                                // for validation purposes
+                                if (timeslot["availability"] == true){
+                                    availableTimeslotData.add(timeslot["timeslot"].toString())
+                                }
                             }
                         }
                         availableTimeslotData.sort()
@@ -103,6 +104,7 @@ class BookingCourtFragment : Fragment() {
         binding.nextBtn.setOnClickListener {
             val bookingPhone: String = binding.courtPhoneBooking.text.toString()
             val bookingDate: String = binding.courtDateBooking.text.toString()
+            val bookingPayment: Double = binding.courtPriceBooking.text.toString().toDouble()
 
             if (bookingPhone.isEmpty()) {
                 binding.courtPhoneBooking.setError("Booking Phone Number is required!")
@@ -133,6 +135,7 @@ class BookingCourtFragment : Fragment() {
                 "bookingDate" to bookingDate,
                 "bookingTime" to spinnerCourtTime.selectedItem.toString(),
                 "bookingStatus" to "Pending",
+                "bookingPayment" to bookingPayment,
                 "userID" to userID
             )
             bookingID.set(booking, SetOptions.merge()).addOnSuccessListener {

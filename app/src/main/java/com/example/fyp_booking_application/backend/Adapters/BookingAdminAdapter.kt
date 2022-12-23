@@ -49,8 +49,12 @@ class BookingAdminAdapter(
         holder.tfBookingDate.text = currentItem.bookingDate
         holder.tfBookingTime.text = currentItem.bookingTime
         holder.tfBookingStatus.text = currentItem.bookingStatus
-        if(currentItem.bookingStatus == "Pending"){ holder.btnSendNotif.visibility = View.VISIBLE }
+
+        if(currentItem.bookingStatus == "Pending"){
+            holder.btnSendNotif.visibility = View.VISIBLE
+        }
         else holder.btnSendNotif.visibility = View.GONE
+
         holder.btnSendNotif.setOnClickListener{
             listener.onButtonClick(position)
         }

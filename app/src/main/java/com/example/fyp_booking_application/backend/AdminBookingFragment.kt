@@ -52,28 +52,6 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
             bookingAdminAdapter = BookingAdminAdapter(bookingArrayList, this@AdminBookingFragment)
             adapter = bookingAdminAdapter
         }
-        /*
-        binding.btnTest.setOnClickListener {
-            val newBookingRef = databaseRef.collection("Bookings").document()
-            val newBooking = hashMapOf(
-                "bookingID" to newBookingRef.id,
-                "bookingDate" to "12/12/2022",
-                "bookingTime" to "10:00 - 11:00",
-                "status" to "Pending",
-                "courtID" to "2Z5YrnKilHMwVi1vmW7j",
-                "userID" to "77zKszKcbYSpmI7IweDc",
-                "bookingPayment" to ""
-            )
-            newBookingRef.set(newBooking)
-                .addOnSuccessListener {
-                    Log.d("ADDING NEW BOOKING", "BOOKING ADDED SUCCESSFULLY")
-                }.addOnFailureListener { e ->
-                    Log.e("ADDING NEW BOOKING", "ERROR ADDING NEW BOOKING", e)
-                }
-        }
-
-         */
-
         return binding.root
     }
 

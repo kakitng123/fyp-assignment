@@ -15,10 +15,10 @@ class CoachAdminAdapter(
 ) : RecyclerView.Adapter<CoachAdminAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        val coachID: TextView = itemView.findViewById(R.id.tfDisplay1)
-        val coachName: TextView = itemView.findViewById(R.id.tfDisplay2)
         val tvCoachID: TextView = itemView.findViewById(R.id.tvDisplay1)
         val tvCoachName: TextView = itemView.findViewById(R.id.tvDisplay2)
+        val tfCoachID: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val tfCoachName: TextView = itemView.findViewById(R.id.tfDisplay2)
 
         init {
             itemView.setOnClickListener(this)
@@ -47,8 +47,8 @@ class CoachAdminAdapter(
         holder.tvCoachID.text = "Coach ID"
         holder.tvCoachName.text = "Coach Name"
 
-        holder.coachID.text = currentItem.coachID
-        holder.coachName.text = currentItem.coachName
+        holder.tfCoachID.text = currentItem.coachID
+        holder.tfCoachName.text = currentItem.coachName
     }
 
     override fun getItemCount(): Int {

@@ -75,6 +75,16 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/imgError"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:contentDescription="@string/nullField"
+                android:padding="6dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_admin_error" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

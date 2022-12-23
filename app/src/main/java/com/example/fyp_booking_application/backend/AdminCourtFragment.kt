@@ -58,15 +58,13 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
         binding.imgBtnAddCourt.setOnClickListener {
             val dialogLayout = layoutInflater.inflate(R.layout.dialog_admin_add_court, null)
-            val newCourtName = dialogLayout.findViewById<EditText>(R.id.courtNameField)
             val newCourtSlots = dialogLayout.findViewById<RadioGroup>(R.id.courtTimeslotField)
             val tvCourtPrice = dialogLayout.findViewById<TextView>(R.id.tvCourtPrice)
 
-            
             newCourtSlots.setOnCheckedChangeListener { _, checkedButtonID ->
                 when(checkedButtonID){
-                    R.id.rdbtnTimeslot1 -> tvCourtPrice.text = "Price per booking: RM 15"
-                    R.id.rdbtnTimeslot2 -> tvCourtPrice.text = "Price per booking: RM 25"
+                    R.id.rdbtnTimeslot1 -> tvCourtPrice.text = "Price per Booking: RM 15"
+                    R.id.rdbtnTimeslot2 -> tvCourtPrice.text = "Price per Booking: RM 25"
                 }
             }
 
@@ -74,42 +72,38 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
             builder.setTitle("Enter Court Name")
             builder.setView(dialogLayout)
             builder.setPositiveButton("Add") { _, _ ->
-                if (newCourtName.text.isEmpty()) {
-                    Toast.makeText(context, "EMPTY FIELD", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                } else if (!newCourtName.text.matches("^[a-zA-Z0-9_]*$".toRegex())) {
-                    Toast.makeText(context, "ONLY ALPHANUMERIC ALLOWED", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                var nameValidation = 0
-                databaseRef.collection("Courts").get()
-                    .addOnSuccessListener { results ->
-                        for (document in results) {
-                            if (document["courtName"] == newCourtName.text.toString()) {
-                                nameValidation += 1
-                            }
-                        }
-                        if (nameValidation == 0) {
-                            val newCourtPrice: Double = when(newCourtSlots.checkedRadioButtonId){
-                                R.id.rdbtnTimeslot1 -> 15.0
-                                R.id.rdbtnTimeslot2 -> 25.0
-                                else -> 0.0
-                            }
-                            val newCourtRef = databaseRef.collection("Courts").document()
-                            val newCourtData = hashMapOf(
-                                "courtID" to newCourtRef.id,
-                                "courtName" to newCourtName.text.toString(),
-                                "courtPrice" to newCourtPrice
-                            )
-                            newCourtRef.set(newCourtData).addOnSuccessListener {
-                                Log.d("ADDING COURT DATA", "COURT ADDED SUCCESSFULLY")
-                            }.addOnFailureListener { e ->
-                                Log.e("ADDING COURT DATA", "ERROR ADDING DATA", e)
-                            }
-                        } else Toast.makeText(context, "EXISTING COURT NAME", Toast.LENGTH_SHORT).show()
+                var collectionSize: Int? = null
+                val collection = databaseRef.collection("Courts").count()
+                collection.get(AggregateSource.SERVER).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        collectionSize = task.result.count.toInt()
+                    }
+                    val newCourtPrice: Double = when(newCourtSlots.checkedRadioButtonId){
+                        R.id.rdbtnTimeslot1 -> 15.0
+                        R.id.rdbtnTimeslot2 -> 25.0
+                        else -> 0.0
                     }
 
+                    val newCourtName: String = when(newCourtSlots.checkedRadioButtonId){
+                        R.id.rdbtnTimeslot1 -> "A${collectionSize!!}"
+                        R.id.rdbtnTimeslot2 -> "B${collectionSize!!}"
+                        else -> "ERROR"
+                    }
+
+                    val newCourtRef = databaseRef.collection("Courts").document()
+                    val newCourtData = hashMapOf(
+                        "courtID" to newCourtRef.id,
+                        "courtName" to newCourtName,
+                        "courtPrice" to newCourtPrice,
+                        "courtSlots" to HashMap<String, Any>()
+                    )
+
+                    newCourtRef.set(newCourtData).addOnSuccessListener {
+                        Log.d("ADDING COURT DATA", "COURT ADDED SUCCESSFULLY")
+                    }.addOnFailureListener { e ->
+                        Log.e("ADDING COURT DATA", "ERROR ADDING DATA", e)
+                    }
+                }
             }
             builder.setNegativeButton("Cancel") { _, _ -> }
             builder.show()
@@ -145,16 +139,15 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         val currentItem = courtList[position]
         displayTimeslots(currentItem)
 
-        // Unable to add timeslot for now
-        // courtPrice issue / design issue, radio btn needs to be clicked
         val ss = SpannableString("Click Here to Add Timeslot")
         val clickableSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {
-                if(currentItem.courtPrice.toString() == "15"){
+                if(currentItem.courtPrice.toString() == "15.0"){
                     addData(1, currentItem.courtID.toString())
-                }else if (currentItem.courtPrice.toString() == "25"){
+                }else if (currentItem.courtPrice.toString() == "25.0"){
                     addData(2, currentItem.courtID.toString())
                 }
+                Toast.makeText(context, "TIMESLOT ADDED", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -203,8 +196,8 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                             val timeslot = value as Map<*, *>
                             val slots = timeslot["timeslot"]
                             val available = timeslot["availability"]
-                            val testing123 = CourtDataTimeslot(slots.toString(), available.toString().toBoolean())
-                            timeslotList.add(testing123)
+                            val newTimeslot = CourtDataTimeslot(slots.toString(), available.toString().toBoolean())
+                            timeslotList.add(newTimeslot)
                         }
                     }
                     binding.timeslotRecyclerView.apply {

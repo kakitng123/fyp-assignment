@@ -53,18 +53,23 @@ class CheckoutFragment : Fragment() {
 
         //Retrieve Booking Data and Display Booking Details in Checkout Page
         setFragmentResultListener("toCheckoutPage") { _, bundle ->
+            // Testing if you can bundle more than 1 data (success)
             val bookingID = bundle.getString("toCheckoutPage")
+
+            Log.d("HAHAHAHAHA", "TESTPEPEGA")
+
             val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
             retrieveBookingRef.get().addOnCompleteListener { resultData ->
                 if (resultData != null) {
                     val dateResult = resultData.result.getString("bookingDate").toString()
                     val timeResult = resultData.result.getString("bookingTime").toString()
                     val courtResult = resultData.result.getString("bookingCourt").toString()
+                    val amountResult = resultData.result.getDouble("bookingPayment").toString()
 
                     binding.checkoutDate.text = dateResult
                     binding.checkoutTime.text = timeResult
                     binding.checkoutCourt.text = courtResult
-                    binding.totalAmount.text = "100.0"
+                    binding.totalAmount.text = amountResult
                 } else {
                     Log.d("noexits", "No such documents.")
                 }
@@ -100,7 +105,7 @@ class CheckoutFragment : Fragment() {
                 )
                 bookingId.set(bookingUpdates, SetOptions.merge())
                 // To-do if checkout successfully then take courtName and time and set availability of timeslot
-                val courtRef = fstore.collection("court_testing1").whereEqualTo("courtName", bookingCourt)
+                val courtRef = fstore.collection("Courts").whereEqualTo("courtName", bookingCourt)
                 courtRef.get().addOnSuccessListener(){ documents ->
                     for (document in documents){
                         val courtID = document["courtID"]
@@ -109,7 +114,7 @@ class CheckoutFragment : Fragment() {
                             for ((key, value) in courtSlot) {
                                 val timeslot = value as Map<*, *>
                                 if (timeslot["timeslot"] == bookingTime){
-                                    val courtUpdateRef = fstore.collection("court_testing1").document(courtID.toString())
+                                    val courtUpdateRef = fstore.collection("Courts").document(courtID.toString())
                                     val updateAvailability = hashMapOf("courtSlots" to hashMapOf(
                                         "$key" to hashMapOf("availability" to false ))
                                     )

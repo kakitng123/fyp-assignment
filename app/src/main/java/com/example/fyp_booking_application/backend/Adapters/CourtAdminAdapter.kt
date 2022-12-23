@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.CourtData
@@ -16,10 +16,12 @@ class CourtAdminAdapter(
 ) : RecyclerView.Adapter<CourtAdminAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        val courtID: TextView = itemView.findViewById(R.id.tfDisplay1)
-        val courtName: TextView = itemView.findViewById(R.id.tfDisplay2)
-        val tvCourtID: TextView = itemView.findViewById(R.id.tvDisplay1)
-        val tvCourtName: TextView = itemView.findViewById(R.id.tvDisplay2)
+        val tvCourtName: TextView = itemView.findViewById(R.id.tvDisplay1)
+        val tvCourtPrice: TextView = itemView.findViewById(R.id.tvDisplay2)
+        val tfCourtName: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val tfCourtPrice: TextView = itemView.findViewById(R.id.tfDisplay2)
+        val imgError: ImageView = itemView.findViewById(R.id.imgError)
+
         init {
             itemView.setOnClickListener(this)
         }
@@ -45,11 +47,15 @@ class CourtAdminAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = courtList[position]
 
-        holder.tvCourtID.text = "Court ID"
         holder.tvCourtName.text = "Court Name"
-        holder.courtID.text = currentItem.courtID
-        holder.courtID.textSize = 14F
-        holder.courtName.text = currentItem.courtName
+        holder.tvCourtPrice.textSize = 14F
+        holder.tvCourtPrice.text = "Price per Booking"
+        if(currentItem.courtSlots == null){
+            holder.imgError.visibility = View.VISIBLE
+            holder.imgError.contentDescription = "NO TIMESLOT"
+        }
+        holder.tfCourtName.text = currentItem.courtName
+        holder.tfCourtPrice.text = "RM ${currentItem.courtPrice.toString()}"
     }
 
     override fun getItemCount(): Int {

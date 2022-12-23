@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".frontend.BookingCourtFragment">
@@ -22,63 +22,63 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
-                android:id="@+id/courtRateBooking"
+                android:id="@+id/courtTimeBooking"
                 android:layout_width="311dp"
                 android:layout_height="52dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="16dp"
                 android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/courtNameBooking"
+                app:layout_constraintStart_toStartOf="@+id/courtNameBooking"
                 app:layout_constraintTop_toBottomOf="@+id/courtNameBooking" />
 
             <EditText
                 android:id="@+id/courtPhoneBooking"
                 android:layout_width="311dp"
                 android:layout_height="52dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="16dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="Booking Phone"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/courtRateBooking" />
+                app:layout_constraintEnd_toEndOf="@+id/courtDateBooking"
+                app:layout_constraintStart_toStartOf="@+id/courtDateBooking"
+                app:layout_constraintTop_toBottomOf="@+id/courtDateBooking" />
 
             <EditText
                 android:id="@+id/courtDateBooking"
                 android:layout_width="311dp"
                 android:layout_height="52dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="16dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="Booking Date"
                 android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/courtPhoneBooking" />
+                app:layout_constraintEnd_toEndOf="@+id/courtPriceBooking"
+                app:layout_constraintStart_toStartOf="@+id/courtPriceBooking"
+                app:layout_constraintTop_toBottomOf="@+id/courtPriceBooking" />
 
-            <Spinner
-                android:id="@+id/courtTimeBooking"
-                android:layout_width="311dp"
+            <EditText
+                android:id="@+id/courtPriceBooking"
+                android:layout_width="0dp"
                 android:layout_height="52dp"
-                android:layout_marginTop="15dp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/courtDateBooking" />
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Booking Rate"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/courtTimeBooking"
+                app:layout_constraintStart_toStartOf="@+id/courtTimeBooking"
+                app:layout_constraintTop_toBottomOf="@+id/courtTimeBooking" />
 
             <Button
                 android:id="@+id/nextBtn"
                 android:layout_width="311dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:text="Next"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/courtTimeBooking"
-                app:layout_constraintVertical_bias="0.006" />
+                app:layout_constraintEnd_toEndOf="@+id/courtPhoneBooking"
+                app:layout_constraintStart_toStartOf="@+id/courtPhoneBooking"
+                app:layout_constraintTop_toBottomOf="@+id/courtPhoneBooking" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

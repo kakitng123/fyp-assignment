@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.backend.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ class UserAdminAdapter(
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val tvUsername: TextView = itemView.findViewById(R.id.tvDisplay1)
         val tvEmail: TextView = itemView.findViewById(R.id.tvDisplay2)
-        val tfUsername: TextView = itemView.findViewById(R.id.tfDisplay2)
+        val tfUsername: TextView = itemView.findViewById(R.id.tfDisplay1)
         val tfEmail: TextView = itemView.findViewById(R.id.tfDisplay2)
 
         init {
@@ -39,6 +40,7 @@ class UserAdminAdapter(
         return MyViewHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = userList[position]
 

@@ -15,10 +15,11 @@ class ClassManageAdminAdapter(
 ) : RecyclerView.Adapter<ClassManageAdminAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val className: TextView = itemView.findViewById(R.id.tfDisplay1)
-        val classPrice: TextView = itemView.findViewById(R.id.tfDisplay2)
         val tvClassName: TextView = itemView.findViewById(R.id.tvDisplay1)
         val tvClassPrice: TextView = itemView.findViewById(R.id.tvDisplay2)
+        val tfClassName: TextView = itemView.findViewById(R.id.tfDisplay1)
+        val tfClassPrice: TextView = itemView.findViewById(R.id.tfDisplay2)
+
 
         init {
             itemView.setOnClickListener(this)
@@ -47,8 +48,8 @@ class ClassManageAdminAdapter(
         holder.tvClassName.text = "Class Name"
         holder.tvClassPrice.text = "Class Price"
 
-        holder.className.text = currentItem.className
-        holder.classPrice.text = currentItem.classPrice.toString()
+        holder.tfClassName.text = currentItem.className
+        holder.tfClassPrice.text = currentItem.classPrice.toString()
     }
 
     override fun getItemCount(): Int {
