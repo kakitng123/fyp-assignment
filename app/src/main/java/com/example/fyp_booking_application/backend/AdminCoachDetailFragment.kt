@@ -45,13 +45,13 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
             val docRef = databaseRef.collection("coach_testing1").document(coachID.toString())
 
             val expType = arrayListOf<String>()
-            val expRef = databaseRef.collection("system_testing1").document("experience")
+            val expRef = databaseRef.collection("SystemSettings").document("experience")
             expRef.get().addOnSuccessListener { document ->
                 if(document != null){
                     document.data!!.forEach { fieldName ->
                         expType.add(fieldName.value.toString())
                     }
-                    val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, expType)
+                    val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, expType)
                     binding.coachExpField.isEnabled = false
                     binding.coachExpField.adapter = spinnerAdapter
                 }
@@ -83,7 +83,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     binding.coachNameField.setText(coach?.coachName.toString())
                     binding.coachEmailField.setText(coach?.coachEmail.toString())
                     binding.coachPhoneNoField.setText(coach?.coachPhone.toString())
-                    binding.coachExpField.setSelection(getIndex(binding.coachExpField, coach?.coachExp.toString()))
+                    binding.coachExpField.setSelection(getIndex(coach?.coachExp.toString()))
 
                     binding.coachNameField.setOnFocusChangeListener { _, focused ->
                         if(!focused && binding.coachNameField.text!!.isEmpty()){
@@ -205,11 +205,14 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
             })
     }
 
-    private fun getIndex(spinner: Spinner, exp: String): Int {
-        for (i in 0..spinner.count){
-            if(spinner.getItemAtPosition(i).toString() == exp)
-                return i
+    private fun getIndex(exp: String): Int {
+        val number: Int = when(exp) {
+            "Beginner" -> 3
+            "Intermediate" -> 2
+            "Advanced" -> 1
+            "Expert" -> 0
+            else -> Log.d("Error", "Error")
         }
-        return 0
+        return number
     }
 }

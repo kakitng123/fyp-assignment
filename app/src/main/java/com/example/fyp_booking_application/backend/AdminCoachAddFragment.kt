@@ -63,19 +63,18 @@ class AdminCoachAddFragment : Fragment() {
         }
 
         val expType = arrayListOf<String>()
-        val categoryRef = databaseRef.collection("system_testing1").document("experience")
-        categoryRef.get().addOnSuccessListener { document ->
+        val expRef = databaseRef.collection("SystemSettings").document("experience")
+        expRef.get().addOnSuccessListener { document ->
             if(document != null){
                 document.data!!.forEach { fieldName ->
                     expType.add(fieldName.value.toString())
                 }
-                expType.sortBy { list -> list.reversed() }
-                val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, expType)
+                val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, expType)
                 binding.spinnerExpField.adapter = spinnerAdapter
-                binding.spinnerExpField.setSelection(0)
+                binding.spinnerExpField.setSelection(3)
             }
         }.addOnFailureListener { e ->
-            Log.e("NO CATEGORY", "ERROR FETCHING CATEGORY", e)
+            Log.e("NO EXPERIENCE", "ERROR FETCHING EXPERIENCE", e)
         }
 
         binding.imgBtnAddNewCoach.setOnClickListener {

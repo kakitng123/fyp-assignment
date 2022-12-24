@@ -52,7 +52,7 @@ class AdminProductAddFragment : Fragment() {
         }
 
         val categoryType = arrayListOf<String>()
-        val categoryRef = databaseRef.collection("system_testing1").document("category")
+        val categoryRef = databaseRef.collection("SystemSettings").document("category")
         categoryRef.get().addOnSuccessListener { document ->
             if(document != null){
                 document.data!!.forEach { fieldName ->

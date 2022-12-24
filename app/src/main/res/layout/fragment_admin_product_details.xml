@@ -196,7 +196,6 @@
                             android:layout_height="44dp"
                             android:layout_margin="6dp"
                             android:contentDescription="@string/category"
-                            android:enabled="false"
                             android:textColor="@drawable/edit_text_selector"
                             android:textSize="14sp"
                             tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />

@@ -14,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.AdminDashboardActivity
@@ -24,6 +26,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
+import java.util.Locale.Category
 
 class AdminProductDetailFragment : Fragment() {
 
@@ -47,13 +50,13 @@ class AdminProductDetailFragment : Fragment() {
             storageRef = FirebaseStorage.getInstance().reference
 
             val categoryType = arrayListOf<String>()
-            val categoryRef = databaseRef.collection("system_testing1").document("category")
+            val categoryRef = databaseRef.collection("SystemSettings").document("category")
             categoryRef.get().addOnSuccessListener { document ->
                 if(document != null){
                     document.data!!.forEach { fieldName ->
                         categoryType.add(fieldName.value.toString())
                     }
-                    val spinnerAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, categoryType)
+                    val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, categoryType)
                     binding.tfProductDetailCate.isEnabled = false
                     binding.tfProductDetailCate.adapter = spinnerAdapter
                 }
@@ -82,11 +85,12 @@ class AdminProductDetailFragment : Fragment() {
                         binding.tfProductDetailQty.isEnabled = isChecked
                     }
 
+
                     binding.tfProductDetailName.setText(product?.productName.toString())
-                    binding.tfProductDetailCate.setSelection(getIndex(binding.tfProductDetailCate, productCategory))
                     binding.tfProductDetailDesc.setText(product?.productDesc.toString())
                     binding.tfProductDetailPrice.setText(product?.productPrice.toString())
                     binding.tfProductDetailQty.setText(product?.productQty.toString())
+                    binding.tfProductDetailCate.setSelection(getIndex(productCategory))
 
                     binding.tfProductDetailName.setOnFocusChangeListener { _, focused ->
                         if(!focused && binding.tfProductDetailName.text.isEmpty()){
@@ -142,12 +146,6 @@ class AdminProductDetailFragment : Fragment() {
                             binding.imgViewProductDetail.setImageURI(null)
                         }
 
-                        when(binding.tfProductDetailCate.selectedItemPosition){
-                            0 -> productCategory = "Racket"
-                            1 -> productCategory = "Accessories"
-                            2 -> productCategory = "Etc"
-                        }
-
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Update Product Details")
                         builder.setMessage("Confirm to update product details?")
@@ -157,7 +155,7 @@ class AdminProductDetailFragment : Fragment() {
                                 val updateProduct = hashMapOf(
                                     "productImage" to "products/product${binding.tfProductDetailName.text}",
                                     "productName" to binding.tfProductDetailName.text.toString(),
-                                    "productCategory" to productCategory,
+                                    "productCategory" to binding.tfProductDetailCate.selectedItem.toString(),
                                     "productDesc" to binding.tfProductDetailDesc.text.toString(),
                                     "productPrice" to binding.tfProductDetailPrice.text.toString().toDouble(),
                                     "productQty" to binding.tfProductDetailQty.text.toString().toInt()
@@ -223,11 +221,13 @@ class AdminProductDetailFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun getIndex(spinner: Spinner, category: String): Int {
-        for (i in 0..spinner.count){
-            if(spinner.getItemAtPosition(i).toString() == category)
-                return i
+    private fun getIndex( category: String): Int {
+        val number: Int = when(category){
+            "Racket" -> 0
+            "Accessories" -> 1
+            "Etc" -> 2
+            else -> Log.d("Error", "Error")
         }
-        return 0
+        return number
     }
 }

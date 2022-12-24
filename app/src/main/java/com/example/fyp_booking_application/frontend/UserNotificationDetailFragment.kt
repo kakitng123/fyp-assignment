@@ -28,7 +28,7 @@ class UserNotificationDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_notification_detail, container, false)
         databaseRef = FirebaseFirestore.getInstance()
 
-        // Havent do design but fuck it dulu
+        // Havent do design but ignore for now
         setFragmentResultListener("toUserNotifDetails"){ _, bundle ->
             val testing123 = bundle.getString("toUserNotifDetails")
             val docRef = databaseRef.collection("notification_testing1").document(testing123.toString())
