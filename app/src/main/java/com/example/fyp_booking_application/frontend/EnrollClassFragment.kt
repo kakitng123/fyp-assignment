@@ -76,9 +76,9 @@ class EnrollClassFragment : Fragment() {
                     "enrollStatus" to "Success",
                     "enrollDate" to enrolledDate,
                     "enrollTime" to enrolledTime,
-                    "enrollClassID" to classID,
                     "enrollClassName" to enrolledClassName,
                     "enrollPrice" to enrolledPrice,
+                    "classID" to classID,
                     "userID" to userID
                 )
 

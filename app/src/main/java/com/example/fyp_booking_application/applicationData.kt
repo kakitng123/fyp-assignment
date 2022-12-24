@@ -28,11 +28,11 @@ data class EnrollData(
     val enrollID: String ?= null,
     val enrollDate: String ?= null,
     val enrollTime: String ?= null,
-    val enrollClassID: String ?= null,
     val enrollClassName: String ?= null,
     val enrollPrice: String ?= null,
     val enrollStatus: String ?= null,
     val enrollCoach: String ?= null,
+    val classID: String ?= null,
     val userID: String ?= null,
 )
 
@@ -49,3 +49,50 @@ data class BookingData(
     val bookingPayment: Double ?= null,
     val userID: String ?= null
 )
+
+//Product Data
+data class ProductData(
+    val productID: String ?= null,
+    val productName: String ?= null,
+    val productImage: String ?= null,
+    val productCategory: String ?= null,
+    val productDesc: String ?= null,
+    val productPrice: Double = 0.00,
+    val productQty: Int = 0
+)
+
+//Product Data
+data class PurchaseData(
+    val purchaseID: String ?= null,
+    val purchaseName: String ?= null,
+    val purchaseQty: Int = 0,
+    val purchaseStatus: String ?= null,
+    val purchasePayment: Double = 0.00,
+    val productID: String ?= null,
+    val userID: String ?= null
+)
+
+//Coach Data
+data class CoachData(
+    val coachID: String ?= null,
+    val coachName: String ?= null,
+    val coachEmail: String ?= null,
+    val coachPhone: String ?= null,
+    val coachExp: String ?= null,
+    val coachImage: String ?= null,
+)
+
+//Training Class Data
+data class TrainingClassData(
+    val classID: String ?= null,
+    val className: String ?= null,
+    val classPrice: Double = 0.00,
+    val classDate: String ?= null,
+    val classTime: String ?= null,
+)
+
+
+
+
+
+

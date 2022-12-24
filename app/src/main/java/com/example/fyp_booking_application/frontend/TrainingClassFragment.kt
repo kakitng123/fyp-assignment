@@ -13,10 +13,10 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
+import com.example.fyp_booking_application.TrainingClassData
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentTrainingClassBinding
 import com.example.fyp_booking_application.frontend.adapter.UserTrainingClassAdapter
-import com.example.fyp_booking_application.frontend.data.TrainingClassData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
@@ -27,10 +27,9 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
     private lateinit var trainingClassAdapter: UserTrainingClassAdapter
     private lateinit var trainingClassDataArrayList: ArrayList<TrainingClassData>
     private lateinit var trainingClassRecView: RecyclerView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         //Declare the variable
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training_class, container, false)
         val userView = (activity as UserDashboardActivity)
@@ -39,22 +38,20 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
         // Initialise
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
+        val userID = auth.currentUser?.uid
 
         trainingClassRecView = binding.classRecyclerView
-        trainingClassRecView.layoutManager = LinearLayoutManager(context)
+        trainingClassRecView.layoutManager = LinearLayoutManager(context) //set layout manager to position the items
         trainingClassRecView.setHasFixedSize(true)
-        trainingClassDataArrayList = arrayListOf()
-        trainingClassAdapter = UserTrainingClassAdapter(trainingClassDataArrayList, this@TrainingClassFragment)
-        trainingClassRecView.adapter = trainingClassAdapter
+        trainingClassDataArrayList = arrayListOf() //Set a array list data
+        trainingClassAdapter = UserTrainingClassAdapter(trainingClassDataArrayList, this@TrainingClassFragment) //Create adapter passing in the array adapter data
+        trainingClassRecView.adapter = trainingClassAdapter //Attach the adapter to the recyclerView to populate the items
         eventChangeListener()
 
         return binding.root
     }
 
     private fun eventChangeListener(){
-        fstore = FirebaseFirestore.getInstance()
-        val userID = auth.currentUser?.uid
-
         setFragmentResultListener("toCoachClass") { _, bundle ->
             val coachName = bundle.getString("toCoachClass")
             Log.d("haha", coachName.toString())
@@ -89,8 +86,6 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
         val currentItem = trainingClassDataArrayList[position]
         val userView = (activity as UserDashboardActivity)
         userView.replaceFragment(EnrollClassFragment())
-        // Parse Data to Paired-Fragment
-        setFragmentResult("toClassDetail", bundleOf("toClassDetail" to currentItem.classID))
-
+        setFragmentResult("toClassDetail", bundleOf("toClassDetail" to currentItem.classID)) // Parse Data to Paired-Fragment
     }
 }

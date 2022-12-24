@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.CoachData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentCoachBinding
 import com.example.fyp_booking_application.frontend.adapter.UserCoachAdapter
-import com.example.fyp_booking_application.frontend.data.CoachData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -23,40 +24,40 @@ import com.google.firebase.storage.StorageReference
 
 class CoachFragment : Fragment(), UserCoachAdapter.OnItemClickListener {
     private lateinit var binding: FragmentCoachBinding
-    private lateinit var storage: FirebaseStorage
+    private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
     private lateinit var fstore: FirebaseFirestore
+    private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
     private lateinit var coachAdapter: UserCoachAdapter
     private lateinit var coachDataArrayList: ArrayList<CoachData>
     private lateinit var coachRecView: RecyclerView
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //Declare the variable
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_coach, container, false)
         val userView = (activity as UserDashboardActivity)
         userView.setTitle("Coach")
 
-        eventChangeListener()
-        coachRecView = binding.coachRecyclerView
-        //set layout manager to position the items
-        coachRecView.layoutManager = LinearLayoutManager(context)
-        coachRecView.setHasFixedSize(true)
-        //Set a array list data
-        coachDataArrayList = arrayListOf()
-        //create adapter passing in the array adapter data
-        coachAdapter = UserCoachAdapter(coachDataArrayList, this@CoachFragment)
-        //Attach the adapter to the recyclerView to populate the items
-        coachRecView.adapter = coachAdapter
-
-        return binding.root
-    }
-    private fun eventChangeListener(){
+        //Initialise
+        auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
+        val userID = auth.currentUser?.uid
 
+        coachRecView = binding.coachRecyclerView
+        coachRecView.layoutManager = LinearLayoutManager(context)//Set layout manager to position the items
+        coachRecView.setHasFixedSize(true)
+        coachDataArrayList = arrayListOf() //Set a array list data
+        coachAdapter = UserCoachAdapter(coachDataArrayList, this@CoachFragment) //Create adapter passing in the array adapter data
+        coachRecView.adapter = coachAdapter //Attach the adapter to the recyclerView to populate the items
+        eventChangeListener()
+
+        return binding.root
+    }
+
+    private fun eventChangeListener(){
+        //Retrieve Coach Class Data
         fstore.collection("coach_testing1")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -78,7 +79,6 @@ class CoachFragment : Fragment(), UserCoachAdapter.OnItemClickListener {
         val currentItem = coachDataArrayList[position]
         val userView = (activity as UserDashboardActivity)
         userView.replaceFragment(TrainingClassFragment())
-        // Parse Data to Paired-Fragment
-        setFragmentResult("toCoachClass", bundleOf("toCoachClass" to currentItem.coachName))
+        setFragmentResult("toCoachClass", bundleOf("toCoachClass" to currentItem.coachName)) // Parse Data to Paired-Fragment
     }
 }

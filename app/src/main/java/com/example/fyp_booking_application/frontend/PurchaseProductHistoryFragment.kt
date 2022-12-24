@@ -9,35 +9,37 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.EnrollData
+import com.example.fyp_booking_application.PurchaseData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.databinding.FragmentEnrollClassHistoryBinding
+import com.example.fyp_booking_application.databinding.FragmentPurchaseProductHistoryBinding
 import com.example.fyp_booking_application.frontend.adapter.EnrolledClassHistoryAdapter
+import com.example.fyp_booking_application.frontend.adapter.PurchaseProductHistoryAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
-class EnrollClassHistoryFragment : Fragment() {
-    private lateinit var binding: FragmentEnrollClassHistoryBinding
+class PurchaseProductHistoryFragment : Fragment() {
+    private lateinit var binding: FragmentPurchaseProductHistoryBinding
     private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
     private lateinit var fstore: FirebaseFirestore
-    private lateinit var enrollHistoryAdapter: EnrolledClassHistoryAdapter
-    private lateinit var enrollHistoryDataArrayList: ArrayList<EnrollData>
+    private lateinit var purchaseHistoryAdapter: PurchaseProductHistoryAdapter
+    private lateinit var purchaseHistoryDataArrayList: ArrayList<PurchaseData>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_enroll_class_history, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_purchase_product_history, container, false)
         val userView = (activity as UserDashboardActivity)
-        userView.setTitle("Enroll Class History")
+        userView.setTitle("Purchase Product History")
 
         eventChangeListener()
-        binding.historyEnrollRecyclerView.apply {
+        binding.historyPurchaseRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            enrollHistoryDataArrayList = arrayListOf()
-            enrollHistoryAdapter = EnrolledClassHistoryAdapter(enrollHistoryDataArrayList)
-            adapter = enrollHistoryAdapter
+            purchaseHistoryDataArrayList = arrayListOf()
+            purchaseHistoryAdapter = PurchaseProductHistoryAdapter(purchaseHistoryDataArrayList)
+            adapter = purchaseHistoryAdapter
         }
         return binding.root
     }
@@ -48,8 +50,8 @@ class EnrollClassHistoryFragment : Fragment() {
         val userID = auth.currentUser?.uid
 
         //Retrieve Training Class Data
-        val enrollHistory = fstore.collection("Enroll").whereEqualTo("userID",userID)
-        enrollHistory.addSnapshotListener(object : EventListener<QuerySnapshot> {
+        val purchaseHistory = fstore.collection("Purchases").whereEqualTo("userID",userID)
+        purchaseHistory.addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?
             ) {
                 if (error != null) {
@@ -58,13 +60,13 @@ class EnrollClassHistoryFragment : Fragment() {
                 }
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     if (dc.type == DocumentChange.Type.ADDED) {
-                        enrollHistoryDataArrayList.add(dc.document.toObject(
-                            EnrollData::class.java
+                        purchaseHistoryDataArrayList.add(dc.document.toObject(
+                            PurchaseData::class.java
                         )
                         )
                     }
                 }
-                enrollHistoryAdapter.notifyDataSetChanged()
+                purchaseHistoryAdapter.notifyDataSetChanged()
             }
         })
     }

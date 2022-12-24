@@ -32,6 +32,10 @@ class MyWalletFragment : Fragment() {
             Toast.makeText(context, "View Successfully", Toast.LENGTH_SHORT).show()
             userView.replaceFragment(EnrollClassHistoryFragment())
         }
+        binding.historyPurchaseBtn.setOnClickListener {
+            Toast.makeText(context, "View Successfully", Toast.LENGTH_SHORT).show()
+            userView.replaceFragment(PurchaseProductHistoryFragment())
+        }
         return binding.root
     }
 }

@@ -7,37 +7,36 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.ProductData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.frontend.data.ProductData
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
 
 class UserProductAdapter(
     private val userProDataArrayList: ArrayList<ProductData>,
-    // private val listener: OnItemClickListener
+    private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<UserProductAdapter.UserProViewholder>() {
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
 
-    // to inflate the layout for each item of recycler view.
+    //Inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserProductAdapter.UserProViewholder {
-        //infate the custom layout
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_product_card, parent, false)
-        //return a new holder instance
-        return UserProViewholder(itemView)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_product_card, parent, false) //Inflate the custom layout
+        return UserProViewholder(itemView) //Return a new holder instance
     }
 
     //Involves the populating data into the item through holder
     override fun onBindViewHolder(holder: UserProductAdapter.UserProViewholder, position: Int) {
-        // Initialise
-        val storage = FirebaseStorage.getInstance()
-        val storageRef = storage.reference
+        //Initialise
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
 
-        //Get the data model based on position
-        val userProModel: ProductData = userProDataArrayList[position]
+        val userProModel: ProductData = userProDataArrayList[position] //Get the data model based on position
 
-        // to set data to textview and imageview of each card layout
+        //Set data to textview and imageview of each card layout
         val img = storageRef.child("images/products/product_"+ userProModel.productImage)
         val file = File.createTempFile("temp", "png")
 
@@ -47,22 +46,35 @@ class UserProductAdapter(
         }
 
         holder.userProName.text = userProModel.productName
+        holder.userProPrice.text = userProModel.productPrice.toString()
     }
 
     //Return the total count of items in the list
     override fun getItemCount(): Int {
-        // this method is used for showing number of card items in recycler view.
         return userProDataArrayList.size
     }
 
-    // View holder class for initializing of your views such as TextView and Imageview.
-    inner class UserProViewholder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    //View holder class for initializing of your views such as TextView and Imageview.
+    inner class UserProViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
         val userProImage: ImageView
         val userProName: TextView
+        val userProPrice: TextView
 
         init {
             userProImage = itemView.findViewById(R.id.tvProductImage)
             userProName = itemView.findViewById(R.id.tvProductName)
+            userProPrice = itemView.findViewById(R.id.tvProductPrice)
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                listener.onItemClick(adapterPosition)
+            }
         }
     }
 }

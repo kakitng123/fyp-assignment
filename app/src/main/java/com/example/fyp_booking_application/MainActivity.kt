@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         val signInBtn = findViewById<Button>(R.id.btnSignIn)
         val navForgotPass = findViewById<TextView>(R.id.linkForgotPass)
         val navRegister = findViewById<TextView>(R.id.linkSignUp)
-        val toAdmin = findViewById<Button>(R.id.btnAdminHELLO)
-        val toUser = findViewById<Button>(R.id.btnUserHELLO)
+        val toAdmin = findViewById<TextView>(R.id.btnAdminHELLO)
+        val toUser = findViewById<TextView>(R.id.btnUserHELLO)
 
         // Initialise
         auth = FirebaseAuth.getInstance()
@@ -38,18 +38,18 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        //Navigate to Register Page
+        navRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
+        }
+
         toAdmin.setOnClickListener(){
             startActivity(Intent(this, AdminDashboardActivity::class.java))
             finish()
         }
         toUser.setOnClickListener(){
             startActivity(Intent(this, UserDashboardActivity::class.java))
-            finish()
-        }
-
-        //Navigate to Register Page
-        navRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
 

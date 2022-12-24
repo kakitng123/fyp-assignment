@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.CoachData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.frontend.data.CoachData
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -20,24 +20,21 @@ class UserCoachAdapter(
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
 
-    // to inflate the layout for each item of recycler view.
+    //Inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserCoachAdapter.CoachViewholder {
-        //infate the custom layout
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_coach_card, parent, false)
-        //return a new holder instance
-        return CoachViewholder(itemView)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_coach_card, parent, false) //Inflate the custom layout
+        return CoachViewholder(itemView) //Return a new holder instance
     }
 
     //Involves the populating data into the item through holder
     override fun onBindViewHolder(holder: UserCoachAdapter.CoachViewholder, position: Int) {
-        // Initialise
-        val storage = FirebaseStorage.getInstance()
-        val storageRef = storage.reference
+        //Initialise
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
 
-        //Get the data model based on position
-        val coachModel: CoachData = coachDataArrayList[position]
+        val coachModel: CoachData = coachDataArrayList[position] //Get the data model based on position
 
-        // to set data to textview and imageview of each card layout
+        //Set data to textview and imageview of each card layout
         val img = storageRef.child("images/coachProfile/coach_"+ coachModel.coachName)
         val file = File.createTempFile("temp", "png")
 
@@ -47,14 +44,13 @@ class UserCoachAdapter(
         }
 
         holder.coachName.text = coachModel.coachName
-        holder.coachExperience.text = coachModel.coachExperience
+        holder.coachExperience.text = coachModel.coachExp
         holder.coachPhone.text = coachModel.coachPhone
         holder.coachEmail.text = coachModel.coachEmail
     }
 
     //Return the total count of items in the list
     override fun getItemCount(): Int {
-        // this method is used for showing number of card items in recycler view.
         return coachDataArrayList.size
     }
 
@@ -62,7 +58,7 @@ class UserCoachAdapter(
         fun onItemClick(position: Int)
     }
 
-    // View holder class for initializing of your views such as TextView and Imageview.
+    //View holder class for initializing of your views such as TextView and Imageview.
     inner class CoachViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
         val coachImage: ImageView
         val coachName: TextView

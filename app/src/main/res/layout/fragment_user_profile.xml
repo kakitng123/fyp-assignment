@@ -86,7 +86,6 @@
             android:layout_height="132dp"
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
-            android:src="@drawable/smashlogo"
             app:civ_border_color="@color/teal_200"
             app:civ_border_width="2dp"
             app:layout_constraintEnd_toEndOf="parent"

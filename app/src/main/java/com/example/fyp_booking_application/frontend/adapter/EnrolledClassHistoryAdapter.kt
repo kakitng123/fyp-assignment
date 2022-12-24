@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.EnrollData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.frontend.data.EnrollData
 
 class EnrolledClassHistoryAdapter(
     private val enrollClassDataArrayList: ArrayList<EnrollData>
