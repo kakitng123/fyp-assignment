@@ -167,6 +167,10 @@ class UserProfileFragment : Fragment() {
                     Toast.makeText(activity, "Save Failure", Toast.LENGTH_SHORT).show()
                 }
         }
+        binding.imgBtnUserNotification.setOnClickListener(){
+            userView.replaceFragment(UserNotificationFragment())
+        }
+
         return binding.root
     }
 

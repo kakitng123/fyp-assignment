@@ -36,10 +36,10 @@ class AdminNotifManageFragment : Fragment() {
         databaseRef.collection("Users").get().addOnSuccessListener { results ->
             for (document in results){
                 userList.add(document["username"].toString())
-
             }
+            listAdapter.notifyDataSetChanged()
         }.addOnFailureListener { e ->
-            Log.d("TEST DATA", "Error getting documents: ", e)
+            Log.e("FETCHING DOCUMENTS", "ERROR FETCHING DOCUMENTS", e)
         }
 
         listAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, userList)

@@ -30,13 +30,14 @@ data class CoachData (
     val coachExp: String ?= null,
     val coachPhone: String ?= null
 )
-// NotificationData (Complete)
+// NotificationData (Not Complete)
 data class NotificationData (
     val notifyID: String ?= null,
     val userID: String ?= null,
     val notifyTitle: String ?= null,
     val notifyMessage: String ?= null,
     val referralCode: String ?= null
+    // Might need to add Date/Time
 )
 
 // BELOW THIS LINE IS EXAMPLE DATA FOR ADAPTER (REAL DATA WE DISCUSS)

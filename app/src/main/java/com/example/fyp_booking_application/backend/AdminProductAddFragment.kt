@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.R
@@ -94,6 +95,7 @@ class AdminProductAddFragment : Fragment() {
             val validDesc = binding.pDescContainer.helperText == null
             val validPrice = binding.pPriceContainer.helperText == null
             val validQty = binding.pQtyContainer.helperText == null
+            val validImage = binding.imgProduct != null
 
             if(validName && validDesc && validPrice && validQty) {
                 var nameValidation = 0

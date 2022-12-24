@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".frontend.UserNotificationDetailFragment">
+
+        <TextView
+            android:id="@+id/tvUserNotifDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TESTING1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvUserNotifDetailMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TESTING2"
+            app:layout_constraintEnd_toEndOf="@+id/tvUserNotifDetailTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvUserNotifDetailTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserNotifDetailTitle" />
+
+        <TextView
+            android:id="@+id/tvUserNotifDetailRef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TESTING3"
+            app:layout_constraintEnd_toEndOf="@+id/tvUserNotifDetailMsg"
+            app:layout_constraintStart_toStartOf="@+id/tvUserNotifDetailMsg"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserNotifDetailMsg" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:text="NOTIFICAAIT0A DETAILASDSA"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
