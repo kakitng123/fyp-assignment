@@ -54,6 +54,11 @@ class ClassEnrollAdminAdapter (
         val currentItem = enrollList[position]
         databaseRef = FirebaseFirestore.getInstance()
 
+        if(currentItem.enrollStatus != "Pending"){
+            holder.btnDecline.visibility = View.GONE
+            holder.btnApprove.visibility = View.GONE
+        }
+
         val docRef = databaseRef.collection("Users").document(currentItem.userID.toString())
         docRef.get().addOnSuccessListener { document ->
             val user = document.toObject(TestUserData::class.java)

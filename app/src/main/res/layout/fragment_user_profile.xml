@@ -29,7 +29,7 @@
             android:id="@+id/saveBtn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="48dp"
             android:layout_marginEnd="76dp"
             android:text="Save"
             android:textColor="@color/white"
@@ -70,7 +70,7 @@
             android:id="@+id/logoutBtn"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="48dp"
             android:text="Logout"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -150,6 +150,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_user_notification_40" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Subscription Newsletter"
+            app:layout_constraintEnd_toEndOf="@+id/passProfile"
+            app:layout_constraintStart_toStartOf="@+id/passProfile"
+            app:layout_constraintTop_toBottomOf="@+id/passProfile" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

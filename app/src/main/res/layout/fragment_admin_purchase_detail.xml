@@ -58,7 +58,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/purchaseIDField"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="55dp"
                         android:enabled="false"
                         android:textColor="@drawable/edit_text_selector"
                         android:textSize="16sp"
@@ -81,7 +81,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/purchasePNameField"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="55dp"
                         android:enabled="false"
                         android:inputType="textPersonName"
                         android:lines="1"
@@ -106,7 +106,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/purchasePQtyField"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="55dp"
                         android:enabled="false"
                         android:inputType="text"
                         android:textColor="@drawable/edit_text_selector"
@@ -130,7 +130,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/purchaseAmtField"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="55dp"
                         android:enabled="false"
                         android:inputType="numberDecimal"
                         android:textColor="@drawable/edit_text_selector"

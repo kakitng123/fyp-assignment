@@ -35,7 +35,7 @@ class CheckoutFragment : Fragment() {
         val userView = (activity as UserDashboardActivity)
         userView.setTitle("Checkout")
 
-        //Spinner for Payment Option (KK - Double Checking)
+        //Spinner for Payment Option
         val spinnerPayment = binding.checkoutPayment
         spinnerPayment.adapter = ArrayAdapter(userView, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, spinnerPaymentOption)
 
@@ -49,7 +49,6 @@ class CheckoutFragment : Fragment() {
                 println(spinPaymentData)
             }
         }
-
 
         //Retrieve Booking Data and Display Booking Details in Checkout Page
         setFragmentResultListener("toCheckoutPage") { _, bundle ->
@@ -75,6 +74,18 @@ class CheckoutFragment : Fragment() {
                 }
             }.addOnFailureListener { exception ->
                 Log.d("noexits", "Error getting documents.", exception)
+            }
+
+            // Voucher Test
+            binding.btnApplyVoucher.setOnClickListener {
+                val voucherRef = fstore.collection("Vouchers").whereEqualTo("voucherCode", binding.voucherCodeField.text.toString())
+                voucherRef.get().addOnSuccessListener { documents ->
+                    for (document in documents){
+                        val voucherDiscount: Double = document["voucherDiscount"].toString().toDouble()
+                        val calculation = binding.totalAmount.text.toString().toDouble() * (1-voucherDiscount)
+                        binding.totalAmount.text = calculation.toString()
+                    }
+                }
             }
 
             // few comments, actually when you use SetOptions.merge(), you dont have to get dateResult/timeResult/courtResult

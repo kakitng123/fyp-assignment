@@ -61,7 +61,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bookingIDField"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="55dp"
                             android:enabled="false"
                             android:textColor="@drawable/edit_text_selector"
                             android:textSize="16sp"
@@ -84,7 +84,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bookingCourtNameField"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="55dp"
                             android:enabled="false"
                             android:inputType="numberDecimal"
                             android:textColor="@drawable/edit_text_selector"
@@ -108,7 +108,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bookingDateField"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="55dp"
                             android:enabled="false"
                             android:inputType="textPersonName"
                             android:lines="1"
@@ -133,7 +133,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bookingTimeField"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="55dp"
                             android:enabled="false"
                             android:inputType="text"
                             android:textColor="@drawable/edit_text_selector"
@@ -157,7 +157,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bookingStatusField"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="55dp"
                             android:enabled="false"
                             android:inputType="date"
                             android:textColor="@drawable/edit_text_selector"
@@ -181,7 +181,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bookingUserIDField"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="55dp"
                             android:enabled="false"
                             android:inputType="time"
                             android:textColor="@drawable/edit_text_selector"
@@ -205,7 +205,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bookingAmountField"
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
+                            android:layout_height="55dp"
                             android:enabled="false"
                             android:inputType="numberDecimal"
                             android:textColor="@drawable/edit_text_selector"

@@ -26,7 +26,7 @@ class EnrolledClassHistoryAdapter(
         val enrollHistoryModel = enrollClassDataArrayList[position]
 
         holder.historyClass.text = enrollHistoryModel.enrollClassName
-        holder.historyPrice.text = enrollHistoryModel.enrollPrice
+        holder.historyPrice.text = enrollHistoryModel.enrollPrice.toString()
         holder.historyDate.text = enrollHistoryModel.enrollDate
         holder.historyTime.text = enrollHistoryModel.enrollTime
         holder.historyStatus.text = enrollHistoryModel.enrollStatus

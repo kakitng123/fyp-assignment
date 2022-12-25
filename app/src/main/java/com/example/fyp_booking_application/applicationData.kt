@@ -22,15 +22,14 @@ data class CourtDataTimeslot (
     val availability: Boolean ?= null
 )
 
-// EnrollData (Changed enrollPrice from String to Double)
+// EnrollData (Complete)
 data class EnrollData(
     val enrollID: String ?= null,
     val enrollDate: String ?= null,
     val enrollTime: String ?= null,
     val enrollClassName: String ?= null,
-    val enrollPrice: String ?= null,
+    val enrollPrice: Double ?= null,
     val enrollStatus: String ?= null,
-    val enrollCoach: String ?= null,
     val classID: String ?= null,
     val userID: String ?= null,
 )
@@ -66,6 +65,8 @@ data class PurchaseData(
     val purchaseQty: Int = 0,
     val purchaseStatus: String ?= null,
     val purchasePrice: Double = 0.00,
+    val purchaseDate: String ?= null,
+    val purchaseTime: String ?= null,
     val productID: String ?= null,
     val userID: String ?= null
 )
@@ -117,6 +118,7 @@ data class VoucherData (
     val voucherMessage: String ?= null,
     val pointsRequired: Int ?= null,
     val voucherCode: String ?= null,
+    val voucherDiscount: Double ?= null,
     val userID: String ?= null
 )
 

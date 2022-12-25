@@ -109,7 +109,7 @@ class EnrollClassFragment : Fragment() {
                 var enrolledClassName: String = binding.enrollClassName.text.toString()
                 var enrolledDate: String = binding.enrollDate.text.toString()
                 var enrolledTime: String = binding.enrollTime.selectedItem.toString()
-                var enrolledPrice: String = binding.enrollPrice.text.toString()
+                var enrolledPrice: Double = binding.enrollPrice.text.toString().toDouble()
 
                 val userID = auth.currentUser?.uid
                 val enrolledId = fstore.collection("Enroll").document()

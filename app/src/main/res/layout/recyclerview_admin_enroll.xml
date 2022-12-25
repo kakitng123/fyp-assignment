@@ -126,8 +126,11 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/green_approve"
                     android:text="@string/approve"
-                    android:textColor="#283593"
-                    app:cornerRadius="15dp" />
+                    android:textColor="@color/black"
+                    app:cornerRadius="15dp"
+                    app:icon="@drawable/ic_admin_check"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/black" />
 
                 <Button
                     android:id="@+id/btnDeclineEnroll"
@@ -135,11 +138,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1.75"
                     android:backgroundTint="@color/red_decline"
                     android:text="@string/decline"
-                    android:textColor="#000000"
-                    app:cornerRadius="15dp" />
+                    android:textColor="@color/black"
+                    app:cornerRadius="15dp"
+                    app:icon="@drawable/ic_admin_close"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/black" />
             </LinearLayout>
         </LinearLayout>
 

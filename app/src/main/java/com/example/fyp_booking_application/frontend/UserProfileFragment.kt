@@ -114,6 +114,7 @@ class UserProfileFragment : Fragment() {
             val phone: String = binding.phoneProfile.text.toString()
             val password: String = binding.passProfile.text.toString()
             var gender:String = binding.radioGroup.checkedRadioButtonId.toString()
+            val subscription:Boolean = binding.checkBox.isChecked
 
             //Gender Radio Button
             if(binding.radioBtnMale.isChecked){
@@ -160,7 +161,8 @@ class UserProfileFragment : Fragment() {
                 "imgID" to image,
                 "phone" to phone,
                 "gender" to gender,
-                "password" to password
+                "password" to password,
+                "isSubscribed" to subscription
             )
             uploadImage()
 

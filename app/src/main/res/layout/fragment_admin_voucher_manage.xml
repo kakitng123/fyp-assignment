@@ -105,6 +105,27 @@
                         tools:ignore="TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vouchDiscountContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="Discount %"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red_decline">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/vouchDiscountField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/vouchUserSV"
                     android:layout_width="match_parent"

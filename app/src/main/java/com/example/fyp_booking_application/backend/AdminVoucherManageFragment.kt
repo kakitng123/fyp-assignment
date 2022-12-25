@@ -98,14 +98,23 @@ class AdminVoucherManageFragment : Fragment() {
             else binding.vouchAddCodeContainer.helperText = null
         }
 
+        binding.vouchDiscountField.setOnFocusChangeListener { _, focused ->
+            if(!focused && binding.vouchDiscountField.text!!.isEmpty()){
+                binding.vouchDiscountContainer.helperText = "Voucher Code is Required"
+            }
+            else binding.vouchDiscountContainer.helperText = null
+        }
+
 
         binding.btnSendVoucher.setOnClickListener {
             val validTitle = binding.vouchAddTitleContainer.helperText == null
             val validMessage = binding.vouchAddMessageContainer.helperText == null
             val validAmount = binding.vouchAddPointContainer.helperText == null
-            val validCode = binding.vouchAddPointContainer.helperText == null
+            val validCode = binding.vouchAddCodeContainer.helperText == null
+            val validDiscount = binding.vouchDiscountContainer.helperText == null
 
-            if(validTitle && validMessage && validAmount && validCode){
+            if(validTitle && validMessage && validAmount && validCode && validDiscount){
+                val discountAmount: Double = binding.vouchDiscountField.toString().toDouble() / 100
                 val newVoucherRef = databaseRef.collection("Vouchers").document()
                 val newVoucher = hashMapOf(
                     "voucherID" to newVoucherRef.id,
@@ -113,6 +122,7 @@ class AdminVoucherManageFragment : Fragment() {
                     "voucherMessage" to binding.vouchAddMessageField.text.toString(),
                     "pointsRequired" to binding.vouchAddPointField.text.toString(),
                     "voucherCode" to binding.vouchAddCodeField.text.toString().toInt(),
+                    "voucherDiscount" to discountAmount,
                     "userID" to binding.vouchUserSV.queryHint
                 )
                 newVoucherRef.set(newVoucher).addOnSuccessListener {
