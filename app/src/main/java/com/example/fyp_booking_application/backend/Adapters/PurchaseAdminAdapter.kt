@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.PurchaseData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.PurchaseData
 
 class PurchaseAdminAdapter(
     private val purchaseList: ArrayList<PurchaseData>,
@@ -47,8 +47,8 @@ class PurchaseAdminAdapter(
         holder.tvTransID.text = "Transact ID"
         holder.tvTransAmt.text = "Transact Amount"
 
-        holder.tfTransID.text = currentItem.transactID
-        holder.tfTransAmt.text = currentItem.transactAmt.toString()
+        holder.tfTransID.text = currentItem.purchaseID
+        holder.tfTransAmt.text = currentItem.purchasePrice.toString()
     }
 
     override fun getItemCount(): Int {

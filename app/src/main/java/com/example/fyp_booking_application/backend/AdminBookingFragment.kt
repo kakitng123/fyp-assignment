@@ -32,8 +32,8 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
     ): View {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_admin_booking, container, false)
         bookingArrayList = arrayListOf()
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("BOOKING MANAGEMENT")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Booking Management")
 
         dataApproved()
         binding.bookingNavView.setOnItemSelectedListener {

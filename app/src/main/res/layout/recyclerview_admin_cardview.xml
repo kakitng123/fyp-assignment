@@ -20,13 +20,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:padding="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:layout_weight="1.5"
                 android:orientation="vertical">
 
@@ -34,7 +34,7 @@
                     android:id="@+id/tvDisplay1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:padding="4dp"
                     android:text="@string/textView"
                     android:textAlignment="textEnd"
                     android:textSize="14sp"
@@ -44,7 +44,7 @@
                     android:id="@+id/tvDisplay2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:padding="4dp"
                     android:text="@string/textView"
                     android:textAlignment="textEnd"
                     android:textSize="14sp"
@@ -54,7 +54,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -62,7 +61,7 @@
                     android:id="@+id/tfDisplay1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:padding="4dp"
                     android:text="@string/textView"
                     android:textSize="14sp" />
 
@@ -70,7 +69,7 @@
                     android:id="@+id/tfDisplay2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:padding="4dp"
                     android:text="@string/textView"
                     android:textSize="14sp" />
             </LinearLayout>

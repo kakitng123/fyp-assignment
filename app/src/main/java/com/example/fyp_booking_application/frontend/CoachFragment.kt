@@ -58,7 +58,7 @@ class CoachFragment : Fragment(), UserCoachAdapter.OnItemClickListener {
 
     private fun eventChangeListener(){
         //Retrieve Coach Class Data
-        fstore.collection("coach_testing1")
+        fstore.collection("Coaches")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     if(error != null){

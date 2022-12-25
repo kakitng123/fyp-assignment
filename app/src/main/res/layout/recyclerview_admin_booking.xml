@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,16 +34,17 @@
                     android:id="@+id/tvBookingDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:padding="4dp"
                     android:text="@string/bookingDate"
                     android:textAlignment="viewEnd"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvBookingTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:padding="4dp"
                     android:text="@string/bookingTime"
                     android:textAlignment="viewEnd"
                     android:textSize="14sp"
@@ -52,9 +54,10 @@
                     android:id="@+id/tvBookingStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:padding="4dp"
                     android:text="@string/status"
                     android:textAlignment="viewEnd"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -69,19 +72,22 @@
                     android:id="@+id/tfBookingDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp" />
+                    android:padding="4dp"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tfBookingTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp" />
+                    android:padding="4dp"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tfBookingStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp" />
+                    android:padding="4dp"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -92,11 +98,13 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/sendReminder"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:visibility="visible"
             app:cornerRadius="25dp"
             app:icon="@drawable/ic_admin_notifications"
-            app:iconGravity="textStart" />
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

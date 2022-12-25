@@ -8,6 +8,19 @@
         android:layout_height="match_parent"
         tools:context=".backend.AdminCoachFragment">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/coachManageSV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_theme_borders"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@null"
+            app:queryHint="Search Coach Name" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/coachRV"
             android:layout_width="0dp"
@@ -15,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coachManageSV"
             tools:listitem="@layout/recyclerview_admin_cardview" />
 
         <ImageButton

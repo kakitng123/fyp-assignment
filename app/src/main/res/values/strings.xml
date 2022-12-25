@@ -43,6 +43,7 @@
     <string name="qty">Quantity</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
+    <string name="gender">Gender</string>
     <string name="phoneNo">Phone No.</string>
     <string name="exp">Experience</string>
     <string name="email">Email</string>
@@ -58,6 +59,7 @@
     <string name="user">User</string>
     <string name="password">Password</string>
     <string name="userType">User Type</string>
+    <string name="dateTime">Date / Time</string>
 
     <!-- ACTIVITY/FRAGMENT HEADINGS -->
     <string name="addCoach">ADD COACH</string>
@@ -77,14 +79,17 @@
     <string name="delete">Delete</string>
     <string name="update">Update</string>
     <string name="add">Add</string>
+    <string name="search">Search</string>
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
+    <string name="send">Send</string>
     <string name="selectImage">Click to Select Image</string>
     <string name="addTimeslot">Click Here to Add Timeslots</string>
     <string name="sendReminder">Send Reminder</string>
     <string name="newData">Enter New Data</string>
     <string name="newCourtName">Enter Court Nane</string>
     <string name="newCourtPrice">Enter Court Price</string>
+    <string name="newReason">Enter Reason</string>
     <string name="timeslotA">Timeslot A (From 10am w/ 1hr Interval)</string>
     <string name="timeslotB">Timeslot B (From 10am w/ 2hr Interval)</string>
 

@@ -73,30 +73,49 @@ class AdminNotifManageFragment : Fragment() {
             Toast.makeText(context, "Selected", Toast.LENGTH_SHORT).show()
         }
 
-        binding.btnSendReminder.setOnClickListener {
-            var collectionSize: Int ?= null
-            val collection = databaseRef.collection("notification_testing1").count()
-            collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
-                if (task.isSuccessful){
-                    collectionSize = task.result.count.toInt()
-                }
-                val newNotifyRef = databaseRef.collection("notification_testing1").document()
-                val newNotify = hashMapOf(
-                    "notifyID" to newNotifyRef.id,
-                    "notifyTitle" to binding.notifAddTitleField.text.toString(),
-                    "notifyMessage" to binding.notifAddMessageField.text.toString(),
-                    "referralCode" to "R${100000+collectionSize!!}",
-                    "userID" to binding.notifUserSearchView.queryHint // GET USER ID (Do Spinner or checkbox to all Opt-in Notif)
-                )
-                newNotifyRef.set(newNotify).addOnSuccessListener {
-                    Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
-
-                }.addOnFailureListener { e ->
-                    Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
-                }
+        binding.notifAddTitleField.setOnFocusChangeListener { _, focused ->
+            if(!focused && binding.notifAddTitleField.text!!.isEmpty()){
+                binding.notifAddTitleContainer.helperText = "Title is Required"
             }
+            else binding.notifAddTitleContainer.helperText = null
         }
 
+        binding.notifAddMessageField.setOnFocusChangeListener { _, focused ->
+            if(!focused && binding.notifAddMessageField.text!!.isEmpty()){
+                binding.notifAddMessageContainer.helperText = "Message is Required"
+            }
+            else binding.notifAddMessageContainer.helperText = null
+        }
+
+        binding.btnSendReminder.setOnClickListener {
+            val validTitle = binding.notifAddTitleContainer.helperText == null
+            val validMessage = binding.notifAddMessageContainer.helperText == null
+
+            if(validTitle && validMessage ){
+                var collectionSize: Int ?= null
+                val collection = databaseRef.collection("Notifications").count()
+                collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
+                    if (task.isSuccessful){
+                        collectionSize = task.result.count.toInt()
+                    }
+                    val newNotifyRef = databaseRef.collection("Notifications").document()
+                    val newNotify = hashMapOf(
+                        "notifyID" to newNotifyRef.id,
+                        "notifyTitle" to binding.notifAddTitleField.text.toString(),
+                        "notifyMessage" to binding.notifAddMessageField.text.toString(),
+                        "referralCode" to "R${100000+collectionSize!!}",
+                        "userID" to binding.notifUserSearchView.queryHint
+                    )
+                    newNotifyRef.set(newNotify).addOnSuccessListener {
+                        Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
+
+                    }.addOnFailureListener { e ->
+                        Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
+                    }
+                }
+            }
+            else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
+        }
         return binding.root
     }
 

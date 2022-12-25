@@ -27,7 +27,7 @@ class PurchaseProductHistoryAdapter(
         holder.purchaseName.text = purchaseHistoryModel.purchaseName
         holder.purchaseQty.text = purchaseHistoryModel.purchaseQty.toString()
         holder.purchaseStatus.text = purchaseHistoryModel.purchaseStatus
-        holder.purchasePayment.text = purchaseHistoryModel.purchasePayment.toString()
+        holder.purchasePayment.text = purchaseHistoryModel.purchasePrice.toString()
     }
 
     //Return the total count of items in the list

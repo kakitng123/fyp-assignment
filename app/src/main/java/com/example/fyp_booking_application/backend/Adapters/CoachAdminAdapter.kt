@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.CoachData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.CoachData
 
 class CoachAdminAdapter(
     private val coachList: ArrayList<CoachData>,

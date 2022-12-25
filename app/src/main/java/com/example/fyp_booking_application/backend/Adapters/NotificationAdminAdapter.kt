@@ -4,11 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fyp_booking_application.NotificationData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.NotificationData
 
 class NotificationAdminAdapter(
     private val notificationList: ArrayList<NotificationData>,

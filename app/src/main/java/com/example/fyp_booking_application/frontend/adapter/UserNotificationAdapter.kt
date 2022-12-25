@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.fyp_booking_application.NotificationData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.NotificationData
 
 class UserNotificationAdapter(
     private val context: Context,

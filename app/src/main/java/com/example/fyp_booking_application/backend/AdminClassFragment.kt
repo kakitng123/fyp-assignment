@@ -19,14 +19,15 @@ class AdminClassFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("CLASS MANAGEMENT")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Training Class Management")
 
-        adminActivityView.replaceFragment(AdminClassManageFragment(), R.id.classAdminLayout)
+        adminView.replaceFragment(AdminClassManageFragment(), R.id.classAdminLayout)
         binding.classNavView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.nav_class_manage -> adminActivityView.replaceFragment(AdminClassManageFragment(), R.id.classAdminLayout)
-                R.id.nav_class_pending -> adminActivityView.replaceFragment(AdminClassEnrollFragment(), R.id.classAdminLayout)
+                R.id.nav_class_manage -> adminView.replaceFragment(AdminClassManageFragment(), R.id.classAdminLayout)
+                R.id.nav_class_pending -> adminView.replaceFragment(AdminEnrollFragment(), R.id.classAdminLayout)
+                R.id.nav_class_history -> adminView.replaceFragment(AdminEnrollHistoryFragment(), R.id.classAdminLayout)
             }
             true
         }

@@ -12,13 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.core.view.get
-import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.AdminDashboardActivity
+import com.example.fyp_booking_application.ProductData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminProductDetailsBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,7 +24,6 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
-import java.util.Locale.Category
 
 class AdminProductDetailFragment : Fragment() {
 
@@ -41,8 +38,8 @@ class AdminProductDetailFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product_details, container, false)
         databaseRef = FirebaseFirestore.getInstance()
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("PRODUCT DETAIL")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("PRODUCT DETAIL")
 
         setFragmentResultListener("toProductDetails") { _, bundle ->
             val productID = bundle.getString("toProductDetails")
@@ -68,7 +65,7 @@ class AdminProductDetailFragment : Fragment() {
                 if (document != null) {
                     val product = document.toObject(ProductData::class.java)
                     val prevProductImgPath = product?.productImage.toString() // used to delete previous image
-                    var productCategory = product?.productCategory.toString()
+                    val productCategory = product?.productCategory.toString()
 
                     val currentPhoto = storageRef.child(product?.productImage.toString())
                     val file = File.createTempFile("temp", "png")
@@ -85,11 +82,14 @@ class AdminProductDetailFragment : Fragment() {
                         binding.tfProductDetailQty.isEnabled = isChecked
                     }
 
-
                     binding.tfProductDetailName.setText(product?.productName.toString())
                     binding.tfProductDetailDesc.setText(product?.productDesc.toString())
                     binding.tfProductDetailPrice.setText(product?.productPrice.toString())
-                    binding.tfProductDetailQty.setText(product?.productQty.toString())
+
+                    binding.tfProductDetailQty.minValue = 1
+                    binding.tfProductDetailQty.maxValue = 100
+                    //binding.tfProductDetailQty.wrapSelectorWheel = true
+                    binding.tfProductDetailQty.value = product?.productQty!!
                     binding.tfProductDetailCate.setSelection(getIndex(productCategory))
 
                     binding.tfProductDetailName.setOnFocusChangeListener { _, focused ->
@@ -116,17 +116,6 @@ class AdminProductDetailFragment : Fragment() {
                         else binding.tfProductDetailPrice.error = null
                     }
 
-                    binding.tfProductDetailQty.setOnFocusChangeListener { _, focused ->
-                        if(!focused && binding.tfProductDetailQty.text!!.isEmpty()){
-                            binding.tfProductDetailQty.error = "Quantity is Required"
-                        }
-                        else if(!focused && !(binding.tfProductDetailQty.text!!.all { it.isDigit() })){
-                            binding.tfProductDetailQty.error = "Invalid Quantity"
-                        }
-                        else binding.tfProductDetailQty.error = null
-                    }
-
-
                     binding.imgViewProductDetail.setOnClickListener {
                         val selectImage = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                         startActivityForResult(selectImage, 3)
@@ -151,14 +140,14 @@ class AdminProductDetailFragment : Fragment() {
                         builder.setMessage("Confirm to update product details?")
                         builder.setPositiveButton("Update") { _, _ ->
                             if(binding.tfProductDetailName.text != null &&  binding.tfProductDetailDesc.text != null
-                                && binding.tfProductDetailPrice.text != null && binding.tfProductDetailQty.text != null){
+                                && binding.tfProductDetailPrice.text != null){
                                 val updateProduct = hashMapOf(
                                     "productImage" to "products/product${binding.tfProductDetailName.text}",
                                     "productName" to binding.tfProductDetailName.text.toString(),
                                     "productCategory" to binding.tfProductDetailCate.selectedItem.toString(),
                                     "productDesc" to binding.tfProductDetailDesc.text.toString(),
                                     "productPrice" to binding.tfProductDetailPrice.text.toString().toDouble(),
-                                    "productQty" to binding.tfProductDetailQty.text.toString().toInt()
+                                    "productQty" to binding.tfProductDetailQty.value
                                 )
                                 docRef.set(updateProduct, SetOptions.merge())
                             }
@@ -197,7 +186,7 @@ class AdminProductDetailFragment : Fragment() {
                     }
                     docRef.delete().addOnSuccessListener {
                         Log.d("DELETING PRODUCT", "PRODUCT DELETED SUCCESSFULLY")
-                        adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
+                        adminView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
                     }.addOnFailureListener { e ->
                         Log.e("DELETING PRODUCT", "ERROR DELETING PRODUCT", e)
                     }
@@ -207,7 +196,7 @@ class AdminProductDetailFragment : Fragment() {
             }
         }
         binding.tvBackProductDetail.setOnClickListener{
-            adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
+            adminView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
         }
         return binding.root
     }

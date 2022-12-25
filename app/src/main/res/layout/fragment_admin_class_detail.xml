@@ -73,138 +73,138 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/classIDContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/id"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:errorEnabled="false">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/classIDContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/classIDField"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:hint="@string/id"
-                        app:boxBackgroundColor="#F4F4F4"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:errorEnabled="false">
+                        android:layout_height="55dp"
+                        android:enabled="false"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/classIDField"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:enabled="false"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="16sp"
-                            tools:ignore="TextContrastCheck" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/classNameContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/name"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/classNameContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/classNameField"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:hint="@string/name"
-                        app:boxBackgroundColor="#F4F4F4"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp">
+                        android:layout_height="55dp"
+                        android:enabled="false"
+                        android:inputType="textPersonName"
+                        android:lines="1"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/classNameField"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:enabled="false"
-                            android:inputType="textPersonName"
-                            android:lines="1"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="16sp"
-                            tools:ignore="TextContrastCheck" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/classDescContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/desc"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/classDescContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/classDescField"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:hint="@string/desc"
-                        app:boxBackgroundColor="#F4F4F4"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp">
+                        android:layout_height="55dp"
+                        android:enabled="false"
+                        android:inputType="text"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/classDescField"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:enabled="false"
-                            android:inputType="text"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="16sp"
-                            tools:ignore="TextContrastCheck" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/classPriceContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/price"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/classPriceContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/classPriceField"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:hint="@string/price"
-                        app:boxBackgroundColor="#F4F4F4"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp">
+                        android:layout_height="55dp"
+                        android:enabled="false"
+                        android:inputType="numberDecimal"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/classPriceField"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:enabled="false"
-                            android:inputType="numberDecimal"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="16sp"
-                            tools:ignore="TextContrastCheck" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/classCoachContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:hint="@string/classCoach"
+                    app:boxBackgroundColor="#F4F4F4"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/classCoachContainer"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/classCoachField"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:hint="@string/classCoach"
-                        app:boxBackgroundColor="#F4F4F4"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp">
+                        android:layout_height="55dp"
+                        android:enabled="false"
+                        android:textColor="@drawable/edit_text_selector"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/classCoachField"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:enabled="false"
-                            android:textColor="@drawable/edit_text_selector"
-                            android:textSize="16sp"
-                            tools:ignore="TextContrastCheck" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                <ListView
+                    android:id="@+id/classSlotLV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="12dp" />
 
-
-                </LinearLayout>
-            </ScrollView>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

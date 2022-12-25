@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
@@ -21,23 +22,36 @@ class AdminClassDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentAdminClassDetailBinding
     private lateinit var databaseRef: FirebaseFirestore
+    private lateinit var trainingClassList: ArrayList<String>
+    private lateinit var listAdapter: ArrayAdapter<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_class_detail, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("CLASS DETAIL")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Class Details")
 
         setFragmentResultListener("toClassDetails") { _, bundle ->
             val classID = bundle.getString("toClassDetails")
             databaseRef = FirebaseFirestore.getInstance()
-            val docRef = databaseRef.collection("class_testing1").document(classID.toString())
+            val docRef = databaseRef.collection("TrainingClasses").document(classID.toString())
+            trainingClassList = arrayListOf()
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
                     val trainingClass = document.toObject(ClassData::class.java)
+                    val classSlots = trainingClass?.classSlot as Map<*, *>
+                    classSlots.let {
+                        for ((key, value) in classSlots){
+                            val listString = "$key -> $value"
+                            trainingClassList.add(listString)
+                        }
+
+                    }
+                    listAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, trainingClassList)
+                    binding.classSlotLV.adapter = listAdapter
 
                     binding.swUpdateClass.setOnCheckedChangeListener { _, isChecked ->
                         binding.classNameField.isEnabled = isChecked
@@ -45,11 +59,11 @@ class AdminClassDetailFragment : Fragment() {
                         binding.classPriceField.isEnabled = isChecked
                     }
 
-                    binding.classIDField.setText(trainingClass?.classID.toString())
-                    binding.classNameField.setText(trainingClass?.className.toString())
-                    binding.classDescField.setText(trainingClass?.classDesc.toString())
-                    binding.classPriceField.setText(trainingClass?.classPrice.toString())
-                    binding.classCoachField.setText(trainingClass?.entitledCoach.toString())
+                    binding.classIDField.setText(trainingClass.classID.toString())
+                    binding.classNameField.setText(trainingClass.className.toString())
+                    binding.classDescField.setText(trainingClass.classDesc.toString())
+                    binding.classPriceField.setText(trainingClass.classPrice.toString())
+                    binding.classCoachField.setText(trainingClass.entitledCoach.toString())
 
                     binding.classNameField.setOnFocusChangeListener { _, focused ->
                         if(!focused && binding.classNameField.text!!.isEmpty()){
@@ -96,7 +110,7 @@ class AdminClassDetailFragment : Fragment() {
                                 docRef.set(updateClass, SetOptions.merge())
                                     .addOnSuccessListener {
                                         Log.d("UPDATE CLASS","CLASS DETAIL UPDATED SUCCESSFULLY" )
-                                        adminActivityView.replaceFragment(AdminClassFragment(), R.id.classAdminLayout)
+                                        adminView.replaceFragment(AdminClassFragment(), R.id.classAdminLayout)
                                     }
                                     .addOnFailureListener { e -> Log.e("UPDATE CLASS", "ERROR UPDATING CLASS DETAIL", e) }
                             }
@@ -119,7 +133,7 @@ class AdminClassDetailFragment : Fragment() {
                 builder.setPositiveButton("Delete"){ _, _ ->
                     docRef.delete().addOnSuccessListener {
                         Log.d("DELETE CLASS", "CLASS DELETED SUCCESSFULLY")
-                        adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
+                        adminView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
                     }.addOnFailureListener { e ->
                         Log.e("DELETE CLASS", "ERROR DELETING CLASS", e)
                     }
@@ -130,7 +144,7 @@ class AdminClassDetailFragment : Fragment() {
 
         }
         binding.tvBackClassDetail.setOnClickListener {
-            adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
+            adminView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
         }
 
 

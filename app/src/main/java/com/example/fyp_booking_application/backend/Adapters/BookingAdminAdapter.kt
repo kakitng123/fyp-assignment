@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.BookingData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.BookingDataTesting
 
 class BookingAdminAdapter(
     private val bookingList: ArrayList<BookingData>,

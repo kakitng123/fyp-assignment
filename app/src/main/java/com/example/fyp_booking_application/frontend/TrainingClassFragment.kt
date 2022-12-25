@@ -57,7 +57,7 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
             Log.d("haha", coachName.toString())
 
             //Retrieve Training Class Data
-            fstore.collection("class_testing1").whereEqualTo("entitledCoach",coachName.toString())
+            fstore.collection("TrainingClasses").whereEqualTo("entitledCoach",coachName.toString())
                 .addSnapshotListener(object : EventListener<QuerySnapshot> {
                     override fun onEvent(
                         value: QuerySnapshot?,

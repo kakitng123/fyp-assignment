@@ -155,31 +155,6 @@
                         tools:ignore="TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/pQtyContainer"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:hint="@string/qty"
-                    app:endIconMode="clear_text"
-                    app:helperText="@string/required"
-                    app:helperTextTextColor="@color/red_decline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pPriceContainer">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tfAddProductQty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:maxLength="3"
-                        tools:ignore="TextContrastCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
-
                 <ImageButton
                     android:id="@+id/imgBtnAddNewProduct"
                     android:layout_width="wrap_content"
@@ -193,6 +168,24 @@
                     app:srcCompat="@drawable/ic_admin_add_black"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/qty"
+                    app:layout_constraintStart_toStartOf="@+id/pPriceContainer"
+                    app:layout_constraintTop_toBottomOf="@+id/pPriceContainer" />
+
+                <NumberPicker
+                    android:id="@+id/tfAddProductQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView4"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

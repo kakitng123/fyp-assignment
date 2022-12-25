@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
+import com.example.fyp_booking_application.NotificationData
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.NotificationData
 import com.example.fyp_booking_application.databinding.FragmentUserNotificationBinding
 import com.example.fyp_booking_application.databinding.FragmentUserNotificationDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,7 +31,7 @@ class UserNotificationDetailFragment : Fragment() {
         // Havent do design but ignore for now
         setFragmentResultListener("toUserNotifDetails"){ _, bundle ->
             val testing123 = bundle.getString("toUserNotifDetails")
-            val docRef = databaseRef.collection("notification_testing1").document(testing123.toString())
+            val docRef = databaseRef.collection("Notifications").document(testing123.toString())
 
             docRef.get().addOnSuccessListener { document ->
                 if (document != null){

@@ -25,8 +25,8 @@ class AdminCoachAddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_coach_add, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("ADD COACH")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Add New Coach")
         databaseRef = FirebaseFirestore.getInstance()
 
         binding.tfAddCoachName.setOnFocusChangeListener { _, focused ->
@@ -84,7 +84,7 @@ class AdminCoachAddFragment : Fragment() {
 
             if(validName && validEmail && validPhone){
                 var nameValidation = 0
-                databaseRef.collection("coach_testing1").get()
+                databaseRef.collection("Coaches").get()
                     .addOnSuccessListener { results ->
                         for (document in results) {
                             if (document["coachName"] == binding.tfAddCoachName.text.toString()) {
@@ -92,18 +92,19 @@ class AdminCoachAddFragment : Fragment() {
                             }
                         }
                         if(nameValidation == 0){
-                            val newCoachRef = databaseRef.collection("coach_testing1").document()
+                            val newCoachRef = databaseRef.collection("Coaches").document()
                             val newCoach = hashMapOf(
                                 "coachID" to newCoachRef.id,
                                 "coachName" to binding.tfAddCoachName.text.toString(),
                                 "coachEmail" to binding.tfAddCoachEmail.text.toString(),
                                 "coachExp" to binding.spinnerExpField.selectedItem.toString(),
                                 "coachPhone" to binding.tfAddCoachPhone.text.toString(),
+                                "coachImage" to ""
                             )
                             newCoachRef.set(newCoach)
                                 .addOnSuccessListener {
                                     Log.d("ADDING NEW COACH", "COACH ADDED SUCCESSFULLY")
-                                    adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+                                    adminView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
                                 }.addOnFailureListener { e ->
                                     Log.e("ADDING NEW COACH", "ERROR ADDING NEW COACH", e)
                                 }
@@ -113,7 +114,7 @@ class AdminCoachAddFragment : Fragment() {
             } else Toast.makeText(context, "CHECK INPUT FIELDS", Toast.LENGTH_SHORT).show()
         }
         binding.tvBackCoachAdd.setOnClickListener {
-            adminActivityView.replaceFragment(AdminCoachFragment(),R.id.adminLayout)
+            adminView.replaceFragment(AdminCoachFragment(),R.id.adminLayout)
         }
         return binding.root
     }

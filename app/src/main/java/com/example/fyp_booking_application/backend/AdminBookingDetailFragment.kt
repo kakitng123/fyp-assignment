@@ -24,8 +24,8 @@ class AdminBookingDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_booking_detail, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("BOOKING DETAIL")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Booking Details")
 
         setFragmentResultListener("toAdminBookingDetails") {_, bundle ->
             val bookingID = bundle.getString("toAdminBookingDetails")
@@ -49,7 +49,7 @@ class AdminBookingDetailFragment : Fragment() {
         }
 
         binding.tvBackBookingDetail.setOnClickListener{
-            adminActivityView.replaceFragment(AdminBookingFragment(), R.id.adminLayout)
+            adminView.replaceFragment(AdminBookingFragment(), R.id.adminLayout)
         }
 
         return binding.root

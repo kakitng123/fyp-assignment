@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,12 +25,17 @@ import com.example.fyp_booking_application.backend.Adapters.CourtTimeslotAdminAd
 import com.example.fyp_booking_application.databinding.FragmentAdminCourtBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentAdminCourtBinding
     private lateinit var databaseRef: FirebaseFirestore
     private lateinit var courtList: ArrayList<CourtData>
+    private lateinit var filteredArrayList: ArrayList<CourtData>
     private lateinit var timeslotList: ArrayList<CourtDataTimeslot>
     private lateinit var courtManageAdapter: CourtAdminAdapter
     private lateinit var timeslotAdapter: CourtTimeslotAdminAdapter
@@ -43,16 +49,41 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         binding.imgBtnRefreshCourt.bringToFront()
         binding.imgBtnAddCourt.bringToFront()
         databaseRef = FirebaseFirestore.getInstance()
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("COURT MANAGEMENT")
-        courtList = arrayListOf()
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Court Management")
+
+        binding.courtManageSV.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filteredArrayList.clear()
+                val searchText = newText!!.lowercase(Locale.getDefault())
+                if (searchText.isNotEmpty()) {
+                    courtList.forEach {
+                        if (it.courtName!!.lowercase(Locale.getDefault()).contains(searchText))
+                            filteredArrayList.add(it)
+                    }
+                    courtManageAdapter.notifyDataSetChanged()
+                }
+                else {
+                    filteredArrayList.clear()
+                    filteredArrayList.addAll(courtList)
+                    courtManageAdapter.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
 
         dataInitialize()
         binding.courtRecyclerView.apply {
-            courtList.sortedBy { list -> list.courtName }
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            courtManageAdapter = CourtAdminAdapter(courtList, this@AdminCourtFragment)
+            courtList = arrayListOf()
+            filteredArrayList = arrayListOf()
+            courtManageAdapter = CourtAdminAdapter(filteredArrayList, this@AdminCourtFragment)
             adapter = courtManageAdapter
         }
 
@@ -110,7 +141,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         }
 
         binding.imgBtnRefreshCourt.setOnClickListener {
-            adminActivityView.replaceFragment(AdminCourtFragment(), R.id.adminLayout)
+            adminView.replaceFragment(AdminCourtFragment(), R.id.adminLayout)
         }
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -154,6 +185,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         ss.setSpan(clickableSpan, 6, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvTesting.text = ss
         binding.tvTesting.movementMethod = LinkMovementMethod.getInstance()
+        Toast.makeText(context, "${currentItem.courtName} is Selected", Toast.LENGTH_SHORT).show()
     }
 
     private fun dataInitialize() {
@@ -169,6 +201,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
                             courtList.add(dc.document.toObject(CourtData::class.java))
+                            filteredArrayList.add(dc.document.toObject(CourtData::class.java))
                         }
                     }
                     courtList.sortByDescending { it.courtName }

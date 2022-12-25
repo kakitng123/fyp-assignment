@@ -9,4 +9,8 @@
         android:id="@+id/nav_class_pending"
         android:icon="@drawable/ic_admin_booking"
         android:title="@string/pending" />
+    <item
+        android:id="@+id/nav_class_history"
+        android:icon="@drawable/ic_admin_history"
+        android:title="@string/history" />
 </menu>

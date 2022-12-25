@@ -19,15 +19,15 @@ class AdminNotifFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("NOTIF MANAGEMENT")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Notification Management")
 
-        adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
+        adminView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
 
         binding.notificationNavBar.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.nav_notificationManage -> adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
-                R.id.nav_notificationHistory -> adminActivityView.replaceFragment(AdminNotifHistoryFragment(), R.id.notificationLayout)
+                R.id.nav_notificationManage -> adminView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
+                R.id.nav_notificationHistory -> adminView.replaceFragment(AdminNotifHistoryFragment(), R.id.notificationLayout)
             }
             true
         }

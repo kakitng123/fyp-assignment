@@ -12,9 +12,9 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
+import com.example.fyp_booking_application.NotificationData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.backend.NotificationData
 import com.example.fyp_booking_application.databinding.FragmentUserNotificationBinding
 import com.example.fyp_booking_application.frontend.adapter.UserNotificationAdapter
 import com.google.firebase.firestore.FirebaseFirestore
@@ -58,7 +58,7 @@ class UserNotificationFragment : Fragment() {
 
     private fun setListData(userID: String){
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("notification_testing1").get().addOnSuccessListener { documents ->
+        databaseRef.collection("Notifications").get().addOnSuccessListener { documents ->
             // Entong, need your help with this, can you sub in auth?.userID into this part, so that during real testing you can check
             // for now I hardcode stuff to double check
             for (document in documents) {

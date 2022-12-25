@@ -33,8 +33,8 @@ class AdminProductAddFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_product_add, container, false)
         databaseRef = FirebaseFirestore.getInstance()
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("ADD PRODUCT")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Add New Product")
 
         binding.tfAddProductName.setOnFocusChangeListener { _, focused ->
             if(!focused && binding.tfAddProductName.text!!.isEmpty()){
@@ -80,24 +80,16 @@ class AdminProductAddFragment : Fragment() {
             else binding.pPriceContainer.helperText = null
         }
 
-        binding.tfAddProductQty.setOnFocusChangeListener { _, focused ->
-            if(!focused && binding.tfAddProductQty.text!!.isEmpty()){
-                binding.pQtyContainer.helperText = "Quantity is Required"
-            }
-            else if(!focused && !(binding.tfAddProductQty.text!!.all { it.isDigit() })){
-                binding.pQtyContainer.helperText = "Invalid Quantity"
-            }
-            else binding.pQtyContainer.helperText = null
-        }
+        binding.tfAddProductQty.minValue = 1
+        binding.tfAddProductQty.maxValue = 100
+        binding.tfAddProductQty.value = 1
 
         binding.imgBtnAddNewProduct.setOnClickListener {
             val validName = binding.pNameContainer.helperText == null
             val validDesc = binding.pDescContainer.helperText == null
             val validPrice = binding.pPriceContainer.helperText == null
-            val validQty = binding.pQtyContainer.helperText == null
-            val validImage = binding.imgProduct != null
 
-            if(validName && validDesc && validPrice && validQty) {
+            if(validName && validDesc && validPrice ) {
                 var nameValidation = 0
                 databaseRef.collection("Products").get()
                     .addOnSuccessListener { results ->
@@ -120,14 +112,14 @@ class AdminProductAddFragment : Fragment() {
                                 "productCategory" to binding.spinnerAddProductCat.selectedItem.toString(),
                                 "productDesc" to binding.tfAddProductDesc.text.toString(),
                                 "productPrice" to binding.tfAddProductPrice.text.toString().toDouble(),
-                                "productQty" to binding.tfAddProductQty.text.toString().toInt()
+                                "productQty" to binding.tfAddProductQty.value
                             )
 
                             newProductRef.set(newProduct)
                                 .addOnSuccessListener { Log.d("ADDING PRODUCT", "PRODUCT SUCCESSFULLY ADDED") }
                                 .addOnFailureListener { e -> Log.w("ADDING PRODUCT", "ERROR ADDING PRODUCT", e) }
 
-                            adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
+                            adminView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
                         }
                     }.addOnFailureListener{ e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e) }
             } else {
@@ -136,7 +128,7 @@ class AdminProductAddFragment : Fragment() {
             }
         }
         binding.tvBackAddProduct.setOnClickListener{
-            adminActivityView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
+            adminView.replaceFragment(AdminProductFragment(), R.id.adminLayout)
         }
         return binding.root
     }

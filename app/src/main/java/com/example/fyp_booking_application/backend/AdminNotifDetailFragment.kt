@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResultListener
 import com.example.fyp_booking_application.AdminDashboardActivity
+import com.example.fyp_booking_application.NotificationData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.databinding.FragmentAdminNotifDetailBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,13 +24,13 @@ class AdminNotifDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_notif_detail, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("NOTIFICATION DETAIL")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Notification Details")
         databaseRef = FirebaseFirestore.getInstance()
 
         setFragmentResultListener("toNotifDetails") { _, bundle ->
             val notifyID = bundle.getString("toNotifDetails")
-            val docRef = databaseRef.collection("notification_testing1").document(notifyID.toString())
+            val docRef = databaseRef.collection("Notifications").document(notifyID.toString())
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
@@ -46,7 +47,7 @@ class AdminNotifDetailFragment : Fragment() {
             }
         }
         binding.tvBackNotifDetail.setOnClickListener {
-            adminActivityView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
+            adminView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
         }
 
         return binding.root

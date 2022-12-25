@@ -19,8 +19,8 @@ class AdminSettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_settings, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("SETTINGS")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("SETTINGS")
 
         return binding.root
     }

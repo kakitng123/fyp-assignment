@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.backend.UserData2
-import com.example.fyp_booking_application.frontend.data.UserData
+import com.example.fyp_booking_application.TestUserData
 
 class UserAdminAdapter(
-    private val userList: ArrayList<UserData2>,
+    private val userList: ArrayList<TestUserData>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<UserAdminAdapter.MyViewHolder>(){
 

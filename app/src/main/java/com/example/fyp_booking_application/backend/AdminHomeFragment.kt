@@ -23,8 +23,8 @@ class AdminHomeFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_home, container, false)
         databaseRef = FirebaseFirestore.getInstance()
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("ADMIN PROFILE")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Admin Profile")
 
         // Add Date Picker to filter which day of transactions
 
@@ -38,9 +38,9 @@ class AdminHomeFragment : Fragment() {
         }
 
         var purchaseSales = 0.0
-        databaseRef.collection("purchase_testing1").get().addOnSuccessListener { documents ->
+        databaseRef.collection("Purchases").get().addOnSuccessListener { documents ->
             for (document in documents){
-                purchaseSales += document["transactAmt"].toString().toDouble()
+                purchaseSales += document["purchasePrice"].toString().toDouble()
             }
             binding.tfPurchaseSales.text = "RM $purchaseSales"
         }

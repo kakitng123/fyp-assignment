@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -19,6 +18,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fyp_booking_application.AdminDashboardActivity
 import com.example.fyp_booking_application.ClassData
+import com.example.fyp_booking_application.CoachData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.backend.Adapters.CoachClassAdminAdapter
 import com.example.fyp_booking_application.databinding.FragmentAdminCoachDetailBinding
@@ -36,13 +36,13 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_admin_coach_detail, container, false)
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.setTitle("COACH DETAIL")
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.setTitle("Coach Details")
 
         setFragmentResultListener("toCoachDetails"){ _, bundle ->
             val coachID = bundle.getString("toCoachDetails")
             databaseRef = FirebaseFirestore.getInstance()
-            val docRef = databaseRef.collection("coach_testing1").document(coachID.toString())
+            val docRef = databaseRef.collection("Coaches").document(coachID.toString())
 
             val expType = arrayListOf<String>()
             val expRef = databaseRef.collection("SystemSettings").document("experience")
@@ -158,7 +158,7 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                 builder.setPositiveButton("Delete"){ _, _ ->
                     docRef.delete().addOnSuccessListener {
                         Log.d("DELETE COACH", "COACH DELETED SUCCESSFULLY")
-                        adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+                        adminView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
                     }.addOnFailureListener { e ->
                         Log.e("DELETE COACH", "ERROR DELETING COACH", e)
                     }
@@ -167,26 +167,26 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                 builder.show()
             }
             binding.imgBtnAddCoachClass.setOnClickListener{
-                adminActivityView.replaceFragment(AdminClassAddFragment(), R.id.adminLayout)
+                adminView.replaceFragment(AdminClassAddFragment(), R.id.adminLayout)
                 setFragmentResult("toClassAdd", bundleOf("toClassAdd" to coachID))
             }
         }
         binding.tvBackCoachDetail.setOnClickListener{
-            adminActivityView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+            adminView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
         }
         return binding.root
     }
 
     override fun onItemClick(position: Int) {
         val currentItem = coachClassList[position]
-        val adminActivityView = (activity as AdminDashboardActivity)
-        adminActivityView.replaceFragment(AdminClassDetailFragment(), R.id.adminLayout)
+        val adminView = (activity as AdminDashboardActivity)
+        adminView.replaceFragment(AdminClassDetailFragment(), R.id.adminLayout)
         setFragmentResult("toClassDetails", bundleOf("toClassDetails" to currentItem.classID))
     }
 
     private fun dataInitialize(coachName: String){
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("class_testing1").whereEqualTo("entitledCoach", coachName)
+        databaseRef.collection("TrainingClasses").whereEqualTo("entitledCoach", coachName)
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
