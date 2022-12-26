@@ -46,6 +46,23 @@ class BookingCourtFragment : Fragment() {
 
         binding.btnAddBookingDate.bringToFront()
 
+        // Added Date Picker
+        binding.btnAddBookingDate.setOnClickListener {
+            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                calendar.apply {
+                    set(Calendar.YEAR, year)
+                    set(Calendar.MONTH, month)
+                    set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                }
+                binding.courtDateBooking.setText(SimpleDateFormat("dd/MM/yyyy").format(calendar.time))
+            }
+            DatePickerDialog(requireContext(), dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+            ).show()
+        }
+
         // Variable Declaration
         val spinnerCourt = binding.courtNameBooking
         val spinnerCourtTime = binding.courtTimeBooking
@@ -99,23 +116,6 @@ class BookingCourtFragment : Fragment() {
                 }
             }
 
-        }
-
-        // Added Date Picker
-        binding.btnAddBookingDate.setOnClickListener {
-            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                calendar.apply {
-                    set(Calendar.YEAR, year)
-                    set(Calendar.MONTH, month)
-                    set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                }
-                binding.courtDateBooking.setText(SimpleDateFormat("dd/MM/yyyy").format(calendar.time))
-            }
-            DatePickerDialog(requireContext(), dateSetListener,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH),
-            ).show()
         }
 
         //Save Updated Data function

@@ -43,14 +43,17 @@ class PurchaseProductHistoryFragment : Fragment() {
             purchaseHistoryAdapter = PurchaseProductHistoryAdapter(purchaseHistoryDataArrayList)
             adapter = purchaseHistoryAdapter
         }
-        return binding.root
-    }
 
+        return binding.root
+
+
+    }
 
     private fun eventChangeListener(){
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
         val userID = auth.currentUser?.uid
+
 
         //Retrieve Purchase Product History Records
         val purchaseHistory = fstore.collection("Purchases").whereEqualTo("userID",userID)

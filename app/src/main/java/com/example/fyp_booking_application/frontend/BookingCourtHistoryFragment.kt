@@ -8,13 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.BookingData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.backend.AdminClassFragment
 import com.example.fyp_booking_application.databinding.FragmentBookingCourtHistoryBinding
 import com.example.fyp_booking_application.frontend.adapter.BookingCourtHistoryAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
@@ -41,6 +44,7 @@ class BookingCourtHistoryFragment : Fragment()  {
             bookingHistoryAdapter = BookingCourtHistoryAdapter(bookingHistoryDataArrayList)
             adapter = bookingHistoryAdapter
         }
+
         return binding.root
     }
 
@@ -72,16 +76,3 @@ class BookingCourtHistoryFragment : Fragment()  {
         })
     }
 }
-
-//            val builder = AlertDialog.Builder(requireContext())
-//            builder.setTitle("Delete Class")
-//            builder.setMessage("Confirm to delete class?")
-//            builder.setPositiveButton("Delete"){ _, _ ->
-//                docRef.delete().addOnSuccessListener {
-//                    Log.d("DELETE CLASS", "CLASS DELETED SUCCESSFULLY")
-//                    adminActivityView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
-//                }.addOnFailureListener { e ->
-//                    Log.e("DELETE CLASS", "ERROR DELETING CLASS", e)
-//                }
-//            }
-//

@@ -3,6 +3,7 @@ package com.example.fyp_booking_application.frontend.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.BookingData
@@ -30,8 +31,12 @@ class BookingCourtHistoryAdapter(
         holder.historyDate.text = bookingHistoryModel.bookingDate
         holder.historyTime.text = bookingHistoryModel.bookingTime
         holder.historyStatus.text = bookingHistoryModel.bookingStatus
-    }
+        holder.deleteBookingBtn.setOnClickListener(View.OnClickListener {
+            bookingHistoryDataArrayList.removeAt(position) // remove the item from list
+            notifyItemRemoved(position) // notify the adapter about the removed item
+        })
 
+    }
     //Return the total count of items in the list
     override fun getItemCount(): Int {
         // this method is used for showing number of card items in recycler view.
@@ -49,12 +54,14 @@ class BookingCourtHistoryAdapter(
         val historyDate: TextView
         val historyTime: TextView
         val historyStatus: TextView
+        val deleteBookingBtn: Button
         init {
             historyCourt = itemView.findViewById(R.id.tvHistoryCourtName)
             historyPrice = itemView.findViewById(R.id.tvHistoryCourtPrice)
             historyDate = itemView.findViewById(R.id.tvHistoryCourtDate)
             historyTime = itemView.findViewById(R.id.tvHistoryCourtTime)
             historyStatus = itemView.findViewById(R.id.tvHistoryCourtStatus)
+            deleteBookingBtn = itemView.findViewById(R.id.deleteBookingBtn)
         }
     }
 }

@@ -97,20 +97,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/historyPurchaseBtn"
-            tools:listitem="@layout/user_training_class_card" />
-
         <Button
             android:id="@+id/historyBookingBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:layout_marginTop="276dp"
             android:text="History Booking"
             android:textColor="@color/white"
@@ -121,11 +111,12 @@
             android:id="@+id/historyEnrollBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="276dp"
             android:text="History Enroll"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/historyBookingBtn"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -134,10 +125,11 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
+            android:layout_marginTop="8dp"
             android:text="Purchase Enroll"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/historyTopUpBtn"
             app:layout_constraintTop_toBottomOf="@+id/historyEnrollBtn" />
 
@@ -145,7 +137,6 @@
             android:id="@+id/historyTopUpBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:text="History Top Up"
             android:textColor="@color/white"

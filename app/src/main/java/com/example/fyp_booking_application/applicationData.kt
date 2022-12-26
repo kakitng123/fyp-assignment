@@ -124,6 +124,7 @@ data class VoucherData (
 
 data class TopUpData(
     val topUpID : String ?= null,
+    val topUpTitle: String ?= null,
     val topUpAmount: Double = 0.00,
     val topUpDesc: String ?= null,
     val topUpStatus: String ?= null

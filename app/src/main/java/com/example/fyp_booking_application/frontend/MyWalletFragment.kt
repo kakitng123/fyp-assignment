@@ -30,23 +30,11 @@ class MyWalletFragment : Fragment() {
         val userView = (activity as UserDashboardActivity)
         userView.setTitle("My Wallet")
 
-//        setFragmentResultListener("toMyWallet") { _, bundle ->
-//            Log.d("haha", walletID.toString())
-//        val amountResult = resultData.result.getString("topUpAmount").toString()
-//        val descResult = resultData.result.getString("topUpDesc").toString()
-//        val statusResult = resultData.result.getString("topUpStatus").toString()
-//
-//        binding.balanceAmt.setText(amountResult)
-//        binding.balanceAmt.setText(descResult)
-//        binding.balanceAmt.setText(statusResult)
-        //Retrieve balance amount
-
         var balanceAmount = 0.00
         fstore.collection("Wallet").get().addOnSuccessListener { documents ->
             for (document in documents){
                 balanceAmount += document["topUpAmount"].toString().toDouble()
             }
-//            binding.balanceAmt.text = "RM $balanceAmount"
             binding.balanceAmt.text = balanceAmount.toString()
 
         }.addOnFailureListener { exception ->

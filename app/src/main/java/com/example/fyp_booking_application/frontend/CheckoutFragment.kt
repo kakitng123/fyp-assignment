@@ -86,11 +86,6 @@ class CheckoutFragment : Fragment() {
                 }
             }
 
-            // few comments, actually when you use SetOptions.merge(), you dont have to get dateResult/timeResult/courtResult
-            // SetOptions.merge() work as if "fieldName" exists == update, if no exists then add new "fieldName"
-            // only if you have to change "fieldName" then you put into new hashMapOf()
-            // but right now I comment here first before I confused you
-
             //Save Updated Booking Data
             binding.checkoutBtn.setOnClickListener {
                 val bookingDate: String = binding.checkoutDate.text.toString()
@@ -106,8 +101,6 @@ class CheckoutFragment : Fragment() {
                     "bookingDate" to bookingDate, // Example this is just "get" you do ntg, then no need put here
                     "bookingTime" to bookingTime, // same here
                     "bookingCourt" to bookingCourt, // same here
-                    // that means you only need to have these below 3 inside this bookingUpdates = hashMapOf()
-                    // if you don't understand I'll explain to you again
                     "bookingStatus" to "Success",
                     "bookingPayment" to bookingPayment,
                     "bookingPaymentMethod" to spinnerPayment.selectedItem.toString()

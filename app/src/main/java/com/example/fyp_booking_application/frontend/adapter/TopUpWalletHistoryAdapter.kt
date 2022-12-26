@@ -15,7 +15,7 @@ class TopUpWalletHistoryAdapter(
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopUpWalletHistoryAdapter.TopUpHistoryViewHolder {
         //infate the custom layout
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_purchase_history_card, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_top_up_wallet_history_card, parent, false)
         //return a new holder instance
         return TopUpHistoryViewHolder(itemView)
     }
@@ -24,7 +24,7 @@ class TopUpWalletHistoryAdapter(
     override fun onBindViewHolder(holder: TopUpWalletHistoryAdapter.TopUpHistoryViewHolder, position: Int) {
         //Get the data model based on position
         val topUpHistoryModel = topUpWalletDataArrayList[position]
-        holder.topUpTitle.text = topUpHistoryModel.topUpID.toString()
+        holder.topUpTitle.text = topUpHistoryModel.topUpTitle.toString()
         holder.topUpAmount.text = topUpHistoryModel.topUpAmount.toString()
         holder.topUpDesc.text = topUpHistoryModel.topUpDesc.toString()
         holder.topUpStatus.text = topUpHistoryModel.topUpStatus.toString()

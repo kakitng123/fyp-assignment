@@ -47,7 +47,7 @@ class UserNotificationFragment : Fragment() {
         //Declare the variable
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_notification, container, false)
         userNotifArrayDataList = arrayListOf()
-        filteredArrayList = arrayListOf()
+      //  filteredArrayList = arrayListOf()
         val userView = (activity as UserDashboardActivity)
         userView.setTitle("Notification")
 
@@ -90,7 +90,7 @@ class UserNotificationFragment : Fragment() {
         listView.apply {
             userNotifArrayDataList.clear()
             setListData(userID.toString())
-            notifyAdapter = UserNotificationAdapter(context, userNotifArrayDataList)
+            notifyAdapter = UserNotificationAdapter(context, filteredArrayList)
             adapter = notifyAdapter
         }
 
@@ -115,4 +115,6 @@ class UserNotificationFragment : Fragment() {
             Log.e("TEST DATA", "Error getting documents: ", e)
         }
     }
+
+
 }

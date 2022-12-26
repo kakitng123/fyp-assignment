@@ -27,19 +27,6 @@ class TopUpFragment : Fragment() {
         val userView = (activity as UserDashboardActivity)
         userView.setTitle("Top Up")
 
-//        // Voucher Test
-//        binding.topUpBtn.setOnClickListener {
-//            val balanceRef = fstore.collection("Wallet").whereEqualTo("userID", userID)
-//            balanceRef.get().addOnSuccessListener { documents ->
-//                for (document in documents){
-//                    val balance: Double = binding.topUpAmount.text.toString().toDouble()
-//                    val voucherDiscount: Double = document["voucherDiscount"].toString().toDouble()
-//                    val calculation = binding.totalAmount.text.toString().toDouble() * (1-voucherDiscount)
-//                    binding.totalAmount.text = calculation.toString()
-//                }
-//            }
-//        }
-
         //Top Up Function in My Wallet
         binding.topUpBtn.setOnClickListener {
             val balance: Double = binding.topUpAmount.text.toString().toDouble()
@@ -48,9 +35,10 @@ class TopUpFragment : Fragment() {
             val walletID = fstore.collection("Wallet").document()
             val topUpWallet = hashMapOf(
                 "topUpID" to walletID.id,
+                "topUpTitle" to "Quick Reload Payment",
                 "topUpAmount" to balance,
-                "topUpDesc" to "Top Up",
-                "topUpStatus" to "Status",
+                "topUpDesc" to "Transfer to Wallet",
+                "topUpStatus" to "Success",
                 "userID" to userID,
             )
             walletID.set(topUpWallet).addOnSuccessListener {
