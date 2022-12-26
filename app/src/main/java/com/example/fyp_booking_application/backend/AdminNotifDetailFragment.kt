@@ -34,20 +34,20 @@ class AdminNotifDetailFragment : Fragment() {
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
-                    val testing = document.toObject(NotificationData::class.java)
+                    val notification = document.toObject(NotificationData::class.java)
 
-                    binding.notifIDField.setText(testing?.notifyID.toString())
-                    binding.notifTitleField.setText(testing?.notifyTitle.toString())
-                    binding.notifMsgField.setText(testing?.notifyMessage.toString())
-                    binding.notifRefCodeField.setText(testing?.referralCode.toString())
-                    binding.notifUserField.setText(testing?.userID.toString()) // Get Name instead of UserID
+                    binding.notifIDField.setText(notification?.notifyID.toString())
+                    binding.notifTitleField.setText(notification?.notifyTitle.toString())
+                    binding.notifMsgField.text = notification?.notifyMessage.toString()
+                    binding.notifRefCodeField.setText(notification?.referralCode.toString())
+                    binding.notifUserField.setText(notification?.userID.toString()) // Get Name instead of UserID
                 }
                 else
                     Log.d("FETCHING DOCUMENT", "INVALID DOCUMENT")
             }
         }
         binding.tvBackNotifDetail.setOnClickListener {
-            adminView.replaceFragment(AdminNotifManageFragment(), R.id.notificationLayout)
+            adminView.replaceFragment(AdminNotifHistoryFragment(), R.id.notificationLayout)
         }
 
         return binding.root

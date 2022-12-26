@@ -112,7 +112,7 @@ class AdminNotifManageFragment : Fragment() {
                                 )
                                 newNotifyRef.set(newNotify).addOnSuccessListener {
                                     Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
-
+                                    Toast.makeText(context, "Notification Sent", Toast.LENGTH_SHORT).show()
                                 }.addOnFailureListener { e ->
                                     Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
                                 }
@@ -123,7 +123,7 @@ class AdminNotifManageFragment : Fragment() {
                         Log.e("FETCH DOCUMENT", "ERROR FETCHING DOCUMENT", e)
                     }
                 }
-                else {
+                else {0
                     var collectionSize: Int ?= null
                     val collection = databaseRef.collection("Notifications").count()
                     collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
@@ -140,7 +140,7 @@ class AdminNotifManageFragment : Fragment() {
                         )
                         newNotifyRef.set(newNotify).addOnSuccessListener {
                             Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
-
+                            Toast.makeText(context, "Notification Sent", Toast.LENGTH_SHORT).show()
                         }.addOnFailureListener { e ->
                             Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
                         }

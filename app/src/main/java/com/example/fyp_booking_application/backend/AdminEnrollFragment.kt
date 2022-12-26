@@ -43,10 +43,6 @@ class AdminEnrollFragment : Fragment(), ClassEnrollAdminAdapter.OnItemClickListe
             enrollArrayList.sortedByDescending { list -> list.enrollDate }
             classEnrollAdminAdapter = ClassEnrollAdminAdapter(enrollArrayList, this@AdminEnrollFragment)
             adapter = classEnrollAdminAdapter
-            if (enrollArrayList.size == 0){
-                binding.tvClassPending.visibility = View.VISIBLE
-            }
-            else binding.tvClassPending.visibility = View.GONE
         }
 
         return binding.root
@@ -161,6 +157,11 @@ class AdminEnrollFragment : Fragment(), ClassEnrollAdminAdapter.OnItemClickListe
                             enrollArrayList.add(dc.document.toObject(EnrollData::class.java))
                         }
                     }
+                    if (enrollArrayList.size == 0){
+                        binding.tvClassPending.visibility = View.VISIBLE
+                    }
+                    else binding.tvClassPending.visibility = View.GONE
+
                     enrollArrayList.sortedByDescending { list -> list.enrollDate}
                     classEnrollAdminAdapter.notifyDataSetChanged()
                 }

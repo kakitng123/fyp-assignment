@@ -73,7 +73,6 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     }
 
                     binding.swUpdateCoach.setOnCheckedChangeListener{ _, isChecked ->
-                        binding.coachNameField.isEnabled = isChecked
                         binding.coachEmailField.isEnabled = isChecked
                         binding.coachPhoneNoField.isEnabled = isChecked
                         binding.coachExpField.isEnabled = isChecked
@@ -84,13 +83,6 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     binding.coachEmailField.setText(coach?.coachEmail.toString())
                     binding.coachPhoneNoField.setText(coach?.coachPhone.toString())
                     binding.coachExpField.setSelection(getIndex(coach?.coachExp.toString()))
-
-                    binding.coachNameField.setOnFocusChangeListener { _, focused ->
-                        if(!focused && binding.coachNameField.text!!.isEmpty()){
-                            binding.coachNameContainer.helperText = "Name is Required"
-                        }
-                        else binding.coachNameContainer.helperText = null
-                    }
 
                     binding.coachEmailField.setOnFocusChangeListener { _, focused ->
                         if(!focused && binding.coachEmailField.text!!.isEmpty()){
@@ -113,17 +105,15 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     }
 
                     binding.imgBtnUpdateCoach.setOnClickListener{
-                        val validName = binding.coachNameContainer.helperText == null
                         val validEmail = binding.coachEmailContainer.helperText == null
                         val validPhone = binding.coachPhoneNoContainer.helperText == null
 
-                        if(validName && validEmail && validPhone){
+                        if(validEmail && validPhone){
                             val builder = AlertDialog.Builder(requireContext())
                             builder.setTitle("Update Coach Details")
                             builder.setMessage("Confirm to update coach details?")
                             builder.setPositiveButton("Update"){ _, _ ->
                                 val updateCoach = hashMapOf(
-                                    "coachName" to binding.coachNameField.text.toString(),
                                     "coachEmail" to binding.coachEmailField.text.toString(),
                                     "coachExp" to binding.coachPhoneNoField.text.toString(),
                                     "coachPhone" to binding.coachExpField.selectedItem.toString()

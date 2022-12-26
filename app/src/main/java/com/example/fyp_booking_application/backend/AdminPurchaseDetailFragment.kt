@@ -39,6 +39,10 @@ class AdminPurchaseDetailFragment : Fragment() {
                     binding.purchasePNameField.setText(transact?.purchaseName.toString())
                     binding.purchasePQtyField.setText(transact?.purchaseQty.toString())
                     binding.purchaseAmtField.setText(transact?.purchasePrice.toString())
+                    binding.purchaseDateField.setText(transact?.purchaseDate.toString())
+                    binding.purchaseTimeField.setText(transact?.purchaseTime.toString())
+                    binding.purchaseStatusField.setText(transact?.purchaseStatus.toString())
+                    binding.purchaseUserIDField.setText(transact?.userID.toString())
                 }
 
             }.addOnFailureListener { e -> Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)}

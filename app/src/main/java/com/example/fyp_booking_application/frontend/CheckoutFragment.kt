@@ -55,8 +55,6 @@ class CheckoutFragment : Fragment() {
             // Testing if you can bundle more than 1 data (success)
             val bookingID = bundle.getString("toCheckoutPage")
 
-            Log.d("HAHAHAHAHA", "TESTPEPEGA")
-
             val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
             retrieveBookingRef.get().addOnCompleteListener { resultData ->
                 if (resultData != null) {

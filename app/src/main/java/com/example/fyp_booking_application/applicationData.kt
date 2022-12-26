@@ -118,7 +118,6 @@ data class VoucherData (
     val voucherMessage: String ?= null,
     val pointsRequired: Int ?= null,
     val voucherCode: String ?= null,
-    val voucherDiscount: Double ?= null,
-    val userID: String ?= null
+    val voucherDiscount: Double ?= null
 )
 
