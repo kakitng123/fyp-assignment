@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.CourtData
 import com.example.fyp_booking_application.R
 import com.google.api.Distribution.BucketOptions.Linear
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CourtAdminAdapter(
     private val courtList: ArrayList<CourtData>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<CourtAdminAdapter.MyViewHolder>() {
+
+    private lateinit var databaseRef: FirebaseFirestore
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
         val tvCourtName: TextView = itemView.findViewById(R.id.tvDisplay1)
@@ -34,6 +37,8 @@ class CourtAdminAdapter(
                 listener.onItemClick(position)
             }
         }
+
+
     }
 
     interface OnItemClickListener {
@@ -51,8 +56,8 @@ class CourtAdminAdapter(
 
         holder.tvCourtName.text = "Court Name"
         holder.tvCourtPrice.textSize = 14F
-        holder.tvCourtPrice.text = "Price per Booking"
-        if(currentItem.courtSlots == null){
+        holder.tvCourtPrice.text = "Price / Booking"
+        if(currentItem.courtSlots?.size!! < 1){
             holder.imgError.visibility = View.VISIBLE
             holder.imgError.contentDescription = "NO TIMESLOT"
         }
@@ -62,6 +67,14 @@ class CourtAdminAdapter(
 
     override fun getItemCount(): Int {
         return courtList.size
+    }
+
+    fun deleteItem(position: Int){
+        val currentItem = courtList[position]
+        databaseRef = FirebaseFirestore.getInstance()
+        val docRef = databaseRef.collection("Courts").document(currentItem.courtID.toString())
+        docRef.delete()
+        notifyItemRemoved(position)
     }
 
 }

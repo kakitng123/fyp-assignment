@@ -90,7 +90,7 @@ class UserNotificationFragment : Fragment() {
         listView.apply {
             userNotifArrayDataList.clear()
             setListData(userID.toString())
-            notifyAdapter = UserNotificationAdapter(context, userNotifArrayDataList)
+            notifyAdapter = UserNotificationAdapter(context, filteredArrayList)
             adapter = notifyAdapter
         }
 
