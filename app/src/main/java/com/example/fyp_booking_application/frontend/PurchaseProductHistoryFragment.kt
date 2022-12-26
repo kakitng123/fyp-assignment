@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.frontend
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import com.example.fyp_booking_application.EnrollData
 import com.example.fyp_booking_application.PurchaseData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
+import com.example.fyp_booking_application.backend.AdminClassFragment
 import com.example.fyp_booking_application.databinding.FragmentPurchaseProductHistoryBinding
 import com.example.fyp_booking_application.frontend.adapter.EnrolledClassHistoryAdapter
 import com.example.fyp_booking_application.frontend.adapter.PurchaseProductHistoryAdapter
@@ -44,15 +46,18 @@ class PurchaseProductHistoryFragment : Fragment() {
         return binding.root
     }
 
+
     private fun eventChangeListener(){
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
         val userID = auth.currentUser?.uid
 
-        //Retrieve Training Class Data
+        //Retrieve Purchase Product History Records
         val purchaseHistory = fstore.collection("Purchases").whereEqualTo("userID",userID)
+
         purchaseHistory.addSnapshotListener(object : EventListener<QuerySnapshot> {
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?
+            override fun onEvent(
+                value: QuerySnapshot?, error: FirebaseFirestoreException?
             ) {
                 if (error != null) {
                     Log.e("Failed", error.message.toString())
@@ -60,9 +65,10 @@ class PurchaseProductHistoryFragment : Fragment() {
                 }
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     if (dc.type == DocumentChange.Type.ADDED) {
-                        purchaseHistoryDataArrayList.add(dc.document.toObject(
-                            PurchaseData::class.java
-                        )
+                        purchaseHistoryDataArrayList.add(
+                            dc.document.toObject(
+                                PurchaseData::class.java
+                            )
                         )
                     }
                 }

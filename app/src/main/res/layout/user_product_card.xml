@@ -29,7 +29,7 @@
                 android:layout_height="150dp"
                 android:layout_centerInParent="true"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/smashlogo" />
+                android:src="@drawable/smashlogo"/>
 
             <TextView
                 android:id="@+id/tvProductName"
@@ -60,4 +60,3 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>
-

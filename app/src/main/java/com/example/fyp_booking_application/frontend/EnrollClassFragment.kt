@@ -27,11 +27,7 @@ class EnrollClassFragment : Fragment() {
     private lateinit var binding : FragmentEnrollClassBinding
     val calendar = Calendar.getInstance()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Initialise
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
@@ -53,10 +49,6 @@ class EnrollClassFragment : Fragment() {
                     val classResult = resultData.result.getString("className").toString()
                     val descResult = resultData.result.getString("classDesc").toString()
 
-                    // No More Time and Date
-                    // val dateResult = resultData.result.getString("classDate").toString()
-                    // val timeResult = resultData.result.getString("classTime").toString()
-
                     val classTimeList = arrayListOf<String>()
 
                     val classTime = resultData.result.get("classSlot") as Map<*, *>
@@ -73,11 +65,6 @@ class EnrollClassFragment : Fragment() {
 
                     binding.enrollClassName.setText(classResult)
                     binding.enrollDesc.setText(descResult)
-
-                    // No more time and date
-                    // binding.enrollDate.setText(dateResult)
-                    // binding.enrollTime.setText(timeResult)
-
                     binding.enrollPrice.setText(priceResult)
                     binding.enrollCoach.setText(assignResult)
                 } else {

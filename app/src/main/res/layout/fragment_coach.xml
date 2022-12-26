@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".frontend.CoachFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/coachRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/coachSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/user_coach_card" />
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_theme_borders"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@null"
+            app:queryHint="Search Coach Name" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/coachRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coachSearch"
+                tools:listitem="@layout/user_coach_card" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>
 

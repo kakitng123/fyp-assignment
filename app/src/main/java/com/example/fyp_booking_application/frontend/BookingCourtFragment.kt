@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.frontend
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -20,21 +21,19 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.hashMapOf
 
 class BookingCourtFragment : Fragment() {
+    private lateinit var binding: FragmentBookingCourtBinding
     private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
     private lateinit var fstore: FirebaseFirestore //get the shared instance of the FirebaseAuth object
     private lateinit var storage: FirebaseStorage
     private lateinit var storageRef: StorageReference
+    val calendar = Calendar.getInstance()
 
-    // Ka Kit's Binding
-    private lateinit var binding: FragmentBookingCourtBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Initialise
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_booking_court, container, false)
         auth = FirebaseAuth.getInstance()
@@ -44,6 +43,8 @@ class BookingCourtFragment : Fragment() {
 
         val userView = (activity as UserDashboardActivity)
         userView.setTitle("Booking Court")
+
+        binding.btnAddBookingDate.bringToFront()
 
         // Variable Declaration
         val spinnerCourt = binding.courtNameBooking
@@ -100,6 +101,23 @@ class BookingCourtFragment : Fragment() {
 
         }
 
+        // Added Date Picker
+        binding.btnAddBookingDate.setOnClickListener {
+            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                calendar.apply {
+                    set(Calendar.YEAR, year)
+                    set(Calendar.MONTH, month)
+                    set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                }
+                binding.courtDateBooking.setText(SimpleDateFormat("dd/MM/yyyy").format(calendar.time))
+            }
+            DatePickerDialog(requireContext(), dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+            ).show()
+        }
+
         //Save Updated Data function
         binding.nextBtn.setOnClickListener {
             val bookingPhone: String = binding.courtPhoneBooking.text.toString()
@@ -116,14 +134,6 @@ class BookingCourtFragment : Fragment() {
                     binding.courtPhoneBooking.requestFocus()
                     return@setOnClickListener
                 }
-            }
-
-            // this can use DatePicker, Ill do this all the way later
-            // format for all dates in our system will be dd/MM/yyyy
-            if (bookingDate.isEmpty()) {
-                binding.courtDateBooking.setError("Booking Date is required!")
-                binding.courtDateBooking.requestFocus()
-                return@setOnClickListener
             }
 
             val userID = auth.currentUser?.uid
@@ -149,77 +159,3 @@ class BookingCourtFragment : Fragment() {
         return binding.root
     }
 }
-// Below codes are redundant codes, I sekali comment over it
-// We do not need phoneNo field nor bookingRate, user alr has phone reg, and Ill add courtPrice after that
-// My Plan is to have courtType A (all 1 hour interval) and courtType B (2 hour interval) both will have fixed price
-// So you dont have to choose here, it depend on A1 OR B2 to determine price
-
-//// Ill put all the unneeded codes here for now
-//        val spinnerRateData = arrayOf("1 Hours", "2 Hours")
-//        val binding = FragmentBookingCourtBinding.inflate(layoutInflater)
-//        // Until Here
-//        val spinnerCourtRate = binding.courtRateBooking // Not Needed, I explained below
-//
-//
-//
-//
-//
-//        spinnerCourtRate.onItemSelectedListener =
-//            object : AdapterView.OnItemSelectedListener {
-//                override fun onNothingSelected(parent: AdapterView<*>?) {
-//                    println("error")
-//                }
-//
-//                override fun onItemSelected(
-//                    parent: AdapterView<*>?,
-//                    view: View?,
-//                    position: Int,
-//                    id: Long
-//                ) {
-//                    val spinBookingRateData: String = parent?.getItemAtPosition(position).toString()
-//                    println(spinBookingRateData)
-//
-//                    //Spinner for available court
-//                    spinnerCourt.onItemSelectedListener =
-//                        object : AdapterView.OnItemSelectedListener {
-//                            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                                println("error")
-//                            }
-//
-//                            override fun onItemSelected(
-//                                parent: AdapterView<*>?,
-//                                view: View?,
-//                                position: Int,
-//                                id: Long
-//                            ) {
-//                                val spinAvailableCourtData: String =
-//                                    parent?.getItemAtPosition(position).toString()
-//                                println(spinAvailableCourtData)
-//
-//                                //Spinner for available timeslot
-//                                spinnerCourtTime.onItemSelectedListener =
-//                                    object : AdapterView.OnItemSelectedListener {
-//                                        override fun onNothingSelected(parent: AdapterView<*>?) {
-//                                            println("error")
-//                                        }
-//
-//                                        override fun onItemSelected(
-//                                            parent: AdapterView<*>?,
-//                                            view: View?,
-//                                            position: Int,
-//                                            id: Long
-//                                        ) {
-//                                            val spinAvailableTimeData: String =
-//                                                parent?.getItemAtPosition(position).toString()
-//                                            println(spinAvailableTimeData)
-//
-//                                        }
-//                                    }
-//                            }
-//                        }
-//                }
-//            }
-//    }
-//}
-//
-

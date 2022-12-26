@@ -57,6 +57,18 @@
                 app:layout_constraintStart_toStartOf="@+id/courtPriceBooking"
                 app:layout_constraintTop_toBottomOf="@+id/courtPriceBooking" />
 
+            <ImageButton
+                android:id="@+id/btnAddBookingDate"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="360dp"
+                android:layout_marginEnd="65dp"
+                android:background="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_admin_calendar"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
             <EditText
                 android:id="@+id/courtPriceBooking"
                 android:layout_width="0dp"

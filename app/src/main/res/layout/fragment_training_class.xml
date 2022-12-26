@@ -8,11 +8,32 @@
         android:layout_height="wrap_content"
         tools:context=".frontend.TrainingClassFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/classRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/classSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/user_training_class_card" />
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_theme_borders"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@null"
+            app:queryHint="Search Class Name" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/classRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/classSearch"
+                tools:listitem="@layout/user_training_class_card" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>
 

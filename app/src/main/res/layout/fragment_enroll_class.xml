@@ -159,9 +159,9 @@
 
         <ImageButton
             android:id="@+id/btnAddEnrollDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="70dp"
             android:layout_marginEnd="16dp"
             android:background="@null"
             app:layout_constraintEnd_toEndOf="parent"

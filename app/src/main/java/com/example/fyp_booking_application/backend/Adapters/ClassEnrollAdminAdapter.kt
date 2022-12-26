@@ -11,7 +11,6 @@ import com.example.fyp_booking_application.EnrollData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.TestUserData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 
 class ClassEnrollAdminAdapter (
     private val enrollList: ArrayList<EnrollData>,

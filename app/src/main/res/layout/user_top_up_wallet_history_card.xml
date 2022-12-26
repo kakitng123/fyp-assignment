@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".frontend.TrainingClassFragment">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="1dp"
+        android:layout_margin="5dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
@@ -22,30 +20,29 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tvTrainingClassName"
+                android:id="@+id/tvTopUpTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="Class Name"
+                android:layout_marginEnd="10dp"
+                android:text="Payment"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvTrainingClassRM"
+                android:id="@+id/tvTopUpRM"
                 android:layout_width="66dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="72dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_toEndOf="@id/tvTrainingClassName"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/tvTopUpTitle"
                 android:drawablePadding="2dp"
                 android:text="RM"
                 android:textAlignment="textEnd"
@@ -54,26 +51,51 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvTrainingClassPrice"
-                android:layout_width="91dp"
+                android:id="@+id/tvTopUpAmount"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="-5dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:layout_toEndOf="@+id/tvTrainingClassRM"
+                android:layout_toEndOf="@+id/tvTopUpRM"
                 android:drawablePadding="2dp"
-                android:text="1000.00"
+                android:text="100.00"
                 android:textAlignment="textEnd"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvTopUpDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTopUpAmount"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawablePadding="2dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:text="Top up description" />
 
-
+            <TextView
+                android:id="@+id/tvTopUpStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTopUpRM"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_toEndOf="@id/tvTopUpDesc"
+                android:drawablePadding="2dp"
+                android:text="Success"
+                android:textAlignment="textEnd" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

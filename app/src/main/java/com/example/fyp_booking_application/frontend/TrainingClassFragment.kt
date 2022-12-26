@@ -1,11 +1,13 @@
 package com.example.fyp_booking_application.frontend
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
@@ -15,10 +17,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.TrainingClassData
 import com.example.fyp_booking_application.UserDashboardActivity
+import com.example.fyp_booking_application.VoucherData
 import com.example.fyp_booking_application.databinding.FragmentTrainingClassBinding
 import com.example.fyp_booking_application.frontend.adapter.UserTrainingClassAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import java.util.*
+import kotlin.collections.ArrayList
 
 class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickListener{
     private lateinit var binding: FragmentTrainingClassBinding
@@ -26,6 +32,7 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
     private lateinit var fstore: FirebaseFirestore
     private lateinit var trainingClassAdapter: UserTrainingClassAdapter
     private lateinit var trainingClassDataArrayList: ArrayList<TrainingClassData>
+    private lateinit var filteredArrayList: ArrayList<TrainingClassData>
     private lateinit var trainingClassRecView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,11 +47,39 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
         fstore = FirebaseFirestore.getInstance()
         val userID = auth.currentUser?.uid
 
+        //Search Function
+        binding.classSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filteredArrayList.clear()
+                val searchText = newText!!.lowercase(Locale.getDefault())
+                if (searchText.isNotEmpty()) {
+                    trainingClassDataArrayList.forEach {
+                        if (it.className!!.lowercase(Locale.getDefault()).contains(searchText))
+                            filteredArrayList.add(it)
+                    }
+                    trainingClassAdapter.notifyDataSetChanged()
+                }
+                else {
+                    filteredArrayList.clear()
+                    filteredArrayList.addAll(trainingClassDataArrayList)
+                    trainingClassAdapter.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
+
+
         trainingClassRecView = binding.classRecyclerView
         trainingClassRecView.layoutManager = LinearLayoutManager(context) //set layout manager to position the items
         trainingClassRecView.setHasFixedSize(true)
         trainingClassDataArrayList = arrayListOf() //Set a array list data
-        trainingClassAdapter = UserTrainingClassAdapter(trainingClassDataArrayList, this@TrainingClassFragment) //Create adapter passing in the array adapter data
+        filteredArrayList = arrayListOf() //Set a array list data
+        trainingClassAdapter = UserTrainingClassAdapter(filteredArrayList, this@TrainingClassFragment) //Create adapter passing in the array adapter data
         trainingClassRecView.adapter = trainingClassAdapter //Attach the adapter to the recyclerView to populate the items
         eventChangeListener()
 
@@ -69,11 +104,8 @@ class TrainingClassFragment : Fragment(), UserTrainingClassAdapter.OnItemClickLi
                         }
                         for (dc: DocumentChange in value?.documentChanges!!) {
                             if (dc.type == DocumentChange.Type.ADDED) {
-                                trainingClassDataArrayList.add(
-                                    dc.document.toObject(
-                                        TrainingClassData::class.java
-                                    )
-                                )
+                                trainingClassDataArrayList.add(dc.document.toObject(TrainingClassData::class.java))
+                                filteredArrayList.add(dc.document.toObject(TrainingClassData::class.java))
                             }
                         }
                         trainingClassAdapter.notifyDataSetChanged()

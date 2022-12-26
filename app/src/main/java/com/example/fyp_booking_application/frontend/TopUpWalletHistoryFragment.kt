@@ -8,48 +8,52 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fyp_booking_application.EnrollData
+import com.example.fyp_booking_application.PurchaseData
 import com.example.fyp_booking_application.R
+import com.example.fyp_booking_application.TopUpData
 import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.databinding.FragmentEnrollClassHistoryBinding
-import com.example.fyp_booking_application.frontend.adapter.EnrolledClassHistoryAdapter
+import com.example.fyp_booking_application.databinding.FragmentPurchaseProductHistoryBinding
+import com.example.fyp_booking_application.databinding.FragmentTopUpWalletHistoryBinding
+import com.example.fyp_booking_application.frontend.adapter.PurchaseProductHistoryAdapter
+import com.example.fyp_booking_application.frontend.adapter.TopUpWalletHistoryAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
-class EnrollClassHistoryFragment : Fragment() {
-    private lateinit var binding: FragmentEnrollClassHistoryBinding
+class TopUpWalletHistoryFragment : Fragment() {
+    private lateinit var binding: FragmentTopUpWalletHistoryBinding
     private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
     private lateinit var fstore: FirebaseFirestore
-    private lateinit var enrollHistoryAdapter: EnrolledClassHistoryAdapter
-    private lateinit var enrollHistoryDataArrayList: ArrayList<EnrollData>
+    private lateinit var topUpHistoryAdapter: TopUpWalletHistoryAdapter
+    private lateinit var topUpHistoryDataArrayList: ArrayList<TopUpData>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_enroll_class_history, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_top_up_wallet_history, container, false)
         val userView = (activity as UserDashboardActivity)
-        userView.setTitle("Enroll Class History")
+        userView.setTitle("Wallet History")
 
         eventChangeListener()
-        binding.historyEnrollRecyclerView.apply {
+        binding.historyTopUpRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            enrollHistoryDataArrayList = arrayListOf()
-            enrollHistoryAdapter = EnrolledClassHistoryAdapter(enrollHistoryDataArrayList)
-            adapter = enrollHistoryAdapter
+            topUpHistoryDataArrayList = arrayListOf()
+            topUpHistoryAdapter = TopUpWalletHistoryAdapter(topUpHistoryDataArrayList)
+            adapter = topUpHistoryAdapter
         }
         return binding.root
     }
 
-    private fun eventChangeListener(){
+    private fun eventChangeListener() {
         auth = FirebaseAuth.getInstance()
         fstore = FirebaseFirestore.getInstance()
         val userID = auth.currentUser?.uid
 
         //Retrieve Training Class Data
-        val enrollHistory = fstore.collection("Enroll").whereEqualTo("userID",userID)
-        enrollHistory.addSnapshotListener(object : EventListener<QuerySnapshot> {
+        val topUpHistory = fstore.collection("Wallet").whereEqualTo("userID", userID)
+        topUpHistory.addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?
             ) {
                 if (error != null) {
@@ -58,13 +62,14 @@ class EnrollClassHistoryFragment : Fragment() {
                 }
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     if (dc.type == DocumentChange.Type.ADDED) {
-                        enrollHistoryDataArrayList.add(dc.document.toObject(
-                            EnrollData::class.java)
+                        topUpHistoryDataArrayList.add(dc.document.toObject(
+                            TopUpData::class.java)
                         )
                     }
                 }
-                enrollHistoryAdapter.notifyDataSetChanged()
+                topUpHistoryAdapter.notifyDataSetChanged()
             }
         })
+        Log.d("haha", topUpHistory.toString())
     }
 }

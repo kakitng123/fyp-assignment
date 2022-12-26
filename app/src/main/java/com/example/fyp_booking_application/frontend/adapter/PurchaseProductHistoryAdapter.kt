@@ -27,7 +27,7 @@ class PurchaseProductHistoryAdapter(
         holder.purchaseName.text = purchaseHistoryModel.purchaseName
         holder.purchaseQty.text = purchaseHistoryModel.purchaseQty.toString()
         holder.purchaseStatus.text = purchaseHistoryModel.purchaseStatus
-        holder.purchasePayment.text = purchaseHistoryModel.purchasePrice.toString()
+        holder.purchasePrice.text = purchaseHistoryModel.purchasePrice.toString()
     }
 
     //Return the total count of items in the list
@@ -45,12 +45,12 @@ class PurchaseProductHistoryAdapter(
         val purchaseName: TextView
         val purchaseQty: TextView
         val purchaseStatus: TextView
-        val purchasePayment: TextView
+        val purchasePrice: TextView
         init {
             purchaseName = itemView.findViewById(R.id.tvPurchaseName)
             purchaseQty = itemView.findViewById(R.id.tvPurchaseQty)
             purchaseStatus = itemView.findViewById(R.id.tvPurchaseStatus)
-            purchasePayment = itemView.findViewById(R.id.tvPurchasePayment)
+            purchasePrice = itemView.findViewById(R.id.tvPurchasePrice)
         }
     }
 }

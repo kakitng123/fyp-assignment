@@ -26,8 +26,6 @@ class UserTrainingClassAdapter (
         //Set data to textview and imageview of each card layout
         holder.trainingClassName.text = trainingClassModel.className
         holder.trainingClassPrice.text = trainingClassModel.classPrice.toString()
-        holder.trainingClassDate.text = trainingClassModel.classDate
-        holder.trainingClassTime.text = trainingClassModel.classTime
     }
 
     override fun getItemCount(): Int {
@@ -43,14 +41,10 @@ class UserTrainingClassAdapter (
     inner class TrainingClassViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val trainingClassName: TextView
         val trainingClassPrice: TextView
-        val trainingClassDate: TextView
-        val trainingClassTime: TextView
 
         init {
             trainingClassName = itemView.findViewById(R.id.tvTrainingClassName)
             trainingClassPrice = itemView.findViewById(R.id.tvTrainingClassPrice)
-            trainingClassDate = itemView.findViewById(R.id.tvTrainingClassDate)
-            trainingClassTime = itemView.findViewById(R.id.tvTrainingClassTime)
             itemView.setOnClickListener(this)
         }
 

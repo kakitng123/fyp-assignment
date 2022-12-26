@@ -1,11 +1,14 @@
 package com.example.fyp_booking_application.frontend
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -19,8 +22,11 @@ import com.example.fyp_booking_application.databinding.FragmentUserHomeBinding
 import com.example.fyp_booking_application.frontend.adapter.UserProductAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserHomeFragment : Fragment(), UserProductAdapter.OnItemClickListener {
     private lateinit var binding: FragmentUserHomeBinding
@@ -30,6 +36,7 @@ class UserHomeFragment : Fragment(), UserProductAdapter.OnItemClickListener {
     private lateinit var storageRef: StorageReference
     private lateinit var productAdapter: UserProductAdapter
     private lateinit var userProDataArrayList: ArrayList<ProductData>
+    private lateinit var filteredArrayList: ArrayList<ProductData>
     private lateinit var userProRecView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -45,16 +52,48 @@ class UserHomeFragment : Fragment(), UserProductAdapter.OnItemClickListener {
         storageRef = storage.reference
         val userID = auth.currentUser?.uid
 
+        binding.voucherBtn.setOnClickListener {
+            Toast.makeText(context, "View Successfully", Toast.LENGTH_SHORT).show()
+            userView.replaceFragment(UserVoucherFragment())
+        }
+
+        binding.homeSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filteredArrayList.clear()
+                val searchText = newText!!.lowercase(Locale.getDefault())
+                if (searchText.isNotEmpty()) {
+                    userProDataArrayList.forEach {
+                        if (it.productName!!.lowercase(Locale.getDefault()).contains(searchText))
+                            filteredArrayList.add(it)
+                    }
+                    productAdapter.notifyDataSetChanged()
+                }
+                else {
+                    filteredArrayList.clear()
+                    filteredArrayList.addAll(userProDataArrayList)
+                    productAdapter.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
+
+        //User Product Recycler View
         userProRecView = binding.userProductRecyclerView
         userProRecView.layoutManager = LinearLayoutManager(context) //Set layout manager to position the items
         val linearLayoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false) //Set layout to horizontal
         userProRecView.setLayoutManager(linearLayoutManager)
         userProRecView.setHasFixedSize(true)
         userProDataArrayList = arrayListOf()//Set a array list data
-        productAdapter = UserProductAdapter(userProDataArrayList, this@UserHomeFragment) //Create adapter passing in the array adapter data
+        filteredArrayList = arrayListOf()//Set a array list data
+        productAdapter = UserProductAdapter(filteredArrayList, this@UserHomeFragment) //Create adapter passing in the array adapter data
         userProRecView.adapter = productAdapter //Attach the adapter to the recyclerView to populate the items
-        eventChangeListener()
 
+        eventChangeListener()
         return binding.root
     }
 
@@ -70,6 +109,7 @@ class UserHomeFragment : Fragment(), UserProductAdapter.OnItemClickListener {
                     for (dc: DocumentChange in value?.documentChanges!!) {
                         if (dc.type == DocumentChange.Type.ADDED) {
                             userProDataArrayList.add(dc.document.toObject(ProductData::class.java))
+                            filteredArrayList.add(dc.document.toObject(ProductData::class.java))
                         }
                     }
                     productAdapter.notifyDataSetChanged()
@@ -78,11 +118,14 @@ class UserHomeFragment : Fragment(), UserProductAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        val currentItem = userProDataArrayList[position]
+        val currentProItem = userProDataArrayList[position]
         val userView = (activity as UserDashboardActivity)
         userView.replaceFragment(UserProductDetailsFragment())
         // Parse Data to Paired-Fragment
-        setFragmentResult("toUserProductDetail", bundleOf("toUserProductDetail" to currentItem.productID))
+        setFragmentResult(
+            "toUserProductDetail",
+            bundleOf("toUserProductDetail" to currentProItem.productID)
+        )
     }
 }
 

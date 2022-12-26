@@ -1,5 +1,6 @@
 package com.example.fyp_booking_application.frontend
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,64 +10,106 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.setFragmentResult
 import com.example.fyp_booking_application.NotificationData
+import com.example.fyp_booking_application.ProductData
 import com.example.fyp_booking_application.R
 import com.example.fyp_booking_application.UserDashboardActivity
 import com.example.fyp_booking_application.databinding.FragmentUserNotificationBinding
 import com.example.fyp_booking_application.frontend.adapter.UserNotificationAdapter
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserNotificationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserNotificationBinding
-    private lateinit var databaseRef: FirebaseFirestore
-    private lateinit var userNotifArrayList: ArrayList<NotificationData>
-    private lateinit var userNotifListAdapter: UserNotificationAdapter
+    private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
+    private lateinit var fstore: FirebaseFirestore //get the shared instance of the FirebaseAuth object
+    private lateinit var storage: FirebaseStorage
+    private lateinit var storageRef: StorageReference
+    private lateinit var userNotifArrayDataList: ArrayList<NotificationData>
+    private lateinit var filteredArrayList: ArrayList<NotificationData>
+    private lateinit var notifyAdapter: UserNotificationAdapter
     private lateinit var listView: ListView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        //Declare the variable
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_notification, container, false)
-        databaseRef = FirebaseFirestore.getInstance()
-        listView = binding.userNotificationLV
-        userNotifArrayList = arrayListOf()
-        // TESTING PURPOSES
+        userNotifArrayDataList = arrayListOf()
+        filteredArrayList = arrayListOf()
         val userView = (activity as UserDashboardActivity)
+        userView.setTitle("Notification")
 
+        //Initialise
+        auth = FirebaseAuth.getInstance()
+        fstore = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
+        storageRef = storage.reference
+        val userID = auth.currentUser?.uid
+
+        binding.notifySearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filteredArrayList.clear()
+                val searchText = newText!!.lowercase(Locale.getDefault())
+                if (searchText.isNotEmpty()) {
+                    userNotifArrayDataList.forEach {
+                        if (it.notifyTitle!!.lowercase(Locale.getDefault()).contains(searchText))
+                            filteredArrayList.add(it)
+                    }
+                    notifyAdapter.notifyDataSetChanged()
+                }
+                else {
+                    filteredArrayList.clear()
+                    filteredArrayList.addAll(userNotifArrayDataList)
+                    notifyAdapter.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
+
+        //User Notification ListView
+        listView = binding.userNotificationLV
+        userNotifArrayDataList = arrayListOf()
+        filteredArrayList = arrayListOf()
         listView.apply {
-            userNotifArrayList.clear()
-            // need to get auth?.userID smtg here
-            setListData("ZbK2533bHaW9c5VJ41ND28jssR72")
-            userNotifListAdapter = UserNotificationAdapter(context, userNotifArrayList)
-            adapter = userNotifListAdapter
+            userNotifArrayDataList.clear()
+            setListData(userID.toString())
+            notifyAdapter = UserNotificationAdapter(context, userNotifArrayDataList)
+            adapter = notifyAdapter
         }
 
         listView.setOnItemClickListener { _: AdapterView<*>, _:View, position:Int, _:Long ->
-            val testing = userNotifArrayList[position]
+            val testing = userNotifArrayDataList[position]
             setFragmentResult("toUserNotifDetails", bundleOf("toUserNotifDetails" to testing.notifyID))
             userView.replaceFragment(UserNotificationDetailFragment())
         }
-
         return binding.root
     }
 
     private fun setListData(userID: String){
-        databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("Notifications").get().addOnSuccessListener { documents ->
-            // Entong, need your help with this, can you sub in auth?.userID into this part, so that during real testing you can check
-            // for now I hardcode stuff to double check
+        fstore.collection("Notifications").get().addOnSuccessListener { documents ->
             for (document in documents) {
-                // Sub the auth?.userID here to work properly with firebase
                 if(document["userID"] == userID) {
-                    userNotifArrayList.add(document.toObject(NotificationData::class.java))
+                    userNotifArrayDataList.add(document.toObject(NotificationData::class.java))
+                    filteredArrayList.add(document.toObject(NotificationData::class.java))
                 }
-                userNotifListAdapter.notifyDataSetChanged()
+                notifyAdapter.notifyDataSetChanged()
             }
         }.addOnFailureListener { e ->
             Log.e("TEST DATA", "Error getting documents: ", e)

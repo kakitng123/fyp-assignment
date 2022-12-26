@@ -28,7 +28,7 @@ data class EnrollData(
     val enrollDate: String ?= null,
     val enrollTime: String ?= null,
     val enrollClassName: String ?= null,
-    val enrollPrice: Double ?= 0.00,
+    val enrollPrice: Double ?= null,
     val enrollStatus: String ?= null,
     val classID: String ?= null,
     val userID: String ?= null,
@@ -58,7 +58,6 @@ data class ProductData(
 )
 
 // Purchase Data
-// need to add date+time
 data class PurchaseData(
     val purchaseID: String ?= null,
     val purchaseName: String ?= null,
@@ -114,10 +113,20 @@ data class NotificationData (
 // Voucher Data (Not Complete)
 data class VoucherData (
     val voucherID: String ?= null,
+    val voucherImage: String ?= null,
     val voucherTitle: String ?= null,
     val voucherMessage: String ?= null,
-    val pointsRequired: Int ?= null,
+    val pointsRequired: Double = 0.00,
     val voucherCode: String ?= null,
-    val voucherDiscount: Double ?= null
+    val voucherDiscount: Double = 0.00,
+    val userID: String ?= null
 )
+
+data class TopUpData(
+    val topUpID : String ?= null,
+    val topUpAmount: Double = 0.00,
+    val topUpDesc: String ?= null,
+    val topUpStatus: String ?= null
+)
+
 
