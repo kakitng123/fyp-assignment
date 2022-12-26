@@ -86,7 +86,7 @@ class AdminProductDetailFragment : Fragment() {
                     binding.tfProductDetailDesc.setText(product?.productDesc.toString())
                     binding.tfProductDetailPrice.setText(product?.productPrice.toString())
 
-                    binding.tfProductDetailQty.minValue = 1
+                    binding.tfProductDetailQty.minValue = 0
                     binding.tfProductDetailQty.maxValue = 100
                     //binding.tfProductDetailQty.wrapSelectorWheel = true
                     binding.tfProductDetailQty.value = product?.productQty!!

@@ -41,23 +41,22 @@ class AdminClassAddFragment : Fragment(){
             binding.tfAddClassName.setOnFocusChangeListener { _, focused ->
                 if (!focused && binding.tfAddClassName.text!!.isEmpty()) {
                     binding.nameContainer.helperText = "Name is Required"
-                } else if (!focused && !(binding.tfAddClassName.text!!.matches("^\\p{L}+(?: \\p{L}+)*\$".toRegex()))) {
-                    binding.nameContainer.helperText = "Invalid Name"
-                } else binding.nameContainer.helperText = null
+                }
+                else binding.nameContainer.helperText = null
             }
 
             binding.tfAddClassDesc.setOnFocusChangeListener { _, focused ->
                 if (!focused && binding.tfAddClassDesc.text!!.isEmpty()) {
                     binding.descContainer.helperText = "Description is Required"
-                } else binding.descContainer.helperText = null
+                }
+                else binding.descContainer.helperText = null
             }
 
             binding.tfAddClassPrice.setOnFocusChangeListener { _, focused ->
                 if (!focused && binding.tfAddClassPrice.text!!.isEmpty()) {
                     binding.priceContainer.helperText = "Price is Required"
-                } else if (!focused && !(binding.tfAddClassPrice.text!!.all { it.isDigit() })) {
-                    binding.priceContainer.helperText = "Only Numbers Allowed"
-                } else binding.priceContainer.helperText = null
+                }
+                else binding.priceContainer.helperText = null
             }
 
             binding.LLSlot1.setOnClickListener {
@@ -110,10 +109,10 @@ class AdminClassAddFragment : Fragment(){
                                     )
                                     newClassRef.set(newClass).addOnSuccessListener {
                                         Log.d("ADDING NEW CLASS", "CLASS ADDED SUCCESSFULLY")
-                                        adminView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
                                     }.addOnFailureListener { e ->
                                         Log.e("ADDING NEW CLASS", "ERROR ADDING NEW CLASS", e)
                                     }
+                                    adminView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
                                 } else Toast.makeText(context, "EXISTING CLASS NAME", Toast.LENGTH_SHORT).show()
                             }.addOnFailureListener { e ->
                                 Log.e("FETCHING DOCUMENT", "INVALID DOCUMENT", e)
@@ -124,7 +123,7 @@ class AdminClassAddFragment : Fragment(){
                 }
 
                 binding.tvBackClassAdd.setOnClickListener {
-                    adminView.replaceFragment(AdminCoachFragment(), R.id.adminLayout)
+                    adminView.replaceFragment(AdminCoachFragment(), R.id.classAdminLayout)
                 }
             }
         }

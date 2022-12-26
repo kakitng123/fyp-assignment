@@ -28,7 +28,7 @@ data class EnrollData(
     val enrollDate: String ?= null,
     val enrollTime: String ?= null,
     val enrollClassName: String ?= null,
-    val enrollPrice: Double ?= null,
+    val enrollPrice: Double ?= 0.00,
     val enrollStatus: String ?= null,
     val classID: String ?= null,
     val userID: String ?= null,

@@ -69,9 +69,6 @@ class AdminClassDetailFragment : Fragment() {
                         if(!focused && binding.classNameField.text!!.isEmpty()){
                             binding.classNameContainer.helperText = "Name is Required"
                         }
-                        else if(!focused && !(binding.classNameField.text!!.matches("^\\p{L}+(?: \\p{L}+)*\$".toRegex()))){
-                            binding.classNameContainer.helperText = "Only Alphabets Allowed"
-                        }
                         else binding.classNameContainer.helperText = null
                     }
 
@@ -85,9 +82,6 @@ class AdminClassDetailFragment : Fragment() {
                     binding.classPriceField.setOnFocusChangeListener { _, focused ->
                         if(!focused && binding.classPriceField.text!!.isEmpty()){
                             binding.classPriceContainer.helperText = "Price is Required"
-                        }
-                        else if(!focused && !(binding.classPriceField.text!!.all { it.isDigit() })){
-                            binding.classPriceContainer.helperText = "Only Numbers Allowed"
                         }
                         else binding.classPriceContainer.helperText = null
                     }
@@ -110,7 +104,7 @@ class AdminClassDetailFragment : Fragment() {
                                 docRef.set(updateClass, SetOptions.merge())
                                     .addOnSuccessListener {
                                         Log.d("UPDATE CLASS","CLASS DETAIL UPDATED SUCCESSFULLY" )
-                                        adminView.replaceFragment(AdminClassFragment(), R.id.classAdminLayout)
+                                        adminView.replaceFragment(AdminClassFragment(), R.id.adminLayout)
                                     }
                                     .addOnFailureListener { e -> Log.e("UPDATE CLASS", "ERROR UPDATING CLASS DETAIL", e) }
                             }

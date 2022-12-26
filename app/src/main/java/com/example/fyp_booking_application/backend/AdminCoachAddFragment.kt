@@ -33,9 +33,6 @@ class AdminCoachAddFragment : Fragment() {
             if(!focused && binding.tfAddCoachName.text!!.isEmpty()){
                 binding.coachNameContainer.helperText = "Name is Required"
             }
-            else if(!focused && !(binding.tfAddCoachName.text!!.matches("^\\p{L}+(?: \\p{L}+)*\$".toRegex()))){
-                binding.coachNameContainer.helperText = "Invalid Name"
-            }
             else binding.coachNameContainer.helperText = null
         }
 

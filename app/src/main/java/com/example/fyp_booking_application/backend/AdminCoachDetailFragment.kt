@@ -89,9 +89,6 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                         if(!focused && binding.coachNameField.text!!.isEmpty()){
                             binding.coachNameContainer.helperText = "Name is Required"
                         }
-                        else if(!focused && !(binding.coachNameField.text!!.matches("^\\p{L}+(?: \\p{L}+)*\$".toRegex()))){
-                            binding.coachNameContainer.helperText = "Invalid Name"
-                        }
                         else binding.coachNameContainer.helperText = null
                     }
 
@@ -108,9 +105,6 @@ class AdminCoachDetailFragment : Fragment(), CoachClassAdminAdapter.OnItemClickL
                     binding.coachPhoneNoField.setOnFocusChangeListener { _, focused ->
                         if(!focused && binding.coachPhoneNoField.text!!.isEmpty()){
                             binding.coachPhoneNoContainer.helperText = "Phone No. is Required"
-                        }
-                        else if(!focused && !(binding.coachPhoneNoField.text!!.all { it.isDigit() })){
-                            binding.coachPhoneNoContainer.helperText = "Invalid Phone No."
                         }
                         else if(!focused && binding.coachPhoneNoField.text!!.length < 10){
                             binding.coachPhoneNoContainer.helperText = "Invalid Phone No."

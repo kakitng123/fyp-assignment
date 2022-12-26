@@ -67,12 +67,12 @@ class AdminBookingFragment : Fragment(), BookingAdminAdapter.OnItemClickListener
         databaseRef = FirebaseFirestore.getInstance()
 
         var collectionSize: Int? = null
-        val collection = databaseRef.collection("notification_testing1").count()
+        val collection = databaseRef.collection("Notifications").count()
         collection.get(AggregateSource.SERVER).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 collectionSize = task.result.count.toInt()
             }
-            val newNotifyRef = databaseRef.collection("notification_testing1").document()
+            val newNotifyRef = databaseRef.collection("Notifications").document()
             val newNotify = hashMapOf(
                 "notifyID" to newNotifyRef.id,
                 "notifyTitle" to "PENDING PAYMENT",

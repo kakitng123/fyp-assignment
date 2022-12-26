@@ -11,7 +11,7 @@
             android:id="@+id/imgAdminProfile"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,18 +33,64 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="Sales Today"
+            android:layout_marginTop="24dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="Sales"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvWelcomeBack" />
 
+        <TextView
+            android:id="@+id/tvSalesToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="TOTAL"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tvSales"
+            app:layout_constraintTop_toTopOf="@+id/tvSales" />
+
+        <TextView
+            android:id="@+id/tvTotalPending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="Pendings"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <TextView
+            android:id="@+id/tvResetCourt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="Reset Court"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +109,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:padding="4dp"
-                    android:text="BOOKING TODAY"
+                    android:text="@string/Booking"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -73,8 +119,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
+                    android:padding="4dp"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvPurchaseSales"
@@ -83,7 +129,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:padding="4dp"
-                    android:text="PURCHASES TODAY"
+                    android:text="@string/purchase"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -93,9 +139,108 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:padding="8dp"
-                    android:textSize="16sp" />
+                    android:padding="4dp"
+                    android:textSize="18sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvTotalPending"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalPending">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvPendingBookings"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical|end"
+                        android:padding="4dp"
+                        android:text="@string/Booking"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPendingBooksCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="4dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvPendingEnrolls"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical|end"
+                        android:padding="4dp"
+                        android:text="Enroll"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPendingEnrollCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="4dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnResetCourt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="RESET"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:icon="@drawable/ic_admin_refresh_white"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintStart_toStartOf="@+id/tvResetCourt"
+            app:layout_constraintTop_toBottomOf="@+id/tvResetCourt" />
+
+        <ImageButton
+            android:id="@+id/btnSalesToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSalesToday"
+            app:layout_constraintStart_toEndOf="@+id/tvSalesToday"
+            app:layout_constraintTop_toTopOf="@+id/tvSalesToday"
+            app:srcCompat="@drawable/ic_admin_calendar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

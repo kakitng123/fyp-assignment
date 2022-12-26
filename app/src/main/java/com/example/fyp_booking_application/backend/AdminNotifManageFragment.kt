@@ -92,25 +92,58 @@ class AdminNotifManageFragment : Fragment() {
             val validMessage = binding.notifAddMessageContainer.helperText == null
 
             if(validTitle && validMessage ){
-                var collectionSize: Int ?= null
-                val collection = databaseRef.collection("Notifications").count()
-                collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
-                    if (task.isSuccessful){
-                        collectionSize = task.result.count.toInt()
-                    }
-                    val newNotifyRef = databaseRef.collection("Notifications").document()
-                    val newNotify = hashMapOf(
-                        "notifyID" to newNotifyRef.id,
-                        "notifyTitle" to binding.notifAddTitleField.text.toString(),
-                        "notifyMessage" to binding.notifAddMessageField.text.toString(),
-                        "referralCode" to "R${100000+collectionSize!!}",
-                        "userID" to binding.notifUserSearchView.queryHint
-                    )
-                    newNotifyRef.set(newNotify).addOnSuccessListener {
-                        Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
+                if(binding.notifCheckBox.isChecked){
+                    val userRef = databaseRef.collection("Users").whereEqualTo("isSubscribed", true)
+                    userRef.get().addOnSuccessListener { documents ->
+                        for (document in documents){
+                            var collectionSize: Int ?= null
+                            val collection = databaseRef.collection("Notifications").count()
+                            collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
+                                if (task.isSuccessful){
+                                    collectionSize = task.result.count.toInt()
+                                }
+                                val newNotifyRef = databaseRef.collection("Notifications").document()
+                                val newNotify = hashMapOf(
+                                    "notifyID" to newNotifyRef.id,
+                                    "notifyTitle" to binding.notifAddTitleField.text.toString(),
+                                    "notifyMessage" to binding.notifAddMessageField.text.toString(),
+                                    "referralCode" to "R${100000+collectionSize!!}",
+                                    "userID" to document["userID"].toString()
+                                )
+                                newNotifyRef.set(newNotify).addOnSuccessListener {
+                                    Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
+
+                                }.addOnFailureListener { e ->
+                                    Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
+                                }
+                            }
+                        }
 
                     }.addOnFailureListener { e ->
-                        Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
+                        Log.e("FETCH DOCUMENT", "ERROR FETCHING DOCUMENT", e)
+                    }
+                }
+                else {
+                    var collectionSize: Int ?= null
+                    val collection = databaseRef.collection("Notifications").count()
+                    collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
+                        if (task.isSuccessful){
+                            collectionSize = task.result.count.toInt()
+                        }
+                        val newNotifyRef = databaseRef.collection("Notifications").document()
+                        val newNotify = hashMapOf(
+                            "notifyID" to newNotifyRef.id,
+                            "notifyTitle" to binding.notifAddTitleField.text.toString(),
+                            "notifyMessage" to binding.notifAddMessageField.text.toString(),
+                            "referralCode" to "R${100000+collectionSize!!}",
+                            "userID" to binding.notifUserSearchView.queryHint
+                        )
+                        newNotifyRef.set(newNotify).addOnSuccessListener {
+                            Log.d("ADD NOTIFICATION", "NOTIFICATION ADDED SUCCESSFULLY")
+
+                        }.addOnFailureListener { e ->
+                            Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
+                        }
                     }
                 }
             }
