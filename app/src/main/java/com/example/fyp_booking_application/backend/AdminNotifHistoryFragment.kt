@@ -67,6 +67,7 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
         binding.notificationRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
+            filteredArrayList.sortByDescending { it.referralCode }
             notificationAdminAdapter = NotificationAdminAdapter(filteredArrayList, this@AdminNotifHistoryFragment)
             adapter = notificationAdminAdapter
         }
@@ -96,8 +97,6 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
                             filteredArrayList.add(dc.document.toObject(NotificationData::class.java))
                         }
                     }
-                    notificationList.sortByDescending { it.referralCode }
-                    filteredArrayList.sortByDescending { it.referralCode }
                     notificationAdminAdapter.notifyDataSetChanged()
                 }
             })

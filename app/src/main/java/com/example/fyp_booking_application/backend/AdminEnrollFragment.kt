@@ -40,7 +40,6 @@ class AdminEnrollFragment : Fragment(), ClassEnrollAdminAdapter.OnItemClickListe
         binding.classPendingRV.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            enrollArrayList.sortedByDescending { list -> list.enrollDate }
             classEnrollAdminAdapter = ClassEnrollAdminAdapter(enrollArrayList, this@AdminEnrollFragment)
             adapter = classEnrollAdminAdapter
         }
@@ -162,7 +161,6 @@ class AdminEnrollFragment : Fragment(), ClassEnrollAdminAdapter.OnItemClickListe
                     }
                     else binding.tvClassPending.visibility = View.GONE
 
-                    enrollArrayList.sortedByDescending { list -> list.enrollDate}
                     classEnrollAdminAdapter.notifyDataSetChanged()
                 }
             })

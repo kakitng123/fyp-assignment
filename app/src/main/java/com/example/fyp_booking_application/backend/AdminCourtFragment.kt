@@ -78,11 +78,13 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         })
 
         dataInitialize()
+
         binding.courtRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             courtList = arrayListOf()
             filteredArrayList = arrayListOf()
+            filteredArrayList.sortedBy { it.courtName }
             courtManageAdapter = CourtAdminAdapter(filteredArrayList, this@AdminCourtFragment)
             adapter = courtManageAdapter
         }
@@ -116,8 +118,8 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                     }
 
                     val newCourtName: String = when(newCourtSlots.checkedRadioButtonId){
-                        R.id.rdbtnTimeslot1 -> "A${collectionSize!!}"
-                        R.id.rdbtnTimeslot2 -> "B${collectionSize!!}"
+                        R.id.rdbtnTimeslot1 -> "A${collectionSize!!+1}"
+                        R.id.rdbtnTimeslot2 -> "B${collectionSize!!+1}"
                         else -> "ERROR"
                     }
 
@@ -151,15 +153,12 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val deletedCourt: CourtData = courtList[viewHolder.adapterPosition]
-                val position = viewHolder.adapterPosition
-                courtList.removeAt(viewHolder.adapterPosition)
-                courtManageAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+
+                courtManageAdapter.deleteItem(viewHolder.adapterPosition)
 
                 Snackbar.make(binding.courtRecyclerView, "Deleted ${deletedCourt.courtName}", Snackbar.LENGTH_LONG)
-                    .setAction("Undo") {
-                        courtList.add(position, deletedCourt)
-                        courtManageAdapter.notifyItemInserted(position)
-                    }.show()
+                    .setAction("Refresh") { adminView.replaceFragment(AdminCourtFragment(), R.id.adminLayout) }.show()
+
             }
         }).attachToRecyclerView(binding.courtRecyclerView)
 
@@ -204,7 +203,6 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                             filteredArrayList.add(dc.document.toObject(CourtData::class.java))
                         }
                     }
-                    courtList.sortByDescending { it.courtName }
                     courtManageAdapter.notifyDataSetChanged()
                 }
             })
@@ -214,7 +212,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
         timeslotList = arrayListOf()
         databaseRef = FirebaseFirestore.getInstance()
 
-        if (currentItem.courtSlots?.size == null) {
+        if (currentItem.courtSlots?.size!! < 1) {
             binding.timeslotRecyclerView.visibility = View.INVISIBLE
             binding.tvTesting.visibility = View.VISIBLE
         } else {
@@ -234,7 +232,6 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                         }
                     }
                     binding.timeslotRecyclerView.apply {
-                        timeslotList.sortBy { list -> list.timeslot }
                         layoutManager = LinearLayoutManager(context)
                         setHasFixedSize(true)
                         timeslotAdapter = CourtTimeslotAdminAdapter(timeslotList)
