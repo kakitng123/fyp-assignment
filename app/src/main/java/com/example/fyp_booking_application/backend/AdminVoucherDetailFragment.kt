@@ -29,8 +29,8 @@ class AdminVoucherDetailFragment : Fragment() {
         databaseRef = FirebaseFirestore.getInstance()
 
         setFragmentResultListener("toVoucherDetails") { _, bundle ->
-            val notifyID = bundle.getString("toVoucherDetails")
-            val docRef = databaseRef.collection("Vouchers").document(notifyID.toString())
+            val voucherID = bundle.getString("toVoucherDetails")
+            val docRef = databaseRef.collection("Vouchers").document(voucherID.toString())
 
             docRef.get().addOnSuccessListener { document ->
                 if(document != null){
@@ -48,7 +48,7 @@ class AdminVoucherDetailFragment : Fragment() {
             }
         }
         binding.tvBackVoucherDetail.setOnClickListener {
-            adminView.replaceFragment(AdminNotifHistoryFragment(), R.id.notificationLayout)
+            adminView.replaceFragment(AdminVoucherFragment(), R.id.voucherLayout)
         }
 
         return binding.root

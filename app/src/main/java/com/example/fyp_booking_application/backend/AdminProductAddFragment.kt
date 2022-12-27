@@ -138,7 +138,7 @@ class AdminProductAddFragment : Fragment() {
         if (requestCode == 100 && data != null && data.data != null) {
             imgUri = data.data!!
             binding.imgProduct.setImageURI(imgUri)
-        } else Log.d("NO IMAGE URI", "NO IMAGE HAHA")
+        } else returnTransition
         super.onActivityResult(requestCode, resultCode, data)
     }
 }

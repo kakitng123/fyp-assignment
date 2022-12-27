@@ -98,6 +98,8 @@ data class TestUserData(
     val phone: String ?= null,
     val gender: String ?= null,
     val imgID: String ?= null,
+    @field:JvmField
+    val isSubscribed: Boolean ?= null
 )
 
 // Notification Data (Not Complete)
@@ -116,7 +118,7 @@ data class VoucherData (
     val voucherImage: String ?= null,
     val voucherTitle: String ?= null,
     val voucherMessage: String ?= null,
-    val pointsRequired: Double = 0.00,
+    val pointsRequired: Int = 0,
     val voucherCode: String ?= null,
     val voucherDiscount: Double = 0.00,
     val userID: String ?= null

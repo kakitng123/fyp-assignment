@@ -114,28 +114,29 @@ class AdminVoucherManageFragment : Fragment() {
             val validDiscount = binding.vouchDiscountContainer.helperText == null
 
             if(validTitle && validMessage && validAmount && validCode && validDiscount){
-                val discountAmount: Double = binding.vouchDiscountField.toString().toDouble() / 100
-                val newVoucherRef = databaseRef.collection("Vouchers").document()
-                val newVoucher = hashMapOf(
-                    "voucherID" to newVoucherRef.id,
-                    "voucherTitle" to binding.vouchAddTitleField.text.toString(),
-                    "voucherMessage" to binding.vouchAddMessageField.text.toString(),
-                    "pointsRequired" to binding.vouchAddPointField.text.toString(),
-                    "voucherCode" to binding.vouchAddCodeField.text.toString(),
-                    "voucherDiscount" to discountAmount,
-                )
-                newVoucherRef.set(newVoucher).addOnSuccessListener {
-                    Log.d("ADD VOUCHER", "VOUCHER ADDED SUCCESSFULLY")
-                    Toast.makeText(context, "VOUCHER CREATED", Toast.LENGTH_SHORT).show()
-
-                }.addOnFailureListener { e ->
-                    Log.e("ADD VOUCHER", "ERROR ADDING VOUCHER", e)
-                }
-
                 if(binding.voucherCheckBox.isChecked){
                     val userRef = databaseRef.collection("Users").whereEqualTo("isSubscribed", true)
                     userRef.get().addOnSuccessListener { documents ->
                         for (document in documents){
+                            val discountAmount: Double = binding.vouchDiscountField.text.toString().toDouble() / 100
+                            val newVoucherRef = databaseRef.collection("Vouchers").document()
+                            val newVoucher = hashMapOf(
+                                "voucherID" to newVoucherRef.id,
+                                "voucherTitle" to binding.vouchAddTitleField.text.toString(),
+                                "voucherMessage" to binding.vouchAddMessageField.text.toString(),
+                                "pointsRequired" to binding.vouchAddPointField.text.toString().toInt(),
+                                "voucherCode" to binding.vouchAddCodeField.text.toString(),
+                                "voucherDiscount" to discountAmount,
+                                "userID" to document["userID"].toString()
+                            )
+                            newVoucherRef.set(newVoucher).addOnSuccessListener {
+                                Log.d("ADD VOUCHER", "VOUCHER ADDED SUCCESSFULLY")
+                                Toast.makeText(context, "VOUCHER CREATED", Toast.LENGTH_SHORT).show()
+
+                            }.addOnFailureListener { e ->
+                                Log.e("ADD VOUCHER", "ERROR ADDING VOUCHER", e)
+                            }
+
                             var collectionSize: Int ?= null
                             val collection = databaseRef.collection("Notifications").count()
                             collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
@@ -158,14 +159,31 @@ class AdminVoucherManageFragment : Fragment() {
                                     Log.e("ADD NOTIFICATION", "ERROR ADDING NOTIFICATION", e)
                                 }
                             }
-
                         }
-
                     }.addOnFailureListener { e ->
                         Log.e("FETCH DOCUMENT", "ERROR FETCHING DOCUMENT", e)
                     }
                 }
                 else {
+                    val discountAmount: Double = binding.vouchDiscountField.toString().toDouble() / 100
+                    val newVoucherRef = databaseRef.collection("Vouchers").document()
+                    val newVoucher = hashMapOf(
+                        "voucherID" to newVoucherRef.id,
+                        "voucherTitle" to binding.vouchAddTitleField.text.toString(),
+                        "voucherMessage" to binding.vouchAddMessageField.text.toString(),
+                        "pointsRequired" to binding.vouchAddPointField.text.toString().toInt(),
+                        "voucherCode" to binding.vouchAddCodeField.text.toString(),
+                        "voucherDiscount" to discountAmount,
+                        "userID" to binding.vouchUserSV.queryHint
+                    )
+                    newVoucherRef.set(newVoucher).addOnSuccessListener {
+                        Log.d("ADD VOUCHER", "VOUCHER ADDED SUCCESSFULLY")
+                        Toast.makeText(context, "VOUCHER CREATED", Toast.LENGTH_SHORT).show()
+
+                    }.addOnFailureListener { e ->
+                        Log.e("ADD VOUCHER", "ERROR ADDING VOUCHER", e)
+                    }
+
                     var collectionSize: Int ?= null
                     val collection = databaseRef.collection("Notifications").count()
                     collection.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
