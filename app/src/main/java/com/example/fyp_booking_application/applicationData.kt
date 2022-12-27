@@ -98,6 +98,7 @@ data class TestUserData(
     val phone: String ?= null,
     val gender: String ?= null,
     val imgID: String ?= null,
+    @field:JvmField
     val isSubscribed: Boolean ?= null
 )
 

@@ -43,7 +43,9 @@ class AdminUserDetailFragment : Fragment() {
                     binding.userPasswordField.isEnabled = isChecked
                     binding.userPhoneField.isEnabled = isChecked
                     binding.userGenderField.isEnabled = isChecked
+                    binding.userSubscribeField.isEnabled = isChecked
                 }
+                //Log.d("CHECK ITEM", user?.isSubscribed.toString())
 
                 binding.userIDField.setText(user?.userID.toString())
                 binding.userNameField.setText(user?.username.toString())
