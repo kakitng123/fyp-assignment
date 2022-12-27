@@ -49,7 +49,8 @@ class AdminHomeFragment : Fragment() {
 
                 // Filter
                 var bookingSales = 0.0
-                databaseRef.collection("Bookings").whereEqualTo("bookingDate", currentDateFormat).get().addOnSuccessListener { documents ->
+                databaseRef.collection("Bookings").whereEqualTo("bookingDate", currentDateFormat)
+                    .get().addOnSuccessListener { documents ->
                     for (document in documents){
                         bookingSales += document["bookingPayment"].toString().toDouble()
                     }
@@ -57,7 +58,8 @@ class AdminHomeFragment : Fragment() {
                 }
 
                 var purchaseSales = 0.0
-                databaseRef.collection("Purchases").whereEqualTo("purchaseDate", currentDateFormat).get().addOnSuccessListener { documents ->
+                databaseRef.collection("Purchases").whereEqualTo("purchaseDate", currentDateFormat)
+                    .get().addOnSuccessListener { documents ->
                     for (document in documents){
                         purchaseSales += document["purchasePrice"].toString().toDouble()
                     }
@@ -87,7 +89,7 @@ class AdminHomeFragment : Fragment() {
             binding.tfPurchaseSales.text = "RM $purchaseSales"
         }
 
-        var enrollSize: Int ?= null
+        var enrollSize: Int
         val enrollRef = databaseRef.collection("Enroll").whereEqualTo("enrollStatus", "Pending").count()
         enrollRef.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
             if (task.isSuccessful){
@@ -96,12 +98,12 @@ class AdminHomeFragment : Fragment() {
             }
         }
 
-        var bookingSize: Int ?= null
+        var bookingSize: Int
         val bookingRef = databaseRef.collection("Bookings").whereEqualTo("bookingStatus", "Pending").count()
         bookingRef.get(AggregateSource.SERVER).addOnCompleteListener{ task ->
             if (task.isSuccessful){
-                enrollSize = task.result.count.toInt()
-                binding.tvPendingBooksCount.text = enrollSize.toString()
+                bookingSize = task.result.count.toInt()
+                binding.tvPendingBooksCount.text = bookingSize.toString()
 
             }
         }
@@ -119,13 +121,8 @@ class AdminHomeFragment : Fragment() {
                         courtSlotSize.let {
                             for ((key, value) in courtSlotSize){
                                 val timeslot = value as Map<*, *>
-                                val resetCourtData = hashMapOf(
-                                    "courtSlots" to hashMapOf(
-                                        "$key" to hashMapOf(
-                                            "availability" to true
-                                        )
-                                    )
-                                )
+                                val resetCourtData = hashMapOf("courtSlots" to
+                                        hashMapOf("$key" to hashMapOf("availability" to true)))
                                 courtRef.document(court.courtID.toString()).set(resetCourtData, SetOptions.merge())
                                     .addOnSuccessListener {
                                         Log.d("RESET COURT", "SUCCESSMUAHAHAHA")

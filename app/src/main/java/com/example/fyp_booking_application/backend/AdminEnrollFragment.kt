@@ -124,7 +124,7 @@ class AdminEnrollFragment : Fragment(), ClassEnrollAdminAdapter.OnItemClickListe
                     "notifyID" to newNotifyRef.id,
                     "notifyTitle" to "Enrollment Rejected",
                     "notifyMessage" to "Your enrollment for Class ${currentItem.enrollClassName} " +
-                            "on ${currentItem.enrollDate} - ${currentItem.enrollTime} has been Rejected. \n\n" +
+                            "on ${currentItem.enrollDate} - ${currentItem.enrollTime} has been Rejected. \n\n " +
                             "Reason: ${editText.text}",
                     "referralCode" to "R${100000+collectionSize!!}",
                     "userID" to currentItem.userID.toString()

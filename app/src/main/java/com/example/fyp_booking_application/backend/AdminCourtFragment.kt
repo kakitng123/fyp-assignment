@@ -84,6 +84,7 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
             setHasFixedSize(true)
             courtList = arrayListOf()
             filteredArrayList = arrayListOf()
+            courtList.sortedBy { it.courtName }
             filteredArrayList.sortedBy { it.courtName }
             courtManageAdapter = CourtAdminAdapter(filteredArrayList, this@AdminCourtFragment)
             adapter = courtManageAdapter
@@ -203,6 +204,8 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                             filteredArrayList.add(dc.document.toObject(CourtData::class.java))
                         }
                     }
+                    courtList.sortedBy { it.courtName }
+                    filteredArrayList.sortedBy { it.courtName }
                     courtManageAdapter.notifyDataSetChanged()
                 }
             })
@@ -230,10 +233,12 @@ class AdminCourtFragment : Fragment(), CourtAdminAdapter.OnItemClickListener {
                             val newTimeslot = CourtDataTimeslot(slots.toString(), available.toString().toBoolean())
                             timeslotList.add(newTimeslot)
                         }
+                        timeslotList.sortBy { it.timeslot }
                     }
                     binding.timeslotRecyclerView.apply {
                         layoutManager = LinearLayoutManager(context)
                         setHasFixedSize(true)
+                        timeslotList.sortBy { it.timeslot }
                         timeslotAdapter = CourtTimeslotAdminAdapter(timeslotList)
                         adapter = timeslotAdapter
                     }

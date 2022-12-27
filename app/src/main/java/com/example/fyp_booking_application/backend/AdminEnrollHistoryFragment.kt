@@ -92,7 +92,7 @@ class AdminEnrollHistoryFragment : Fragment(), ClassEnrollAdminAdapter.OnItemCli
 
     private fun dataInitialize(){
         databaseRef = FirebaseFirestore.getInstance()
-        databaseRef.collection("Enroll")
+        databaseRef.collection("Enroll").whereNotEqualTo("enrollStatus", "Pending")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {

@@ -52,7 +52,7 @@ class CheckoutFragment : Fragment() {
 
         //Retrieve Booking Data and Display Booking Details in Checkout Page
         setFragmentResultListener("toCheckoutPage") { _, bundle ->
-            // Testing if you can bundle more than 1 data (success)
+
             val bookingID = bundle.getString("toCheckoutPage")
 
             val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
@@ -131,6 +131,8 @@ class CheckoutFragment : Fragment() {
                 }.addOnFailureListener(){
                     // for now do ntg, or just logErrpr
                 }
+
+
             }
         }
         return binding.root

@@ -78,7 +78,7 @@ class AdminVoucherHistoryFragment : Fragment(), VoucherAdminAdapter.OnItemClickL
         val currentItem = voucherList[position]
         val adminActivityView = (activity as AdminDashboardActivity)
         adminActivityView.replaceFragment(AdminVoucherDetailFragment(), R.id.voucherLayout)
-        setFragmentResult("toVoucherDetails", bundleOf("toVoucherDetails" to currentItem.voucherTitle))
+        setFragmentResult("toVoucherDetails", bundleOf("toVoucherDetails" to currentItem.voucherID))
     }
 
     private fun dataInitialize() {

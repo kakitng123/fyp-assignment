@@ -39,7 +39,8 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
         filteredArrayList = arrayListOf()
 
         dataInitialize()
-
+        notificationList.sortByDescending { it.referralCode }
+        filteredArrayList.sortByDescending { it.referralCode }
         binding.notifHistorySV.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -67,6 +68,7 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
         binding.notificationRecyclerView.apply{
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
+            notificationList.sortByDescending { it.referralCode }
             filteredArrayList.sortByDescending { it.referralCode }
             notificationAdminAdapter = NotificationAdminAdapter(filteredArrayList, this@AdminNotifHistoryFragment)
             adapter = notificationAdminAdapter
@@ -96,6 +98,8 @@ class AdminNotifHistoryFragment : Fragment(), NotificationAdminAdapter.OnItemCli
                             notificationList.add(dc.document.toObject(NotificationData::class.java))
                             filteredArrayList.add(dc.document.toObject(NotificationData::class.java))
                         }
+                        notificationList.sortByDescending { it.referralCode }
+                        filteredArrayList.sortByDescending { it.referralCode }
                     }
                     notificationAdminAdapter.notifyDataSetChanged()
                 }

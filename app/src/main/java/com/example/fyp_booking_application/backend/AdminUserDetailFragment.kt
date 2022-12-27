@@ -51,6 +51,7 @@ class AdminUserDetailFragment : Fragment() {
                 binding.userPasswordField.setText(user?.password.toString())
                 binding.userPhoneField.setText(user?.phone.toString())
                 binding.userGenderField.setText(user?.gender.toString())
+                binding.userSubscribeField.isChecked = user?.isSubscribed!!
 
                 binding.imgBtnUpdateUser.setOnClickListener {
                     val builder = AlertDialog.Builder(requireContext())
@@ -60,7 +61,8 @@ class AdminUserDetailFragment : Fragment() {
                         val updateClass = hashMapOf(
                             "username" to binding.userNameField.text.toString(),
                             "email" to binding.userEmailField.text.toString(),
-                            "password" to binding.userPasswordField.text.toString()
+                            "password" to binding.userPasswordField.text.toString(),
+                            "isSubscribe" to binding.userSubscribeField.isChecked
                         )
                         docRef.set(updateClass, SetOptions.merge())
                             .addOnSuccessListener { Log.d("UPDATE USER","USER DETAIL UPDATED SUCCESSFULLY" ) }
