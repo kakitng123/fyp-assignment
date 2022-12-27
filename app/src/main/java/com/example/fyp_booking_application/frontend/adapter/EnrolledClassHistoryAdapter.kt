@@ -14,9 +14,7 @@ class EnrolledClassHistoryAdapter(
 
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EnrolledClassHistoryAdapter.EnrollHistoryViewHolder {
-        //infate the custom layout
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_enroll_history_card, parent, false)
-        //return a new holder instance
         return EnrollHistoryViewHolder(itemView)
     }
 
@@ -24,7 +22,6 @@ class EnrolledClassHistoryAdapter(
     override fun onBindViewHolder(holder: EnrolledClassHistoryAdapter.EnrollHistoryViewHolder, position: Int) {
         //Get the data model based on position
         val enrollHistoryModel = enrollClassDataArrayList[position]
-
         holder.historyClass.text = enrollHistoryModel.enrollClassName
         holder.historyPrice.text = enrollHistoryModel.enrollPrice.toString()
         holder.historyDate.text = enrollHistoryModel.enrollDate
@@ -34,7 +31,6 @@ class EnrolledClassHistoryAdapter(
 
     //Return the total count of items in the list
     override fun getItemCount(): Int {
-        // this method is used for showing number of card items in recycler view.
         return enrollClassDataArrayList.size
     }
 

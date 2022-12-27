@@ -6,17 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.TopUpData
+import com.example.fyp_booking_application.WalletData
 
 class TopUpWalletHistoryAdapter(
-    private val topUpWalletDataArrayList: ArrayList<TopUpData>
+    private val topUpWalletDataArrayList: ArrayList<WalletData>
 ) : RecyclerView.Adapter<TopUpWalletHistoryAdapter.TopUpHistoryViewHolder>() {
 
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopUpWalletHistoryAdapter.TopUpHistoryViewHolder {
-        //infate the custom layout
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_top_up_wallet_history_card, parent, false)
-        //return a new holder instance
         return TopUpHistoryViewHolder(itemView)
     }
 
@@ -32,7 +30,6 @@ class TopUpWalletHistoryAdapter(
 
     //Return the total count of items in the list
     override fun getItemCount(): Int {
-        // this method is used for showing number of card items in recycler view.
         return topUpWalletDataArrayList.size
     }
 

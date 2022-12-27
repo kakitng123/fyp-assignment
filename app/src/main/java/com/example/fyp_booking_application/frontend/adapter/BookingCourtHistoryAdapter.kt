@@ -1,5 +1,4 @@
 package com.example.fyp_booking_application.frontend.adapter
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +14,7 @@ class BookingCourtHistoryAdapter(
 
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingCourtHistoryAdapter.BookingHistoryViewHolder {
-        //inflate the custom layout
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_booking_history_card, parent, false)
-        //return a new holder instance
         return BookingHistoryViewHolder(itemView)
     }
 
@@ -25,7 +22,6 @@ class BookingCourtHistoryAdapter(
     override fun onBindViewHolder(holder: BookingCourtHistoryAdapter.BookingHistoryViewHolder, position: Int) {
         //Get the data model based on position
         val bookingHistoryModel = bookingHistoryDataArrayList[position]
-
         holder.historyCourt.text = bookingHistoryModel.bookingCourt
         holder.historyPrice.text = bookingHistoryModel.bookingPayment.toString()
         holder.historyDate.text = bookingHistoryModel.bookingDate
@@ -35,14 +31,12 @@ class BookingCourtHistoryAdapter(
             bookingHistoryDataArrayList.removeAt(position) // remove the item from list
             notifyItemRemoved(position) // notify the adapter about the removed item
         })
-
     }
     //Return the total count of items in the list
     override fun getItemCount(): Int {
-        // this method is used for showing number of card items in recycler view.
         return bookingHistoryDataArrayList.size
     }
-
+    //On Item Click Function
     interface OnItemClickListener{
         fun onItemClick(position: Int)
     }

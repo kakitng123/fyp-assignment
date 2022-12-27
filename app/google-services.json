@@ -4,8 +4,7 @@
     "project_id": "fyp-assignment-49ce6",
     "storage_bucket": "fyp-assignment-49ce6.appspot.com"
   },
-  "client": [
-    {
+  "client": [{
       "client_info": {
         "mobilesdk_app_id": "1:337621392326:android:15cac7067a0449ca98f0c7",
         "android_client_info": {
@@ -16,24 +15,15 @@
         {
           "client_id": "337621392326-f329utgc3ea33ihde2p9lqfcqt0hvqqo.apps.googleusercontent.com",
           "client_type": 3
-        }
-      ],
+        }],
       "api_key": [
         {
           "current_key": "AIzaSyAsBRsOKI-NwPIRv4zxuk1PMIiGubOjJqY"
-        }
-      ],
+        }],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
               "client_id": "337621392326-f329utgc3ea33ihde2p9lqfcqt0hvqqo.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
-}
+              "client_type": 3}]}}}],
+  "configuration_version": "1"}

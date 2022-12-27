@@ -122,10 +122,11 @@ data class VoucherData (
     val userID: String ?= null
 )
 
-data class TopUpData(
+data class WalletData(
     val topUpID : String ?= null,
     val topUpTitle: String ?= null,
     val topUpAmount: Double = 0.00,
+    val balance: Double = 0.00,
     val topUpDesc: String ?= null,
     val topUpStatus: String ?= null
 )

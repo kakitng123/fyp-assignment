@@ -14,7 +14,6 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,7 +37,6 @@ android {
     }
 }
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
@@ -60,13 +58,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2") {
-        // Excludes the support library because it's already included by Glide.
         transitive = false
     }
     implementation("androidx.fragment:fragment-ktx:1.5.4")
     debugImplementation("androidx.fragment:fragment-testing:1.5.4")
-
     implementation 'de.hdodenhof:circleimageview:3.1.0' //circle image view
-    implementation 'com.github.shuhart:stepview:1.5.1' //booking step view
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

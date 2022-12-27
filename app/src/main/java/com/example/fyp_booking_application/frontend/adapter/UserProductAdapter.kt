@@ -22,8 +22,8 @@ class UserProductAdapter(
 
     //Inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserProductAdapter.UserProViewholder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_product_card, parent, false) //Inflate the custom layout
-        return UserProViewholder(itemView) //Return a new holder instance
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_product_card, parent, false)
+        return UserProViewholder(itemView)
     }
 
     //Involves the populating data into the item through holder
@@ -37,12 +37,10 @@ class UserProductAdapter(
         //Set data to textview and imageview of each card layout
         val img = storageRef.child(userProModel.productImage.toString())
         val file = File.createTempFile("temp", "png")
-
         img.getFile(file).addOnSuccessListener(){
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
             holder.userProImage.setImageBitmap(bitmap)
         }
-
         holder.userProName.text = userProModel.productName
         holder.userProPrice.text = userProModel.productPrice.toString()
     }
@@ -61,14 +59,12 @@ class UserProductAdapter(
         val userProImage: ImageView
         val userProName: TextView
         val userProPrice: TextView
-
         init {
             userProImage = itemView.findViewById(R.id.tvProductImage)
             userProName = itemView.findViewById(R.id.tvProductName)
             userProPrice = itemView.findViewById(R.id.tvProductPrice)
             itemView.setOnClickListener(this)
         }
-
         override fun onClick(v: View?) {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 listener.onItemClick(adapterPosition)

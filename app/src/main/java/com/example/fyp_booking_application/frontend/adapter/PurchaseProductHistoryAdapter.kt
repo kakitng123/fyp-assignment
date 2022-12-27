@@ -17,9 +17,7 @@ class PurchaseProductHistoryAdapter(
 
     // to inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PurchaseProductHistoryAdapter.PurchaseHistoryViewHolder {
-        //infate the custom layout
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_purchase_history_card, parent, false)
-        //return a new holder instance
         return PurchaseHistoryViewHolder(itemView)
     }
 
@@ -39,7 +37,6 @@ class PurchaseProductHistoryAdapter(
 
     //Return the total count of items in the list
     override fun getItemCount(): Int {
-        // this method is used for showing number of card items in recycler view.
         return purchaseProductDataArrayList.size
     }
 

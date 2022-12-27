@@ -50,11 +50,21 @@ class CheckoutFragment : Fragment() {
             }
         }
 
+//        var balanceAmount = 0.00
+//        fstore.collection("Wallet").get().addOnSuccessListener { documents ->
+//            for (document in documents){
+//                balanceAmount -= document["topUpAmount"].toString().toDouble()
+//            }
+//            binding.balanceAmt.text = balanceAmount.toString()
+//
+//        }.addOnFailureListener { exception ->
+//            Log.d("noexits", "Error getting documents.", exception)
+//        }
+
         //Retrieve Booking Data and Display Booking Details in Checkout Page
         setFragmentResultListener("toCheckoutPage") { _, bundle ->
-            // Testing if you can bundle more than 1 data (success)
+            //Bundle more than 1 data (success)
             val bookingID = bundle.getString("toCheckoutPage")
-
             val retrieveBookingRef = fstore.collection("Bookings").document(bookingID.toString())
             retrieveBookingRef.get().addOnCompleteListener { resultData ->
                 if (resultData != null) {

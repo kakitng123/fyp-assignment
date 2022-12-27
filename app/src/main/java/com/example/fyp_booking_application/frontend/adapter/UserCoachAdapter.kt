@@ -34,7 +34,7 @@ class UserCoachAdapter(
 
         val coachModel: CoachData = coachDataArrayList[position] //Get the data model based on position
 
-        //Set data to textview and imageview of each card layout
+
         val img = storageRef.child("images/coachProfile/coach_"+ coachModel.coachName)
         val file = File.createTempFile("temp", "png")
 
@@ -42,7 +42,6 @@ class UserCoachAdapter(
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
             holder.coachImage.setImageBitmap(bitmap)
         }
-
         holder.coachName.text = coachModel.coachName
         holder.coachExperience.text = coachModel.coachExp
         holder.coachPhone.text = coachModel.coachPhone
@@ -73,7 +72,6 @@ class UserCoachAdapter(
             coachEmail = itemView.findViewById(R.id.tvCoachEmail)
             itemView.setOnClickListener(this)
         }
-
         override fun onClick(v: View?) {
             if (adapterPosition != RecyclerView.NO_POSITION){
                 listener.onItemClick(adapterPosition)

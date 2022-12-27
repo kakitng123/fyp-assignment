@@ -62,7 +62,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }
-                    }.addOnFailureListener {
+                    }
+                    .addOnFailureListener {
                         //Show failure Toast Message
                         Toast.makeText(this, "Try again! Something wrong happened!", Toast.LENGTH_LONG).show()
                     }

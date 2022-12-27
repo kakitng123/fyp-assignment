@@ -8,13 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fyp_booking_application.PurchaseData
+import com.example.fyp_booking_application.*
 import com.example.fyp_booking_application.R
-import com.example.fyp_booking_application.TopUpData
-import com.example.fyp_booking_application.UserDashboardActivity
-import com.example.fyp_booking_application.databinding.FragmentPurchaseProductHistoryBinding
 import com.example.fyp_booking_application.databinding.FragmentTopUpWalletHistoryBinding
-import com.example.fyp_booking_application.frontend.adapter.PurchaseProductHistoryAdapter
 import com.example.fyp_booking_application.frontend.adapter.TopUpWalletHistoryAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
@@ -24,7 +20,7 @@ class TopUpWalletHistoryFragment : Fragment() {
     private lateinit var auth: FirebaseAuth //get the shared instance of the FirebaseAuth object
     private lateinit var fstore: FirebaseFirestore
     private lateinit var topUpHistoryAdapter: TopUpWalletHistoryAdapter
-    private lateinit var topUpHistoryDataArrayList: ArrayList<TopUpData>
+    private lateinit var topUpHistoryDataArrayList: ArrayList<WalletData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +59,7 @@ class TopUpWalletHistoryFragment : Fragment() {
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     if (dc.type == DocumentChange.Type.ADDED) {
                         topUpHistoryDataArrayList.add(dc.document.toObject(
-                            TopUpData::class.java)
+                            WalletData::class.java)
                         )
                     }
                 }

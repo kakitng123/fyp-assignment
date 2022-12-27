@@ -63,13 +63,11 @@ class RegisterActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
-
             if(username.isEmpty()){
                 usernameRegister.setError("Username is required!")
                 usernameRegister.requestFocus()
                 return@setOnClickListener
             }
-
             if(password.isEmpty()){
                 passwordRegister1.setError("Password is required!")
                 passwordRegister1.requestFocus()
@@ -107,22 +105,18 @@ class RegisterActivity : AppCompatActivity() {
 
             //Check the email and password input
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                // create user data in Authentication by using this method
+                //Create user data in Authentication by using Password-based Accounts
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            //Verify the email
+                            //Verify the email address
                             auth.currentUser!!.sendEmailVerification()
                                 .addOnCompleteListener { verify ->
                                     if (verify.isSuccessful) {
                                         Log.d(ContentValues.TAG, "Email sent.")
-                                        Toast.makeText(
-                                            this,
-                                            "Register successfully. Please verify your email address!",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
+                                        Toast.makeText(this, "Register successfully. Please verify your email address!",
+                                            Toast.LENGTH_SHORT).show()
                                     }
-
                                     //Verify isPlayer (User)
                                     if (isPlayer.isChecked()) {
                                         val user = hashMapOf(
@@ -141,7 +135,6 @@ class RegisterActivity : AppCompatActivity() {
                                                 Log.w(ContentValues.TAG, "Error adding document", e)
                                             }
                                     }
-
                                     //Verify isCoach (Admin)
                                     if (isCoach.isChecked()) {
                                         val admin = hashMapOf(
@@ -162,13 +155,9 @@ class RegisterActivity : AppCompatActivity() {
                                     }
                                 }
                         } else {
-                            // If sign up fails, display a message to the user.
+                            //If sign up fails, display a message to the user.
                             Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                            Toast.makeText(
-                                baseContext,
-                                "Email has been used by others accounts!",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(baseContext, "Email has been used by others accounts!", Toast.LENGTH_SHORT).show()
                         }
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()

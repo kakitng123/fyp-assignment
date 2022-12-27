@@ -54,10 +54,7 @@ class CoachFragment : Fragment(), UserCoachAdapter.OnItemClickListener {
 
         //Search Function
         binding.coachSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
+            override fun onQueryTextSubmit(query: String?): Boolean { return false }
             @SuppressLint("NotifyDataSetChanged")
             override fun onQueryTextChange(newText: String?): Boolean {
                 filteredArrayList.clear()
@@ -77,15 +74,17 @@ class CoachFragment : Fragment(), UserCoachAdapter.OnItemClickListener {
                 return false
             }
         })
-
-
         coachRecView = binding.coachRecyclerView
-        coachRecView.layoutManager = LinearLayoutManager(context)//Set layout manager to position the items
+        //Set layout manager to position the items
+        coachRecView.layoutManager = LinearLayoutManager(context)
         coachRecView.setHasFixedSize(true)
-        coachDataArrayList = arrayListOf() //Set a array list data
-        filteredArrayList = arrayListOf() //Set a array list data
-        coachAdapter = UserCoachAdapter(filteredArrayList, this@CoachFragment) //Create adapter passing in the array adapter data
-        coachRecView.adapter = coachAdapter //Attach the adapter to the recyclerView to populate the items
+        //Set a array list data
+        coachDataArrayList = arrayListOf()
+        filteredArrayList = arrayListOf()
+        // Create adapter passing in the array adapter data
+        coachAdapter = UserCoachAdapter(filteredArrayList, this@CoachFragment)
+        //Attach the adapter to the recyclerView to populate the items
+        coachRecView.adapter = coachAdapter
         eventChangeListener()
 
         return binding.root

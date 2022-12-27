@@ -22,8 +22,8 @@ class UserVoucherAdapter (
 
     //Inflate the layout for each item of recycler view.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserVoucherAdapter.UserVoucherViewholder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_voucher_card, parent, false) //Inflate the custom layout
-        return UserVoucherViewholder(itemView) //Return a new holder instance
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_voucher_card, parent, false)
+        return UserVoucherViewholder(itemView)
     }
 
     //Involves the populating data into the item through holder
@@ -33,7 +33,6 @@ class UserVoucherAdapter (
         storageRef = storage.reference
 
         val userVoucherModel: VoucherData = userVoucherDataArrayList[position] //Get the data model based on position
-
         //Set data to textview and imageview of each card layout
         val img = storageRef.child(userVoucherModel.voucherImage.toString())
         val file = File.createTempFile("temp", "png")
@@ -61,14 +60,12 @@ class UserVoucherAdapter (
         val userVouImage: ImageView
         val userVouTitle: TextView
         val userVouDiscount: TextView
-
         init {
             userVouImage = itemView.findViewById(R.id.tvVoucherImage)
             userVouTitle = itemView.findViewById(R.id.tvVoucherTitle)
             userVouDiscount = itemView.findViewById(R.id.tvVoucherDiscount)
             itemView.setOnClickListener(this)
         }
-
         override fun onClick(v: View?) {
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 listener.onItemClick(adapterPosition)
